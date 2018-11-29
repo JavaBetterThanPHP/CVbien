@@ -12,4 +12,4 @@ Création de CV Portfolio de Devs
 
 - Road map en cours de rédaction...
 
-- Backlog [ici](https://github.com/JavaBetterThanPHP/CVbien/projects/2)
+- Backlog [ici](https://github.com/JavaBetterThanPHP/CVbien/projects/2) ou [la](https://github.com/JavaBetterThanPHP/CVbien/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement)
