@@ -8,8 +8,8 @@ Création de CV Portfolio de Devs
 
 - Listes des users story [ici](https://github.com/JavaBetterThanPHP/CVbien/issues?q=is%3Aissue+is%3Aopen+label%3Aenhancement)
 
-- Story mapping en cours de rédaction...
+- Story mapping [ici](https://github.com/JavaBetterThanPHP/CVbien/blob/master/Diagrams/StoryMapping/StoryMapping.pdf)
 
-- Road map en cours de rédaction...
+- Road map [ici](https://github.com/JavaBetterThanPHP/CVbien/blob/master/Diagrams/RoadMap/RoadMap.pdf)
 
 - Backlog [ici](https://github.com/JavaBetterThanPHP/CVbien/projects/2)
