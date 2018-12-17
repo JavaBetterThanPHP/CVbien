@@ -61,4 +61,8 @@
 
 # End of https://www.gitignore.io/api/symfony
 
+### JetBrains ###
 .idea*
+
+### Mac OS ###
+.DS_Store
