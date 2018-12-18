@@ -78,10 +78,10 @@ Cet espace ne sera pas détaillé dans ce document compte tenu de sa nature tech
 - Portail d'administration
 - Fonction de mot de passe perdu
 - Possibilité de créer son espace personnel en manipulant les modules existants :
- - Ajouter un module
- - Supprimer un module
- - Editer un module
- - Déplacer un module
+    - Ajouter un module
+    - Supprimer un module
+    - Editer un module
+    - Déplacer un module
 - Consultation des espaces personnels des utilisateurs sans avoir besoin de se connecter
 - Possibilité de rechercher des CV via des critères précis
 - Portail de paiement pour la création d'un compte pro
@@ -90,9 +90,8 @@ Cet espace ne sera pas détaillé dans ce document compte tenu de sa nature tech
 
 ### 2. DÉROULEMENT DU PROJET
 2.1.1 Réalisation
-
-•        Les développeurs travaillent sur le même environnement grâce à l'outil Docker
-•        Environnement technique : BootStrap, Symfony, Nginx, PostreSQL
+- Les développeurs travaillent sur le même environnement grâce à l'outil Docker
+- Environnement technique : BootStrap, Symfony, Nginx, PostreSQL
 
 2.1.2 Recette
 
@@ -119,8 +118,8 @@ L'application devra :
  - Php 7^
  - Symfony 4.2
  - Docker :
-  - PostgreSQL : 11.1
-  - Nginx : 1.14
+     - PostgreSQL : 11.1
+     - Nginx : 1.14
  - Bootstrap 4.1.3
  - Packery https://packery.metafizzy.co/#cdn
  - GitFlow
