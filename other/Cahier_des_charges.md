@@ -115,7 +115,7 @@ L'application devra :
  - Maitrise de Symfony, d'un environnement de développement PHP, HTML/CSS, Javascript et SQL.
  
 3.2 Stack Technique  
- - Php 7^
+ - Php 7.2^
  - Symfony 4.2
  - Docker :
      - PostgreSQL : 11.1
@@ -125,5 +125,7 @@ L'application devra :
  - GitFlow
  - GitHub
  - ZenHub
+ - Code Factor
+ - Travis
  - PhpStorm 2018^
  - Visual Studio Code 1.28^
