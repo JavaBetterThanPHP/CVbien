@@ -105,15 +105,16 @@ L'application devra :
  - Maitrise de Symfony, d'un environnement de développement PHP, HTML/CSS, Javascript et SQL.
  
 #### 3.2 Stack Technique  
+
+ - [**GitHub**](https://github.com/JavaBetterThanPHP/CVbien)
  - Php 7.2^
  - Symfony 4.2
  - Docker :
      - PostgreSQL : 11.1
      - Nginx : 1.14
- - Bootstrap 4.1.3
- - Packery https://packery.metafizzy.co/#cdn
+ - Bootstrap 4.1^
+ - [Packery](https://packery.metafizzy.co/#cdn)
  - GitFlow
- - GitHub
  - ZenHub
  - Code Factor
  - Travis
