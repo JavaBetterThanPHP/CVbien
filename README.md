@@ -1,8 +1,10 @@
-# CVbien
+# CVBIEN
 
-Création de CV Portfolio de Devs
+Créateurs de CV / Portfolio pour les developpeurs 
 
-## Projet annuel - 4e Année - ESGI
+Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
+
+## PROJET ANNUEL - 4e Année - ESGI
 
 ### Cours de Symfony :
 
@@ -18,7 +20,7 @@ Création de CV Portfolio de Devs
 
 --- 
 
-Cours de projet annuel
+### Cours de projet annuel
 
 - Stack technique disponible dans le cahier des charges [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md)
 
@@ -31,7 +33,7 @@ Cours de projet annuel
 
 ---
 
-Cours de management du web
+### Cours de management du web
 
 - Cahier des charges [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md)
 
