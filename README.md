@@ -14,13 +14,15 @@ Création de CV Portfolio de Devs
 
 - Détail des fonctionnalités du S1 en tâche à attribuer [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/projects/6)
 
-- Design de la BD : En cours...[]()
+- Design de la BD (En cours...)[]()
 
 --- 
 
 Cours de projet annuel
 
-- Stack technique disponible dans le [cahier des charges](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md)
+- Stack technique disponible dans le cahier des charges [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md)
+
+- Business plan (En cours...)
 
 - Diagramme SWOT [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Diagrams/Swot/SWOT.pdf)
 
