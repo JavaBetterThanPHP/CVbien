@@ -22,7 +22,7 @@ Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 
 ### Cours projet annuel
 
-- Stack technique disponible dans le cahier des charges [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md)
+- Stack technique [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md#32-stack-technique)
 
 - Business plan [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Business_plan.md)
 
