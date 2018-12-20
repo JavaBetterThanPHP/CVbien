@@ -4,10 +4,6 @@
  
 Nous souhaiterions développer une solution pour permettre aux développeurs de créer des espaces personnels customisables afin qu’ils mettent en avant toutes leurs compétences techniques et professionnelles et qu’ils puissent mieux se vendre sur le marché du travail qu’a travers un C.V, un Portfolio ou un LinkedIn.  
 La plateforme pourra également proposer aux chargés de ressources humaines et aux recruteurs I.T de parcourir la base de données des profils, selon des critères bien précis, afin de répondre à besoins.
-
-## Sommaire
- 
-## Executive Summary
  
 ## L’équipe et les intervenants
  
@@ -81,7 +77,7 @@ La demande est forte. De nos jours, il n'est pas toujours possible de créer un 
 
 ## La concurrence
 
-Bien que des sites très connus comme LinkedIn 
+Bien que des sites très connus comme LinkedIn, Github ou bien UpWork existent, notre idée se démarque de la concurrence car elle ne propose par exactement les mêmes fonctionnalités que nous. Notre application proposera en plus de mettre en avant ses comptes de ces sites cités au dessus. Une possibilité de partenariat est donc envisageable. 
 
 ## Le service
 
@@ -95,14 +91,8 @@ Après ce constat, nous avons pensé mettre à profit cette base de profils en c
 
 ## Outils de production
 
-Le développement de la solution s'effectue dans le 12eme arrondissement de Paris, près de nation où nous louons 150 mètres carrés de bureaux sur deux étages.  
-Nous disposons de :
-- une dizaine de postes de travails dont cinq vacants pour permettre l'agrandissement de l'équipe et l'accueil des consultants et des prestataires
-- une salle serveur dédiée aux environnements de développements et de tests
-- deux salles de réunions
-- un espace de travail partagé
-  
-Nos développeurs travaillent sur les derniers MacBook Pro, pouvant être reliés aux deux écrans Thunderbolt de chaque poste de travail.  
+Le développement de la solution s'effectue dans le 12eme arrondissement de Paris, et puis de chez nous.
+ 
 En dehors de nos licences PHPStorm pour l'environnement de développement, tous les outils que nous utilisons (Docker, Bootstrap; Travis, CodeFactor) sont Open Source et proposent des licences gratuites pour les projets également Open Source.
 Notre partenaire pour l'hébergement final de nos solutions est AWS.
          
@@ -125,5 +115,5 @@ Passé cette étape, nous souhaiterions ouvrir notre projet à l'investissement 
 
 Notre projet sera Open Source, il sera disponible sur GitHub et sera ouvert à toute nouvelle fonctionnalité ou modification par des tiers. Nous prévoyons avoir une grande communauté qui saura soutenir et faire connaitre notre plateforme.  
 Cela nous permettra également de profiter de licence d'outils Open Source tels que Travis (intégration continue), CodeFactor (qualité de code) ou ZenHub (Scrum Board).  
-Afin de rallier notre volonté Open Source et notre stratégie markéting, nous avons opté pour une licence AGPL --> à compléter
+Afin de rallier notre volonté Open Source et notre stratégie markéting, nous avons opté pour une licence AGPL
 
