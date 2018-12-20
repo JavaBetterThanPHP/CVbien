@@ -6,11 +6,11 @@ Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 
 ## PROJET ANNUEL - 4e Année - ESGI
 
-### Cours de Symfony :
+### Cours Symfony :
 
 - Description du concept du site internet dans le cahier des charges [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md)
 
-- Arborescence du site internet [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Arbo.png)
+- Arborescence du site internet [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Arborescence.png)
 
 - Listing des grandes fonctionnalités du site & précision des dév pour le S1 et pour le S2 [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/projects/6)
 
@@ -20,11 +20,11 @@ Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 
 --- 
 
-### Cours de projet annuel
+### Cours projet annuel
 
 - Stack technique disponible dans le cahier des charges [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md)
 
-- Business plan (En cours...)
+- Business plan [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Business_plan.md)
 
 - Diagramme SWOT [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Diagrams/Swot/SWOT.pdf)
 
@@ -33,7 +33,7 @@ Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 
 ---
 
-### Cours de management du web
+### Cours management de projet Web
 
 - Cahier des charges [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md)
 
