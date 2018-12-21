@@ -5,6 +5,25 @@
 Nous souhaiterions développer une solution pour permettre aux développeurs de créer des espaces personnels customisables afin qu’ils mettent en avant toutes leurs compétences techniques et professionnelles et qu’ils puissent mieux se vendre sur le marché du travail qu’a travers un C.V, un Portfolio ou un LinkedIn.  
 La plateforme pourra également proposer aux chargés de ressources humaines et aux recruteurs I.T de parcourir la base de données des profils, selon des critères bien précis, afin de répondre à besoins.
  
+## Sommaire
+
+1. Executive summary
+2. L'équipe et les intervenants
+3. Le marché
+4. L’offre et la demande
+5. La concurrence
+6. Le service
+7. Outils de production
+8. Stratégie marketing et commerciale
+9. Stratégie de développement
+10. Choix du statut juridique
+ 
+## Executive summary
+
+L'équipe du projet est composé de 4 developpeurs en étude, spécialisé dans le developpement web. Le marché est prometteur en effet le secteur de l'informatique ne cesse de croitre et est promis à un bel avenir. Nous offrons la possibililté aux developpeurs de se mettre en avant mais nous permettons aussi aux recruteurs d'embaucher plus rapidement. Dans un marché ou la demande en developpeur est forte notre solution peu interesser les personnes voulant se mettre en avant et ceux qui veulent recruter rapidement. Les concurrents existent mais aucun ne propre exactement les memes fonctionnalités que nous. Dans le sens ou nous voulons fournir un espace aux developpeurs leurs permettant de mettre leurs projets et compétence en avant sur une page entierement personnalisable. Ces pages seront accessible via les recruteurs via un liens ou via une recherche par critère. Toute l'application sera developpé en PHP avec le framework Symfony 4, avec quelques librairies javascript, des outils d'intégration et d'inspection de qualités de code. L'application étant en open source MIT elle devra se faire connaitre par les developpeur francais dans un premier temps pour ensuite s'exporter a l'etranger.
+
+
+ 
 ## L’équipe et les intervenants
  
 ### Notre équipe
@@ -60,8 +79,6 @@ La plateforme pourra également proposer aux chargés de ressources humaines et 
   - Consultant technologies du Web
   - Expert PHP/JS
   - Chef d'entreprise, créateur et coach Startup
-	
-Rajouter Yves/ESGI/GES/Orsay ?
 
 ## Le marché
 
@@ -115,5 +132,5 @@ Passé cette étape, nous souhaiterions ouvrir notre projet à l'investissement 
 
 Notre projet sera Open Source, il sera disponible sur GitHub et sera ouvert à toute nouvelle fonctionnalité ou modification par des tiers. Nous prévoyons avoir une grande communauté qui saura soutenir et faire connaitre notre plateforme.  
 Cela nous permettra également de profiter de licence d'outils Open Source tels que Travis (intégration continue), CodeFactor (qualité de code) ou ZenHub (Scrum Board).  
-Afin de rallier notre volonté Open Source et notre stratégie markéting, nous avons opté pour une licence AGPL
+Afin de rallier notre volonté Open Source et notre stratégie markéting, nous avons opté pour une licence MIT
 
