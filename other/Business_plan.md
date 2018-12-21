@@ -20,9 +20,7 @@ La plateforme pourra également proposer aux chargés de ressources humaines et 
  
 ## Executive summary
 
-L'équipe du projet est composé de 4 developpeurs en étude, spécialisé dans le developpement web. Le marché est prometteur en effet le secteur de l'informatique ne cesse de croitre et est promis à un bel avenir. Nous offrons la possibililté aux developpeurs de se mettre en avant mais nous permettons aussi aux recruteurs d'embaucher plus rapidement. Dans un marché ou la demande en developpeur est forte notre solution peu interesser les personnes voulant se mettre en avant et ceux qui veulent recruter rapidement. Les concurrents existent mais aucun ne propre exactement les memes fonctionnalités que nous. Dans le sens ou nous voulons fournir un espace aux developpeurs leurs permettant de mettre leurs projets et compétence en avant sur une page entierement personnalisable. Ces pages seront accessible via les recruteurs via un liens ou via une recherche par critère. Toute l'application sera developpé en PHP avec le framework Symfony 4, avec quelques librairies javascript, des outils d'intégration et d'inspection de qualités de code. L'application étant en open source MIT elle devra se faire connaitre par les developpeur francais dans un premier temps pour ensuite s'exporter a l'etranger.
-
-
+L'équipe du projet est composée de 4 developpeurs alternants, spécialisé dans le developpement web. Le marché est prometteur, le secteur de l'informatique ne cesse de croitre et est promis à un bel avenir. Nous offrons la possibililté aux développeurs de se mettre en avant mais nous permettons aussi aux recruteurs d'embaucher plus rapidement. Dans un marché ou la demande en d'informaticiens est forte, notre solution peu intéresser les personnes voulant se mettre en avant et celles qui veulent recruter rapidement. Des concurrents existent mais aucun ne propose actuelellement le design, la performance, la customisation et la recherche avancée des profils. Nous voulons fournir la possibilité de créer un espace personnel permettant de mettre les projets et compétence des développeurs en avant sur une page entierement personnalisable. Ces pages seront accessible via les recruteurs via un lien ou via une recherche par critère. Toute l'application sera developpé en PHP avec le framework Symfony 4, quelques librairies javascript, des outils d'intégration et d'inspection de qualités de code. L'application étant en open source sous licence MIT elle devra se faire connaitre par les developpeur francais dans un premier temps pour ensuite s'exporter a l'etranger.
  
 ## L’équipe et les intervenants
  
@@ -132,5 +130,4 @@ Passé cette étape, nous souhaiterions ouvrir notre projet à l'investissement 
 
 Notre projet sera Open Source, il sera disponible sur GitHub et sera ouvert à toute nouvelle fonctionnalité ou modification par des tiers. Nous prévoyons avoir une grande communauté qui saura soutenir et faire connaitre notre plateforme.  
 Cela nous permettra également de profiter de licence d'outils Open Source tels que Travis (intégration continue), CodeFactor (qualité de code) ou ZenHub (Scrum Board).  
-Afin de rallier notre volonté Open Source et notre stratégie markéting, nous avons opté pour une licence MIT
-
+Afin de rallier notre volonté Open Source et notre stratégie markéting, nous avons opté pour une licence MIT.
