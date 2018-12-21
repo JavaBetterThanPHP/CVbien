@@ -30,6 +30,7 @@ Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 
 - Répartition et découpage des taches dans la backlog [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/projects/2)
 
+- Répartition des rôles : [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Business_plan.md#notre-%C3%A9quipe)
 
 ---
 
