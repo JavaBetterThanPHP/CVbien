@@ -8,14 +8,12 @@ Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 
 ### Cours Symfony :
 
-- Description du concept du site internet dans le cahier des charges [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md)
-
+- Description du concept du site internet dans le cahier des charges [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md#1-pr%C3%A9sentation-g%C3%A9n%C3%A9rale-du-projet)
 - Arborescence du site internet [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Arborescence.png)
-
-- Listing des grandes fonctionnalités du site & précision des dév pour le S1 et pour le S2 [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/projects/6)
-
-- Détail des fonctionnalités du S1 en tâche à attribuer [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/projects/6)
-
+- Listing des grandes fonctionnalités du site [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md#124-fonctionnalit%C3%A9s-principales)
+- Précision des dév pour le S1 [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/projects/6)
+- Précision des dév pour le S2 [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/projects/7)
+- Détail des fonctionnalités en tâche à attribuer [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/projects/2)
 - Design de la BDD [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Diagrams/DB/BDD_CVBIEN.pdf)
 
 --- 
