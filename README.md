@@ -16,7 +16,7 @@ Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 
 - Détail des fonctionnalités du S1 en tâche à attribuer [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/projects/6)
 
-- Design de la BD (En cours...)[]()
+- Design de la BDD [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Diagrams/DB/BDD_CVBIEN.pdf)
 
 --- 
 
