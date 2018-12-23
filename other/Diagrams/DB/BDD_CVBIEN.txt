@@ -1,0 +1,207 @@
+Table USER {
+  id int PK
+  active boolean
+  firstname varchar
+  lastname varchar
+  email varchar
+  birthdate date
+  phoneNumber varchar
+  proPhoneNumber varchar
+  address varchar
+  city varchar
+  citycode varchar
+  country varchar
+  userType int
+  userStatus int
+}
+
+Table USER_TYPE {
+  id int PK
+  label varchar
+}
+
+Table USER_STATUS {
+  id int PK
+  label varchar
+}
+
+Table USER_SOCIETY {
+  id int PK
+  id_society int PK
+  firstDate date
+  lastDate date
+  active boolean
+  post_type int
+}
+
+Table POST_TYPE {
+  id int PK
+  label varchar
+}
+
+Table SOCIETY {
+  id int PK
+  name varchar
+  activityArea varchar
+  address varchar
+  city varchar
+  citycode varchar
+  country varchar
+}
+
+Table USER_MODULE {
+  id_user int PK
+  id_module int PK
+  positioning varchar
+  active boolean
+}
+
+Table MODULE {
+  id int PK
+  name int
+  description varchar
+  tag varchar
+  content varchar
+}
+
+Table THEME {
+  id int PK
+  name varchar
+  description varchar
+  code varchar
+  content varchar
+}
+
+Table USER_THEME {
+  id_user int PK
+  id_theme varchar
+  active varchar
+}
+
+Table LINK {
+ id int PK
+ website varchar
+ url varchar
+}
+
+Table USER_LINK {
+  id_user int PK
+  id_link int PK
+  nickname varchar
+  urlUser varchar
+  
+}
+
+Table MODULE_TAG {
+  id int PK
+  label varchar
+}
+
+Table DIPLOMA {
+  id int PK
+  title varchar
+  country varchar
+  level varchar
+  international boolean
+}
+
+Table USER_DIPLOMA {
+  id_user int PK
+  id_diploma int PK
+  dateOfGrant date
+  mention varchar
+}
+
+Table LANGUAGE {
+  id int PK
+  name varchar
+}
+
+Table USER_LANGUAGE {
+  id_user int PK
+  id_language int PK
+  level varchar
+} 
+
+Table PROG_LAGUAGE {
+  id int PK
+  name varchar
+  type varchar
+}
+
+Table USER_PROG_LANGUAGE {
+  id_user int PK
+  id_prog_language int PK
+  level int
+}
+
+Table USER_PROJECT {
+  id_user_project int PK
+  id_user int
+  urlProject varchar
+  urlWebsite varchar
+  society int
+}
+
+Table PROJECT_TYPE {
+  id int PK
+  type varchar
+}
+
+Table USER_PROJECT_TYPE {
+  id_user_project int PK
+  id_project_type int PK
+}
+
+Table USER_PROJECT_PROG_LANGUAGE {
+  id_user_project int PK
+  id_prog_language int PK
+}
+
+Ref: "USER"."userType" - "USER_TYPE"."id"
+
+Ref: "USER"."userStatus" - "USER_STATUS"."id"
+
+Ref: "USER_MODULE"."id_user" - "USER"."id"
+
+Ref: "USER_MODULE"."id_module" - "MODULE"."id"
+
+Ref: "USER"."id" - "USER_LINK"."id_user"
+
+Ref: "USER_LINK"."id_link" - "LINK"."id"
+
+Ref: "USER"."id" - "USER_THEME"."id_user"
+
+Ref: "USER_THEME"."id_theme" - "THEME"."id"
+
+Ref: "MODULE"."tag" - "MODULE_TAG"."id"
+
+Ref: "USER"."id" - "USER_DIPLOMA"."id_user"
+
+Ref: "USER_DIPLOMA"."id_diploma" - "DIPLOMA"."id"
+
+Ref: "USER"."id" - "USER_SOCIETY"."id"
+
+Ref: "USER_SOCIETY"."id_society" - "SOCIETY"."id"
+
+Ref: "USER"."id" - "USER_LANGUAGE"."id_user"
+
+Ref: "USER_LANGUAGE"."id_language" - "LANGUAGE"."id"
+
+Ref: "USER_PROG_LANGUAGE"."id_user" - "USER"."id"
+
+Ref: "PROG_LAGUAGE"."id" - "USER_PROG_LANGUAGE"."id_prog_language"
+
+Ref: "USER_PROJECT"."id_user" - "USER"."id"
+
+Ref: "USER_PROJECT_PROG_LANGUAGE"."id_user_project" - "USER_PROJECT"."id_user_project"
+
+Ref: "USER_PROJECT_PROG_LANGUAGE"."id_prog_language" - "PROG_LAGUAGE"."id"
+
+Ref: "USER_PROJECT"."society" - "USER_SOCIETY"."id"
+
+Ref: "USER_PROJECT_TYPE"."id_user_project" - "USER_PROJECT"."id_user_project"
+
+Ref: "USER_PROJECT_TYPE"."id_project_type" - "PROJECT_TYPE"."id"
+
+Ref: "USER_SOCIETY"."post_type" - "POST_TYPE"."id"
