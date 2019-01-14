@@ -1,4 +1,4 @@
-# CVBIEN
+# CVBIEN - PROJET ANNUEL - 4e Année - ESGI
 
 [![CodeFactor](https://www.codefactor.io/repository/github/javabetterthanphp/cvbien/badge)](https://www.codefactor.io/repository/github/javabetterthanphp/cvbien)
 
@@ -6,7 +6,13 @@ Créateurs de CV / Portfolio pour les developpeurs
 
 Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 
-## PROJET ANNUEL - 4e Année - ESGI
+## Must read
+
+### Git Flow
+
+https://danielkummer.github.io/git-flow-cheatsheet/
+
+## Rendus
 
 ### Cours Symfony :
 
