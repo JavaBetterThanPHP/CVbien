@@ -1,5 +1,7 @@
 # CVBIEN
 
+[![CodeFactor](https://www.codefactor.io/repository/github/javabetterthanphp/cvbien/badge)](https://www.codefactor.io/repository/github/javabetterthanphp/cvbien)
+
 Créateurs de CV / Portfolio pour les developpeurs 
 
 Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
