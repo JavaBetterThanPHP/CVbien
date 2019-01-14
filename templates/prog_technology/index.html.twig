@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}ProgTechnology index{% endblock %}
+
+{% block body %}
+    <h1>ProgTechnology index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Label</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for prog_technology in prog_technologies %}
+            <tr>
+                <td>{{ prog_technology.id }}</td>
+                <td>{{ prog_technology.label }}</td>
+                <td>
+                    <a href="{{ path('prog_technology_show', {'id': prog_technology.id}) }}">show</a>
+                    <a href="{{ path('prog_technology_edit', {'id': prog_technology.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('prog_technology_new') }}">Create new</a>
+{% endblock %}
