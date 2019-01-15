@@ -22,6 +22,11 @@ class UserDiploma
     private $diploma;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userDiplomas")
+     */
+    private $user;
+
+    /**
      * @ORM\Column(type="date", nullable=true)
      */
     private $dateOfGrant;
@@ -44,6 +49,18 @@ class UserDiploma
     public function setDiploma(?Diploma $diploma): self
     {
         $this->diploma = $diploma;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
