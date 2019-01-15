@@ -106,6 +106,12 @@ class User implements UserInterface
      */
     private $userProjects;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserDiploma", mappedBy="user")
+     */
+    private $userDiplomas;
+
+
     public function __construct()
     {
         $this->progLanguages = new ArrayCollection();
@@ -390,4 +396,35 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|UserDiploma[]
+     */
+    public function getUserDiplomas(): Collection
+    {
+        return $this->userDiplomas;
+    }
+
+    public function addUserDiploma(UserDiploma $userDiploma): self
+    {
+        if (!$this->userDiplomas->contains($userDiploma)) {
+            $this->userDiplomas[] = $userDiploma;
+            $userDiploma->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserDiploma(UserDiploma $userDiploma): self
+    {
+        if ($this->userDiplomas->contains($userDiploma)) {
+            $this->userDiplomas->removeElement($userDiploma);
+            // set the owning side to null (unless already changed)
+            if ($userDiploma->getUser() === $this) {
+                $userDiploma->setUser(null);
+            }
+        }
+        return $this;
+    }
+
 }
