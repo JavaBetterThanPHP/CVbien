@@ -116,12 +116,18 @@ class User implements UserInterface
      */
     private $userLanguages;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserProgLanguage", mappedBy="user")
+     */
+    private $userProgLanguages;
+
     public function __construct()
     {
         $this->progLanguages = new ArrayCollection();
         $this->userProjects = new ArrayCollection();
         $this->userDiplomas = new ArrayCollection();
         $this->userLanguages = new ArrayCollection();
+        $this->userProgLanguages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -458,6 +464,37 @@ class User implements UserInterface
             // set the owning side to null (unless already changed)
             if ($userLanguage->getUser() === $this) {
                 $userLanguage->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserProgLanguage[]
+     */
+    public function getUserProgLanguages(): Collection
+    {
+        return $this->userProgLanguages;
+    }
+
+    public function addUserProgLanguage(UserProgLanguage $userProgLanguage): self
+    {
+        if (!$this->userProgLanguages->contains($userProgLanguage)) {
+            $this->userProgLanguages[] = $userProgLanguage;
+            $userProgLanguage->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserProgLanguage(UserProgLanguage $userProgLanguage): self
+    {
+        if ($this->userProgLanguages->contains($userProgLanguage)) {
+            $this->userProgLanguages->removeElement($userProgLanguage);
+            // set the owning side to null (unless already changed)
+            if ($userProgLanguage->getUser() === $this) {
+                $userProgLanguage->setUser(null);
             }
         }
 
