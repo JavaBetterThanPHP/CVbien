@@ -43,11 +43,17 @@ class ProgLanguage
      */
     private $userProgLanguages;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserProjectProgLanguage", mappedBy="progLanguage")
+     */
+    private $userProjectProgLanguages;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
         $this->userProjects = new ArrayCollection();
         $this->userProgLanguages = new ArrayCollection();
+        $this->userProjectProgLanguages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -160,6 +166,37 @@ class ProgLanguage
             // set the owning side to null (unless already changed)
             if ($userProgLanguage->getProgLanguage() === $this) {
                 $userProgLanguage->setProgLanguage(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserProjectProgLanguage[]
+     */
+    public function getUserProjectProgLanguages(): Collection
+    {
+        return $this->userProjectProgLanguages;
+    }
+
+    public function addUserProjectProgLanguage(UserProjectProgLanguage $userProjectProgLanguage): self
+    {
+        if (!$this->userProjectProgLanguages->contains($userProjectProgLanguage)) {
+            $this->userProjectProgLanguages[] = $userProjectProgLanguage;
+            $userProjectProgLanguage->setProgLanguage($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserProjectProgLanguage(UserProjectProgLanguage $userProjectProgLanguage): self
+    {
+        if ($this->userProjectProgLanguages->contains($userProjectProgLanguage)) {
+            $this->userProjectProgLanguages->removeElement($userProjectProgLanguage);
+            // set the owning side to null (unless already changed)
+            if ($userProjectProgLanguage->getProgLanguage() === $this) {
+                $userProjectProgLanguage->setProgLanguage(null);
             }
         }
 

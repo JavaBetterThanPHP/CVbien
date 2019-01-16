@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UserProjectProgLanguage{% endblock %}
+
+{% block body %}
+    <h1>UserProjectProgLanguage</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ user_project_prog_language.id }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_project_prog_language_index') }}">back to list</a>
+
+    <a href="{{ path('user_project_prog_language_edit', {'id': user_project_prog_language.id}) }}">edit</a>
+
+    {{ include('user_project_prog_language/_delete_form.html.twig') }}
+{% endblock %}
