@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin - Overview{% endblock %}
+
+{% block body %}
+    {% block header %}
+        <nav class="navbar navbar-light bg-dark justify-content-between">
+            <a class="navbar-brand text-light">CVBien - Administration</a>
+            <div class="text-light">
+                A remplacer ici par les infos de la personne connecté
+            </div>
+        </nav>
+    {% endblock %}
+
+    <div class="container-fluid mt-5">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    <footer class="container">
+        <div class="text-center mt-5 border-top text-secondary">© 2018 Copyright:
+            <a href="">cvbien.com</a>
+        </div>
+    </footer>
+{% endblock %}
