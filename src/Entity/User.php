@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="user_account")
@@ -37,22 +38,22 @@ class User implements UserInterface
     private $password;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="boolean", nullable=true)
      */
     private $isActive;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $firstname;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $lastname;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="date", nullable=true)
      */
     private $birthdate;
 
@@ -85,11 +86,6 @@ class User implements UserInterface
      * @ORM\ManyToOne(targetEntity="App\Entity\Country", inversedBy="users")
      */
     private $country;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\UserType", inversedBy="users")
-     */
-    private $userType;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\UserStatus", inversedBy="users")
@@ -152,7 +148,7 @@ class User implements UserInterface
      *
      * @see UserInterface
      */
-    public function getUsername(): string
+    public function getUsername(): ?string
     {
         return (string) $this->email;
     }
@@ -213,7 +209,7 @@ class User implements UserInterface
         return $this->isActive;
     }
 
-    public function setIsActive(bool $isActive): self
+    public function setIsActive(?bool $isActive): self
     {
         $this->isActive = $isActive;
 
@@ -225,7 +221,7 @@ class User implements UserInterface
         return $this->firstname;
     }
 
-    public function setFirstname(string $firstname): self
+    public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
 
@@ -237,7 +233,7 @@ class User implements UserInterface
         return $this->lastname;
     }
 
-    public function setLastname(string $lastname): self
+    public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
 
@@ -249,7 +245,7 @@ class User implements UserInterface
         return $this->birthdate;
     }
 
-    public function setBirthdate(\DateTimeInterface $birthdate): self
+    public function setBirthdate(?\DateTimeInterface $birthdate): self
     {
         $this->birthdate = $birthdate;
 
@@ -324,18 +320,6 @@ class User implements UserInterface
     public function setCountry(?Country $country): self
     {
         $this->country = $country;
-
-        return $this;
-    }
-
-    public function getUserType(): ?UserType
-    {
-        return $this->userType;
-    }
-
-    public function setUserType(?UserType $userType): self
-    {
-        $this->userType = $userType;
 
         return $this;
     }
