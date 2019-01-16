@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New UserProgLanguage{% endblock %}
+
+{% block body %}
+    <h1>Create new UserProgLanguage</h1>
+
+    {{ include('user_prog_language/_form.html.twig') }}
+
+    <a href="{{ path('user_prog_language_index') }}">back to list</a>
+{% endblock %}
