@@ -1,12 +1,16 @@
-{% extends 'base.html.twig' %}
+{% extends 'front_base.html.twig' %}
 
-{% block body %}
-    {{ form_start(form) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.password.first) }}
-    {{ form_row(form.password.second) }}
+{% block content %}
 
-    <button type="submit">S'inscrire !</button>
-    {{ form_end(form) }}
+    <div class="col-lg-6 offset-lg-3 border rounded p-5">
+        <h1 class="h3 mb-3 font-weight-normal">Please register</h1>
+        {{ form_start(form) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.password.first) }}
+        {{ form_row(form.password.second) }}
+
+        <button class="btn-sm btn-primary" type="submit">S'inscrire</button>
+        {{ form_end(form) }}
+    </div>
 
 {% endblock %}

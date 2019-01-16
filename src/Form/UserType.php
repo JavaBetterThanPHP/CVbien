@@ -20,8 +20,7 @@ class UserType extends AbstractType
                 'type' => PasswordType::class,
                 'first_options'  => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
-            ))
-            ->add('isActive')
+            ));
         ;
     }
 
