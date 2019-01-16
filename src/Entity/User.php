@@ -106,10 +106,22 @@ class User implements UserInterface
      */
     private $userProjects;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserDiploma", mappedBy="user")
+     */
+    private $userDiplomas;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserLanguage", mappedBy="user")
+     */
+    private $userLanguages;
+
     public function __construct()
     {
         $this->progLanguages = new ArrayCollection();
         $this->userProjects = new ArrayCollection();
+        $this->userDiplomas = new ArrayCollection();
+        $this->userLanguages = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -390,4 +402,66 @@ class User implements UserInterface
 
         return $this;
     }
+
+    /**
+     * @return Collection|UserDiploma[]
+     */
+    public function getUserDiplomas(): Collection
+    {
+        return $this->userDiplomas;
+    }
+
+    public function addUserDiploma(UserDiploma $userDiploma): self
+    {
+        if (!$this->userDiplomas->contains($userDiploma)) {
+            $this->userDiplomas[] = $userDiploma;
+            $userDiploma->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserDiploma(UserDiploma $userDiploma): self
+    {
+        if ($this->userDiplomas->contains($userDiploma)) {
+            $this->userDiplomas->removeElement($userDiploma);
+            // set the owning side to null (unless already changed)
+            if ($userDiploma->getUser() === $this) {
+                $userDiploma->setUser(null);
+            }
+        }
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserLanguage[]
+     */
+    public function getUserLanguages(): Collection
+    {
+        return $this->userLanguages;
+    }
+
+    public function addUserLanguage(UserLanguage $userLanguage): self
+    {
+        if (!$this->userLanguages->contains($userLanguage)) {
+            $this->userLanguages[] = $userLanguage;
+            $userLanguage->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserLanguage(UserLanguage $userLanguage): self
+    {
+        if ($this->userLanguages->contains($userLanguage)) {
+            $this->userLanguages->removeElement($userLanguage);
+            // set the owning side to null (unless already changed)
+            if ($userLanguage->getUser() === $this) {
+                $userLanguage->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
 }

@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}UserDiploma index{% endblock %}
+
+{% block body %}
+    <h1>UserDiploma index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>DateOfGrant</th>
+                <th>Mention</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for user_diploma in user_diplomas %}
+            <tr>
+                <td>{{ user_diploma.id }}</td>
+                <td>{{ user_diploma.dateOfGrant ? user_diploma.dateOfGrant|date('Y-m-d') : '' }}</td>
+                <td>{{ user_diploma.mention }}</td>
+                <td>
+                    <a href="{{ path('user_diploma_show', {'id': user_diploma.id}) }}">show</a>
+                    <a href="{{ path('user_diploma_edit', {'id': user_diploma.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('user_diploma_new') }}">Create new</a>
+{% endblock %}
