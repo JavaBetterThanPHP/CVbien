@@ -93,11 +93,6 @@ class User implements UserInterface
     private $userStatus;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ProgLanguage", inversedBy="users")
-     */
-    private $progLanguages;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserProject", mappedBy="user")
      */
     private $userProjects;

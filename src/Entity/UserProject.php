@@ -44,11 +44,6 @@ class UserProject
     private $projectType;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ProgLanguage", inversedBy="userProjects")
-     */
-    private $progLanguage;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\ProgTechnology", inversedBy="userProjects")
      */
     private $progTechnologies;

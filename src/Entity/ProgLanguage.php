@@ -29,16 +29,6 @@ class ProgLanguage
     private $type;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="progLanguages")
-     */
-    private $users;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\UserProject", mappedBy="progLanguage")
-     */
-    private $userProjects;
-
-    /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserProgLanguage", mappedBy="progLanguage")
      */
     private $userProgLanguages;
