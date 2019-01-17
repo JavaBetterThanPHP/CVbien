@@ -7,24 +7,24 @@
 
     <table class="table">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ user_project.id }}</td>
-            </tr>
-            <tr>
-                <th>UrlProject</th>
-                <td>{{ user_project.urlProject }}</td>
-            </tr>
-            <tr>
-                <th>UrlWebsite</th>
-                <td>{{ user_project.urlWebsite }}</td>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <td>{{ user_project.id }}</td>
+        </tr>
+        <tr>
+            <th>UrlProject</th>
+            <td>{{ user_project.urlProject }}</td>
+        </tr>
+        <tr>
+            <th>UrlWebsite</th>
+            <td>{{ user_project.urlWebsite }}</td>
+        </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('user_project_index') }}">back to list</a>
+    <a href="{{ path('back_user_project_index') }}">back to list</a>
 
-    <a href="{{ path('user_project_edit', {'id': user_project.id}) }}">edit</a>
+    <a href="{{ path('back_user_project_edit', {'id': user_project.id}) }}">edit</a>
 
     {{ include('Back/user_project/_delete_form.html.twig') }}
 {% endblock %}

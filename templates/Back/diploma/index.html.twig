@@ -23,8 +23,8 @@
                 <td>{{ diploma.level }}</td>
                 <td>{{ diploma.isInternational ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('diploma_show', {'id': diploma.id}) }}">show</a>
-                    <a href="{{ path('diploma_edit', {'id': diploma.id}) }}">edit</a>
+                    <a href="{{ path('back_diploma_show', {'id': diploma.id}) }}">show</a>
+                    <a href="{{ path('back_diploma_edit', {'id': diploma.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('diploma_new') }}">Create new</a>
+    <a href="{{ path('back_diploma_new') }}">Create new</a>
 {% endblock %}

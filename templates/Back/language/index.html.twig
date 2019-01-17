@@ -19,8 +19,8 @@
                 <td>{{ language.id }}</td>
                 <td>{{ language.name }}</td>
                 <td>
-                    <a href="{{ path('language_show', {'id': language.id}) }}">show</a>
-                    <a href="{{ path('language_edit', {'id': language.id}) }}">edit</a>
+                    <a href="{{ path('back_language_show', {'id': language.id}) }}">show</a>
+                    <a href="{{ path('back_language_edit', {'id': language.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('language_new') }}">Create new</a>
+    <a href="{{ path('back_language_new') }}">Create new</a>
 {% endblock %}

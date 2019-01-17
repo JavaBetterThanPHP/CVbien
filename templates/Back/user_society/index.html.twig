@@ -7,13 +7,13 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>FirstDate</th>
-                <th>LastDate</th>
-                <th>IsActive</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>FirstDate</th>
+            <th>LastDate</th>
+            <th>IsActive</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for user_society in user_societies %}
@@ -23,8 +23,8 @@
                 <td>{{ user_society.lastDate ? user_society.lastDate|date('Y-m-d') : '' }}</td>
                 <td>{{ user_society.isActive ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a href="{{ path('user_society_show', {'id': user_society.id}) }}">show</a>
-                    <a href="{{ path('user_society_edit', {'id': user_society.id}) }}">edit</a>
+                    <a href="{{ path('back_user_society_show', {'id': user_society.id}) }}">show</a>
+                    <a href="{{ path('back_user_society_edit', {'id': user_society.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_society_new') }}">Create new</a>
+    <a href="{{ path('back_user_society_new') }}">Create new</a>
 {% endblock %}

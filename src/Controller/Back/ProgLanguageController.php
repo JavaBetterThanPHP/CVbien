@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/prog/language")
+ * @Route("/prog/language", name="back_prog_language_")
  */
 class ProgLanguageController extends AbstractController
 {
     /**
-     * @Route("/", name="prog_language_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(ProgLanguageRepository $progLanguageRepository): Response
     {
@@ -24,7 +24,7 @@ class ProgLanguageController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="prog_language_new", methods={"GET","POST"})
+     * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -37,7 +37,7 @@ class ProgLanguageController extends AbstractController
             $entityManager->persist($progLanguage);
             $entityManager->flush();
 
-            return $this->redirectToRoute('prog_language_index');
+            return $this->redirectToRoute('back_prog_language_index');
         }
 
         return $this->render('Back/prog_language/new.html.twig', [
@@ -47,7 +47,7 @@ class ProgLanguageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="prog_language_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(ProgLanguage $progLanguage): Response
     {
@@ -55,7 +55,7 @@ class ProgLanguageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="prog_language_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, ProgLanguage $progLanguage): Response
     {
@@ -65,7 +65,7 @@ class ProgLanguageController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('prog_language_index', ['id' => $progLanguage->getId()]);
+            return $this->redirectToRoute('back_prog_language_index', ['id' => $progLanguage->getId()]);
         }
 
         return $this->render('Back/prog_language/edit.html.twig', [
@@ -75,7 +75,7 @@ class ProgLanguageController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="prog_language_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, ProgLanguage $progLanguage): Response
     {
@@ -85,6 +85,6 @@ class ProgLanguageController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('prog_language_index');
+        return $this->redirectToRoute('back_prog_language_index');
     }
 }

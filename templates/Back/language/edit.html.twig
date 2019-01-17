@@ -5,9 +5,9 @@
 {% block content %}
     <h1>Edit Language</h1>
 
-    {{ include('language/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('Back/language:_form.html.twig', {'button_label': 'Update'}) }}
 
-    <a href="{{ path('language_index') }}">back to list</a>
+    <a href="{{ path('back_language_index') }}">back to list</a>
 
-    {{ include('language/_delete_form.html.twig') }}
+    {{ include('Back/language/_delete_form.html.twig') }}
 {% endblock %}

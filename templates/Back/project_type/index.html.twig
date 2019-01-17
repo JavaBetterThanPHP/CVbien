@@ -7,11 +7,11 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Label</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Label</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for project_type in project_types %}
@@ -19,8 +19,8 @@
                 <td>{{ project_type.id }}</td>
                 <td>{{ project_type.label }}</td>
                 <td>
-                    <a href="{{ path('project_type_show', {'id': project_type.id}) }}">show</a>
-                    <a href="{{ path('project_type_edit', {'id': project_type.id}) }}">edit</a>
+                    <a href="{{ path('back_project_type_show', {'id': project_type.id}) }}">show</a>
+                    <a href="{{ path('back_project_type_edit', {'id': project_type.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('project_type_new') }}">Create new</a>
+    <a href="{{ path('back_project_type_new') }}">Create new</a>
 {% endblock %}

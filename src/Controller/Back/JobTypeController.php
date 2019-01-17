@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/job/type")
+ * @Route("/job/type", name="back_job_type_")
  */
 class JobTypeController extends AbstractController
 {
     /**
-     * @Route("/", name="job_type_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(JobTypeRepository $jobTypeRepository): Response
     {
@@ -24,7 +24,7 @@ class JobTypeController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="job_type_new", methods={"GET","POST"})
+     * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -37,7 +37,7 @@ class JobTypeController extends AbstractController
             $entityManager->persist($jobType);
             $entityManager->flush();
 
-            return $this->redirectToRoute('job_type_index');
+            return $this->redirectToRoute('back_job_type_index');
         }
 
         return $this->render('Back/job_type/new.html.twig', [
@@ -47,7 +47,7 @@ class JobTypeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="job_type_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(JobType $jobType): Response
     {
@@ -55,7 +55,7 @@ class JobTypeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="job_type_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, JobType $jobType): Response
     {
@@ -65,7 +65,7 @@ class JobTypeController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('job_type_index', ['id' => $jobType->getId()]);
+            return $this->redirectToRoute('back_job_type_index', ['id' => $jobType->getId()]);
         }
 
         return $this->render('Back/job_type/edit.html.twig', [
@@ -75,7 +75,7 @@ class JobTypeController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="job_type_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, JobType $jobType): Response
     {
@@ -85,6 +85,6 @@ class JobTypeController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('job_type_index');
+        return $this->redirectToRoute('back_job_type_index');
     }
 }

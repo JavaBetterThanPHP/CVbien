@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/society")
+ * @Route("/society", name="back_society_")
  */
 class SocietyController extends AbstractController
 {
     /**
-     * @Route("/", name="society_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(SocietyRepository $societyRepository): Response
     {
@@ -24,7 +24,7 @@ class SocietyController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="society_new", methods={"GET","POST"})
+     * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -37,7 +37,7 @@ class SocietyController extends AbstractController
             $entityManager->persist($society);
             $entityManager->flush();
 
-            return $this->redirectToRoute('society_index');
+            return $this->redirectToRoute('back_society_index');
         }
 
         return $this->render('Back/society/new.html.twig', [
@@ -47,7 +47,7 @@ class SocietyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="society_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(Society $society): Response
     {
@@ -55,7 +55,7 @@ class SocietyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="society_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Society $society): Response
     {
@@ -65,7 +65,7 @@ class SocietyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('society_index', ['id' => $society->getId()]);
+            return $this->redirectToRoute('back_society_index', ['id' => $society->getId()]);
         }
 
         return $this->render('Back/society/edit.html.twig', [
@@ -75,7 +75,7 @@ class SocietyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="society_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, Society $society): Response
     {
@@ -85,6 +85,6 @@ class SocietyController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('society_index');
+        return $this->redirectToRoute('back_society_index');
     }
 }

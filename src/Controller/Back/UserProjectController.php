@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user/project")
+ * @Route("/user/project", name="back_user_project_")
  */
 class UserProjectController extends AbstractController
 {
     /**
-     * @Route("/", name="user_project_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(UserProjectRepository $userProjectRepository): Response
     {
@@ -24,7 +24,7 @@ class UserProjectController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="user_project_new", methods={"GET","POST"})
+     * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -37,7 +37,7 @@ class UserProjectController extends AbstractController
             $entityManager->persist($userProject);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_project_index');
+            return $this->redirectToRoute('back_user_project_index');
         }
 
         return $this->render('Back/user_project/new.html.twig', [
@@ -47,7 +47,7 @@ class UserProjectController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_project_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(UserProject $userProject): Response
     {
@@ -55,7 +55,7 @@ class UserProjectController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="user_project_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, UserProject $userProject): Response
     {
@@ -65,7 +65,7 @@ class UserProjectController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_project_index', ['id' => $userProject->getId()]);
+            return $this->redirectToRoute('back_user_project_index', ['id' => $userProject->getId()]);
         }
 
         return $this->render('Back/user_project/edit.html.twig', [
@@ -75,7 +75,7 @@ class UserProjectController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_project_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, UserProject $userProject): Response
     {
@@ -85,6 +85,6 @@ class UserProjectController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('user_project_index');
+        return $this->redirectToRoute('back_user_project_index');
     }
 }

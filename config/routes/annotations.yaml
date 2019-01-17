@@ -1,13 +1,14 @@
 controllers:
-    resource: ../../src/Controller/
-    type: annotation
+  resource: ../../src/Controller/
+  type: annotation
+  prefix: /
 
 controllers_back:
-    resource: ../../src/Controller/Back
-    type: annotation
-    prefix: /admin
+  resource: ../../src/Controller/Back
+  type: annotation
+  prefix: /admin
 
 controllers_front:
-    resource: ../../src/Controller/Front
-    type: annotation
-    prefix: /
+  resource: ../../src/Controller/Front
+  type: annotation
+  prefix: /dashboard

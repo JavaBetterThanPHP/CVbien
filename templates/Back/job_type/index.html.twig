@@ -19,8 +19,8 @@
                 <td>{{ job_type.id }}</td>
                 <td>{{ job_type.label }}</td>
                 <td>
-                    <a href="{{ path('job_type_show', {'id': job_type.id}) }}">show</a>
-                    <a href="{{ path('job_type_edit', {'id': job_type.id}) }}">edit</a>
+                    <a href="{{ path('back_job_type_show', {'id': job_type.id}) }}">show</a>
+                    <a href="{{ path('back_job_type_edit', {'id': job_type.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('job_type_new') }}">Create new</a>
+    <a href="{{ path('back_job_type_new') }}">Create new</a>
 {% endblock %}

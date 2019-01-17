@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/link")
+ * @Route("/link", name="back_link_")
  */
 class LinkController extends AbstractController
 {
     /**
-     * @Route("/", name="link_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(LinkRepository $linkRepository): Response
     {
@@ -24,7 +24,7 @@ class LinkController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="link_new", methods={"GET","POST"})
+     * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -37,7 +37,7 @@ class LinkController extends AbstractController
             $entityManager->persist($link);
             $entityManager->flush();
 
-            return $this->redirectToRoute('link_index');
+            return $this->redirectToRoute('back_link_index');
         }
 
         return $this->render('Back/link/new.html.twig', [
@@ -47,7 +47,7 @@ class LinkController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="link_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(Link $link): Response
     {
@@ -55,7 +55,7 @@ class LinkController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="link_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, Link $link): Response
     {
@@ -65,7 +65,7 @@ class LinkController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('link_index', ['id' => $link->getId()]);
+            return $this->redirectToRoute('back_link_index', ['id' => $link->getId()]);
         }
 
         return $this->render('Back/link/edit.html.twig', [
@@ -75,7 +75,7 @@ class LinkController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="link_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, Link $link): Response
     {
@@ -85,6 +85,6 @@ class LinkController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('link_index');
+        return $this->redirectToRoute('back_link_index');
     }
 }

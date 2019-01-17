@@ -7,11 +7,11 @@
 
     <table class="table">
         <thead>
-            <tr>
-                <th>Id</th>
-                <th>Label</th>
-                <th>actions</th>
-            </tr>
+        <tr>
+            <th>Id</th>
+            <th>Label</th>
+            <th>actions</th>
+        </tr>
         </thead>
         <tbody>
         {% for user_status in user_statuses %}
@@ -19,8 +19,8 @@
                 <td>{{ user_status.id }}</td>
                 <td>{{ user_status.label }}</td>
                 <td>
-                    <a href="{{ path('user_status_show', {'id': user_status.id}) }}">show</a>
-                    <a href="{{ path('user_status_edit', {'id': user_status.id}) }}">edit</a>
+                    <a href="{{ path('back_user_status_show', {'id': user_status.id}) }}">show</a>
+                    <a href="{{ path('back_user_status_edit', {'id': user_status.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('user_status_new') }}">Create new</a>
+    <a href="{{ path('back_user_status_new') }}">Create new</a>
 {% endblock %}

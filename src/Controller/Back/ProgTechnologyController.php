@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/prog/technology")
+ * @Route("/prog/technology", name="back_prog_technology_")
  */
 class ProgTechnologyController extends AbstractController
 {
     /**
-     * @Route("/", name="prog_technology_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(ProgTechnologyRepository $progTechnologyRepository): Response
     {
@@ -24,7 +24,7 @@ class ProgTechnologyController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="prog_technology_new", methods={"GET","POST"})
+     * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -37,7 +37,7 @@ class ProgTechnologyController extends AbstractController
             $entityManager->persist($progTechnology);
             $entityManager->flush();
 
-            return $this->redirectToRoute('prog_technology_index');
+            return $this->redirectToRoute('back_prog_technology_index');
         }
 
         return $this->render('Back/prog_technology/new.html.twig', [
@@ -47,7 +47,7 @@ class ProgTechnologyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="prog_technology_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(ProgTechnology $progTechnology): Response
     {
@@ -55,7 +55,7 @@ class ProgTechnologyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="prog_technology_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, ProgTechnology $progTechnology): Response
     {
@@ -65,7 +65,7 @@ class ProgTechnologyController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('prog_technology_index', ['id' => $progTechnology->getId()]);
+            return $this->redirectToRoute('back_prog_technology_index', ['id' => $progTechnology->getId()]);
         }
 
         return $this->render('Back/prog_technology/edit.html.twig', [
@@ -75,7 +75,7 @@ class ProgTechnologyController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="prog_technology_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, ProgTechnology $progTechnology): Response
     {
@@ -85,6 +85,6 @@ class ProgTechnologyController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('prog_technology_index');
+        return $this->redirectToRoute('back_prog_technology_index');
     }
 }

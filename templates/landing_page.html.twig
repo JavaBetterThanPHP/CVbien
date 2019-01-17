@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CV Bien{% endblock %}
+
+{% block body %}
+    {% block header %}
+        <nav class="navbar navbar-light bg-dark justify-content-between">
+            <a class="navbar-brand text-light">CVBien</a>
+
+            <div class="ml-3">
+                <a class="btn btn-primary" href="{{ path('app_security_login') }}">Sign in</a>
+                <a class="btn btn-outline-primary" href="{{ path('app_security_registration') }}">Sign up</a>
+            </div>
+        </nav>
+    {% endblock %}
+
+    <div class="container mt-5">
+        {% block content %}
+        {% endblock %}
+    </div>
+
+    {% block footer %}{% endblock %}
+{% endblock %}

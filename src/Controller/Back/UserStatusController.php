@@ -11,12 +11,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user/status")
+ * @Route("/user/status", name="back_user_status_")
  */
 class UserStatusController extends AbstractController
 {
     /**
-     * @Route("/", name="user_status_index", methods={"GET"})
+     * @Route("/", name="index", methods={"GET"})
      */
     public function index(UserStatusRepository $userStatusRepository): Response
     {
@@ -24,7 +24,7 @@ class UserStatusController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="user_status_new", methods={"GET","POST"})
+     * @Route("/new", name="new", methods={"GET","POST"})
      */
     public function new(Request $request): Response
     {
@@ -37,7 +37,7 @@ class UserStatusController extends AbstractController
             $entityManager->persist($userStatus);
             $entityManager->flush();
 
-            return $this->redirectToRoute('user_status_index');
+            return $this->redirectToRoute('back_user_status_index');
         }
 
         return $this->render('Back/user_status/new.html.twig', [
@@ -47,7 +47,7 @@ class UserStatusController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_status_show", methods={"GET"})
+     * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(UserStatus $userStatus): Response
     {
@@ -55,7 +55,7 @@ class UserStatusController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="user_status_edit", methods={"GET","POST"})
+     * @Route("/{id}/edit", name="edit", methods={"GET","POST"})
      */
     public function edit(Request $request, UserStatus $userStatus): Response
     {
@@ -65,7 +65,7 @@ class UserStatusController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('user_status_index', ['id' => $userStatus->getId()]);
+            return $this->redirectToRoute('back_user_status_index', ['id' => $userStatus->getId()]);
         }
 
         return $this->render('Back/user_status/edit.html.twig', [
@@ -75,7 +75,7 @@ class UserStatusController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="user_status_delete", methods={"DELETE"})
+     * @Route("/{id}", name="delete", methods={"DELETE"})
      */
     public function delete(Request $request, UserStatus $userStatus): Response
     {
@@ -85,6 +85,6 @@ class UserStatusController extends AbstractController
             $entityManager->flush();
         }
 
-        return $this->redirectToRoute('user_status_index');
+        return $this->redirectToRoute('back_user_status_index');
     }
 }
