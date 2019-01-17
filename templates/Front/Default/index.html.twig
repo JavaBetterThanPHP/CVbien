@@ -3,5 +3,8 @@
 {% block title %}Dashboard - CVBien{% endblock %}
 
 {% block content %}
-    /templates/Front/Default/index.html.twig
+    {% if user is defined %}
+        <p>{{ user.firstname }}</p>
+        <p>{{ user.adress }}</p>
+    {% endif %}
 {% endblock %}

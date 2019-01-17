@@ -6,11 +6,26 @@
     {% block header %}
         <nav class="navbar navbar-light bg-dark justify-content-between">
             <a class="navbar-brand text-light">CVBien</a>
+            {% if user is defined %}
+                <div class="hamburger">
+                    <span class="bars"></span>
+                </div>
+                <div class="menu">
+                    <ul>
+                        <li><a href="">Link</a></li>
+                        <li class="sub-menu"><a href="">Link</a></li>
+                        <li><a href="">Link</a></li>
+                        <li><a href="">Link</a></li>
+                        <li><a href="">Link</a></li>
+                    </ul>
 
-            <div class="ml-3">
-                <a class="btn btn-primary" href="{{ path('app_security_login') }}">Sign in</a>
-                <a class="btn btn-outline-primary" href="{{ path('app_security_registration') }}">Sign up</a>
-            </div>
+                </div>
+            {% else %}
+                <div class="ml-3">
+                    <a class="btn btn-primary" href="{{ path('app_security_login') }}">Sign in</a>
+                    <a class="btn btn-outline-primary" href="{{ path('app_security_registration') }}">Sign up</a>
+                </div>
+            {% endif %}
         </nav>
     {% endblock %}
 
