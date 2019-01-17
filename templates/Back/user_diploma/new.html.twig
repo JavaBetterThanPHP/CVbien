@@ -1,0 +1,11 @@
+{% extends 'back_base.html.twig' %}
+
+{% block title %}New UserDiploma{% endblock %}
+
+{% block body %}
+    <h1>Create new UserDiploma</h1>
+
+    {{ include('Back/user_diploma/_form.html.twig') }}
+
+    <a href="{{ path('back_user_diploma_index') }}">back to list</a>
+{% endblock %}

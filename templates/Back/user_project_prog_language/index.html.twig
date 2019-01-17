@@ -1,0 +1,33 @@
+{% extends 'back_base.html.twig' %}
+
+{% block title %}UserProjectProgLanguage index{% endblock %}
+
+{% block body %}
+    <h1>UserProjectProgLanguage index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user_project_prog_language in user_project_prog_languages %}
+            <tr>
+                <td>{{ user_project_prog_language.id }}</td>
+                <td>
+                    <a href="{{ path('back_user_project_prog_language_show', {'id': user_project_prog_language.id}) }}">show</a>
+                    <a href="{{ path('back_user_project_prog_language_edit', {'id': user_project_prog_language.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="2">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('back_user_project_prog_language_new') }}">Create new</a>
+{% endblock %}
