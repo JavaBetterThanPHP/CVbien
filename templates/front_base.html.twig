@@ -7,18 +7,13 @@
         <nav class="navbar navbar-light bg-dark justify-content-between">
             <a class="navbar-brand text-light">CVBien</a>
             {% if user is defined %}
-                <div class="hamburger">
-                    <span class="bars"></span>
-                </div>
-                <div class="menu">
-                    <ul>
-                        <li><a href="">Link</a></li>
-                        <li class="sub-menu"><a href="">Link</a></li>
-                        <li><a href="">Link</a></li>
-                        <li><a href="">Link</a></li>
-                        <li><a href="">Link</a></li>
-                    </ul>
-
+                <div class="dropdown">
+                    <span style="cursor: pointer;" data-toggle="dropdown" class="fa fa-bars text-light fa-2x"></span>
+                    <div class="dropdown-menu dropdown-menu-left">
+                        <a class="dropdown-item" href="{{ path('app_security_login') }}">Modifier mes informations</a>
+                        <a class="dropdown-item" href="#">Link 2</a>
+                        <a class="dropdown-item" href="#">Link 3</a>
+                    </div>
                 </div>
             {% else %}
                 <div class="ml-3">
