@@ -2,7 +2,10 @@
 
 namespace App\Form;
 
+use App\Entity\Country;
 use App\Entity\User;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -17,12 +20,16 @@ class UserFrontType extends AbstractType
         $builder
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
-            ->add('password', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ));
-        ;
+            ->add('birthdate', DateType::class)
+            ->add('phoneNumber', TextType::class)
+            ->add('proPhoneNumber', TextType::class)
+            ->add('adress', TextType::class)
+            ->add('cityCode', TextType::class)
+            ->add('city', TextType::class)
+            ->add('country', EntityType::class, [
+                'class' => Country::class,
+                'choice_label' => 'name',
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)
