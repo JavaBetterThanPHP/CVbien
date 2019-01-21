@@ -112,6 +112,11 @@ class User implements UserInterface
      */
     private $userProgLanguages;
 
+    /**
+     * @ORM\Column(type="blob", nullable=true)
+     */
+    private $profilePicture;
+
     public function __construct()
     {
         $this->progLanguages = new ArrayCollection();
@@ -476,6 +481,18 @@ class User implements UserInterface
                 $userProgLanguage->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getProfilePicture()
+    {
+        return $this->profilePicture;
+    }
+
+    public function setProfilePicture($profilePicture): self
+    {
+        $this->profilePicture = $profilePicture;
 
         return $this;
     }

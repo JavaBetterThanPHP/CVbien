@@ -18,8 +18,10 @@ class DefaultController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
+        $profilePicture = stream_get_contents($user->getProfilePicture());
         return $this->render('Front/Default/index.html.twig',[
             'user' => $user,
+            'profilePicture' => $profilePicture
         ]);
     }
 }
