@@ -17,9 +17,6 @@ class UserFrontType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('profilePicture', FileType::class, [
-                'label' => 'Profile Picture'
-            ])
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
             ->add('birthdate', DateType::class)

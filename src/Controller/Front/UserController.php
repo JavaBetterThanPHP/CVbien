@@ -33,4 +33,18 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/updateProfilePicture", name="updateProfilePicture", methods={"POST"})
+     */
+    public function updateProfilePicture(Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        $entityManager = $this->getDoctrine()->getManager();
+        $user->setImageFile($request->request->get('image'));
+        $user->setProfilePicture($user->getId().".jpg");
+        $entityManager->flush();
+        return "ok";
+    }
 }
