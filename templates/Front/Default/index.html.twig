@@ -19,11 +19,9 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <div id="main-cropper"></div>
                         <input class="btn" type="file" id="inputPicture" value="Choose Image" accept="image/*">
-                        <script>
-
-                        </script>
+                        <div id="main-cropper"></div>
+                        <input id="updateProfilePictureLink" name="updateProfilePictureLink" type="hidden" value="{{ path('front_user_updateProfilePicture') }}">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

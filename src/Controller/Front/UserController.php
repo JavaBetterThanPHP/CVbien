@@ -39,12 +39,29 @@ class UserController extends AbstractController
      */
     public function updateProfilePicture(Request $request): Response
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user = $this->getUser();
-        $entityManager = $this->getDoctrine()->getManager();
-        $user->setImageFile($request->request->get('image'));
-        $user->setProfilePicture($user->getId().".jpg");
-        $entityManager->flush();
-        return "ok";
+        try {
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+            $user = $this->getUser();
+            $entityManager = $this->getDoctrine()->getManager();
+            $user->setImageFile($request->files->get('data'));
+            $entityManager->flush();
+        }
+        catch (exception $e) {
+
+        }
+        /*
+$form = $this->createForm(UserFrontType::class, $user);
+$form->handleRequest($request);
+if ($form->isSubmitted() && $form->isValid()) {
+    $this->getDoctrine()->getManager()->flush();
+    return $this->redirectToRoute('front_index');
+}else{
+    return $this->render('Front/default/index.html.twig', [
+        'user' => $user,
+        'form' => $form->createView(),
+    ]);
+}
+*/
+        return new Response("ok");
     }
 }

@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * @ORM\Table(name="user_account")
  * @Vich\Uploadable
  */
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
@@ -527,6 +527,28 @@ class User implements UserInterface
         }
 
         return $this;
+    }
+
+    /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->profilePicture,
+            $this->email,
+            $this->password
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->profilePicture,
+            $this->email,
+            $this->password
+            ) = unserialize($serialized);
     }
 
 }

@@ -27,29 +27,53 @@ function initCrop () {
         $('#main-cropper').croppie('bind');
     });
 
-
     $( "#cropSave" ).click(function() {
-        alert("click !");
-        basic.croppie('result','canvas'
+        basic.croppie('result','blob'
         ).then(function (result) {
-            $('#profilePicture').attr('src', result);
+            var fd = new FormData();
+            fd.append('data', result,$('#userId').val()+"."+result.type.split("/")[1]);
             $.ajax({
-                type : "POST",
-                data : {
-                    'image':result,
-                    'userId':$('#userId').val()
-                },
-                url : 'updateProfilePicture',
-                success : function(response) {
-                    $('#profilePicture').attr('src', result);
-                    alert("success !")
-
-                },
-                error : function (response) {
-                    alert("error !")
-                }
+                type: 'POST',
+                url : $('#updateProfilePictureLink').val(),
+                data: fd,
+                processData: false,
+                contentType: false
+            }).done(function(data) {
+                $('#profilePicture').attr('src', URL.createObjectURL(result));
             });
         });
     });
+
+    function b64toBlob(b64Data, contentType, sliceSize) {
+        contentType = contentType || '';
+        sliceSize = sliceSize || 512;
+
+        var byteCharacters = atob(b64Data);
+        var byteArrays = [];
+
+        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+            var slice = byteCharacters.slice(offset, offset + sliceSize);
+
+            var byteNumbers = new Array(slice.length);
+            for (var i = 0; i < slice.length; i++) {
+                byteNumbers[i] = slice.charCodeAt(i);
+            }
+
+            var byteArray = new Uint8Array(byteNumbers);
+
+            byteArrays.push(byteArray);
+        }
+
+        var blob = new Blob(byteArrays, {type: contentType});
+        return blob;
+    }
+
+    function urltoFile(url, filename, mimeType){
+        return (fetch(url)
+                .then(function(res){return res.arrayBuffer();})
+                .then(function(buf){return new File([buf], filename, {type:mimeType});})
+        );
+    }
+
 }
 

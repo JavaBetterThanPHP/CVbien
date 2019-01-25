@@ -7,6 +7,7 @@
         <nav class="navbar navbar-light bg-dark justify-content-between">
             <a class="navbar-brand text-light">CVBien</a>
             {% if user is defined %}
+                <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
                 <div class="dropdown">
                     <span style="cursor: pointer;" data-toggle="dropdown" class="fa fa-bars text-light fa-2x"></span>
                     <div class="dropdown-menu dropdown-menu-left">
@@ -22,6 +23,15 @@
                 </div>
             {% endif %}
         </nav>
+        {% if user is defined %}
+        <div class="container-fluid p-o">
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="https://www.mymaldives.com.au/wp-content/uploads/sites/11/2016/12/Beach-Banner.jpg" alt="placeholder 960" class="img-responsive" />
+                </div>
+            </div>
+        </div>
+        {% endif %}
     {% endblock %}
 
     <div class="container mt-5">
