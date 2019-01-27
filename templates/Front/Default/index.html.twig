@@ -10,8 +10,8 @@
         <input id="updateBannerLink" name="updateBannerLink" type="hidden" value="{{ path('front_user_updateBanner') }}">
         <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
         <img id="profilePicture" src="{{ vich_uploader_asset(user, 'imageFile') }}"/>
-        <button onclick="initCropBanner()" class="btn" data-toggle="modal" data-target="#bannerModal">Modifer Avatar</button>
         <button onclick="initCropProfile()" class="btn" data-toggle="modal" data-target="#profilePictureModal">Modifer Avatar</button>
+        <button onclick="initCropBanner()" class="btn" data-toggle="modal" data-target="#bannerModal">Modifer Bannière</button>
         <div id="profilePictureModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
@@ -42,9 +42,8 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                        <input class="btn" type="file" id="inputPicture" value="Choose Image" accept="image/*">
+                        <input class="btn" type="file" id="inputBanner" value="Choose Image" accept="image/*">
                         <div id="banner-cropper"></div>
-                        <input id="updateProfilePictureLink" name="updateProfilePictureLink" type="hidden" value="{{ path('front_user_updateProfilePicture') }}">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>

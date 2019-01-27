@@ -80,11 +80,11 @@ function initCropProfile () {
 
 function initCropBanner () {
     var basic = $('#banner-cropper').croppie({
-        viewport: {width: 300, height: 300},
-        boundary: {width: 300, height: 300},
+        viewport: {width: 750, height: 200},
+        boundary: {width: 750, height: 200},
         enforceBoundary: true,
         showZoomer: true,
-        url: $("#userBanner").css('background-image')
+        url: $("#userBanner").css('background-image').replace('url(','').replace(')','').replace(/\"/gi, "")
     });
 
     function readFile(input) {
@@ -108,10 +108,12 @@ function initCropBanner () {
     });
 
     $( "#cropBannerSave" ).click(function() {
-        basic.croppie('result','blob'
+        basic.croppie('result', {
+            type: 'blob',
+            size: 'original'}
         ).then(function (result) {
             var fd = new FormData();
-            fd.append('data', result,$('#userId').val()+"Banner."+result.type.split("/")[1]);
+            fd.append('data', result,$('#userId').val()+"."+result.type.split("/")[1]);
             $.ajax({
                 type: 'POST',
                 url : $('#updateBannerLink').val(),
@@ -119,9 +121,7 @@ function initCropBanner () {
                 processData: false,
                 contentType: false
             }).done(function(data) {
-                $("#userBanner").css('background-image', URL.createObjectURL(result) )
-
-                $('#profilePicture').attr('src', URL.createObjectURL(result));
+                $("#userBanner").css('background-image', 'url("'+URL.createObjectURL(result)+'")');
                 $('#bannerModal').modal('hide');
             });
         });
