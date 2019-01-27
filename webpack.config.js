@@ -8,6 +8,9 @@ Encore
     // EntryPoint
     .addEntry('main', './assets/css/main.css')
     .addEntry('app', './assets/js/app.js')
+    .copyFiles({
+        from: './assets/images'
+    })
 
     // Config
     .enableSingleRuntimeChunk()

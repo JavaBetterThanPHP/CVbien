@@ -4,15 +4,33 @@
 
 {% block content %}
     {% if user is defined %}
-        <p>{{ user.firstname }}</p>
-        <p>{{ user.adress }}</p>
-        <input id="updateProfilePictureLink" name="updateProfilePictureLink" type="hidden" value="{{ path('front_user_updateProfilePicture') }}">
-        <input id="updateBannerLink" name="updateBannerLink" type="hidden" value="{{ path('front_user_updateBanner') }}">
+
+        {# Values #}
+        <input id="updateProfilePictureLink" name="updateProfilePictureLink" type="hidden"
+               value="{{ path('front_user_updateProfilePicture') }}">
+        <input id="updateBannerLink" name="updateBannerLink" type="hidden"
+               value="{{ path('front_user_updateBanner') }}">
         <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
+        {# --- #}
+
+        {# Display banner/pictures #}
+        <div id="userBanner" class="bg-img"
+        style="background-image: url({{ vich_uploader_asset(user, 'bannerImageFile') }});">
         <img id="profilePicture" src="{{ vich_uploader_asset(user, 'imageFile') }}"/>
-        <button onclick="initCropProfile()" class="btn" data-toggle="modal" data-target="#profilePictureModal">Modifer Avatar</button>
-        <button onclick="initCropBanner()" class="btn" data-toggle="modal" data-target="#bannerModal">Modifer Bannière</button>
-        <div id="profilePictureModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+
+        {# Change Picture #}
+        <button onclick="initCropProfile()" class="btn" data-toggle="modal" data-target="#profilePictureModal">
+            Modifer Avatar
+        </button>
+
+        {# Change Banner #}
+        <button onclick="initCropBanner()" class="btn" data-toggle="modal" data-target="#bannerModal">
+            Modifier Bannière
+        </button>
+
+        {# ---- MODAL PICTURES/BANNERS ---- #}
+        <div id="profilePictureModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+             aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -32,7 +50,8 @@
                 </div>
             </div>
         </div>
-        <div id="bannerModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div id="bannerModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+             aria-labelledby="myLargeModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -52,5 +71,7 @@
                 </div>
             </div>
         </div>
+        {# ----- #}
+
     {% endif %}
 {% endblock %}

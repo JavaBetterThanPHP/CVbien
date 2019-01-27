@@ -1,38 +1,78 @@
 {% extends 'base.html.twig' %}
-{% block title %}CV Bien{% endblock %}
+{% block title %}CVBien{% endblock %}
 {% block body %}
+
     {% block header %}
-        {% if user is defined %}
-            <div id="userBanner" class="bg-img"
-            style="background-image: url({{ vich_uploader_asset(user, 'bannerImageFile') }});">
-        {% endif %}
-        <!--<img src="{{ vich_uploader_asset(user, 'bannerImageFile') }}">-->
-        <nav class="navbar navbar-light bg-dark justify-content-between">
-            <a class="navbar-brand text-light">CVBien</a>
+        {# --------- NAVBAR ---------- #}
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-primary">
+            <a class="navbar-brand" href="{{ path('app_index') }}"><img src="{{ asset('build/CVBien_logo.png') }}"
+                                                                        width="180"/></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            {# --- User menu --- #}
             {% if user is defined %}
-                <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
-                <div class="dropdown">
-                    <span style="cursor: pointer;" data-toggle="dropdown" class="fa fa-bars text-light fa-2x"></span>
-                    <div class="dropdown-menu dropdown-menu-left">
-                        <a class="dropdown-item" href="{{ path('front_user_edit') }}">Modifier mes informations</a>
-                        <a class="dropdown-item" href="#">Link 2</a>
-                        <a class="dropdown-item" href="#">Link 3</a>
+            <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto">
+                    {# To the personnal page #}
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Preview<span class="sr-only">(current)</span></a>
+                    </li>
+                    {# - #}
+
+                    {# To the dashboard #}
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Dashboard</a>
+                    </li>
+                    {# - #}
+
+                    {# To parameters pages #}
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                           data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Settings
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-left">
+                            <a class="dropdown-item" href="{{ path('front_user_edit') }}">Update personal
+                                information</a>
+                            <a class="dropdown-item" href="#">Autre lien</a>
+                            <a class="dropdown-item" href="#">Autre lien</a>
+                        </div>
+                    </li>
+                    {# - #}
+
+                </ul>
+                {% endif %}
+                {# --- #}
+
+
+                {# --- Login/register links --- #}
+                {% if user is not defined %}
+                    <div class="ml-3">
+                        <a class="btn btn-primary" href="{{ path('app_security_login') }}">Sign in</a>
+                        <a class="btn btn-outline-primary" href="{{ path('app_security_registration') }}">Sign up</a>
                     </div>
-                </div>
-            {% else %}
-                <div class="ml-3">
-                    <a class="btn btn-primary" href="{{ path('app_security_login') }}">Sign in</a>
-                    <a class="btn btn-outline-primary" href="{{ path('app_security_registration') }}">Sign up</a>
-                </div>
-            {% endif %}
-        </nav>
-        {% if user is defined %}
+                {% endif %}
+                {# ----------- #}
+
             </div>
-        {% endif %}
+        </nav>
+        {# --------- #}
     {% endblock %}
-    <div class="container mt-5">
-        {% block content %}
-        {% endblock %}
-    </div>
-    {% block footer %}{% endblock %}
+
+    <div class="container mt-5">{% block content %}{% endblock %}</div>
+
+    {# Footer #}
+    {% block footer %}
+        <footer class="container">
+            <div class="text-center mt-5 mb-3 border-top text-secondary">© 2018 Copyright:
+                <a href="">cvbien.com</a>
+            </div>
+        </footer>
+    {% endblock %}
+    {# --- #}
+
 {% endblock %}
