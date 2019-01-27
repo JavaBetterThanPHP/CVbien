@@ -1,9 +1,12 @@
 {% extends 'base.html.twig' %}
-
 {% block title %}CV Bien{% endblock %}
-
 {% block body %}
     {% block header %}
+        {% if user is defined %}
+            <div id="userBanner" class="bg-img"
+            style="background-image: url({{ vich_uploader_asset(user, 'bannerImageFile') }});">
+        {% endif %}
+        <!--<img src="{{ vich_uploader_asset(user, 'bannerImageFile') }}">-->
         <nav class="navbar navbar-light bg-dark justify-content-between">
             <a class="navbar-brand text-light">CVBien</a>
             {% if user is defined %}
@@ -24,20 +27,12 @@
             {% endif %}
         </nav>
         {% if user is defined %}
-        <div class="container-fluid p-o">
-            <div class="row">
-                <div class="col-md-12">
-                    <img src="https://www.mymaldives.com.au/wp-content/uploads/sites/11/2016/12/Beach-Banner.jpg" alt="placeholder 960" class="img-responsive" />
-                </div>
             </div>
-        </div>
         {% endif %}
     {% endblock %}
-
     <div class="container mt-5">
         {% block content %}
         {% endblock %}
     </div>
-
     {% block footer %}{% endblock %}
 {% endblock %}

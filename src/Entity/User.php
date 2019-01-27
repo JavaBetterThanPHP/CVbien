@@ -116,7 +116,7 @@ class User implements UserInterface, \Serializable
     private $userProgLanguages;
 
     /**
-     * @ORM\Column(type="string", length=255, options={"default" : "default.jpg"})
+     * @ORM\Column(type="string", length=255, options={"default" : "default.png"})
      * @var string
      */
     private $profilePicture;
@@ -159,6 +159,45 @@ class User implements UserInterface, \Serializable
     public function getProfilePicture()
     {
         return $this->profilePicture;
+    }
+
+    /**
+     * @ORM\Column(type="string", length=255, options={"default" : "default.png"})
+     * @var string
+     */
+    private $bannerPicture;
+
+    /**
+     * @Vich\UploadableField(mapping="bannerPictures", fileNameProperty="bannerPicture")
+     * @var File
+     */
+    private $bannerImageFile;
+
+    public function setBannerImageFile(File $image = null)
+    {
+        $this->bannerImageFile = $image;
+        // VERY IMPORTANT:
+        // It is required that at least one field changes if you are using Doctrine,
+        // otherwise the event listeners won't be called and the file is lost
+        if ($image) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    public function getBannerImageFile()
+    {
+        return $this->bannerImageFile;
+    }
+
+    public function setBannerPicture($bannerPicture)
+    {
+        $this->bannerPicture = $bannerPicture;
+    }
+
+    public function getBannerPicture()
+    {
+        return $this->bannerPicture;
     }
 
     public function __construct()
@@ -536,7 +575,8 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->profilePicture,
             $this->email,
-            $this->password
+            $this->password,
+            $this->bannerPicture,
         ));
     }
 
@@ -547,8 +587,10 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->profilePicture,
             $this->email,
-            $this->password
+            $this->password,
+            $this->bannerPicture,
             ) = unserialize($serialized);
     }
+    //TODO searialize all user properties just to be sure
 
 }

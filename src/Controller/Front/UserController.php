@@ -50,18 +50,37 @@ class UserController extends AbstractController
 
         }
         /*
-$form = $this->createForm(UserFrontType::class, $user);
-$form->handleRequest($request);
-if ($form->isSubmitted() && $form->isValid()) {
-    $this->getDoctrine()->getManager()->flush();
-    return $this->redirectToRoute('front_index');
-}else{
-    return $this->render('Front/default/index.html.twig', [
-        'user' => $user,
-        'form' => $form->createView(),
-    ]);
-}
-*/
+        $form = $this->createForm(UserFrontType::class, $user);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('front_index');
+        }else{
+            return $this->render('Front/default/index.html.twig', [
+                'user' => $user,
+                'form' => $form->createView(),
+            ]);
+        }
+        */
         return new Response("ok");
     }
+
+    /**
+     * @Route("/updateBanner", name="updateBanner", methods={"POST"})
+     */
+    public function updateBanner(Request $request): Response
+    {
+        try {
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+            $user = $this->getUser();
+            $entityManager = $this->getDoctrine()->getManager();
+            $user->setBannerImageFile($request->files->get('data'));
+            $entityManager->flush();
+        }
+        catch (exception $e) {
+
+        }
+        return new Response("ok");
+    }
+
 }
