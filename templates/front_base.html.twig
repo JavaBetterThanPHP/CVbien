@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+{% block title %}CV Bien{% endblock %}
+{% block body %}
+    {% block header %}
+        {% if user is defined %}
+            <div id="userBanner" class="bg-img"
+            style="background-image: url({{ vich_uploader_asset(user, 'bannerImageFile') }});">
+        {% endif %}
+        <!--<img src="{{ vich_uploader_asset(user, 'bannerImageFile') }}">-->
+        <nav class="navbar navbar-light bg-dark justify-content-between">
+            <a class="navbar-brand text-light">CVBien</a>
+            {% if user is defined %}
+                <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
+                <div class="dropdown">
+                    <span style="cursor: pointer;" data-toggle="dropdown" class="fa fa-bars text-light fa-2x"></span>
+                    <div class="dropdown-menu dropdown-menu-left">
+                        <a class="dropdown-item" href="{{ path('front_user_edit') }}">Modifier mes informations</a>
+                        <a class="dropdown-item" href="#">Link 2</a>
+                        <a class="dropdown-item" href="#">Link 3</a>
+                    </div>
+                </div>
+            {% else %}
+                <div class="ml-3">
+                    <a class="btn btn-primary" href="{{ path('app_security_login') }}">Sign in</a>
+                    <a class="btn btn-outline-primary" href="{{ path('app_security_registration') }}">Sign up</a>
+                </div>
+            {% endif %}
+        </nav>
+        {% if user is defined %}
+            </div>
+        {% endif %}
+    {% endblock %}
+    <div class="container mt-5">
+        {% block content %}
+        {% endblock %}
+    </div>
+    {% block footer %}{% endblock %}
+{% endblock %}

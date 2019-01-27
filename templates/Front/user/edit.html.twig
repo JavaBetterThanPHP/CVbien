@@ -1,0 +1,12 @@
+{% extends 'back_base.html.twig' %}
+
+{% block title %}Modifier mes informations{% endblock %}
+
+{% block content %}
+    <h1>Modifier mes informations</h1>
+
+    {{ include('Front/user/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('front_index') }}">retour</a>
+
+{% endblock %}

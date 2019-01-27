@@ -1,0 +1,37 @@
+{% extends 'back_base.html.twig' %}
+
+{% block title %}UserProject index{% endblock %}
+
+{% block body %}
+    <h1>UserProject index</h1>
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>UrlProject</th>
+            <th>UrlWebsite</th>
+            <th>actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for user_project in user_projects %}
+            <tr>
+                <td>{{ user_project.id }}</td>
+                <td>{{ user_project.urlProject }}</td>
+                <td>{{ user_project.urlWebsite }}</td>
+                <td>
+                    <a href="{{ path('back_user_project_show', {'id': user_project.id}) }}">show</a>
+                    <a href="{{ path('back_user_project_edit', {'id': user_project.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('back_user_project_new') }}">Create new</a>
+{% endblock %}
