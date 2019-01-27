@@ -33,4 +33,35 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * @Route("/updateProfilePicture", name="updateProfilePicture", methods={"POST"})
+     */
+    public function updateProfilePicture(Request $request): Response
+    {
+        try {
+            $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+            $user = $this->getUser();
+            $entityManager = $this->getDoctrine()->getManager();
+            $user->setImageFile($request->files->get('data'));
+            $entityManager->flush();
+        }
+        catch (exception $e) {
+
+        }
+        /*
+$form = $this->createForm(UserFrontType::class, $user);
+$form->handleRequest($request);
+if ($form->isSubmitted() && $form->isValid()) {
+    $this->getDoctrine()->getManager()->flush();
+    return $this->redirectToRoute('front_index');
+}else{
+    return $this->render('Front/default/index.html.twig', [
+        'user' => $user,
+        'form' => $form->createView(),
+    ]);
+}
+*/
+        return new Response("ok");
+    }
 }
