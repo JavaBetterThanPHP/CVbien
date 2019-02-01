@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/prog/technology", name="back_prog_technology_")
+ * @Route("/progTechnology", name="back_prog_technology_")
  */
 class ProgTechnologyController extends AbstractController
 {

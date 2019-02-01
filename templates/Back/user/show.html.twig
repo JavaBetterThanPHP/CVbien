@@ -16,16 +16,20 @@
             <td>{{ user.email }}</td>
         </tr>
         <tr>
+            <th>Personnal space identifier</th>
+            <td>{{ user.spaceName }}</td>
+        </tr>
+        <tr>
             <th>Roles</th>
             <td>{{ user.roles ? user.roles|json_encode : '' }}</td>
         </tr>
         <tr>
-            <th>Password</th>
-            <td>{{ user.password }}</td>
-        </tr>
-        <tr>
             <th>IsActive</th>
             <td>{{ user.isActive ? 'Yes' : 'No' }}</td>
+        </tr>
+        <tr>
+            <th>IsSearchable</th>
+            <td>{{ user.IsSearchable ? 'Yes' : 'No' }}</td>
         </tr>
         <tr>
             <th>Firstname</th>
@@ -58,6 +62,18 @@
         <tr>
             <th>CityCode</th>
             <td>{{ user.cityCode }}</td>
+        </tr>
+        <tr>
+            <th>Country</th>
+            <td>{{ user.country.name }}</td>
+        </tr>
+        <tr>
+            <th>Status</th>
+            <td>{{ user.status }}</td>
+        </tr>
+        <tr>
+            <th>Type</th>
+            <td>{{ user.type }}</td>
         </tr>
         </tbody>
     </table>

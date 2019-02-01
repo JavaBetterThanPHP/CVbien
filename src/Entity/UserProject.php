@@ -13,8 +13,9 @@ class UserProject
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
 
@@ -39,29 +40,27 @@ class UserProject
     private $society;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\ProjectType", inversedBy="userProjects")
-     */
-    private $projectType;
-
-    /**
      * @ORM\ManyToMany(targetEntity="App\Entity\ProgTechnology", inversedBy="userProjects")
      */
     private $progTechnologies;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserProjectProgLanguage", mappedBy="userProject")
+     * @ORM\ManyToMany(targetEntity="App\Entity\ProgLanguage", inversedBy="userProjects")
      */
-    private $userProjectProgLanguages;
+    private $progLanguages;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $type;
 
     public function __construct()
     {
-        $this->projectType = new ArrayCollection();
-        $this->progLanguage = new ArrayCollection();
         $this->progTechnologies = new ArrayCollection();
-        $this->userProjectProgLanguages = new ArrayCollection();
+        $this->progLanguages = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -115,43 +114,17 @@ class UserProject
     }
 
     /**
-     * @return Collection|ProjectType[]
-     */
-    public function getProjectType(): Collection
-    {
-        return $this->projectType;
-    }
-
-    public function addProjectType(ProjectType $projectType): self
-    {
-        if (!$this->projectType->contains($projectType)) {
-            $this->projectType[] = $projectType;
-        }
-
-        return $this;
-    }
-
-    public function removeProjectType(ProjectType $projectType): self
-    {
-        if ($this->projectType->contains($projectType)) {
-            $this->projectType->removeElement($projectType);
-        }
-
-        return $this;
-    }
-
-    /**
      * @return Collection|ProgLanguage[]
      */
-    public function getProgLanguage(): Collection
+    public function getProgLanguages(): Collection
     {
-        return $this->progLanguage;
+        return $this->progLanguages;
     }
 
     public function addProgLanguage(ProgLanguage $progLanguage): self
     {
-        if (!$this->progLanguage->contains($progLanguage)) {
-            $this->progLanguage[] = $progLanguage;
+        if (!$this->progLanguages->contains($progLanguage)) {
+            $this->progLanguages[] = $progLanguage;
         }
 
         return $this;
@@ -159,8 +132,8 @@ class UserProject
 
     public function removeProgLanguage(ProgLanguage $progLanguage): self
     {
-        if ($this->progLanguage->contains($progLanguage)) {
-            $this->progLanguage->removeElement($progLanguage);
+        if ($this->progLanguages->contains($progLanguage)) {
+            $this->progLanguages->removeElement($progLanguage);
         }
 
         return $this;
@@ -192,33 +165,14 @@ class UserProject
         return $this;
     }
 
-    /**
-     * @return Collection|UserProjectProgLanguage[]
-     */
-    public function getUserProjectProgLanguages(): Collection
+    public function getType(): ?string
     {
-        return $this->userProjectProgLanguages;
+        return $this->type;
     }
 
-    public function addUserProjectProgLanguage(UserProjectProgLanguage $userProjectProgLanguage): self
+    public function setType(?string $type): self
     {
-        if (!$this->userProjectProgLanguages->contains($userProjectProgLanguage)) {
-            $this->userProjectProgLanguages[] = $userProjectProgLanguage;
-            $userProjectProgLanguage->setUserProject($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserProjectProgLanguage(UserProjectProgLanguage $userProjectProgLanguage): self
-    {
-        if ($this->userProjectProgLanguages->contains($userProjectProgLanguage)) {
-            $this->userProjectProgLanguages->removeElement($userProjectProgLanguage);
-            // set the owning side to null (unless already changed)
-            if ($userProjectProgLanguage->getUserProject() === $this) {
-                $userProjectProgLanguage->setUserProject(null);
-            }
-        }
+        $this->type = $type;
 
         return $this;
     }

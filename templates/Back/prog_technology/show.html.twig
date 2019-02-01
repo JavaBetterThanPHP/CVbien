@@ -15,6 +15,10 @@
             <th>Label</th>
             <td>{{ prog_technology.label }}</td>
         </tr>
+        <tr>
+            <th>Related language</th>
+            <td>{% if prog_technology.progLanguage.name  is defined %}{{ prog_technology.progLanguage.name }}{% endif %}</td>
+        </tr>
         </tbody>
     </table>
 

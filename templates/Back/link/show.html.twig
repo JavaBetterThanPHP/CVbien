@@ -1,8 +1,8 @@
-{{% extends 'back_base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Link{% endblock %}
 
-{% block content %}
+{% block body %}
     <h1>Link</h1>
 
     <table class="table">
@@ -18,6 +18,18 @@
             <tr>
                 <th>Url</th>
                 <td>{{ link.url }}</td>
+            </tr>
+            <tr>
+                <th>Name</th>
+                <td>{{ link.name }}</td>
+            </tr>
+            <tr>
+                <th>ImageUrl</th>
+                <td>{{ link.imageUrl }}</td>
+            </tr>
+            <tr>
+                <th>User</th>
+                <td>{{ link.user.email }}</td>
             </tr>
         </tbody>
     </table>

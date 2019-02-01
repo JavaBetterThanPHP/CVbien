@@ -9,6 +9,8 @@
         <thead>
         <tr>
             <th>Id</th>
+            <th>User</th>
+            <th>Prog Language</th>
             <th>Level</th>
             <th>actions</th>
         </tr>
@@ -17,6 +19,8 @@
         {% for user_prog_language in user_prog_languages %}
             <tr>
                 <td>{{ user_prog_language.id }}</td>
+                <td>{{ user_prog_language.user.email }}</td>
+                <td>{{ user_prog_language.progLanguage.name }}</td>
                 <td>{{ user_prog_language.level }}</td>
                 <td>
                     <a href="{{ path('back_user_prog_language_show', {'id': user_prog_language.id}) }}">show</a>

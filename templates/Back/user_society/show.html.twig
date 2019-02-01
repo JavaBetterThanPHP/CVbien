@@ -12,6 +12,18 @@
             <td>{{ user_society.id }}</td>
         </tr>
         <tr>
+            <th>User</th>
+            <td>{{ user_society.user.email }}</td>
+        </tr>
+        <tr>
+            <th>Society</th>
+            <td>{{ user_society.society.name }}</td>
+        </tr>
+        <tr>
+            <th>Job Type</th>
+            <td>{{ user_society.jobType.label }}</td>
+        </tr>
+        <tr>
             <th>FirstDate</th>
             <td>{{ user_society.firstDate ? user_society.firstDate|date('Y-m-d') : '' }}</td>
         </tr>

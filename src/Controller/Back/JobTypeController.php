@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/job/type", name="back_job_type_")
+ * @Route("/jobType", name="back_job_type_")
  */
 class JobTypeController extends AbstractController
 {

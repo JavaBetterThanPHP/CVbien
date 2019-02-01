@@ -13,8 +13,9 @@ class UserSociety
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
 
@@ -44,16 +45,16 @@ class UserSociety
     private $jobType;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserProject", mappedBy="society")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userSocieties")
      */
-    private $userProjects;
+    private $user;
 
     public function __construct()
     {
         $this->userProjects = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -66,6 +67,18 @@ class UserSociety
     public function setSociety(?Society $society): self
     {
         $this->society = $society;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
@@ -114,37 +127,6 @@ class UserSociety
     public function setJobType(?JobType $jobType): self
     {
         $this->jobType = $jobType;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|UserProject[]
-     */
-    public function getUserProjects(): Collection
-    {
-        return $this->userProjects;
-    }
-
-    public function addUserProject(UserProject $userProject): self
-    {
-        if (!$this->userProjects->contains($userProject)) {
-            $this->userProjects[] = $userProject;
-            $userProject->setSociety($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUserProject(UserProject $userProject): self
-    {
-        if ($this->userProjects->contains($userProject)) {
-            $this->userProjects->removeElement($userProject);
-            // set the owning side to null (unless already changed)
-            if ($userProject->getSociety() === $this) {
-                $userProject->setSociety(null);
-            }
-        }
 
         return $this;
     }

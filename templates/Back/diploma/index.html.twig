@@ -12,6 +12,7 @@
                 <th>Title</th>
                 <th>Level</th>
                 <th>IsInternational</th>
+                <th>Country</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,6 +23,7 @@
                 <td>{{ diploma.title }}</td>
                 <td>{{ diploma.level }}</td>
                 <td>{{ diploma.isInternational ? 'Yes' : 'No' }}</td>
+                <td>{{ diploma.country.name }}</td>
                 <td>
                     <a href="{{ path('back_diploma_show', {'id': diploma.id}) }}">show</a>
                     <a href="{{ path('back_diploma_edit', {'id': diploma.id}) }}">edit</a>

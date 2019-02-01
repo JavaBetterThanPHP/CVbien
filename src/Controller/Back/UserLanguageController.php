@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user/language", name="back_user_language_")
+ * @Route("/userLanguage", name="back_user_language_")
  */
 class UserLanguageController extends AbstractController
 {

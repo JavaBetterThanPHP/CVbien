@@ -10,6 +10,7 @@
         <tr>
             <th>Id</th>
             <th>Label</th>
+            <th>Related language</th>
             <th>actions</th>
         </tr>
         </thead>
@@ -18,6 +19,7 @@
             <tr>
                 <td>{{ prog_technology.id }}</td>
                 <td>{{ prog_technology.label }}</td>
+                <td>{% if prog_technology.progLanguage.name  is defined %}{{ prog_technology.progLanguage.name }}{% endif %}</td>
                 <td>
                     <a href="{{ path('back_prog_technology_show', {'id': prog_technology.id}) }}">show</a>
                     <a href="{{ path('back_prog_technology_edit', {'id': prog_technology.id}) }}">edit</a>

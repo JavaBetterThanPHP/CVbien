@@ -1,8 +1,8 @@
-{% extends 'back_base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Link index{% endblock %}
 
-{% block content %}
+{% block body %}
     <h1>Link index</h1>
 
     <table class="table">
@@ -11,6 +11,9 @@
                 <th>Id</th>
                 <th>Website</th>
                 <th>Url</th>
+                <th>Name</th>
+                <th>ImageUrl
+                <th>User</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -20,6 +23,9 @@
                 <td>{{ link.id }}</td>
                 <td>{{ link.website }}</td>
                 <td>{{ link.url }}</td>
+                <td>{{ link.name }}</td>
+                <td>{{ link.imageUrl }}</td>
+                <td>{{ link.user.email }}</td>
                 <td>
                     <a href="{{ path('back_link_show', {'id': link.id}) }}">show</a>
                     <a href="{{ path('back_link_edit', {'id': link.id}) }}">edit</a>
@@ -27,7 +33,7 @@
             </tr>
         {% else %}
             <tr>
-                <td colspan="4">no records found</td>
+                <td colspan="6">no records found</td>
             </tr>
         {% endfor %}
         </tbody>

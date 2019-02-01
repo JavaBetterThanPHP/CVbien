@@ -19,6 +19,38 @@
             <th>UrlWebsite</th>
             <td>{{ user_project.urlWebsite }}</td>
         </tr>
+        <tr>
+            <th>Languages</th>
+            <td>
+                <ul>
+                    {% for language in user_project.progLanguages  %}
+                        <li>{{ language.name }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Technologies</th>
+            <td>
+                <ul>
+                    {% for technology in user_project.progTechnologies%}
+                        <li>{{ technology.label }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+            <th>Technologies</th>
+            <td>{{ user_project.urlWebsite }}</td>
+        </tr>
+        <tr>
+            <th>User</th>
+            <td>{{ user_project.user.email }}</td>
+        </tr>
+        <tr>
+            <th>Society</th>
+            <td>{% if user_project.society.name is defined %}{{ user_project.society.name }} {% endif %}</td>
+        </tr>
         </tbody>
     </table>
 

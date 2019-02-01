@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user/society", name="back_user_society_")
+ * @Route("/userSociety", name="back_user_society_")
  */
 class UserSocietyController extends AbstractController
 {

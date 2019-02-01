@@ -12,6 +12,15 @@
             <td>{{ user_diploma.id }}</td>
         </tr>
         <tr>
+            <th>User</th>
+            <td>{{ user_diploma.user.email }}</td>
+
+        </tr>
+        <tr>
+            <th>Diploma</th>
+            <td>{{ user_diploma.diploma.title }}</td>
+        </tr>
+        <tr>
             <th>DateOfGrant</th>
             <td>{{ user_diploma.dateOfGrant ? user_diploma.dateOfGrant|date('Y-m-d') : '' }}</td>
         </tr>

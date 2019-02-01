@@ -19,6 +19,16 @@
             <th>Type</th>
             <td>{{ prog_language.type }}</td>
         </tr>
+        <tr>
+            <th>Related technologies</th>
+            <td>
+                <ul>
+                    {% for technology in prog_language.progTechnologies  %}
+                        <li>{{ technology.label }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
         </tbody>
     </table>
 

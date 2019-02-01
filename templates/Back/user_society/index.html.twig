@@ -9,6 +9,9 @@
         <thead>
         <tr>
             <th>Id</th>
+            <th>User</th>
+            <th>Society</th>
+            <th>Job Type</th>
             <th>FirstDate</th>
             <th>LastDate</th>
             <th>IsActive</th>
@@ -19,6 +22,9 @@
         {% for user_society in user_societies %}
             <tr>
                 <td>{{ user_society.id }}</td>
+                <td>{{ user_society.user.email }}</td>
+                <td>{{ user_society.society.name }}</td>
+                <td>{{ user_society.jobType.label }}</td>
                 <td>{{ user_society.firstDate ? user_society.firstDate|date('Y-m-d') : '' }}</td>
                 <td>{{ user_society.lastDate ? user_society.lastDate|date('Y-m-d') : '' }}</td>
                 <td>{{ user_society.isActive ? 'Yes' : 'No' }}</td>
