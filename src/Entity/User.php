@@ -5,9 +5,9 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
-use Symfony\Component\HttpFoundation\File\File;
 
 
 /**
@@ -42,7 +42,7 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":false})
+     * @ORM\Column(type="boolean")
      */
     private $isActive;
 
@@ -147,7 +147,7 @@ class User implements UserInterface, \Serializable
     private $links;
 
     /**
-     * @ORM\Column(type="boolean", options={"default":true})
+     * @ORM\Column(type="boolean")
      */
     private $isSearchable;
 
@@ -228,6 +228,8 @@ class User implements UserInterface, \Serializable
 
     public function __construct()
     {
+        $this->setIsActive(true);
+        $this->setIsSearchable(true);
         $this->progLanguages = new ArrayCollection();
         $this->userProjects = new ArrayCollection();
         $this->userDiplomas = new ArrayCollection();
@@ -261,7 +263,7 @@ class User implements UserInterface, \Serializable
      */
     public function getUsername(): ?string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -288,7 +290,7 @@ class User implements UserInterface, \Serializable
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
