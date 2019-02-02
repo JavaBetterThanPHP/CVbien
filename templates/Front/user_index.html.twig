@@ -2,6 +2,10 @@
 
 {% block title %}Dashboard - CVBien{% endblock %}
 
+{% block header %}
+    {{ include('_header_dashboard.html.twig') }}
+{% endblock %}
+
 {% block content %}
     {% if user is defined %}
 

@@ -45,8 +45,7 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $user->setImageFile($request->files->get('data'));
             $entityManager->flush();
-        }
-        catch (exception $e) {
+        } catch (exception $e) {
 
         }
         /*
@@ -76,8 +75,7 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $user->setBannerImageFile($request->files->get('data'));
             $entityManager->flush();
-        }
-        catch (exception $e) {
+        } catch (exception $e) {
 
         }
         return new Response("ok");
