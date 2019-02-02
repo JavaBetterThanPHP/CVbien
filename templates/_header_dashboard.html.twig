@@ -1,38 +1,55 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <title>{% block title %}CV Bien{% endblock %}</title>
-    {% block head_js %}
-        <script src="https://code.jquery.com/jquery-3.3.1.js"
-                integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-                crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                crossorigin="anonymous"></script>
-        <script src="{{ asset('build/app.js') }}"></script>
-        <script src="{{ asset('profile.js') }}/"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.3/croppie.js"
-                integrity="sha256-odzugn0iO1bO8/vV7MlKiRYidgILhueFvafxnrRI864=" crossorigin="anonymous"></script>
-    {% endblock %}
-    {% block head_css %}
-        <link rel="stylesheet" href="{{ asset('build/main.css') }}"/>
-        <link rel="stylesheet"
-              href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-              integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-              crossorigin="anonymous">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.3/croppie.css"
-              integrity="sha256-M8o9uqnAVROBWo3/2ZHSIJG+ZHbaQdpljJLLvdpeKcI=" crossorigin="anonymous"/>
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css"
-              integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
-              crossorigin="anonymous">
-    {% endblock %}
-</head>
-<body>
-{% block body %}{% endblock %}
-{% block javascripts %}{% endblock %}
-</body>
-</html>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-primary">
+    <a class="navbar-brand" href="{{ path('app_index') }}">
+        <img src="{{ asset('build/CVBien_logo.png') }}" width="180"/>
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    {# --- User menu --- #}
+    {% if user is defined %}
+        <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                {# To the personnal page #}
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Preview<span class="sr-only">(current)</span></a>
+                </li>
+                {# - #}
+
+                {# To the Default #}
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Dashboard</a>
+                </li>
+                {# - #}
+
+                {# To parameters pages #}
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Settings
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-left">
+                        <a class="dropdown-item" href="{{ path('front_user_edit') }}">Update personal
+                            information</a>
+                        <a class="dropdown-item" href="#">Autre lien</a>
+                        <a class="dropdown-item" href="#">Autre lien</a>
+                    </div>
+                </li>
+                {# - #}
+
+            </ul>
+        </div>
+    {% endif %}
+
+    {# --- Login/register links --- #}
+    {% if user is not defined %}
+        <div class="ml-3">
+            <a class="btn btn-primary" href="{{ path('app_security_login') }}">Sign in</a>
+            <a class="btn btn-outline-primary" href="{{ path('app_security_registration') }}">Sign up</a>
+        </div>
+    {% endif %}
+    {# ----------- #}
+
+</nav>
