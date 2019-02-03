@@ -1,12 +1,33 @@
-body {
-
-}
-
 .bg-img {
-    min-height: 200px;
-    max-height: 200px;
     background-position: center;
-    background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    max-height: 350px;
+    min-height: 250px;
+}
+
+.border-fat{
+    border: 2px white solid;
+}
+
+.border-fat-bottom{
+    border-bottom: 2px white solid;
+}
+
+.image-120-120{
+    height: 120px;
+    width: 120px;
+}
+
+.height-150{
+    height: 150px;
+}
+
+.overflow{
+    overflow: visible;
+}
+
+.flex-fill{
+    width:100%;
+    padding: 10px;
 }

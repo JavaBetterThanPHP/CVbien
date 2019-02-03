@@ -19,23 +19,74 @@
 
         {# Display banner/pictures #}
         <div id="userBanner" class="bg-img"
-        style="background-image: url({{ vich_uploader_asset(user, 'bannerImageFile') }});">
-        <img id="profilePicture" src="{{ vich_uploader_asset(user, 'imageFile') }}"/>
+             style="background-image: url({{ vich_uploader_asset(user, 'bannerImageFile') }})">
+        </div>
 
-        {# Change Picture #}
-        <button onclick="initCropProfile()" class="btn" data-toggle="modal" data-target="#profilePictureModal">
-            Modifer Avatar
-        </button>
+        {# Under banner #}
+        <div class="height-150 bg-dark">
+            <div class="container d-flex justify-content-between">
 
-        {# Change Banner #}
-        <button onclick="initCropBanner()" class="btn" data-toggle="modal" data-target="#bannerModal">
-            Modifier Bannière
-        </button>
+                {# Profil picture #}
+                <div class="">
+                    <img id="profilePicture" class="border-fat rounded-circle image-120-120 mt-2"
+                         src="{{ vich_uploader_asset(user, 'imageFile') }}"/>
+                </div>
+                {# --- #}
+
+                {# Profil picture #}
+                <div class="text-light flex-fill">
+                    <p>
+                        <b>{{ user.firstname }} {{ user.lastname }}</b>
+                    </p>
+                    <p>
+                        <b>Tél : </b>
+                        {{ user.phoneNumber }}
+                        - <b>Pro : </b>
+                        {{ user.proPhoneNumber }}
+                    </p>
+                    <p>
+                        <b>City : </b>
+                        {{ user.city }}
+                        {% if user.country is not null %}
+                            - <b>Country : </b>
+                            {{ user.country.label }}
+                        {% endif %}
+                    </p>
+                </div>
+                {# --- #}
+
+                {# Editer les éléments du profil #}
+                <div class="">
+                    <div class="btn-group mt-4">
+                        <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                            Edit page
+                        </button>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <button onclick="initCropProfile()" class="dropdown-item" type="button"
+                                    data-toggle="modal"
+                                    data-target="#profilePictureModal">
+                                Avatar
+                            </button>
+                            <button onclick="initCropBanner()" class="dropdown-item" type="button"
+                                    data-toggle="modal"
+                                    data-target="#bannerModal">
+                                Banner
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                {# --- #}
+            </div>
+        </div>
+
+        {# MODULE AREA - Zone des modules #}
+        <div class="container-fluid"></div>
+        {# --- #}
 
         {# ---- MODAL PICTURES/BANNERS ---- #}
         {{ include('Front/_modal_profile_picture.html.twig') }}
         {{ include('Front/_modal_banner_picture.html.twig') }}
         {# ----- #}
-
     {% endif %}
 {% endblock %}
