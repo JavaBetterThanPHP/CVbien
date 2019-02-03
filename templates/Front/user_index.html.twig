@@ -45,7 +45,7 @@
                         {{ user.proPhoneNumber }}
                     </p>
                     <p>
-                        <b>City : </b>
+                        <b>Ville : </b>
                         {{ user.city }}
                         {% if user.country is not null %}
                             - <b>Country : </b>
@@ -81,7 +81,20 @@
         </div>
 
         {# MODULE AREA - Zone des modules #}
-        <div class="container-fluid"></div>
+        <div class="container mt-5">
+
+            {% if user is defined %}
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <h5 class="card-title">Informations personnelles</h5>
+                        <p class="card-text">ici on peut rentrer pleins d'information concernant la personne.</p>
+                    </div>
+                </div>
+
+                {# Import des modules #}
+
+            {% endif %}
+        </div>
         {# --- #}
 
         {# ---- MODAL PICTURES/BANNERS ---- #}
