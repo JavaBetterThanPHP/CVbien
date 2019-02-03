@@ -33,48 +33,8 @@
         </button>
 
         {# ---- MODAL PICTURES/BANNERS ---- #}
-        <div id="profilePictureModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-             aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modifier ma photo de profil</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <input class="btn" type="file" id="inputPicture" value="Choose Image" accept="image/*">
-                        <div id="main-cropper"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button id="cropSave" type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div id="bannerModal" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-             aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Modifier ma photo de profil</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <input class="btn" type="file" id="inputBanner" value="Choose Image" accept="image/*">
-                        <div id="banner-cropper"></div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button id="cropBannerSave" type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                </div>
-            </div>
-        </div>
+        {{ include('Front/_modal_profile_picture.html.twig') }}
+        {{ include('Front/_modal_banner_picture.html.twig') }}
         {# ----- #}
 
     {% endif %}
