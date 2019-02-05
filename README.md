@@ -52,6 +52,6 @@ https://danielkummer.github.io/git-flow-cheatsheet/
 
 - Backlog et users story [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/issues)
 
-- Story mapping [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Diagrams/StoryMapping/StoryMappingCVbien.pdf)
+- Story mapping [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Diagrams/StoryMapping/StoryMappingCVbien.svg)
 
-- Road map [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Diagrams/RoadMap/RoadMap.pdf)
+- Road map [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Diagrams/RoadMap/RoadMapPDF.pdf)
