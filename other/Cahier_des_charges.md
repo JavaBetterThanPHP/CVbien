@@ -36,7 +36,13 @@ Les utilisateurs secondaires seront des recruteurs, des chasseurs de tête, des 
 
 Les supers utilisateurs seront les Administrateurs qui s'assureront du bon fonctionnement du site.
 
-##### 1.2.3 Description de l’application
+##### 1.2.3 Grands objectifs du projet
+
+- Permettre aux développeurs de créer de vrais CV adaptés au monde et techniques du développement
+- Partager les CV avec le design que les développeurs auront choisi ainsi que les informations qu'ils souhaitent faire figurer
+- Faciliter la recherche de développeurs pour les entreprises en laissant la possibilité de trier en fonction des compétences
+
+##### 1.2.4 Description de l’application
 
 Nous aimerions avoir une application moderne qui permettrait de facilement mettre en place un site vitrine et qui regrouperait ce genre de sites cités, mais aussi d'autres modules comme par exemple :
  - Informations Personnelles
@@ -53,7 +59,7 @@ Le site devrait donc permettre de :
  - Afficher/Créer/Editer un espace personnel
  - Faire une recherche d'espaces personnels selon critères
 
-##### 1.2.4 Fonctionnalités principales
+##### 1.2.5 Fonctionnalités principales
 
 Pour tous :
 - Consultation des espaces personnels des utilisateurs sans avoir besoin de se connecter
