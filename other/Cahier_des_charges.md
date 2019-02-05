@@ -217,6 +217,8 @@ Tout au long du développement, sensibilisation sur l'implémentation de techniq
 
 ##### 2.1.2. Parcours utilisateur
 
+![Parcours](https://raw.githubusercontent.com/JavaBetterThanPHP/CVbien/master/other/Arborescence.png)
+
 ##### 2.1.3. Ecrans types
 
 #### 2.2. Contexte de réalisation technique
