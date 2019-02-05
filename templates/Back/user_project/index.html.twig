@@ -6,7 +6,7 @@
     <h1>UserProject index</h1>
 
     <table class="table">
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <th>Id</th>
             <th>UrlProject</th>
@@ -25,8 +25,8 @@
                 <td>{{ user_project.user.email }}</td>
                 <td>{% if user_project.society.name is defined %}{{ user_project.society.name }} {% endif %}</td>
                 <td>
-                    <a href="{{ path('back_user_project_show', {'id': user_project.id}) }}">show</a>
-                    <a href="{{ path('back_user_project_edit', {'id': user_project.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('back_user_project_show', {'id': user_project.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('back_user_project_edit', {'id': user_project.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +37,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('back_user_project_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('back_user_project_new') }}">Create new</a>
 {% endblock %}

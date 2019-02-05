@@ -20,7 +20,9 @@ class UserProjectController extends AbstractController
      */
     public function index(UserProjectRepository $userProjectRepository): Response
     {
-        return $this->render('Back/user_project/index.html.twig', ['user_projects' => $userProjectRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user_project/index.html.twig', ['user_projects' => $userProjectRepository->findAll(),'user' => $user]);
     }
 
     /**
@@ -28,6 +30,8 @@ class UserProjectController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $userProject = new UserProject();
         $form = $this->createForm(UserProjectType::class, $userProject);
         $form->handleRequest($request);
@@ -42,6 +46,7 @@ class UserProjectController extends AbstractController
 
         return $this->render('Back/user_project/new.html.twig', [
             'user_project' => $userProject,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +56,9 @@ class UserProjectController extends AbstractController
      */
     public function show(UserProject $userProject): Response
     {
-        return $this->render('Back/user_project/show.html.twig', ['user_project' => $userProject]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user_project/show.html.twig', ['user_project' => $userProject,'user' => $user]);
     }
 
     /**
@@ -59,6 +66,8 @@ class UserProjectController extends AbstractController
      */
     public function edit(Request $request, UserProject $userProject): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(UserProjectType::class, $userProject);
         $form->handleRequest($request);
 
@@ -70,6 +79,7 @@ class UserProjectController extends AbstractController
 
         return $this->render('Back/user_project/edit.html.twig', [
             'user_project' => $userProject,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }

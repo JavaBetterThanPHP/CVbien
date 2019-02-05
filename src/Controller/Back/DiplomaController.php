@@ -20,7 +20,9 @@ class DiplomaController extends AbstractController
      */
     public function index(DiplomaRepository $diplomaRepository): Response
     {
-        return $this->render('Back/diploma/index.html.twig', ['diplomas' => $diplomaRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/diploma/index.html.twig', ['diplomas' => $diplomaRepository->findAll(),'user' => $user]);
     }
 
     /**
@@ -28,6 +30,8 @@ class DiplomaController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $diploma = new Diploma();
         $form = $this->createForm(DiplomaType::class, $diploma);
         $form->handleRequest($request);
@@ -42,6 +46,7 @@ class DiplomaController extends AbstractController
 
         return $this->render('Back/diploma/new.html.twig', [
             'diploma' => $diploma,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +56,9 @@ class DiplomaController extends AbstractController
      */
     public function show(Diploma $diploma): Response
     {
-        return $this->render('Back/diploma/show.html.twig', ['diploma' => $diploma]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/diploma/show.html.twig', ['diploma' => $diploma,'user' => $user]);
     }
 
     /**
@@ -59,6 +66,8 @@ class DiplomaController extends AbstractController
      */
     public function edit(Request $request, Diploma $diploma): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(DiplomaType::class, $diploma);
         $form->handleRequest($request);
 
@@ -70,6 +79,7 @@ class DiplomaController extends AbstractController
 
         return $this->render('Back/diploma/edit.html.twig', [
             'diploma' => $diploma,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }

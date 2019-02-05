@@ -20,7 +20,9 @@ class LinkController extends AbstractController
      */
     public function index(LinkRepository $linkRepository): Response
     {
-        return $this->render('Back/link/index.html.twig', ['links' => $linkRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/link/index.html.twig', ['links' => $linkRepository->findAll(),'user' => $user]);
     }
 
     /**
@@ -28,6 +30,8 @@ class LinkController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $link = new Link();
         $form = $this->createForm(LinkType::class, $link);
         $form->handleRequest($request);
@@ -42,6 +46,7 @@ class LinkController extends AbstractController
 
         return $this->render('Back/link/new.html.twig', [
             'link' => $link,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +56,9 @@ class LinkController extends AbstractController
      */
     public function show(Link $link): Response
     {
-        return $this->render('Back/link/show.html.twig', ['link' => $link]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/link/show.html.twig', ['link' => $link,'user' => $user]);
     }
 
     /**
@@ -59,6 +66,8 @@ class LinkController extends AbstractController
      */
     public function edit(Request $request, Link $link): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(LinkType::class, $link);
         $form->handleRequest($request);
 
@@ -70,6 +79,7 @@ class LinkController extends AbstractController
 
         return $this->render('Back/link/edit.html.twig', [
             'link' => $link,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }

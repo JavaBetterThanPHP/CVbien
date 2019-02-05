@@ -1,4 +1,4 @@
-{% extends 'base.html.twig' %}
+{% extends 'back_base.html.twig' %}
 
 {% block title %}Link{% endblock %}
 
@@ -35,7 +35,7 @@
     </table>
 
     <a href="{{ path('back_link_index') }}">back to list</a>
-
+    <br>
     <a href="{{ path('back_link_edit', {'id': link.id}) }}">edit</a>
 
     {{ include('Back/link/_delete_form.html.twig') }}
