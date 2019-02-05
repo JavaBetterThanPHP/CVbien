@@ -77,18 +77,27 @@ Recruteur :
 Admin :
 - Accès au portail d'administration
 
+##### 1.3 Risques
+
+|               Risque identifié               | Probabilité d'occurence | Impact |                                                                         Résolution                                                                         |   |
+|:--------------------------------------------:|:-----------------------:|:------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------:|
+| Développement commercial plus long que prévu |           30%           |  Moyen |                                                     Renforcer le budget des campagnes de communication                                                     |
+|       Apparition d'un concurrent direct      |           10%           |  Moyen | Implémentation de nouvelles fonctionnalités spéciales : Recherche de profil intelligente, Système de classement des profils en fonction des Modules, ...   |
+|    Augmentation du coût des ressources IT    |           15%           | Faible |                  Augmentation possible d'ici 2021 au minima. Le site générera des revenus et le budget pourra être modifié en conséquence-                 |
+
 ### 2. DÉROULEMENT DU PROJET
 
 #### 2.1 Réalisation
 - Les développeurs travaillent sur le même environnement grâce à l'outil Docker
 - Environnement technique : BootStrap, Symfony, Nginx, PostreSQL
 
-#### 2.2 Recette
+#### 2.2 Intégration continue
+Intégration continue des environnements de test et de production avec Travis CI et Heroku
 
+#### 2.3 Recette
 Phase de test permettant la vérification des fonctionnalités, des algorithmes, des interfaces
 
-#### 2.3 Déploiement
-
+#### 2.4 Déploiement
 Basculer de la réalisation à la production, avec des procédures de retour en arrière, des tests de validité de comportement de l’application et l’identification des risques possibles.
 
 ### 3. PRÉCONISATIONS GÉNÉRALES
