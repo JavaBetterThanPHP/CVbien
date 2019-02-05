@@ -78,11 +78,10 @@ Admin :
 - Accès au portail d'administration
 
 ##### 1.3 Risques
-
-|               Risque identifié               | Probabilité d'occurence | Impact |                                                                         Résolution                                                                         |   |
+|               Risque identifié               | Probabilité d'occurence | Impact |                                                                         Résolution                                                                         |
 |:--------------------------------------------:|:-----------------------:|:------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | Développement commercial plus long que prévu |           30%           |  Moyen |                                                     Renforcer le budget des campagnes de communication                                                     |
-|       Apparition d'un concurrent direct      |           10%           |  Moyen | Implémentation de nouvelles fonctionnalités spéciales : Recherche de profil intelligente, Système de classement des profils en fonction des Modules, ...   |
+|       Apparition d'un concurrent direct      |           10%           |  Moyen | Implémentation de nouvelles fonctionnalités spéciales : Recherche de profil intelligente, Système de classement des profils en fonction des Modules, ...   |   
 |    Augmentation du coût des ressources IT    |           15%           | Faible |                  Augmentation possible d'ici 2021 au minima. Le site générera des revenus et le budget pourra être modifié en conséquence-                 |
 
 ### 2. DÉROULEMENT DU PROJET
