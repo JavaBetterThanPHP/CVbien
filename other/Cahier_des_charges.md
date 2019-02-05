@@ -28,24 +28,41 @@ Nous utilisons des sites variés, par exemple :
 
  Les recruteurs, aujourd'hui, sont eux, face à un manque d'information lors de leurs processus d'embauche. En effet, le C.V décrit de moins en moins bien les profils de developpeurs, les outils étant très diversifiés dans ce secteur d'activité. De plus, la demande d'emploi dans ce secteur étant très forte, le recruteur souhaiterait pouvoir embaucher rapidement.
  
- ##### 1.2.2. Contexte de réalisation fonctionnelle
+##### 1.2.2. Contexte de réalisation fonctionnelle
 
 Ce projet se déroule dans le cadre du Projet Annuel des 4ème années Ingénierie du Web de l'école ESGI. Chaque intervenant gère à la fois le développement et la partie management en travaillant en remote, en s'appuyant sur un outil de versionning et une interface de gestion de projet. Les tâches sont auto-attribuées, chaque élève est autonome et des points en ligne ou en physique sont organisés chaque semaine. Si le rendu du projet est satisfaisant, rien n'indique qu'il ne sera pas poussé réellement en production.
  
- ##### 1.2.3. Grands objectifs du projet
+##### 1.2.3. Grands objectifs du projet
 
 - Permettre aux développeurs de créer des sites vitrines type CV adaptés à leurs besoins en intégrant les pratiques et les technologies les plus en vogue.
 - Instaurer un standard de pratique : En un seul lien CVBien à mettre sur son C.V papier, donner l'accès à tout les travaux et les compétences d'un développeur.
 - Se positionner en tant que leader dans la création de portfolio et le recrutement d'informaticiens.
 - Faciliter la recherche de développeurs pour les recruteurs grâce à un outil de recherche puissant et un classement intelligent de profils.
 
+##### 1.2.3. Objectifs à la sortie du projet
+
+- Mise en production et maintenance de la solution
+- Préparation des versions 2 et 3
+- Montée en compétence des intervenants sur les dernières technologies du web et la gestion et management de projet
+- Génération de capital et réinvestissement : Recrutements, Internationalisation, Elargissement de la campagne de communication.
+
 ##### 1.2.4. Utilisateurs
+
+###### 1.2.4.1 Description
 
 Les utilisateurs principaux seront les développeurs voulant mettre en avant leurs compétences. Qu'ils soient en freelance, consultant, en recherche d'emploi, en recherche de challenge.
 
 Les utilisateurs secondaires seront des recruteurs, des chasseurs de tête, des RH, ou bien des personnes intéréssées pour monter des projets ambitieux et donc à la recherche de developpeur.
 
 Les supers utilisateurs seront les Administrateurs qui s'assureront du bon fonctionnement du site.
+
+###### 1.2.4.2 Cibles
+
+- entreprises (B2B)
+- consommateurs (B2C)
+- médias (B2P)
+
+CVbien compte proposer ses services aux entreprises, aux particulier et possiblement mettre à disposition des espaces publicitaires discret sur le site
 
 ##### 1.2.5. Description de l’application
 
