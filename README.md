@@ -40,8 +40,6 @@ https://danielkummer.github.io/git-flow-cheatsheet/
 
 - Design de la BDD [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Diagrams/DB/BDD_CVBIEN.pdf)
 
---- 
-
 ### Cours projet annuel
 
 - Stack technique [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md#32-stack-technique)
