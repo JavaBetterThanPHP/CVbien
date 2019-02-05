@@ -84,6 +84,7 @@ Admin :
 |       Apparition d'un concurrent direct      |           10%           |  Moyen | Implémentation de nouvelles fonctionnalités spéciales : Recherche de profil intelligente, Système de classement des profils en fonction des Modules, ...   |   
 |    Augmentation du coût des ressources IT    |           15%           | Faible |                  Augmentation possible d'ici 2021 au minima. Le site générera des revenus et le budget pourra être modifié en conséquence-                 |
 |    Difficulté de recrutement    |           5%           | Faible |                 Demande de profils au réseau des écoles spécialisées en informatiques, recrutement d'apprentis/stagiaires                 |
+|    Service PayPal fermé ou indisponible    |           10%           | Fort |                 Développement en urgence d'un paiment par sécurisé par carte bleue avec notre banque Société Générale                 |
 
 ### 2. DÉROULEMENT DU PROJET
 
