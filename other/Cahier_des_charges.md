@@ -86,6 +86,12 @@ Admin :
 |    Difficulté de recrutement    |           5%           | Faible |                 Demande de profils au réseau des écoles spécialisées en informatiques, recrutement d'apprentis/stagiaires                 |
 |    Service PayPal fermé ou indisponible    |           10%           | Fort |                 Développement en urgence d'un paiment par sécurisé par carte bleue avec notre banque Société Générale                 |
 
+#### 1.3 Analyse de la concurrence principale
+##### 1.3.1 LinkedIn
+Réseau social professionnel en ligne créé en 2003. Le site revendique plus de 400 millions de membres issus de 170 secteurs d'activités dans plus de 200 pays et territoires et plus de 10 millions d'utilisateurs en France. L'entreprise est valorisée à 20 milliards de dollars en 2015. Malgré un nombre croissant d'utilisateurs depuis 2016, LinkedIn n'est pas le média prioritaire qu'il souheterais être et présente des difficultés à attirer de la publicité. De plus, LinkedIn à été accusé de plusieures violation de droits aux informations privées. Les principaux concurrents de la plateforme sont FaceBook, Monster, Xing et Viadeo. Le réseau social pourrait être un concurrent solide malgré le fait que la clientèle visée n'est pas du tout la même que la nôtre et que les fonctionnalités seront plus riches sur notre application.
+##### 1.3.1 Tumblr
+Créée en 2007 par un entrepreneur américain, Tumblr est une application web permettant de générer un blog personnel à travers un design original. La plate-forme a connu une augmentation rapide du nombre d'usagers. En janvier 2008, Tumblr comptait quelque 170 000 utilisateurs. Début août 2010, environ 6,6 millions de personnes l'utilisaient, selon Mark Coatney, employé de Tumblr. Néanmoins, depuis 2013, le site est en énorme perte de vitesse à cause de son contenu à controverses (pornographie, gore, ...). Certains professionnels utilisent Tumblr pour gérer leur site personnel mais malgré le fait que les fonctionnalités primaires de CVbien soient similaires à celles de Tumblr, nous comptons nous démarquer en proposant des fonctionnalités plus poussées et offrir un contexte plus professionnel aux personnes désirant créer des sites vitrines.
+
 ### 2. DÉROULEMENT DU PROJET
 
 #### 2.1 Réalisation
