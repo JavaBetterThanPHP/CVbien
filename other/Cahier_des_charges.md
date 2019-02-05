@@ -9,7 +9,7 @@
 - Statut du document : En cours
 
 ### 1. PRÉSENTATION GÉNÉRALE DU PROJET
-#### 1.1. Pitch
+#### 1.1 Pitch
 
 Les développeurs mettent sur leur C.V leur Git, Stack, Site perso, Linkedin, etc... Il n'existe aucun standard de C.V vitrine pour les développeurs. Nous proposons de créer une application web type CMS qui permettrait de créer un espace personnel qui centraliserait toutes ces informations et serait configurable à souhait (projets, expériences, compétences, moocs, certifications, etc).
 Le site permettra aux recruteurs de trouver des profils facilement et en fonction de critères précis.
@@ -27,8 +27,19 @@ Nous utilisons des sites variés, par exemple :
  - Codepen, JSFiddle
 
  Les recruteurs, aujourd'hui, sont eux, face à un manque d'information lors de leurs processus d'embauche. En effet, le C.V décrit de moins en moins bien les profils de developpeurs, les outils étant très diversifiés dans ce secteur d'activité. De plus, la demande d'emploi dans ce secteur étant très forte, le recruteur souhaiterait pouvoir embaucher rapidement.
-    
-##### 1.2.2 Utilisateurs
+ 
+ ##### 1.2.2 Contexte de réalisation fonctionnelle
+
+Ce projet se déroule dans le cadre du Projet Annuel des 4ème années Ingénierie du Web de l'école ESGI. Chaque intervenant gère à la fois le développement et la partie management en travaillant en remote, en s'appuyant sur un outil de versionning et une interface de gestion de projet. Les tâches sont auto-attribuées, chaque élève est autonome et des points en ligne ou en physique sont organisés chaque semaine. Si le rendu du projet est satisfaisant, rien n'indique qu'il ne sera pas poussé réellement en production.
+ 
+ ##### 1.2.3 Grands objectifs du projet
+
+- Permettre aux développeurs de créer des sites vitrines type CV adaptés à leurs besoins en intégrant les pratiques et les technologies les plus en vogue.
+- Instaurer un standard de pratique : En un seul lien CVBien à mettre sur son C.V papier, donner l'accès à tout les travaux et les compétences d'un développeur.
+- Se positionner en tant que leader dans la création de portfolio et le recrutement d'informaticiens.
+- Faciliter la recherche de développeurs pour les recruteurs grâce à un outil de recherche puissant et un classement intelligent de profils.
+
+##### 1.2.4 Utilisateurs
 
 Les utilisateurs principaux seront les développeurs voulant mettre en avant leurs compétences. Qu'ils soient en freelance, consultant, en recherche d'emploi, en recherche de challenge.
 
@@ -36,13 +47,7 @@ Les utilisateurs secondaires seront des recruteurs, des chasseurs de tête, des 
 
 Les supers utilisateurs seront les Administrateurs qui s'assureront du bon fonctionnement du site.
 
-##### 1.2.3 Grands objectifs du projet
-
-- Permettre aux développeurs de créer de vrais CV adaptés au monde et techniques du développement
-- Partager les CV avec le design que les développeurs auront choisi ainsi que les informations qu'ils souhaitent faire figurer
-- Faciliter la recherche de développeurs pour les entreprises en laissant la possibilité de trier en fonction des compétences
-
-##### 1.2.4 Description de l’application
+##### 1.2.5 Description de l’application
 
 Nous aimerions avoir une application moderne qui permettrait de facilement mettre en place un site vitrine et qui regrouperait ce genre de sites cités, mais aussi d'autres modules comme par exemple :
  - Informations Personnelles
@@ -59,7 +64,7 @@ Le site devrait donc permettre de :
  - Afficher/Créer/Editer un espace personnel
  - Faire une recherche d'espaces personnels selon critères
 
-##### 1.2.5 Fonctionnalités principales
+##### 1.2.6 Fonctionnalités principales
 
 Pour tous :
 - Consultation des espaces personnels des utilisateurs sans avoir besoin de se connecter
@@ -83,7 +88,68 @@ Recruteur :
 Admin :
 - Accès au portail d'administration
 
-##### 1.3 Risques
+#### 1.3 Notre équipe et nos intervenants
+
+##### 1.3.1 Equipe
+
+- **Maxime Aublet** : Chef de projet : Développement / Gestion de projet
+  - DUT et Licence Professionnelle de l’IUT d’ORSAY
+  - Elève de 4ème année en Mastère Ingénierie du Web à L’ESGI en alternance chez Transactis 
+  - Très bonnes connaissances en PHP, Javascript et sur les frameworks Symfony et Angular
+  - Pratique des méthodologies agiles au quotidien
+  - Expert technique JAVA, Spring, Hibernate
+  - Très bonnes connaissances SQL et UML
+  - Très bonnes connaissances sur Docker
+ 
+- **Canavaggio Lorenzo** : Scrum Master : Développement / Gestion de projet
+  - Ancien Chef de Cuisine en reconversion ayant déjà géré une équipe de 15 personnes
+  - BTS au Campus Montsouris et Licence Professionnelle de l’IUT d’ORSAY
+  - Elève de 4ème année en Mastère Ingénierie du Web à L’ESGI en alternance à la société générale
+  - Expert des méthodologies agiles et Agile At Scale
+  - Expert technique JAVA, Spring Suite, Hibernate, Mockito 
+  - Connaissances en PHP et framework Symfony
+  - Bonne connaissances SQL et UML 
+ 
+- **Roger François** : Expert technique : Développement / Référent technique
+  - DUT et Licence Professionnelle de l’IUT d’ORSAY
+  - Elève de 4ème année en Mastère Ingénierie du Web à L’ESGI en alternance chez Axa 
+  - Expert technique PHP, Symfony
+  - Expert technique Javascript
+  - Expert technique Django
+  - très bonnes connaissances SQL et UML
+ 
+- **Longuet Kevin** : Expert en architecture informatique : Développement / Référent solutions architechture
+  - DUT et Licence Professionnelle de l’IUT d’ORSAY
+  - Elève de 4ème année en Mastère Ingénierie du Web à L’ESGI en alternance chez Aéroport de Paris pôle R&D
+  - Bonnes connaissances en PHP et Symfony
+  - Expert technique .NET, C#, Entity Framework
+  - Très bonnes connaissances en chefferie de projet
+  - Expert SQL et UML
+  
+##### 1.3.2 Nos partenaires
+ 
+- **Arnaud Morin** : CEO Vetixy, Auto-entrepreneur, Intervenant en école supérieur chez ESGI Paris & Pôle Paris Alternance
+  - Consultant S.I, Technologies du web, SGBD, NoSQL, Redis
+  - Expert technique fullstack PHP
+  - Expert des technologies du Web
+  - Expert technique Docker
+  - Chef d'entreprise
+  - Expert Management et chefferie de projets webs
+  - Contributeur Open Source
+
+- **Mickaël Andrieu** : CEO SolvoLabs, Intervenant OpenClassrooms, ESGI Paris, Software architecht, Open source contributor
+  - Contributeur Open Source : Symfony, CasperJS, PrestaShop, Akeneo
+  - Consultant technologies du Web
+  - Expert PHP/JS
+  - Chef d'entreprise, créateur et coach Startup
+  
+- **Axel Feredj** : Agile Coach, SAFe 4.5 Program Consultant DAVEO, Expert en gestion de programme Agile
+  - Consultant expert sur les méthodes SAFe, Scrum, Kanban, Lean Start Up, Spotify, Scrum Of Scrums, Agile @ Scale
+  - Formateur pour les certifications : Agilist, Product Owner/Product Manager, Scrum Master, Scrum Master Advanced et Team 
+  - Spécialiste sur la mise en place de plateforme Web ou Logiciel complexe pour des clients grands comptes
+  - Double diplôme en Maîtrise en Gestion de Projet Informatique au Canada et en Master de l'ingénierie du Web et de l'E-Business à Paris.
+
+#### 1.4 Risques
 |               Risque identifié               | Probabilité d'occurence | Impact |                                                                         Résolution                                                                         |
 |:--------------------------------------------:|:-----------------------:|:------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------:|
 | Développement commercial plus long que prévu |           30%           |  Moyen |                                                     Renforcer le budget des campagnes de communication                                                     |
@@ -92,15 +158,15 @@ Admin :
 |    Difficulté de recrutement    |           5%           | Faible |                 Demande de profils au réseau des écoles spécialisées en informatiques, recrutement d'apprentis/stagiaires                 |
 |    Service PayPal fermé ou indisponible    |           10%           | Fort |                 Développement en urgence d'un paiment par sécurisé par carte bleue avec notre banque Société Générale                 |
 
-#### 1.3 Analyse de la concurrence principale
-##### 1.3.1 LinkedIn
+#### 1.5 Analyse de la concurrence principale
+##### 1.5.1 LinkedIn
 Réseau social professionnel en ligne créé en 2003. Le site revendique plus de 400 millions de membres issus de 170 secteurs d'activités dans plus de 200 pays et territoires et plus de 10 millions d'utilisateurs en France. L'entreprise est valorisée à 20 milliards de dollars en 2015. Malgré un nombre croissant d'utilisateurs depuis 2016, LinkedIn n'est pas le média prioritaire qu'il souheterais être et présente des difficultés à attirer de la publicité. De plus, LinkedIn à été accusé de plusieures violation de droits aux informations privées. Les principaux concurrents de la plateforme sont FaceBook, Monster, Xing et Viadeo. Le réseau social pourrait être un concurrent solide malgré le fait que la clientèle visée n'est pas du tout la même que la nôtre et que les fonctionnalités seront plus riches sur notre application.
-##### 1.3.1 Tumblr
+##### 1.5.1 Tumblr
 Créée en 2007 par un entrepreneur américain, Tumblr est une application web permettant de générer un blog personnel à travers un design original. La plate-forme a connu une augmentation rapide du nombre d'usagers. En janvier 2008, Tumblr comptait quelque 170 000 utilisateurs. Début août 2010, environ 6,6 millions de personnes l'utilisaient, selon Mark Coatney, employé de Tumblr. Néanmoins, depuis 2013, le site est en énorme perte de vitesse à cause de son contenu à controverses (pornographie, gore, ...). Certains professionnels utilisent Tumblr pour gérer leur site personnel mais malgré le fait que les fonctionnalités primaires de CVbien soient similaires à celles de Tumblr, nous comptons nous démarquer en proposant des fonctionnalités plus poussées et offrir un contexte plus professionnel aux personnes désirant créer des sites vitrines.
 
 ### 2. DÉROULEMENT DU PROJET
 
-#### 2.1 Réalisation
+#### 2.1 Contexte de réalisation technique
 - Les développeurs travaillent sur le même environnement grâce à l'outil Docker
 - Environnement technique : BootStrap, Symfony, Nginx, PostreSQL
 
