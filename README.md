@@ -24,6 +24,8 @@ https://danielkummer.github.io/git-flow-cheatsheet/
 
 - Road map [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Diagrams/RoadMap/RoadMapPDF.pdf)
 
+- Slides présentation [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Pre%CC%81sentationCVBien.pdf)
+
 ### Cours de Symfony :
 
 - Description du concept du site internet dans le cahier des charges [>> ici <<](https://github.com/JavaBetterThanPHP/CVbien/blob/master/other/Cahier_des_charges.md#1-pr%C3%A9sentation-g%C3%A9n%C3%A9rale-du-projet)
