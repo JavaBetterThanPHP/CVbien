@@ -209,17 +209,27 @@ Tout au long du développement, sensibilisation sur l'implémentation de techniq
 
 ### 2. DÉROULEMENT DU PROJET
 
-#### 2.1. Contexte de réalisation technique
+#### 2.1. Design
+
+##### 2.1.1. Logo
+
+![Logo](https://raw.githubusercontent.com/JavaBetterThanPHP/CVbien/master/assets/images/CVBien_logo.png)
+
+##### 2.1.2. Parcours utilisateur
+
+##### 2.1.3. Ecrans types
+
+#### 2.2. Contexte de réalisation technique
 - Les développeurs travaillent sur le même environnement grâce à l'outil Docker
 - Environnement technique : BootStrap, Symfony, Nginx, PostreSQL
 
-#### 2.2. Intégration continue
+#### 2.3. Intégration continue
 Intégration continue des environnements de test et de production avec Travis CI et Heroku
 
-#### 2.3. Recette
+#### 2.4. Recette
 Phase de test permettant la vérification des fonctionnalités, des algorithmes, des interfaces
 
-#### 2.4. Déploiement
+#### 2.5. Déploiement
 Basculer de la réalisation à la production, avec des procédures de retour en arrière, des tests de validité de comportement de l’application et l’identification des risques possibles.
 
 ### 3. PRÉCONISATIONS GÉNÉRALES
