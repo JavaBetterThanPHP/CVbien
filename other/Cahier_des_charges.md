@@ -48,7 +48,7 @@ Ce projet se déroule dans le cadre du Projet Annuel des 4ème années Ingénier
 
 ##### 1.2.4. Utilisateurs
 
-###### 1.2.4.1 Description
+###### 1.2.4.1. Description
 
 Les utilisateurs principaux seront les développeurs voulant mettre en avant leurs compétences. Qu'ils soient en freelance, consultant, en recherche d'emploi, en recherche de challenge.
 
@@ -56,7 +56,7 @@ Les utilisateurs secondaires seront des recruteurs, des chasseurs de tête, des 
 
 Les supers utilisateurs seront les Administrateurs qui s'assureront du bon fonctionnement du site.
 
-###### 1.2.4.2 Cibles
+###### 1.2.4.2. Cibles
 
 - entreprises (B2B)
 - consommateurs (B2C)
@@ -180,6 +180,32 @@ Admin :
 Réseau social professionnel en ligne créé en 2003. Le site revendique plus de 400 millions de membres issus de 170 secteurs d'activités dans plus de 200 pays et territoires et plus de 10 millions d'utilisateurs en France. L'entreprise est valorisée à 20 milliards de dollars en 2015. Malgré un nombre croissant d'utilisateurs depuis 2016, LinkedIn n'est pas le média prioritaire qu'il souheterais être et présente des difficultés à attirer de la publicité. De plus, LinkedIn à été accusé de plusieures violation de droits aux informations privées. Les principaux concurrents de la plateforme sont FaceBook, Monster, Xing et Viadeo. Le réseau social pourrait être un concurrent solide malgré le fait que la clientèle visée n'est pas du tout la même que la nôtre et que les fonctionnalités seront plus riches sur notre application.
 ##### 1.5.2. Tumblr
 Créée en 2007 par un entrepreneur américain, Tumblr est une application web permettant de générer un blog personnel à travers un design original. La plate-forme a connu une augmentation rapide du nombre d'usagers. En janvier 2008, Tumblr comptait quelque 170 000 utilisateurs. Début août 2010, environ 6,6 millions de personnes l'utilisaient, selon Mark Coatney, employé de Tumblr. Néanmoins, depuis 2013, le site est en énorme perte de vitesse à cause de son contenu à controverses (pornographie, gore, ...). Certains professionnels utilisent Tumblr pour gérer leur site personnel mais malgré le fait que les fonctionnalités primaires de CVbien soient similaires à celles de Tumblr, nous comptons nous démarquer en proposant des fonctionnalités plus poussées et offrir un contexte plus professionnel aux personnes désirant créer des sites vitrines.
+
+#### 1.6. Moyens de communications
+
+##### 1.6.1. Landing Page
+
+Priorité au développement de la landing page du site afin d'éstimer l'impact des première campagnes de communication
+
+##### 1.6.2. Presse 
+
+Campagnes de communication dans les hebdomadaires les plus populaires des grandes villes de France (Paris, Marseille, Bordeaux, Lille, Rennes)
+
+##### 1.6.3. Relations entreprises et relations publiques
+
+Campagnes de communications sous forme de partenariats avec les anciennes écoles et les réseaux entreprises des intervenants
+
+##### 1.6.4. Relations entreprises et relations publiques
+
+Campagnes de communications sous forme de partenariats avec les anciennes écoles et les réseaux entreprises des intervenants
+
+##### 1.6.5. Internet et les réseaux sociaux
+
+La communication via les réseaux sociaux bénéficie d’audiences très importantes et permettant de toucher une quantité très importante de personnes. Des campagnes publicitaires sont prévues sur LinkedIn et FaceBook.
+
+##### 1.6.6. SEO
+
+Tout au long du développement, sensibilisation sur l'implémentation de techniques de référecement SEO pour garantir une position de première page dans les résultats Google pour des recherches comme "Générateur de C.V".
 
 ### 2. DÉROULEMENT DU PROJET
 
