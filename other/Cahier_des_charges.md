@@ -270,3 +270,22 @@ L'application devra :
  - Travis
  - PhpStorm 2018^
  - Visual Studio Code 1.28^
+
+#### 3.3. Sécurité
+
+La sécurité est au centre des préocupations de notre projet et résulte d'un effort de conception sur l'ensemble du site : dans la configuration du serveur web grâce aux choix d'un serveur externe dédié N Tier et l'activation d'HTTPS, dans nos politiques de création et de renouvellement des mots de passe avec la méthode de chiffrement Argon2i, et dans le code côté-client avec le Framework Symfony 4 qui inclut par défaut des mécanismes de défense solides et bien pensés contre un certain nombre des attaques les plus courantes. Enfin, dans notre processus d'intégration continue, des outils tels que CodeFactor, DependencyBot et Travis CI s'assurrent de la qualité et de la sécurité du code à chaque nouvelle release.
+
+#### 3.4. Performance 
+
+Pour notre applciation, la performance sera garantie part :
+
+ - L'utilisation de technologies modernes et légères et de paquets à jours : Symfony 4, Doctrine 2, jQuery 3.3.1, PostgreSQL 11.1, ...
+ - La mise en cache des ressources statiques et du contenu dynamique
+ - La prise en charge du Scaling en amont : Optimisation SSL et OffLoad
+ - La réplication multi-noeud
+ - Des Load balancers locaux et globaux
+
+#### 3.5. Accessibilité
+
+
+#### 3.6. Paiement  
