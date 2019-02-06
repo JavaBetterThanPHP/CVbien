@@ -287,5 +287,6 @@ Pour notre applciation, la performance sera garantie part :
 
 #### 3.5. Accessibilité
 
+CVBien étant une plateforme publique nous souhaitons nous conformer aux normes Web Accessibility Initiative (WAI) et World Wide Web Consortium (W3C). Répondre à ce besoin permettra de toucher un public plus large, d’augmenter le trafic et les conversions de notre site. Pour cela, nos développeurs sont sensibilisés sur le sujet dès les premières étapes du projet et nous utilisons des outils tels que AccessLint et Wave dans nos procéssus de développement.
 
 #### 3.6. Paiement  
