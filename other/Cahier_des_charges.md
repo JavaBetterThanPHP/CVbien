@@ -14,6 +14,10 @@
 Les développeurs mettent sur leur C.V leur Git, Stack, Site perso, Linkedin, etc... Il n'existe aucun standard de C.V vitrine pour les développeurs. Nous proposons de créer une application web type CMS qui permettrait de créer un espace personnel qui centraliserait toutes ces informations et serait configurable à souhait (projets, expériences, compétences, moocs, certifications, etc).
 Le site permettra aux recruteurs de trouver des profils facilement et en fonction de critères précis.
 
+##### 1.1.1 CVBien
+
+Le nom CVBIEN à été trouvé car il est composé des lettres C.V mais c'est aussi un jeu de mot qui veut dire "Ca va bien". Ce dernier est très connu par la génération digitale car il tire son origine des premières applications de messageries en lignes (MSN). Nous pensons que les développeurs d'aujourd'hui, qui font parti de cette génération, se reconnaitron dans le nom accrocheur de notre projet.
+
 #### 1.2. Brief  
 
 ##### 1.2.1. Besoin et contexte
