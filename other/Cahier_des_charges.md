@@ -221,6 +221,9 @@ Tout au long du développement, sensibilisation sur l'implémentation de techniq
 
 ##### 2.1.3. Ecrans types
 
+![Sign in](https://raw.githubusercontent.com/JavaBetterThanPHP/CVbien/master/other/cvbiensignin.png)
+![Dashboard](https://raw.githubusercontent.com/JavaBetterThanPHP/CVbien/master/other/cvbiendashboard.png)
+
 #### 2.2. Contexte de réalisation technique
 - Les développeurs travaillent sur le même environnement grâce à l'outil Docker
 - Environnement technique : BootStrap, Symfony, Nginx, PostreSQL
