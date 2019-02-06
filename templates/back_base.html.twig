@@ -5,7 +5,7 @@
 {% block body %}
     {% block header %}
         <nav class="navbar navbar-light bg-dark justify-content-between">
-            <a class="navbar-brand text-light">CVBien - Administration</a>
+            <a href="{{ path('back_index') }}" class="navbar-brand text-light">CVBien - Administration</a>
             <div class="text-light">
                 {% if user is defined %}
                     <p>
