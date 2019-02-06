@@ -16,7 +16,7 @@ Le site permettra aux recruteurs de trouver des profils facilement et en fonctio
 
 ##### 1.1.1 CVBien
 
-Le nom CVBIEN à été trouvé car il est composé des lettres C.V mais c'est aussi un jeu de mot qui veut dire "Ca va bien". Ce dernier est très connu par la génération digitale car il tire son origine des premières applications de messageries en lignes (MSN). Nous pensons que les développeurs d'aujourd'hui, qui font parti de cette génération, se reconnaitron dans le nom accrocheur de notre projet.
+Le nom CVBIEN à été trouvé car il est composé des lettres C.V mais c'est aussi un jeu de mot qui veut dire "Ca va bien". Ce dernier est très connu par la génération digitale car il tire son origine des premières applications de messageries en lignes (MSN). Nous pensons que les développeurs d'aujourd'hui, qui font parti de cette génération, se reconnaitront dans le nom accrocheur de notre projet.
 
 #### 1.2. Brief  
 
