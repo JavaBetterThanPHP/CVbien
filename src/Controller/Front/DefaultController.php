@@ -17,7 +17,6 @@ class DefaultController extends AbstractController
      */
     public function index(Request $request)
     {
-
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 
