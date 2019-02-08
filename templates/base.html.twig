@@ -3,25 +3,6 @@
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}CV Bien{% endblock %}</title>
-    {% block head_js %}
-        <script src="https://code.jquery.com/jquery-3.3.1.js"
-                integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
-                crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-                integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-                crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-                crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.3/croppie.js"
-                integrity="sha256-odzugn0iO1bO8/vV7MlKiRYidgILhueFvafxnrRI864=" crossorigin="anonymous"></script>
-        <script type="text/javascript" charset="utf8"
-                src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
-        <script src="https://unpkg.com/web-animations-js@2.3.1/web-animations.min.js"></script>
-        <script src="https://unpkg.com/hammerjs@2.0.8/hammer.min.js"></script>
-        <script src="https://unpkg.com/muuri@0.7.1/dist/muuri.min.js"></script>
-        <script src="{{ asset('profile.js') }}"></script>
-    {% endblock %}
     {% block head_css %}
         {{ encore_entry_link_tags('app') }}
         <link rel="stylesheet"
@@ -38,6 +19,25 @@
 </head>
 <body>
 {% block body %}{% endblock %}
+{% block head_js %}
+    <script src="https://code.jquery.com/jquery-3.3.1.js"
+            integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60="
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+            integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+            integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.3/croppie.js"
+            integrity="sha256-odzugn0iO1bO8/vV7MlKiRYidgILhueFvafxnrRI864=" crossorigin="anonymous"></script>
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="https://unpkg.com/web-animations-js@2.3.1/web-animations.min.js"></script>
+    <script src="https://unpkg.com/hammerjs@2.0.8/hammer.min.js"></script>
+    <script src="https://unpkg.com/muuri@0.7.1/dist/muuri.min.js"></script>
+    <script src="{{ asset('profile.js') }}"></script>
+{% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
 </html>

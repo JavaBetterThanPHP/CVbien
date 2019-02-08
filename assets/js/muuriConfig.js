@@ -1,1 +1,3 @@
-var grid = new Muuri('.grid', {dragEnabled: true});
+$( document ).ready(function() {
+    var grid = new Muuri('.grid', {dragEnabled: true});
+});

@@ -145,3 +145,13 @@ function initCropBanner() {
 
 }
 
+
+$('#btnInitCropProfile').click(function () {
+    initCropProfile();
+});
+
+$('#btnInitCropBanner').click(function () {
+    initCropBanner();
+});
+
+
