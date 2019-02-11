@@ -6,12 +6,13 @@
     <h1>Diploma index</h1>
 
     <table class="table">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th>Id</th>
                 <th>Title</th>
                 <th>Level</th>
                 <th>IsInternational</th>
+                <th>Country</th>
                 <th>actions</th>
             </tr>
         </thead>
@@ -22,9 +23,10 @@
                 <td>{{ diploma.title }}</td>
                 <td>{{ diploma.level }}</td>
                 <td>{{ diploma.isInternational ? 'Yes' : 'No' }}</td>
+                <td>{{ diploma.country.name }}</td>
                 <td>
-                    <a href="{{ path('back_diploma_show', {'id': diploma.id}) }}">show</a>
-                    <a href="{{ path('back_diploma_edit', {'id': diploma.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('back_diploma_show', {'id': diploma.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('back_diploma_edit', {'id': diploma.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +37,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('back_diploma_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('back_diploma_new') }}">Create new</a>
 {% endblock %}

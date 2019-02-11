@@ -13,8 +13,9 @@ class ProgTechnology
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
 
@@ -28,12 +29,17 @@ class ProgTechnology
      */
     private $userProjects;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProgLanguage", inversedBy="progTechnologies")
+     */
+    private $progLanguage;
+
     public function __construct()
     {
         $this->userProjects = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -74,6 +80,18 @@ class ProgTechnology
             $this->userProjects->removeElement($userProject);
             $userProject->removeProgTechnology($this);
         }
+
+        return $this;
+    }
+
+    public function getProgLanguage(): ?ProgLanguage
+    {
+        return $this->progLanguage;
+    }
+
+    public function setProgLanguage(?ProgLanguage $progLanguage): self
+    {
+        $this->progLanguage = $progLanguage;
 
         return $this;
     }

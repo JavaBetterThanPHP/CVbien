@@ -2,25 +2,43 @@
 
 namespace App\Form;
 
+use App\Entity\Country;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\EmailType;
-use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 
 class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('email', EmailType::class)
-            ->add('password', RepeatedType::class, array(
-                'type' => PasswordType::class,
-                'first_options'  => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
-            ));
+            ->add('email')
+            ->add('spaceName')
+            ->add('isActive')
+            ->add('isSearchable')
+            ->add('firstname')
+            ->add('lastname')
+            ->add('birthdate', BirthdayType::class)
+            ->add('phoneNumber')
+            ->add('proPhoneNumber')
+            ->add('adress')
+            ->add('city')
+            ->add('cityCode')
+            ->add('country', EntityType::class, [
+                'label' => 'Pays',
+                'class' => Country::class,
+                'choice_label' => 'name',
+                'multiple' => false,
+                'required' => false,
+            ])
+            ->add('status')
+            ->add('type')
+            ->add('bannerPicture')
+            ->add('profilePicture')
+            ->add('isSearchable')
         ;
     }
 
@@ -30,5 +48,4 @@ class UserType extends AbstractType
             'data_class' => User::class,
         ]);
     }
-
 }

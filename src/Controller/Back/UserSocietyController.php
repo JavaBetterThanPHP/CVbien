@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user/society", name="back_user_society_")
+ * @Route("/userSociety", name="back_user_society_")
  */
 class UserSocietyController extends AbstractController
 {
@@ -20,7 +20,9 @@ class UserSocietyController extends AbstractController
      */
     public function index(UserSocietyRepository $userSocietyRepository): Response
     {
-        return $this->render('Back/user_society/index.html.twig', ['user_societies' => $userSocietyRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user_society/index.html.twig', ['user_societies' => $userSocietyRepository->findAll(),'user' => $user]);
     }
 
     /**
@@ -28,6 +30,8 @@ class UserSocietyController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $userSociety = new UserSociety();
         $form = $this->createForm(UserSocietyType::class, $userSociety);
         $form->handleRequest($request);
@@ -42,6 +46,7 @@ class UserSocietyController extends AbstractController
 
         return $this->render('Back/user_society/new.html.twig', [
             'user_society' => $userSociety,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -51,6 +56,8 @@ class UserSocietyController extends AbstractController
      */
     public function show(UserSociety $userSociety): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         return $this->render('Back/user_society/show.html.twig', ['user_society' => $userSociety]);
     }
 
@@ -59,6 +66,8 @@ class UserSocietyController extends AbstractController
      */
     public function edit(Request $request, UserSociety $userSociety): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(UserSocietyType::class, $userSociety);
         $form->handleRequest($request);
 
@@ -70,6 +79,7 @@ class UserSocietyController extends AbstractController
 
         return $this->render('Back/user_society/edit.html.twig', [
             'user_society' => $userSociety,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }

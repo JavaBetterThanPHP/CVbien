@@ -1,4 +1,4 @@
-function initCropProfile () {
+function initCropProfile() {
     var basic = $('#main-cropper').croppie({
         viewport: {width: 300, height: 300},
         boundary: {width: 300, height: 300},
@@ -23,22 +23,22 @@ function initCropProfile () {
         readFile(this);
     });
 
-    $('#profilePictureModal').on('shown.bs.modal', function() {
+    $('#profilePictureModal').on('shown.bs.modal', function () {
         $('#main-cropper').croppie('bind');
     });
 
-    $( "#cropSave" ).click(function() {
-        basic.croppie('result','blob'
+    $("#cropSave").click(function () {
+        basic.croppie('result', 'blob'
         ).then(function (result) {
             var fd = new FormData();
-            fd.append('data', result,$('#userId').val()+"."+result.type.split("/")[1]);
+            fd.append('data', result, $('#userId').val() + "." + result.type.split("/")[1]);
             $.ajax({
                 type: 'POST',
-                url : $('#updateProfilePictureLink').val(),
+                url: $('#updateProfilePictureLink').val(),
                 data: fd,
                 processData: false,
                 contentType: false
-            }).done(function(data) {
+            }).done(function (data) {
                 $('#profilePicture').attr('src', URL.createObjectURL(result));
                 $('#profilePictureModal').modal('hide');
             });
@@ -69,22 +69,26 @@ function initCropProfile () {
         return blob;
     }
 
-    function urltoFile(url, filename, mimeType){
+    function urltoFile(url, filename, mimeType) {
         return (fetch(url)
-                .then(function(res){return res.arrayBuffer();})
-                .then(function(buf){return new File([buf], filename, {type:mimeType});})
+                .then(function (res) {
+                    return res.arrayBuffer();
+                })
+                .then(function (buf) {
+                    return new File([buf], filename, {type: mimeType});
+                })
         );
     }
 
 }
 
-function initCropBanner () {
+function initCropBanner() {
     var basic = $('#banner-cropper').croppie({
         viewport: {width: 750, height: 200},
         boundary: {width: 750, height: 200},
         enforceBoundary: true,
         showZoomer: true,
-        url: $("#userBanner").css('background-image').replace('url(','').replace(')','').replace(/\"/gi, "")
+        url: $("#userBanner").css('background-image').replace('url(', '').replace(')', '').replace(/\"/gi, "")
     });
 
     function readFile(input) {
@@ -103,36 +107,51 @@ function initCropBanner () {
         readFile(this);
     });
 
-    $('#bannerModal').on('shown.bs.modal', function() {
+    $('#bannerModal').on('shown.bs.modal', function () {
         $('#banner-cropper').croppie('bind');
     });
 
-    $( "#cropBannerSave" ).click(function() {
+    $("#cropBannerSave").click(function () {
         basic.croppie('result', {
-            type: 'blob',
-            size: 'original'}
+                type: 'blob',
+                size: 'original'
+            }
         ).then(function (result) {
             var fd = new FormData();
-            fd.append('data', result,$('#userId').val()+"."+result.type.split("/")[1]);
+            fd.append('data', result, $('#userId').val() + "." + result.type.split("/")[1]);
             $.ajax({
                 type: 'POST',
-                url : $('#updateBannerLink').val(),
+                url: $('#updateBannerLink').val(),
                 data: fd,
                 processData: false,
                 contentType: false
-            }).done(function(data) {
-                $("#userBanner").css('background-image', 'url("'+URL.createObjectURL(result)+'")');
+            }).done(function (data) {
+                $("#userBanner").css('background-image', 'url("' + URL.createObjectURL(result) + '")');
                 $('#bannerModal').modal('hide');
             });
         });
     });
 
-    function urltoFile(url, filename, mimeType){
+    function urltoFile(url, filename, mimeType) {
         return (fetch(url)
-                .then(function(res){return res.arrayBuffer();})
-                .then(function(buf){return new File([buf], filename, {type:mimeType});})
+                .then(function (res) {
+                    return res.arrayBuffer();
+                })
+                .then(function (buf) {
+                    return new File([buf], filename, {type: mimeType});
+                })
         );
     }
 
 }
+
+
+$('#btnInitCropProfile').click(function () {
+    initCropProfile();
+});
+
+$('#btnInitCropBanner').click(function () {
+    initCropBanner();
+});
+
 

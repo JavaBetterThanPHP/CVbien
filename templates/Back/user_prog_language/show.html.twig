@@ -11,6 +11,16 @@
             <th>Id</th>
             <td>{{ user_prog_language.id }}</td>
         </tr>
+
+        <tr>
+            <th>User</th>
+            <td>{{ user_prog_language.user.email }}</td>
+        </tr>
+
+        <tr>
+            <th>Prog Language</th>
+            <td>{{ user_prog_language.progLanguage.name }}</td>
+        </tr>v
         <tr>
             <th>Level</th>
             <td>{{ user_prog_language.level }}</td>
@@ -21,6 +31,6 @@
     <a href="{{ path('back_user_prog_language_index') }}">back to list</a>
 
     <a href="{{ path('back_user_prog_language_edit', {'id': user_prog_language.id}) }}">edit</a>
-
+    <br>
     {{ include('Back/user_prog_language/_delete_form.html.twig') }}
 {% endblock %}

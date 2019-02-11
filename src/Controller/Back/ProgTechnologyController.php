@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/prog/technology", name="back_prog_technology_")
+ * @Route("/progTechnology", name="back_prog_technology_")
  */
 class ProgTechnologyController extends AbstractController
 {
@@ -20,7 +20,9 @@ class ProgTechnologyController extends AbstractController
      */
     public function index(ProgTechnologyRepository $progTechnologyRepository): Response
     {
-        return $this->render('Back/prog_technology/index.html.twig', ['prog_technologies' => $progTechnologyRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/prog_technology/index.html.twig', ['prog_technologies' => $progTechnologyRepository->findAll(), 'user' => $user]);
     }
 
     /**
@@ -28,6 +30,8 @@ class ProgTechnologyController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $progTechnology = new ProgTechnology();
         $form = $this->createForm(ProgTechnologyType::class, $progTechnology);
         $form->handleRequest($request);
@@ -42,6 +46,7 @@ class ProgTechnologyController extends AbstractController
 
         return $this->render('Back/prog_technology/new.html.twig', [
             'prog_technology' => $progTechnology,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +56,9 @@ class ProgTechnologyController extends AbstractController
      */
     public function show(ProgTechnology $progTechnology): Response
     {
-        return $this->render('Back/prog_technology/show.html.twig', ['prog_technology' => $progTechnology]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/prog_technology/show.html.twig', ['prog_technology' => $progTechnology,'user' => $user]);
     }
 
     /**
@@ -59,6 +66,8 @@ class ProgTechnologyController extends AbstractController
      */
     public function edit(Request $request, ProgTechnology $progTechnology): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(ProgTechnologyType::class, $progTechnology);
         $form->handleRequest($request);
 
@@ -70,6 +79,7 @@ class ProgTechnologyController extends AbstractController
 
         return $this->render('Back/prog_technology/edit.html.twig', [
             'prog_technology' => $progTechnology,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }

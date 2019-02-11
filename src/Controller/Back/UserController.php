@@ -20,7 +20,9 @@ class UserController extends AbstractController
      */
     public function index(UserRepository $userRepository): Response
     {
-        return $this->render('Back/user/index.html.twig', ['users' => $userRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user/index.html.twig', ['users' => $userRepository->findAll(), 'user' => $user]);
     }
 
     /**
@@ -28,8 +30,10 @@ class UserController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        $user_account = new User();
+        $form = $this->createForm(UserType::class, $user_account);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -41,8 +45,9 @@ class UserController extends AbstractController
         }
 
         return $this->render('Back/user/new.html.twig', [
+            'user_account' => $user_account,
             'user' => $user,
-            'form' => $form->createView(),
+            'form' => $form->createView()
         ]);
     }
 
@@ -51,7 +56,9 @@ class UserController extends AbstractController
      */
     public function show(User $user): Response
     {
-        return $this->render('Back/user/show.html.twig', ['user' => $user]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $userConnected = $this->getUser();
+        return $this->render('Back/user/show.html.twig', ['user_account' => $user, 'user' => $userConnected]);
     }
 
     /**
@@ -62,6 +69,9 @@ class UserController extends AbstractController
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
 
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $userConnected = $this->getUser();
+
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
@@ -69,7 +79,8 @@ class UserController extends AbstractController
         }
 
         return $this->render('Back/user/edit.html.twig', [
-            'user' => $user,
+            'user_account' => $user,
+            'user' => $userConnected,
             'form' => $form->createView(),
         ]);
     }

@@ -2,10 +2,14 @@
 
 {% block title %}CVBien - Modifier mes informations{% endblock %}
 
+{% block header %}
+    {{ include('_header_dashboard.html.twig') }}
+{% endblock %}
+
 {% block content %}
-    <h1>Modifier mes informations</h1>
-
-    {{ include('Front/user/_form.html.twig', {'button_label': 'Update'}) }}
-    <a class="ml-1 mt-3 btn btn-secondary" href="{{ path('front_index') }}">Retour</a>
-
+    <div class="container mt-5 mb-5">
+        <h1>Modifier mes informations</h1>
+        {{ include('Front/user/_form.html.twig', {'button_label': 'Update'}) }}
+        <a class="ml-1 mt-3 btn btn-secondary" href="{{ path('front_index') }}">Retour</a>
+    </div>
 {% endblock %}

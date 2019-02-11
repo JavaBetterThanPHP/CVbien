@@ -16,6 +16,6 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
-        return $this->render('landing_page.html.twig');
+        return $this->render('Front/landing_page.html.twig');
     }
 }

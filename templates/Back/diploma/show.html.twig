@@ -20,6 +20,10 @@
                 <td>{{ diploma.level }}</td>
             </tr>
             <tr>
+                <th>Country</th>
+                <td>{{ diploma.country.name }}</td>
+            </tr>
+            <tr>
                 <th>IsInternational</th>
                 <td>{{ diploma.isInternational ? 'Yes' : 'No' }}</td>
             </tr>
@@ -27,7 +31,7 @@
     </table>
 
     <a href="{{ path('back_diploma_index') }}">back to list</a>
-
+    <br>
     <a href="{{ path('back_diploma_edit', {'id': diploma.id}) }}">edit</a>
 
     {{ include('Back/diploma/_delete_form.html.twig') }}

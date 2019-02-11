@@ -1,0 +1,15 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}Edit Link{% endblock %}
+
+{% block header %}
+    {{ include('_header_dashboard.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Modifier un lien</h1>
+        {{ include('Front/link/_form.html.twig', {'button_label': 'Valider'}) }}
+        <a class="btn btn-secondary mt-3" href="{{ path('front_link_index') }}">Retour</a>
+    </div>
+{% endblock %}

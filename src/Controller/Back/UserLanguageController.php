@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user/language", name="back_user_language_")
+ * @Route("/userLanguage", name="back_user_language_")
  */
 class UserLanguageController extends AbstractController
 {
@@ -20,7 +20,9 @@ class UserLanguageController extends AbstractController
      */
     public function index(UserLanguageRepository $userLanguageRepository): Response
     {
-        return $this->render('Back/user_language/index.html.twig', ['user_languages' => $userLanguageRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user_language/index.html.twig', ['user_languages' => $userLanguageRepository->findAll(),'user' => $user]);
     }
 
     /**
@@ -28,6 +30,8 @@ class UserLanguageController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $userLanguage = new UserLanguage();
         $form = $this->createForm(UserLanguageType::class, $userLanguage);
         $form->handleRequest($request);
@@ -42,6 +46,7 @@ class UserLanguageController extends AbstractController
 
         return $this->render('Back/user_language/new.html.twig', [
             'user_language' => $userLanguage,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +56,9 @@ class UserLanguageController extends AbstractController
      */
     public function show(UserLanguage $userLanguage): Response
     {
-        return $this->render('Back/user_language/show.html.twig', ['user_language' => $userLanguage]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user_language/show.html.twig', ['user_language' => $userLanguage,'user' => $user]);
     }
 
     /**
@@ -59,6 +66,8 @@ class UserLanguageController extends AbstractController
      */
     public function edit(Request $request, UserLanguage $userLanguage): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(UserLanguageType::class, $userLanguage);
         $form->handleRequest($request);
 
@@ -70,6 +79,7 @@ class UserLanguageController extends AbstractController
 
         return $this->render('Back/user_language/edit.html.twig', [
             'user_language' => $userLanguage,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
