@@ -50,7 +50,7 @@ L'équipe du projet est composée de 4 developpeurs alternants, spécialisé dan
   - Expert technique PHP, Symfony
   - Expert technique Javascript
   - Expert technique Django
-  - rès bonnes connaissances SQL et UML
+  - Très bonnes connaissances SQL et UML
  
 - **Longuet Kevin** : Expert en architecture informatique
   - DUT et Licence Professionnelle de l’IUT d’ORSAY
