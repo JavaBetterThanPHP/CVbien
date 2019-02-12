@@ -1,0 +1,31 @@
+<div class="col-9">
+    <h1>Modifier mes expériences <a href="#" class="btn btn-default" type="button" data-toggle="modal" data-target="#userSocietyModal"><i class="fas fa-plus-circle fa-2x"></i></a></h1>
+    <div class="container">
+        <div class="row">
+            {% for userSociety in user.userSocieties %}
+                <div class="col-sm-6 col-lg-4 py-2">
+                    <div class="card bg-light card h-100" style="max-width: 25rem;">
+                        <div class="card-header">
+                            {{ userSociety.jobType.label }}
+                            <a href="#" class="btn btn-default float-right"><i class="far fa-trash-alt"></i></a>
+                            <a href="#" class="btn btn-default float-right"><i class="fas fa-edit"></i></a>
+                            <br>
+                            {{ userSociety.society.name }}
+                        </div>
+                        <div class="card-body">
+                            <p class="card-text">
+                                {{ userSociety.society.city }} - {{ userSociety.society.country.name }}
+                                {% if userSociety.isActive %}
+                                    <span class="badge badge-success float-right">En poste</span>
+                                {% endif %}
+                            </p>
+                            <p class="card-text">
+                                Du {{ userSociety.firstDate | date("m/d/Y", "Europe/Paris") }} au {{ userSociety.lastDate | date("m/d/Y", "Europe/Paris") }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

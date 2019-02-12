@@ -1,0 +1,48 @@
+<div class="col-9">
+    <h1>Modifier mes informations professionnelles</h1>
+    <h2>Technologies
+        <a href="#" class="btn btn-default" type="button" data-toggle="modal" data-target="#userProgLanguageModal"><i class="fas fa-plus-circle fa-2x"></i></a>    </h2>
+    <div class="container">
+        <div class="row">
+            {% for userProgLanguage in user.userProgLanguages %}
+                <div class="col-sm-6 col-lg-4 py-2">
+                    <div class="card bg-light card h-100" style="max-width: 25rem;">
+                        <div class="card-header">
+                            {{ userProgLanguage.progLanguage.name }}
+                            <a href="#" class="btn btn-default float-right"><i class="far fa-trash-alt"></i></a>
+                            <a href="#" class="btn btn-default float-right"><i class="fas fa-edit"></i></a>
+                        </div>
+                        <div class="card-body">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-success" role="progressbar" aria-valuenow="{{ userProgLanguage.level * 10}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ userProgLanguage.level * 10}}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+    <h2>Langues
+        <a href="#" class="btn btn-default" type="button" data-toggle="modal" data-target="#userLanguageModal"><i class="fas fa-plus-circle fa-2x"></i></a>    </h2>
+    </h2>
+    <div class="container">
+        <div class="row">
+            {% for userLanguage in user.userLanguages %}
+                <div class="col-sm-6 col-lg-4 py-2">
+                    <div class="card bg-light card h-100" style="max-width: 25rem;">
+                        <div class="card-header">
+                            {{ userLanguage.language.name }}
+                            <a href="#" class="btn btn-default float-right"><i class="far fa-trash-alt"></i></a>
+                            <a href="#" class="btn btn-default float-right"><i class="fas fa-edit"></i></a>
+                        </div>
+                        <div class="card-body">
+                            <div class="progress">
+                                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="{{ userLanguage.level * 10}}" aria-valuemin="0" aria-valuemax="100" style="width: {{ userLanguage.level * 10}}%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>

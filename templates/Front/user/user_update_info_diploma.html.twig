@@ -1,0 +1,18 @@
+{% extends "front_base.html.twig" %}
+
+{% block title %}Dashboard - CVBien{% endblock %}
+
+{% block header %}
+    {{ include('_header_dashboard.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    {% if user is defined %}
+        <div class="container-fluid">
+            <div class="row">
+                {{ include('Front/user/_user_info_menu.html.twig') }}
+                {{ include('Front/user/_user_info_diploma.html.twig') }}
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}

@@ -37,7 +37,7 @@ class UserProject
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\UserSociety", inversedBy="userProjects")
      */
-    private $society;
+    private $userSociety;
 
     /**
      * @ORM\ManyToMany(targetEntity="App\Entity\ProgTechnology", inversedBy="userProjects")
@@ -101,14 +101,14 @@ class UserProject
         return $this;
     }
 
-    public function getSociety(): ?UserSociety
+    public function getUserSociety(): ?UserSociety
     {
-        return $this->society;
+        return $this->userSociety;
     }
 
-    public function setSociety(?UserSociety $society): self
+    public function setUserSociety(?UserSociety $userSociety): self
     {
-        $this->society = $society;
+        $this->userSociety = $userSociety;
 
         return $this;
     }

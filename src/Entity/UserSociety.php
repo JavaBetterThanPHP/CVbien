@@ -49,6 +49,11 @@ class UserSociety
      */
     private $user;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserProject", mappedBy="userSociety")
+     */
+    private $userProjects;
+
     public function __construct()
     {
         $this->userProjects = new ArrayCollection();
@@ -127,6 +132,37 @@ class UserSociety
     public function setJobType(?JobType $jobType): self
     {
         $this->jobType = $jobType;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserProject[]
+     */
+    public function getUserProjects(): Collection
+    {
+        return $this->userProjects;
+    }
+
+    public function addUserProject(UserProject $userProject): self
+    {
+        if (!$this->userProjects->contains($userProject)) {
+            $this->userProjects[] = $userProject;
+            $userProject->setUserSociety($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserProject(UserProject $userProject): self
+    {
+        if ($this->userProjects->contains($userProject)) {
+            $this->userProjects->removeElement($userProject);
+            // set the owning side to null (unless already changed)
+            if ($userProject->getUserSociety() === $this) {
+                $userProject->setUserSociety(null);
+            }
+        }
 
         return $this;
     }

@@ -11,7 +11,7 @@
 
         {# Values #}
         <input id="updateProfilePictureLink" name="updateProfilePictureLink" type="hidden"
-               value="{{ path('front_user_updateProfilePicture') }}">
+               value=" ">
         <input id="updateBannerLink" name="updateBannerLink" type="hidden"
                value="{{ path('front_user_updateBanner') }}">
         <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
@@ -49,7 +49,7 @@
                         {{ user.city }}
                         {% if user.country is not null %}
                             - <b>Country : </b>
-                            {{ user.country.label }}
+                            {{ user.country.name }}
                         {% endif %}
                     </p>
                 </div>
