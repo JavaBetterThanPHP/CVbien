@@ -2,17 +2,15 @@
 
 namespace App\Controller\Front;
 
+use App\Form\ResetPasswordType;
 use App\Form\UserFrontType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
-use App\Form\ResetPasswordType;
-use Symfony\Component\Form\FormError;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Component\Serializer\Encoder\EncoderInterface;
 
 /**
  * @Route("/", name="front_user_")
