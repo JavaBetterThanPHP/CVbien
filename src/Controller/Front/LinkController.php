@@ -23,7 +23,7 @@ class LinkController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
-        return $this->render('Front/link/index.html.twig', ['links' => $linkRepository->findAll(), 'user' => $user]);
+        return $this->render('Front/link/index.html.twig', ['links' => $linkRepository->findBy(['user' => $user]), 'user' => $user]);
     }
 
     /**
@@ -35,6 +35,7 @@ class LinkController extends AbstractController
         $user = $this->getUser();
 
         $link = new Link();
+        $link->setUser($user); // Ne fonctionne pas avec @Gedmo/Blameable
         $form = $this->createForm(LinkFrontType::class, $link);
         $form->handleRequest($request);
 
