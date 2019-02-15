@@ -114,28 +114,98 @@ class UserController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
+
         $userProgLanguage = new UserProgLanguage();
         $userProgLanguage->setUser($user);
         $formUserProgLanguage = $this->createForm(UserProgLanguageFrontType::class, $userProgLanguage);
-        $formUserProgLanguage->handleRequest($request);
-        if ($formUserProgLanguage->isSubmitted() && $formUserProgLanguage->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userProgLanguage);
-            $entityManager->flush();
-        }
+
         $userLanguage = new UserLanguage();
         $userLanguage->setUser($user);
         $formUserLanguage = $this->createForm(UserLanguageFrontType::class, $userLanguage);
-        $formUserLanguage->handleRequest($request);
-        if ($formUserLanguage->isSubmitted() && $formUserLanguage->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userLanguage);
-            $entityManager->flush();
+
+        if($request->request->has($formUserProgLanguage->getName())){
+            $formUserProgLanguage->handleRequest($request);
+            if ($formUserProgLanguage->isSubmitted() && $formUserProgLanguage->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($userProgLanguage);
+                $entityManager->flush();
+                return $this->redirectToRoute('front_user_updatePro');
+            }
+        }elseif($request->request->has($formUserLanguage->getName())) {
+            $formUserLanguage->handleRequest($request);
+            if ($formUserLanguage->isSubmitted() && $formUserLanguage->isValid()) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->persist($userLanguage);
+                $entityManager->flush();
+                return $this->redirectToRoute('front_user_updatePro');
+            }
         }
         return $this->render('Front/user/user_update_info_pro.html.twig', [
             'user' => $user,
             'formUserProgLanguageFront' => $formUserProgLanguage->createView(),
             'formUserLanguageFront' => $formUserLanguage->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("userProgLanguageDelete/{id}", name="progLanguageDelete", methods={"DELETE"})
+     */
+    public function userProgLanguageDelete(Request $request, UserProgLanguage $userProgLanguage): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $userProgLanguage->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($userProgLanguage);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('front_user_updatePro');
+    }
+
+    /**
+     * @Route("userProgLanguageEdit/{id}", name="progLanguageEdit", methods={"GET","POST"}, options={"expose"=true})
+     */
+    public function userProgLanguageEdit(Request $request, UserProgLanguage $userProgLanguage): Response
+    {
+        $form = $this->createForm(UserProgLanguageFrontType::class, $userProgLanguage, [
+            'action' => $this->generateUrl('front_user_progLanguageEdit', ['id' => $userProgLanguage->getId()])
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('front_user_updatePro');
+        }
+        return $this->render('Front/user/_modal_user_progLanguage_edit.html.twig', [
+            'formEditProgLanguage' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("userLanguageDelete/{id}", name="languageDelete", methods={"DELETE"})
+     */
+    public function userLanguageDelete(Request $request, UserLanguage $userLanguage): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $userLanguage->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($userLanguage);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('front_user_updatePro');
+    }
+
+    /**
+     * @Route("userLanguageEdit/{id}", name="languageEdit", methods={"GET","POST"}, options={"expose"=true})
+     */
+    public function userLanguageEdit(Request $request, UserLanguage $userLanguage): Response
+    {
+        $form = $this->createForm(UserLanguageFrontType::class, $userLanguage, [
+            'action' => $this->generateUrl('front_user_languageEdit', ['id' => $userLanguage->getId()])
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('front_user_updatePro');
+        }
+        return $this->render('Front/user/_modal_user_language_edit.html.twig', [
+            'formEditLanguage' => $form->createView(),
         ]);
     }
 
@@ -153,7 +223,7 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($userSociety);
             $entityManager->flush();
-            // TODO return js response
+            return $this->redirectToRoute('front_user_updateExp');
         }
         return $this->render('Front/user/user_update_info_society.html.twig', [
             'user' => $user,
@@ -161,11 +231,41 @@ class UserController extends AbstractController
         ]);
     }
 
+    /**
+     * @Route("userExpDelete/{id}", name="expDelete", methods={"DELETE"})
+     */
+    public function useExpDelete(Request $request, UserSociety $userSociety): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $userSociety->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($userSociety);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('front_user_updateExp');
+    }
 
     /**
-     * @Route("/updateDiploma", name="updateDiploma", methods={"GET","POST"})
+     * @Route("userExpEdit/{id}", name="expEdit", methods={"GET","POST"}, options={"expose"=true})
      */
-    public function updateDiploma(Request $request): Response
+    public function userExpEdit(Request $request, UserSociety $userSociety): Response
+    {
+        $form = $this->createForm(UserSocietyTypeFront::class, $userSociety, [
+            'action' => $this->generateUrl('front_user_expEdit', ['id' => $userSociety->getId()])
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('front_user_updateExp');
+        }
+        return $this->render('Front/user/_modal_user_exp_edit.html.twig', [
+            'formEditExp' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * @Route("/userUpdateDiploma", name="updateDiploma", methods={"GET","POST"})
+     */
+    public function getUpdateUserDiploma(Request $request): Response
     {
         $user = $this->getUser();
         $userDiploma = new UserDiploma();
@@ -176,7 +276,7 @@ class UserController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($userDiploma);
             $entityManager->flush();
-// TODO return js response
+            return $this->redirectToRoute('front_user_updateDiploma');
         }
         return $this->render('Front/user/user_update_info_diploma.html.twig', [
             'user' => $user,
@@ -184,12 +284,35 @@ class UserController extends AbstractController
         ]);
     }
 
-//$formUserSociety = $this->createForm(UserSocietyType::class, $user);
-//$formUserSociety->handleRequest($request);
-//if ($formUserSociety->isSubmitted() && $formUserSociety->isValid()) {
-//    $this->getDoctrine()->getManager()->flush();
-//    return $this->redirectToRoute('front_user_updateInfo');
-//}
+    /**
+     * @Route("userDiplomaDelete/{id}", name="diplomaDelete", methods={"DELETE"})
+     */
+    public function userDiplomaDelete(Request $request, UserDiploma $userDiploma): Response
+    {
+        if ($this->isCsrfTokenValid('delete' . $userDiploma->getId(), $request->request->get('_token'))) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->remove($userDiploma);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('front_user_updateDiploma');
+    }
 
+    /**
+     * @Route("userDiplomaEdit/{id}", name="diplomaEdit", methods={"GET","POST"}, options={"expose"=true})
+     */
+    public function userDiplomaEdit(Request $request, UserDiploma $userDiploma): Response
+    {
+        $form = $this->createForm(UserDiplomaFrontType::class, $userDiploma, [
+            'action' => $this->generateUrl('front_user_diplomaEdit',['id'=>$userDiploma->getId()] )
+        ]);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->getDoctrine()->getManager()->flush();
+            return $this->redirectToRoute('front_user_updateDiploma');
+        }
+        return $this->render('Front/user/_modal_user_diploma_edit.html.twig', [
+            'formEditUserDiploma' => $form->createView(),
+        ]);
+    }
 
 }
