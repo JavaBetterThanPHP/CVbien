@@ -29,11 +29,6 @@ class ProgTechnology
      */
     private $userProjects;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ProgLanguage", inversedBy="progTechnologies")
-     */
-    private $progLanguage;
-
     public function __construct()
     {
         $this->userProjects = new ArrayCollection();
@@ -80,18 +75,6 @@ class ProgTechnology
             $this->userProjects->removeElement($userProject);
             $userProject->removeProgTechnology($this);
         }
-
-        return $this;
-    }
-
-    public function getProgLanguage(): ?ProgLanguage
-    {
-        return $this->progLanguage;
-    }
-
-    public function setProgLanguage(?ProgLanguage $progLanguage): self
-    {
-        $this->progLanguage = $progLanguage;
 
         return $this;
     }

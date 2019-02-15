@@ -44,6 +44,11 @@ class Diploma
      */
     private $userDiplomas;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $school;
+
     public function __construct()
     {
         $this->userDiplomas = new ArrayCollection();
@@ -129,6 +134,18 @@ class Diploma
                 $userDiploma->setDiploma(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSchool(): ?string
+    {
+        return $this->school;
+    }
+
+    public function setSchool(?string $school): self
+    {
+        $this->school = $school;
 
         return $this;
     }
