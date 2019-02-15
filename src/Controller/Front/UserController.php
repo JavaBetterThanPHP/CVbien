@@ -7,14 +7,18 @@ use App\Entity\UserLanguage;
 use App\Entity\UserProgLanguage;
 use App\Entity\UserSociety;
 use App\Form\UserDiplomaFrontType;
+use App\Form\ResetPasswordType;
 use App\Form\UserFrontType;
 use App\Form\UserLanguageFrontType;
 use App\Form\UserProgLanguageFrontType;
 use App\Form\UserSocietyTypeFront;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\FormError;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * @Route("/", name="front_user_")
@@ -313,6 +317,68 @@ class UserController extends AbstractController
         return $this->render('Front/user/_modal_user_diploma_edit.html.twig', [
             'formEditUserDiploma' => $form->createView(),
         ]);
+    }
+
+
+    /**
+     * @Route("/reset-password", name="reset_password", methods={"GET", "POST"})
+     */
+
+    public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getUser();
+
+        $form = $this->createForm(ResetPasswordType::class, $user);
+
+        $form->handleRequest($request);
+
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            $oldPassword = $request->request->get('reset_password')['oldPassword'];
+            $newPassword = $request->request->get('reset_password')['plainPassword']['first'];
+
+            if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
+                $newEncodedPassword = $passwordEncoder->encodePassword($user, $newPassword);
+                $user->setPassword($newEncodedPassword);
+
+                $em->persist($user);
+                $em->flush();
+
+                $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
+
+                return $this->redirectToRoute('front_index');
+            } else {
+                $form->addError(new FormError('Ancien mot de passe incorrect'));
+            }
+        }
+
+        return $this->render('Front/user/reset_password.html.twig', array(
+            'form' => $form->createView(),
+        ));
+    }
+
+    /**
+     * @Route("/sendmail", name="sendmail", methods={"GET", "POST"})
+     */
+
+    public function sendMail(\Swift_Mailer $mailer)
+    {
+        $message = (new \Swift_Message('test'))
+            ->setFrom('francois0roger@gmail.com')
+            ->setTo('francois0roger@gmail.com')
+            ->setBody("test");
+
+        $logger = new \Swift_Plugins_Loggers_EchoLogger();
+        $mailer->registerPlugin(new \Swift_Plugins_LoggerPlugin($logger));
+        $resultCustomer = $mailer->send($message, $failures);
+
+
+        dump($resultCustomer);
+
+        return new JsonResponse("ok", 200);
+
     }
 
 }

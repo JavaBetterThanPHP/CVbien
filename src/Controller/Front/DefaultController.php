@@ -8,16 +8,15 @@ use Symfony\Component\Routing\Annotation\Route;
 
 
 /**
- * @Route("/")
+ * @Route("/", name="front_")
  */
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/", name="front_index", methods="GET")
+     * @Route("/", name="index", methods="GET")
      */
     public function index(Request $request)
     {
-
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
 

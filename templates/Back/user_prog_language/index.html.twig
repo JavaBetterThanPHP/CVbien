@@ -2,11 +2,11 @@
 
 {% block title %}UserProgLanguage index{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>UserProgLanguage index</h1>
 
     <table class="table">
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <th>Id</th>
             <th>User</th>
@@ -23,8 +23,8 @@
                 <td>{{ user_prog_language.progLanguage.name }}</td>
                 <td>{{ user_prog_language.level }}</td>
                 <td>
-                    <a href="{{ path('back_user_prog_language_show', {'id': user_prog_language.id}) }}">show</a>
-                    <a href="{{ path('back_user_prog_language_edit', {'id': user_prog_language.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('back_user_prog_language_show', {'id': user_prog_language.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('back_user_prog_language_edit', {'id': user_prog_language.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -35,5 +35,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('back_user_prog_language_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('back_user_prog_language_new') }}">Create new</a>
 {% endblock %}

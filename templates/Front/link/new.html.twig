@@ -1,0 +1,15 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}CVBien - Liaison des comptes{% endblock %}
+
+{% block header %}
+    {{ include('_header_dashboard.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h1>Ajouter un compte</h1>
+        {{ include('Front/link/_form.html.twig') }}
+        <a class="btn btn-secondary mt-3" href="{{ path('front_link_index') }}">Retour</a>
+    </div>
+{% endblock %}

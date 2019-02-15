@@ -10,21 +10,11 @@
         <tr>
             <th>Id</th>
             <th>Email</th>
-            <th>Personal space identifier</th>
-            <th>IsActive
-            <th>IsSearchable</th>
+            <th>Space identifier</th>
             <th>Firstname</th>
             <th>Lastname</th>
-            <th>Birthdate</th>
             <th>PhoneNumber</th>
-            <th>ProPhoneNumber</th>
-            <th>Adress</th>
-            <th>City</th>
-            <th>CityCode</th>
-            <th>Country</th>
-            <th>Status</th>
-            <th>Type</th>
-            <th>actions</th>
+            <th>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -34,22 +24,12 @@
                 <td>{{ user.email }}</td>
                 <td>{{ user.spaceName }}</td>
                 {# <td>{{ user.roles ? user.roles|json_encode : '' }}</td> #}
-                <td>{{ user.isActive ? 'Yes' : 'No' }}</td>
-                <td>{{ user.isSearchable ? 'Yes' : 'No' }}</td>
                 <td>{{ user.firstname }}</td>
                 <td>{{ user.lastname }}</td>
-                <td>{{ user.birthdate ? user.birthdate|date('Y-m-d') : '' }}</td>
                 <td>{{ user.phoneNumber }}</td>
-                <td>{{ user.proPhoneNumber }}</td>
-                <td>{{ user.adress }}</td>
-                <td>{{ user.city }}</td>
-                <td>{{ user.cityCode }}</td>
-                <td>{{ user.country.name }}</td>
-                <td>{{ user.status }}</td>
-                <td>{{ user.type }}</td>
                 <td>
-                    <a href="{{ path('back_user_show', {'id': user.id}) }}">show</a>
-                    <a href="{{ path('back_user_edit', {'id': user.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('back_user_show', {'id': user.id}) }}">Show</a>
+                    <a class="btn btn-primary" href="{{ path('back_user_edit', {'id': user.id}) }}">Edit</a>
                 </td>
             </tr>
         {% else %}
@@ -60,5 +40,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('back_user_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('back_user_new') }}">Create new</a>
 {% endblock %}

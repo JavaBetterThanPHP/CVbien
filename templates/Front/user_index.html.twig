@@ -63,12 +63,12 @@
                             Edit page
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
-                            <button onclick="initCropProfile()" class="dropdown-item" type="button"
+                            <button id="btnInitCropProfile" class="dropdown-item" type="button"
                                     data-toggle="modal"
                                     data-target="#profilePictureModal">
                                 Avatar
                             </button>
-                            <button onclick="initCropBanner()" class="dropdown-item" type="button"
+                            <button id="btnInitCropBanner" class="dropdown-item" type="button"
                                     data-toggle="modal"
                                     data-target="#bannerModal">
                                 Banner
@@ -83,17 +83,47 @@
         {# MODULE AREA - Zone des modules #}
         <div class="container mt-5">
 
-            {% if user is defined %}
-                <div class="card" style="width: 18rem;">
-                    <div class="card-body">
-                        <h5 class="card-title">Informations personnelles</h5>
-                        <p class="card-text">ici on peut rentrer pleins d'information concernant la personne.</p>
+            {# {% if user is defined %}
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                            <h5 class="card-title">Informations personnelles</h5>
+                            <p class="card-text">ici on peut rentrer pleins d'information concernant la personne.</p>
+                        </div>
+                    </div>
+               {% endif %}#}
+            {# Import des modules #}
+
+            <div class="grid">
+
+                <div class="item">
+                    <div class="item-content">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ user.birthdate | date('d/m/y') }}</h6>
+                                <p class="card-text">{{ user.adress }}, <br/>{{ user.cityCode }} {{ user.city }}
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-                {# Import des modules #}
+                {# <div class="item">
+                    <div class="item-content">
+                        <div class="card">
+                            <div class="card-body">
+                                <h5 class="card-title">Liens</h5>
+                                {% for link in user.links %}
+                                    <p class="card-text"><a href="{{ link.url }}">{{ link.website }}
+                                            : {{ link.username }}</p>
+                                {% else %}
+                                    VIDE
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>#}
 
-            {% endif %}
+            </div>
         </div>
         {# --- #}
 
@@ -102,4 +132,12 @@
         {{ include('Front/_modal_banner_picture.html.twig') }}
         {# ----- #}
     {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {{ encore_entry_script_tags('app') }}
+{% endblock %}
+
+{% block footer %}
+    {{ include('_footer.html.twig') }}
 {% endblock %}

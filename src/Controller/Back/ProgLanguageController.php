@@ -20,7 +20,9 @@ class ProgLanguageController extends AbstractController
      */
     public function index(ProgLanguageRepository $progLanguageRepository): Response
     {
-        return $this->render('Back/prog_language/index.html.twig', ['prog_languages' => $progLanguageRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/prog_language/index.html.twig', ['prog_languages' => $progLanguageRepository->findAll(),'user' => $user]);
     }
 
     /**
@@ -28,6 +30,8 @@ class ProgLanguageController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $progLanguage = new ProgLanguage();
         $form = $this->createForm(ProgLanguageType::class, $progLanguage);
         $form->handleRequest($request);
@@ -42,6 +46,7 @@ class ProgLanguageController extends AbstractController
 
         return $this->render('Back/prog_language/new.html.twig', [
             'prog_language' => $progLanguage,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +56,9 @@ class ProgLanguageController extends AbstractController
      */
     public function show(ProgLanguage $progLanguage): Response
     {
-        return $this->render('Back/prog_language/show.html.twig', ['prog_language' => $progLanguage]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/prog_language/show.html.twig', ['prog_language' => $progLanguage,'user' => $user]);
     }
 
     /**
@@ -59,6 +66,8 @@ class ProgLanguageController extends AbstractController
      */
     public function edit(Request $request, ProgLanguage $progLanguage): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(ProgLanguageType::class, $progLanguage);
         $form->handleRequest($request);
 
@@ -70,6 +79,7 @@ class ProgLanguageController extends AbstractController
 
         return $this->render('Back/prog_language/edit.html.twig', [
             'prog_language' => $progLanguage,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }

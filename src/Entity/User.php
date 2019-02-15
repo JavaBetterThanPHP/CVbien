@@ -5,14 +5,17 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="user_account")
+ * @UniqueEntity("spaceName")
  * @Vich\Uploadable
  */
 class User implements UserInterface, \Serializable
@@ -153,6 +156,12 @@ class User implements UserInterface, \Serializable
 
     /**
      * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 20,
+     *      minMessage = "Your space name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your space name cannot be longer than {{ limit }} characters"
+     * )
      */
     private $spaceName;
 

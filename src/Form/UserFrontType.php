@@ -18,6 +18,7 @@ class UserFrontType extends AbstractType
         $builder
             ->add('firstname', TextType::class)
             ->add('lastname', TextType::class)
+            ->add("spaceName", TextType::class)
             ->add('birthdate', BirthdayType::class)
             ->add('phoneNumber', TextType::class)
             ->add('proPhoneNumber', TextType::class)

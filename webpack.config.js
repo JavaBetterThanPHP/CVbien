@@ -1,12 +1,11 @@
 var Encore = require('@symfony/webpack-encore');
 
 Encore
-    // IO
+// IO
     .setOutputPath('public/build/')
     .setPublicPath('/build')
 
     // EntryPoint
-    .addEntry('main', './assets/css/main.css')
     .addEntry('app', './assets/js/app.js')
     .copyFiles({
         from: './assets/images'
@@ -19,6 +18,7 @@ Encore
     .enableSourceMaps(!Encore.isProduction())
     .enableVersioning(Encore.isProduction())
     .enableSassLoader()
+    .autoProvidejQuery()
 
 ;
 

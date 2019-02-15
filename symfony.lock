@@ -107,6 +107,12 @@
             "ref": "a9f2e49180f75cdc71ae279a929c4b2e0638de84"
         }
     },
+    "fzaninotto/faker": {
+        "version": "v1.8.0"
+    },
+    "gedmo/doctrine-extensions": {
+        "version": "v2.4.36"
+    },
     "jdorn/sql-formatter": {
         "version": "v1.2.17"
     },
