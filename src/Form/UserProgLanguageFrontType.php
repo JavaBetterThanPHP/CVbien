@@ -3,7 +3,6 @@
 namespace App\Form;
 
 use App\Entity\ProgLanguage;
-use App\Entity\User;
 use App\Entity\UserProgLanguage;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -16,7 +15,7 @@ class UserProgLanguageFrontType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('level',RangeType::class, [
+            ->add('level', RangeType::class, [
                 'attr' => [
                     'min' => 1,
                     'max' => 10
@@ -28,8 +27,7 @@ class UserProgLanguageFrontType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false,
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

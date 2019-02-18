@@ -23,7 +23,7 @@
             <th>Languages</th>
             <td>
                 <ul>
-                    {% for language in user_project.progLanguages  %}
+                    {% for language in user_project.progLanguages %}
                         <li>{{ language.name }}</li>
                     {% endfor %}
                 </ul>
@@ -33,7 +33,7 @@
             <th>Technologies</th>
             <td>
                 <ul>
-                    {% for technology in user_project.progTechnologies%}
+                    {% for technology in user_project.progTechnologies %}
                         <li>{{ technology.label }}</li>
                     {% endfor %}
                 </ul>
@@ -49,7 +49,7 @@
         </tr>
         <tr>
             <th>Society</th>
-            <td>{% if user_project.society.name is defined %}{{ user_project.society.name }} {% endif %}</td>
+            <td>{% if user_project.userSociety.society.name is defined %}{{ user_project.userSociety.society.name }} {% endif %}</td>
         </tr>
         </tbody>
     </table>
@@ -58,5 +58,4 @@
     <br>
     <a href="{{ path('back_user_project_edit', {'id': user_project.id}) }}">edit</a>
 
-    {{ include('Back/user_project/_delete_form.html.twig') }}
 {% endblock %}

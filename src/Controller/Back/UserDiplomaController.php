@@ -22,34 +22,9 @@ class UserDiplomaController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
-        return $this->render('Back/user_diploma/index.html.twig', ['user_diplomas' => $userDiplomaRepository->findAll(),'user' => $user]);
+        return $this->render('Back/user_diploma/index.html.twig', ['user_diplomas' => $userDiplomaRepository->findAll(), 'user' => $user]);
     }
 
-    /**
-     * @Route("/new", name="new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user = $this->getUser();
-        $userDiploma = new UserDiploma();
-        $form = $this->createForm(UserDiplomaType::class, $userDiploma);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userDiploma);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('back_user_diploma_index');
-        }
-
-        return $this->render('Back/user_diploma/new.html.twig', [
-            'user_diploma' => $userDiploma,
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="show", methods={"GET"})
@@ -58,7 +33,7 @@ class UserDiplomaController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
-        return $this->render('Back/user_diploma/show.html.twig', ['user_diploma' => $userDiploma,'user' => $user]);
+        return $this->render('Back/user_diploma/show.html.twig', ['user_diploma' => $userDiploma, 'user' => $user]);
     }
 
     /**
@@ -82,19 +57,5 @@ class UserDiplomaController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, UserDiploma $userDiploma): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $userDiploma->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($userDiploma);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('back_user_diploma_index');
     }
 }

@@ -25,8 +25,10 @@
                 <td>{{ user_diploma.dateOfGrant ? user_diploma.dateOfGrant|date('Y-m-d') : '' }}</td>
                 <td>{{ user_diploma.mention }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('back_user_diploma_show', {'id': user_diploma.id}) }}">show</a>
-                    <a class="btn btn-primary" href="{{ path('back_user_diploma_edit', {'id': user_diploma.id}) }}">edit</a>
+                    <a class="btn btn-primary"
+                       href="{{ path('back_user_diploma_show', {'id': user_diploma.id}) }}">show</a>
+                    <a class="btn btn-primary"
+                       href="{{ path('back_user_diploma_edit', {'id': user_diploma.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -37,5 +39,4 @@
         </tbody>
     </table>
 
-    <a class="btn btn-success" href="{{ path('back_user_diploma_new') }}">Create new</a>
 {% endblock %}

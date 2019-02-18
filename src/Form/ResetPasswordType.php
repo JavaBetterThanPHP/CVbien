@@ -4,12 +4,11 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
-
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ResetPasswordType extends AbstractType
 {
@@ -27,7 +26,7 @@ class ResetPasswordType extends AbstractType
                         'class' => 'password-field'
                     )
                 ),
-                'first_options'  => array('label' => 'Password'),
+                'first_options' => array('label' => 'Password'),
                 'second_options' => array('label' => 'Repeat Password'),
                 'required' => true,
                 'mapped' => false,
@@ -36,8 +35,7 @@ class ResetPasswordType extends AbstractType
                 'attr' => array(
                     'class' => 'btn btn-primary btn-block'
                 )
-            ))
-        ;
+            ));
     }
 
     public function configureOptions(OptionsResolver $resolver)

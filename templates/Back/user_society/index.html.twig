@@ -29,8 +29,10 @@
                 <td>{{ user_society.lastDate ? user_society.lastDate|date('Y-m-d') : '' }}</td>
                 <td>{{ user_society.isActive ? 'Yes' : 'No' }}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('back_user_society_show', {'id': user_society.id}) }}">show</a>
-                    <a class="btn btn-primary" href="{{ path('back_user_society_edit', {'id': user_society.id}) }}">edit</a>
+                    <a class="btn btn-primary"
+                       href="{{ path('back_user_society_show', {'id': user_society.id}) }}">show</a>
+                    <a class="btn btn-primary"
+                       href="{{ path('back_user_society_edit', {'id': user_society.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -40,6 +42,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a class="btn btn-success" href="{{ path('back_user_society_new') }}">Create new</a>
 {% endblock %}

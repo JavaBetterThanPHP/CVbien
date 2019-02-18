@@ -15,7 +15,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="user_account")
- * @UniqueEntity("spaceName")
+ * @UniqueEntity("email", message="Il existe déjà un compte avec cette email")
+ * @UniqueEntity("spaceName", message="Ce nom d'espace est déjà attribué")
  * @Vich\Uploadable
  */
 class User implements UserInterface, \Serializable
@@ -32,6 +33,17 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 20,
+     *      minMessage = "Your space name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your space name cannot be longer than {{ limit }} characters"
+     * )
+     */
+    private $spaceName;
 
     /**
      * @ORM\Column(type="json")
@@ -95,24 +107,9 @@ class User implements UserInterface, \Serializable
     private $country;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserProject", mappedBy="user")
+     * @ORM\Column(type="boolean")
      */
-    private $userProjects;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserDiploma", mappedBy="user")
-     */
-    private $userDiplomas;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserLanguage", mappedBy="user")
-     */
-    private $userLanguages;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserProgLanguage", mappedBy="user")
-     */
-    private $userProgLanguages;
+    private $isSearchable;
 
     /**
      * @ORM\Column(type="string", length=255, options={"default":"default.png"})
@@ -145,27 +142,6 @@ class User implements UserInterface, \Serializable
     private $bannerImageFile;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Link", mappedBy="user")
-     */
-    private $links;
-
-    /**
-     * @ORM\Column(type="boolean")
-     */
-    private $isSearchable;
-
-    /**
-     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
-     * @Assert\Length(
-     *      min = 6,
-     *      max = 20,
-     *      minMessage = "Your space name must be at least {{ limit }} characters long",
-     *      maxMessage = "Your space name cannot be longer than {{ limit }} characters"
-     * )
-     */
-    private $spaceName;
-
-    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $status;
@@ -174,6 +150,31 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $type;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserProject", mappedBy="user")
+     */
+    private $userProjects;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserDiploma", mappedBy="user")
+     */
+    private $userDiplomas;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserLanguage", mappedBy="user")
+     */
+    private $userLanguages;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserProgLanguage", mappedBy="user")
+     */
+    private $userProgLanguages;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Link", mappedBy="user")
+     */
+    private $links;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserSociety", mappedBy="user")

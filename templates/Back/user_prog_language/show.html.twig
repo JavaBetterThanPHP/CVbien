@@ -2,7 +2,7 @@
 
 {% block title %}UserProgLanguage{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>UserProgLanguage</h1>
 
     <table class="table">
@@ -20,7 +20,8 @@
         <tr>
             <th>Prog Language</th>
             <td>{{ user_prog_language.progLanguage.name }}</td>
-        </tr>v
+        </tr>
+
         <tr>
             <th>Level</th>
             <td>{{ user_prog_language.level }}</td>
@@ -31,6 +32,4 @@
     <a href="{{ path('back_user_prog_language_index') }}">back to list</a>
 
     <a href="{{ path('back_user_prog_language_edit', {'id': user_prog_language.id}) }}">edit</a>
-    <br>
-    {{ include('Back/user_prog_language/_delete_form.html.twig') }}
 {% endblock %}

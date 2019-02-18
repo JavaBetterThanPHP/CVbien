@@ -2,12 +2,10 @@
 
 {% block title %}Edit UserLanguage{% endblock %}
 
-{% block body %}
-    <h1>Edit UserLanguage</h1>
+{% block content %}
+    <h1>Edit UserLanguage of {{ user_language.user.id }}</h1>
 
     {{ include('Back/user_language/_form.html.twig', {'button_label': 'Update'}) }}
 
     <a href="{{ path('back_user_language_index') }}">back to list</a>
-
-    {{ include('Back/user_language/_delete_form.html.twig') }}
 {% endblock %}

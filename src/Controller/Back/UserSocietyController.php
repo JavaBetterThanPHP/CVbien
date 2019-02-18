@@ -22,33 +22,7 @@ class UserSocietyController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
-        return $this->render('Back/user_society/index.html.twig', ['user_societies' => $userSocietyRepository->findAll(),'user' => $user]);
-    }
-
-    /**
-     * @Route("/new", name="new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user = $this->getUser();
-        $userSociety = new UserSociety();
-        $form = $this->createForm(UserSocietyType::class, $userSociety);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userSociety);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('back_user_society_index');
-        }
-
-        return $this->render('Back/user_society/new.html.twig', [
-            'user_society' => $userSociety,
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('Back/user_society/index.html.twig', ['user_societies' => $userSocietyRepository->findAll(), 'user' => $user]);
     }
 
     /**
@@ -82,19 +56,5 @@ class UserSocietyController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, UserSociety $userSociety): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $userSociety->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($userSociety);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('back_user_society_index');
     }
 }
