@@ -13,8 +13,7 @@ class UserProfilePictureType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('imageFile', VichFileType::class)
-        ;
+            ->add('imageFile', VichFileType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

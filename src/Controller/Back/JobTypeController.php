@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/job/type", name="back_job_type_")
+ * @Route("/jobType", name="back_job_type_")
  */
 class JobTypeController extends AbstractController
 {
@@ -20,7 +20,9 @@ class JobTypeController extends AbstractController
      */
     public function index(JobTypeRepository $jobTypeRepository): Response
     {
-        return $this->render('Back/job_type/index.html.twig', ['job_types' => $jobTypeRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/job_type/index.html.twig', ['job_types' => $jobTypeRepository->findAll(),'user' => $user]);
     }
 
     /**
@@ -28,6 +30,8 @@ class JobTypeController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $jobType = new JobType();
         $form = $this->createForm(JobTypeType::class, $jobType);
         $form->handleRequest($request);
@@ -42,6 +46,7 @@ class JobTypeController extends AbstractController
 
         return $this->render('Back/job_type/new.html.twig', [
             'job_type' => $jobType,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +56,9 @@ class JobTypeController extends AbstractController
      */
     public function show(JobType $jobType): Response
     {
-        return $this->render('Back/job_type/show.html.twig', ['job_type' => $jobType]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/job_type/show.html.twig', ['job_type' => $jobType,'user' => $user]);
     }
 
     /**
@@ -59,6 +66,8 @@ class JobTypeController extends AbstractController
      */
     public function edit(Request $request, JobType $jobType): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(JobTypeType::class, $jobType);
         $form->handleRequest($request);
 
@@ -70,6 +79,7 @@ class JobTypeController extends AbstractController
 
         return $this->render('Back/job_type/edit.html.twig', [
             'job_type' => $jobType,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }

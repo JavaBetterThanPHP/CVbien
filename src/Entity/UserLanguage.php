@@ -11,8 +11,9 @@ class UserLanguage
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
 
@@ -27,11 +28,11 @@ class UserLanguage
     private $user;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="smallint", length=1, nullable=true)
      */
     private $level;
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }

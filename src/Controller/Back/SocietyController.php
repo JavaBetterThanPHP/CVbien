@@ -20,7 +20,9 @@ class SocietyController extends AbstractController
      */
     public function index(SocietyRepository $societyRepository): Response
     {
-        return $this->render('Back/society/index.html.twig', ['societies' => $societyRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/society/index.html.twig', ['societies' => $societyRepository->findAll(),'user' => $user]);
     }
 
     /**
@@ -28,6 +30,8 @@ class SocietyController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $society = new Society();
         $form = $this->createForm(SocietyType::class, $society);
         $form->handleRequest($request);
@@ -42,6 +46,7 @@ class SocietyController extends AbstractController
 
         return $this->render('Back/society/new.html.twig', [
             'society' => $society,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +56,9 @@ class SocietyController extends AbstractController
      */
     public function show(Society $society): Response
     {
-        return $this->render('Back/society/show.html.twig', ['society' => $society]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/society/show.html.twig', ['society' => $society,'user' => $user]);
     }
 
     /**
@@ -59,6 +66,8 @@ class SocietyController extends AbstractController
      */
     public function edit(Request $request, Society $society): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(SocietyType::class, $society);
         $form->handleRequest($request);
 
@@ -70,6 +79,7 @@ class SocietyController extends AbstractController
 
         return $this->render('Back/society/edit.html.twig', [
             'society' => $society,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }

@@ -16,7 +16,8 @@ class LinkType extends AbstractType
         $builder
             ->add('website', TextType::class)
             ->add('url', UrlType::class)
-        ;
+            ->add('name', TextType::class)
+            ->add('imageUrl', TextType::class);
     }
 
     public function configureOptions(OptionsResolver $resolver)

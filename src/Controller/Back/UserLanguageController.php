@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user/language", name="back_user_language_")
+ * @Route("/userLanguage", name="back_user_language_")
  */
 class UserLanguageController extends AbstractController
 {
@@ -20,30 +20,9 @@ class UserLanguageController extends AbstractController
      */
     public function index(UserLanguageRepository $userLanguageRepository): Response
     {
-        return $this->render('Back/user_language/index.html.twig', ['user_languages' => $userLanguageRepository->findAll()]);
-    }
-
-    /**
-     * @Route("/new", name="new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $userLanguage = new UserLanguage();
-        $form = $this->createForm(UserLanguageType::class, $userLanguage);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userLanguage);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('back_user_language_index');
-        }
-
-        return $this->render('Back/user_language/new.html.twig', [
-            'user_language' => $userLanguage,
-            'form' => $form->createView(),
-        ]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user_language/index.html.twig', ['user_languages' => $userLanguageRepository->findAll(), 'user' => $user]);
     }
 
     /**
@@ -51,7 +30,9 @@ class UserLanguageController extends AbstractController
      */
     public function show(UserLanguage $userLanguage): Response
     {
-        return $this->render('Back/user_language/show.html.twig', ['user_language' => $userLanguage]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user_language/show.html.twig', ['user_language' => $userLanguage, 'user' => $user]);
     }
 
     /**
@@ -59,6 +40,8 @@ class UserLanguageController extends AbstractController
      */
     public function edit(Request $request, UserLanguage $userLanguage): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(UserLanguageType::class, $userLanguage);
         $form->handleRequest($request);
 
@@ -70,21 +53,8 @@ class UserLanguageController extends AbstractController
 
         return $this->render('Back/user_language/edit.html.twig', [
             'user_language' => $userLanguage,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, UserLanguage $userLanguage): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $userLanguage->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($userLanguage);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('back_user_language_index');
     }
 }

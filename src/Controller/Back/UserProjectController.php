@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user/project", name="back_user_project_")
+ * @Route("/userProject", name="back_user_project_")
  */
 class UserProjectController extends AbstractController
 {
@@ -20,30 +20,9 @@ class UserProjectController extends AbstractController
      */
     public function index(UserProjectRepository $userProjectRepository): Response
     {
-        return $this->render('Back/user_project/index.html.twig', ['user_projects' => $userProjectRepository->findAll()]);
-    }
-
-    /**
-     * @Route("/new", name="new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $userProject = new UserProject();
-        $form = $this->createForm(UserProjectType::class, $userProject);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userProject);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('back_user_project_index');
-        }
-
-        return $this->render('Back/user_project/new.html.twig', [
-            'user_project' => $userProject,
-            'form' => $form->createView(),
-        ]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user_project/index.html.twig', ['user_projects' => $userProjectRepository->findAll(), 'user' => $user]);
     }
 
     /**
@@ -51,7 +30,9 @@ class UserProjectController extends AbstractController
      */
     public function show(UserProject $userProject): Response
     {
-        return $this->render('Back/user_project/show.html.twig', ['user_project' => $userProject]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user_project/show.html.twig', ['user_project' => $userProject, 'user' => $user]);
     }
 
     /**
@@ -59,6 +40,8 @@ class UserProjectController extends AbstractController
      */
     public function edit(Request $request, UserProject $userProject): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(UserProjectType::class, $userProject);
         $form->handleRequest($request);
 
@@ -70,21 +53,8 @@ class UserProjectController extends AbstractController
 
         return $this->render('Back/user_project/edit.html.twig', [
             'user_project' => $userProject,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, UserProject $userProject): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $userProject->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($userProject);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('back_user_project_index');
     }
 }

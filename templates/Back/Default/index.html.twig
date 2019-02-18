@@ -1,5 +1,150 @@
 {% extends 'back_base.html.twig' %}
 
 {% block content %}
-    Bienvenue dans le back office : templates/Back/Default/index.html.twig
+    <div class="card text-center">
+        <h6 class="card-header">Informations utilisateurs</h6>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">User</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-user fa-2x"></i>
+                            <a href="{{ path('back_user_index') }}" class="btn btn-outline-primary">Go to index</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">UserDiploma</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-graduation-cap fa-2x"></i>
+                            <a href="{{ path('back_user_diploma_index') }}" class="btn btn-outline-primary">Go to
+                                index</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">UserLanguage</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-language fa-2x"></i>
+                            <a href="{{ path('back_user_language_index') }}" class="btn btn-outline-primary">Go to
+                                index</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 style="font-size:15px;" class="card-title">UserProgLanguage</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-greater-than fa-2x"></i>
+                            <a href="{{ path('back_user_prog_language_index') }}" class="btn btn-outline-primary">Go to
+                                index</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">UserProject</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-project-diagram fa-2x"></i>
+                            <a href="{{ path('back_user_project_index') }}" class="btn btn-outline-primary">Go to
+                                index</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">UserSociety</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-building fa-2x"></i>
+                            <a href="{{ path('back_user_society_index') }}" class="btn btn-outline-primary">Go to
+                                index</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">LinkUser</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-link fa-2x"></i>
+                            <a href="{{ path('back_link_index') }}" class="btn btn-outline-primary">Go to index</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card text-center">
+        <h6 class="card-header">Référentiels</h6>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Country</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-globe-europe fa-2x"></i>
+                            <a href="{{ path('back_country_index') }}" class="btn btn-outline-primary">Go to index</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Diploma</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-user-graduate fa-2x"></i>
+                            <a href="{{ path('back_diploma_index') }}" class="btn btn-outline-primary">Go to index</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">JobType</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-user-tie fa-2x"></i>
+                            <a href="{{ path('back_job_type_index') }}" class="btn btn-outline-primary">Go to index</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Language</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-users fa-2x"></i>
+                            <a href="{{ path('back_language_index') }}" class="btn btn-outline-primary">Go to index</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">ProgLanguage</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-tasks fa-2x"></i>
+                            <a href="{{ path('back_prog_language_index') }}" class="btn btn-outline-primary">Go to
+                                index</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2 mt-2 mb-2">
+                    <div class="card">
+                        <div class="card-body">
+                            <h6 class="card-title">Society</h6>
+                            <i style="padding-bottom: 10px" class="fas fa-city fa-2x"></i>
+                            <a href="{{ path('back_society_index') }}" class="btn btn-outline-primary">Go to index</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="card text-center">
+        <h6 class="card-header">Autres</h6>
+        <div class="card-body">
+            <div class="row">
+            </div>
+        </div>
+    </div>
 {% endblock %}

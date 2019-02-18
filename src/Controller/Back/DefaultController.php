@@ -15,6 +15,8 @@ class DefaultController extends AbstractController
      */
     public function index()
     {
-        return $this->render('Back/Default/index.html.twig');
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/Default/index.html.twig',['user' => $user]);
     }
 }

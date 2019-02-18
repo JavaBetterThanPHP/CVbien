@@ -13,8 +13,9 @@ class Diploma
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
 
@@ -43,12 +44,17 @@ class Diploma
      */
     private $userDiplomas;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $school;
+
     public function __construct()
     {
         $this->userDiplomas = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -128,6 +134,18 @@ class Diploma
                 $userDiploma->setDiploma(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSchool(): ?string
+    {
+        return $this->school;
+    }
+
+    public function setSchool(?string $school): self
+    {
+        $this->school = $school;
 
         return $this;
     }

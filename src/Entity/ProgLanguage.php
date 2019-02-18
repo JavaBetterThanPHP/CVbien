@@ -13,8 +13,9 @@ class ProgLanguage
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
 
@@ -34,19 +35,28 @@ class ProgLanguage
     private $userProgLanguages;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserProjectProgLanguage", mappedBy="progLanguage")
+     * @ORM\ManyToMany(targetEntity="App\Entity\UserProject", mappedBy="progLanguages")
      */
-    private $userProjectProgLanguages;
+    private $userProjects;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProgLanguage", inversedBy="childProgLanguages")
+     */
+    private $parentProgLanguage;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\ProgLanguage", mappedBy="parentProgLanguage")
+     */
+    private $childProgLanguages;
 
     public function __construct()
     {
-        $this->users = new ArrayCollection();
         $this->userProjects = new ArrayCollection();
         $this->userProgLanguages = new ArrayCollection();
-        $this->userProjectProgLanguages = new ArrayCollection();
+        $this->childProgLanguages = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -59,7 +69,6 @@ class ProgLanguage
     public function setName(string $name): self
     {
         $this->name = $name;
-
         return $this;
     }
 
@@ -71,35 +80,6 @@ class ProgLanguage
     public function setType(string $type): self
     {
         $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-            $user->addProgLanguage($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-            $user->removeProgLanguage($this);
-        }
-
         return $this;
     }
 
@@ -117,7 +97,6 @@ class ProgLanguage
             $this->userProjects[] = $userProject;
             $userProject->addProgLanguage($this);
         }
-
         return $this;
     }
 
@@ -127,7 +106,6 @@ class ProgLanguage
             $this->userProjects->removeElement($userProject);
             $userProject->removeProgLanguage($this);
         }
-
         return $this;
     }
 
@@ -145,7 +123,6 @@ class ProgLanguage
             $this->userProgLanguages[] = $userProgLanguage;
             $userProgLanguage->setProgLanguage($this);
         }
-
         return $this;
     }
 
@@ -158,35 +135,46 @@ class ProgLanguage
                 $userProgLanguage->setProgLanguage(null);
             }
         }
+        return $this;
+    }
+
+    public function getParentProgLanguage(): ?self
+    {
+        return $this->parentProgLanguage;
+    }
+
+    public function setParentProgLanguage(?self $parentProgLanguage): self
+    {
+        $this->parentProgLanguage = $parentProgLanguage;
 
         return $this;
     }
 
     /**
-     * @return Collection|UserProjectProgLanguage[]
+     * @return Collection|self[]
      */
-    public function getUserProjectProgLanguages(): Collection
+    public function getChildProgLanguages(): Collection
     {
-        return $this->userProjectProgLanguages;
+        return $this->childProgLanguages;
     }
 
-    public function addUserProjectProgLanguage(UserProjectProgLanguage $userProjectProgLanguage): self
+    public function addChildProgLanguage(self $childProgLanguage): self
     {
-        if (!$this->userProjectProgLanguages->contains($userProjectProgLanguage)) {
-            $this->userProjectProgLanguages[] = $userProjectProgLanguage;
-            $userProjectProgLanguage->setProgLanguage($this);
+        if (!$this->childProgLanguages->contains($childProgLanguage)) {
+            $this->childProgLanguages[] = $childProgLanguage;
+            $childProgLanguage->setParentProgLanguage($this);
         }
 
         return $this;
     }
 
-    public function removeUserProjectProgLanguage(UserProjectProgLanguage $userProjectProgLanguage): self
+    public function removeChildProgLanguage(self $childProgLanguage): self
     {
-        if ($this->userProjectProgLanguages->contains($userProjectProgLanguage)) {
-            $this->userProjectProgLanguages->removeElement($userProjectProgLanguage);
+        if ($this->childProgLanguages->contains($childProgLanguage)) {
+            $this->childProgLanguages->removeElement($childProgLanguage);
             // set the owning side to null (unless already changed)
-            if ($userProjectProgLanguage->getProgLanguage() === $this) {
-                $userProjectProgLanguage->setProgLanguage(null);
+            if ($childProgLanguage->getParentProgLanguage() === $this) {
+                $childProgLanguage->setParentProgLanguage(null);
             }
         }
 

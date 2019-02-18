@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user/society", name="back_user_society_")
+ * @Route("/userSociety", name="back_user_society_")
  */
 class UserSocietyController extends AbstractController
 {
@@ -20,30 +20,9 @@ class UserSocietyController extends AbstractController
      */
     public function index(UserSocietyRepository $userSocietyRepository): Response
     {
-        return $this->render('Back/user_society/index.html.twig', ['user_societies' => $userSocietyRepository->findAll()]);
-    }
-
-    /**
-     * @Route("/new", name="new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $userSociety = new UserSociety();
-        $form = $this->createForm(UserSocietyType::class, $userSociety);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userSociety);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('back_user_society_index');
-        }
-
-        return $this->render('Back/user_society/new.html.twig', [
-            'user_society' => $userSociety,
-            'form' => $form->createView(),
-        ]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user_society/index.html.twig', ['user_societies' => $userSocietyRepository->findAll(), 'user' => $user]);
     }
 
     /**
@@ -51,6 +30,8 @@ class UserSocietyController extends AbstractController
      */
     public function show(UserSociety $userSociety): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         return $this->render('Back/user_society/show.html.twig', ['user_society' => $userSociety]);
     }
 
@@ -59,6 +40,8 @@ class UserSocietyController extends AbstractController
      */
     public function edit(Request $request, UserSociety $userSociety): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(UserSocietyType::class, $userSociety);
         $form->handleRequest($request);
 
@@ -70,21 +53,8 @@ class UserSocietyController extends AbstractController
 
         return $this->render('Back/user_society/edit.html.twig', [
             'user_society' => $userSociety,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, UserSociety $userSociety): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $userSociety->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($userSociety);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('back_user_society_index');
     }
 }

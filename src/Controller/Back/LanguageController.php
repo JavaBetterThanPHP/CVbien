@@ -20,7 +20,9 @@ class LanguageController extends AbstractController
      */
     public function index(LanguageRepository $languageRepository): Response
     {
-        return $this->render('Back/language/index.html.twig', ['languages' => $languageRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/language/index.html.twig', ['languages' => $languageRepository->findAll(),'user' => $user]);
     }
 
     /**
@@ -28,6 +30,8 @@ class LanguageController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $language = new Language();
         $form = $this->createForm(LanguageType::class, $language);
         $form->handleRequest($request);
@@ -42,6 +46,7 @@ class LanguageController extends AbstractController
 
         return $this->render('Back/language/new.html.twig', [
             'language' => $language,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +56,9 @@ class LanguageController extends AbstractController
      */
     public function show(Language $language): Response
     {
-        return $this->render('Back/language/show.html.twig', ['language' => $language]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/language/show.html.twig', ['language' => $language,'user' => $user]);
     }
 
     /**
@@ -59,6 +66,8 @@ class LanguageController extends AbstractController
      */
     public function edit(Request $request, Language $language): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(LanguageType::class, $language);
         $form->handleRequest($request);
 
@@ -70,6 +79,7 @@ class LanguageController extends AbstractController
 
         return $this->render('Back/language/edit.html.twig', [
             'language' => $language,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }

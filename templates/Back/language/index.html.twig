@@ -6,7 +6,7 @@
     <h1>Language index</h1>
 
     <table class="table">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th>Id</th>
                 <th>Name</th>
@@ -19,8 +19,8 @@
                 <td>{{ language.id }}</td>
                 <td>{{ language.name }}</td>
                 <td>
-                    <a href="{{ path('back_language_show', {'id': language.id}) }}">show</a>
-                    <a href="{{ path('back_language_edit', {'id': language.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('back_language_show', {'id': language.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('back_language_edit', {'id': language.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('back_language_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('back_language_new') }}">Create new</a>
 {% endblock %}

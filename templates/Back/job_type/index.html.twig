@@ -6,7 +6,7 @@
     <h1>JobType index</h1>
 
     <table class="table">
-        <thead>
+        <thead class="thead-dark">
             <tr>
                 <th>Id</th>
                 <th>Label</th>
@@ -19,8 +19,8 @@
                 <td>{{ job_type.id }}</td>
                 <td>{{ job_type.label }}</td>
                 <td>
-                    <a href="{{ path('back_job_type_show', {'id': job_type.id}) }}">show</a>
-                    <a href="{{ path('back_job_type_edit', {'id': job_type.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('back_job_type_show', {'id': job_type.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('back_job_type_edit', {'id': job_type.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -31,5 +31,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('back_job_type_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('back_job_type_new') }}">Create new</a>
 {% endblock %}

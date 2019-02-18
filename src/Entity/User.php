@@ -5,22 +5,27 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
-use Vich\UploaderBundle\Mapping\Annotation as Vich;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @ORM\Table(name="user_account")
+ * @UniqueEntity("email", message="Il existe déjà un compte avec cette email")
+ * @UniqueEntity("spaceName", message="Ce nom d'espace est déjà attribué")
  * @Vich\Uploadable
  */
 class User implements UserInterface, \Serializable
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
 
@@ -28,6 +33,17 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
+
+    /**
+     * @ORM\Column(type="string", length=255, unique=true, nullable=true)
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 20,
+     *      minMessage = "Your space name must be at least {{ limit }} characters long",
+     *      maxMessage = "Your space name cannot be longer than {{ limit }} characters"
+     * )
+     */
+    private $spaceName;
 
     /**
      * @ORM\Column(type="json")
@@ -41,7 +57,7 @@ class User implements UserInterface, \Serializable
     private $password;
 
     /**
-     * @ORM\Column(type="boolean", nullable=true)
+     * @ORM\Column(type="boolean")
      */
     private $isActive;
 
@@ -91,9 +107,49 @@ class User implements UserInterface, \Serializable
     private $country;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\UserStatus", inversedBy="users")
+     * @ORM\Column(type="boolean")
      */
-    private $userStatus;
+    private $isSearchable;
+
+    /**
+     * @ORM\Column(type="string", length=255, options={"default":"default.png"})
+     * @var string
+     */
+    private $profilePicture = "default.png";
+
+    /**
+     * @Vich\UploadableField(mapping="profilePictures", fileNameProperty="profilePicture")
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
+     * @ORM\Column(type="string", length=255, options={"default" : "default.png"})
+     * @var string
+     */
+    private $bannerPicture = "default.png";
+
+    /**
+     * @Vich\UploadableField(mapping="bannerPictures", fileNameProperty="bannerPicture")
+     * @var File
+     */
+    private $bannerImageFile;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $status;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $type;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserProject", mappedBy="user")
@@ -116,22 +172,14 @@ class User implements UserInterface, \Serializable
     private $userProgLanguages;
 
     /**
-     * @ORM\Column(type="string", length=255, options={"default" : "default.png"})
-     * @var string
+     * @ORM\OneToMany(targetEntity="App\Entity\Link", mappedBy="user")
      */
-    private $profilePicture;
+    private $links;
 
     /**
-     * @Vich\UploadableField(mapping="profilePictures", fileNameProperty="profilePicture")
-     * @var File
+     * @ORM\OneToMany(targetEntity="App\Entity\UserSociety", mappedBy="user")
      */
-    private $imageFile;
-
-    /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTime
-     */
-    private $updatedAt;
+    private $userSocieties;
 
     public function setImageFile(File $image = null)
     {
@@ -160,18 +208,6 @@ class User implements UserInterface, \Serializable
     {
         return $this->profilePicture;
     }
-
-    /**
-     * @ORM\Column(type="string", length=255, options={"default" : "default.png"})
-     * @var string
-     */
-    private $bannerPicture;
-
-    /**
-     * @Vich\UploadableField(mapping="bannerPictures", fileNameProperty="bannerPicture")
-     * @var File
-     */
-    private $bannerImageFile;
 
     public function setBannerImageFile(File $image = null)
     {
@@ -202,14 +238,18 @@ class User implements UserInterface, \Serializable
 
     public function __construct()
     {
+        $this->setIsActive(true);
+        $this->setIsSearchable(true);
         $this->progLanguages = new ArrayCollection();
         $this->userProjects = new ArrayCollection();
         $this->userDiplomas = new ArrayCollection();
         $this->userLanguages = new ArrayCollection();
         $this->userProgLanguages = new ArrayCollection();
+        $this->links = new ArrayCollection();
+        $this->userSocieties = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -233,7 +273,7 @@ class User implements UserInterface, \Serializable
      */
     public function getUsername(): ?string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -260,7 +300,7 @@ class User implements UserInterface, \Serializable
      */
     public function getPassword(): string
     {
-        return (string) $this->password;
+        return (string)$this->password;
     }
 
     public function setPassword(string $password): self
@@ -403,18 +443,6 @@ class User implements UserInterface, \Serializable
     public function setCountry(?Country $country): self
     {
         $this->country = $country;
-
-        return $this;
-    }
-
-    public function getUserStatus(): ?UserStatus
-    {
-        return $this->userStatus;
-    }
-
-    public function setUserStatus(?UserStatus $userStatus): self
-    {
-        $this->userStatus = $userStatus;
 
         return $this;
     }
@@ -591,6 +619,117 @@ class User implements UserInterface, \Serializable
             $this->bannerPicture,
             ) = unserialize($serialized);
     }
+
+    /**
+     * @return Collection|Link[]
+     */
+    public function getLinks(): Collection
+    {
+        return $this->links;
+    }
+
+    public function addLink(Link $link): self
+    {
+        if (!$this->links->contains($link)) {
+            $this->links[] = $link;
+            $link->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeLink(Link $link): self
+    {
+        if ($this->links->contains($link)) {
+            $this->links->removeElement($link);
+            // set the owning side to null (unless already changed)
+            if ($link->getUser() === $this) {
+                $link->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
+    public function getIsSearchable(): ?bool
+    {
+        return $this->isSearchable;
+    }
+
+    public function setIsSearchable(bool $isSearchable): self
+    {
+        $this->isSearchable = $isSearchable;
+
+        return $this;
+    }
+
+    public function getSpaceName(): ?string
+    {
+        return $this->spaceName;
+    }
+
+    public function setSpaceName(string $spaceName): self
+    {
+        $this->spaceName = $spaceName;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(?string $status): self
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    public function getType(): ?string
+    {
+        return $this->type;
+    }
+
+    public function setType(?string $type): self
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|UserSociety[]
+     */
+    public function getUserSocieties(): Collection
+    {
+        return $this->userSocieties;
+    }
+
+    public function addUserSociety(UserSociety $userSociety): self
+    {
+        if (!$this->userSocieties->contains($userSociety)) {
+            $this->userSocieties[] = $userSociety;
+            $userSociety->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUserSociety(UserSociety $userSociety): self
+    {
+        if ($this->userSocieties->contains($userSociety)) {
+            $this->userSocieties->removeElement($userSociety);
+            // set the owning side to null (unless already changed)
+            if ($userSociety->getUser() === $this) {
+                $userSociety->setUser(null);
+            }
+        }
+
+        return $this;
+    }
+
     //TODO searialize all user properties just to be sure
 
 }

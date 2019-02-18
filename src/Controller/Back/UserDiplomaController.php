@@ -11,7 +11,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/user/diploma", name="back_user_diploma_")
+ * @Route("/userDiploma", name="back_user_diploma_")
  */
 class UserDiplomaController extends AbstractController
 {
@@ -20,38 +20,20 @@ class UserDiplomaController extends AbstractController
      */
     public function index(UserDiplomaRepository $userDiplomaRepository): Response
     {
-        return $this->render('Back/user_diploma/index.html.twig', ['user_diplomas' => $userDiplomaRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user_diploma/index.html.twig', ['user_diplomas' => $userDiplomaRepository->findAll(), 'user' => $user]);
     }
 
-    /**
-     * @Route("/new", name="new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $userDiploma = new UserDiploma();
-        $form = $this->createForm(UserDiplomaType::class, $userDiploma);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userDiploma);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('back_user_diploma_index');
-        }
-
-        return $this->render('Back/user_diploma/new.html.twig', [
-            'user_diploma' => $userDiploma,
-            'form' => $form->createView(),
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="show", methods={"GET"})
      */
     public function show(UserDiploma $userDiploma): Response
     {
-        return $this->render('Back/user_diploma/show.html.twig', ['user_diploma' => $userDiploma]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/user_diploma/show.html.twig', ['user_diploma' => $userDiploma, 'user' => $user]);
     }
 
     /**
@@ -59,6 +41,8 @@ class UserDiplomaController extends AbstractController
      */
     public function edit(Request $request, UserDiploma $userDiploma): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(UserDiplomaType::class, $userDiploma);
         $form->handleRequest($request);
 
@@ -70,21 +54,8 @@ class UserDiplomaController extends AbstractController
 
         return $this->render('Back/user_diploma/edit.html.twig', [
             'user_diploma' => $userDiploma,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, UserDiploma $userDiploma): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $userDiploma->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($userDiploma);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('back_user_diploma_index');
     }
 }

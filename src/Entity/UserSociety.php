@@ -13,8 +13,9 @@ class UserSociety
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="uuid", unique=true)
+     * @ORM\GeneratedValue(strategy="CUSTOM")
+     * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
 
@@ -44,7 +45,12 @@ class UserSociety
     private $jobType;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\UserProject", mappedBy="society")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="userSocieties")
+     */
+    private $user;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\UserProject", mappedBy="userSociety")
      */
     private $userProjects;
 
@@ -53,7 +59,7 @@ class UserSociety
         $this->userProjects = new ArrayCollection();
     }
 
-    public function getId(): ?int
+    public function getId()
     {
         return $this->id;
     }
@@ -66,6 +72,18 @@ class UserSociety
     public function setSociety(?Society $society): self
     {
         $this->society = $society;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(?User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
@@ -130,7 +148,7 @@ class UserSociety
     {
         if (!$this->userProjects->contains($userProject)) {
             $this->userProjects[] = $userProject;
-            $userProject->setSociety($this);
+            $userProject->setUserSociety($this);
         }
 
         return $this;
@@ -141,8 +159,8 @@ class UserSociety
         if ($this->userProjects->contains($userProject)) {
             $this->userProjects->removeElement($userProject);
             // set the owning side to null (unless already changed)
-            if ($userProject->getSociety() === $this) {
-                $userProject->setSociety(null);
+            if ($userProject->getUserSociety() === $this) {
+                $userProject->setUserSociety(null);
             }
         }
 

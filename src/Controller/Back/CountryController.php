@@ -20,7 +20,9 @@ class CountryController extends AbstractController
      */
     public function index(CountryRepository $countryRepository): Response
     {
-        return $this->render('Back/country/index.html.twig', ['countries' => $countryRepository->findAll()]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/country/index.html.twig', ['countries' => $countryRepository->findAll(), 'user' => $user]);
     }
 
     /**
@@ -28,6 +30,8 @@ class CountryController extends AbstractController
      */
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $country = new Country();
         $form = $this->createForm(CountryType::class, $country);
         $form->handleRequest($request);
@@ -42,6 +46,7 @@ class CountryController extends AbstractController
 
         return $this->render('Back/country/new.html.twig', [
             'country' => $country,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -51,7 +56,9 @@ class CountryController extends AbstractController
      */
     public function show(Country $country): Response
     {
-        return $this->render('Back/country/show.html.twig', ['country' => $country]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/country/show.html.twig', ['country' => $country, 'user' => $user]);
     }
 
     /**
@@ -59,6 +66,8 @@ class CountryController extends AbstractController
      */
     public function edit(Request $request, Country $country): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(CountryType::class, $country);
         $form->handleRequest($request);
 
@@ -70,6 +79,7 @@ class CountryController extends AbstractController
 
         return $this->render('Back/country/edit.html.twig', [
             'country' => $country,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
     }
@@ -79,6 +89,7 @@ class CountryController extends AbstractController
      */
     public function delete(Request $request, Country $country): Response
     {
+
         if ($this->isCsrfTokenValid('delete' . $country->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($country);

@@ -20,30 +20,9 @@ class LinkController extends AbstractController
      */
     public function index(LinkRepository $linkRepository): Response
     {
-        return $this->render('Back/link/index.html.twig', ['links' => $linkRepository->findAll()]);
-    }
-
-    /**
-     * @Route("/new", name="new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $link = new Link();
-        $form = $this->createForm(LinkType::class, $link);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($link);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('back_link_index');
-        }
-
-        return $this->render('Back/link/new.html.twig', [
-            'link' => $link,
-            'form' => $form->createView(),
-        ]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/link/index.html.twig', ['links' => $linkRepository->findAll(),'user' => $user]);
     }
 
     /**
@@ -51,7 +30,9 @@ class LinkController extends AbstractController
      */
     public function show(Link $link): Response
     {
-        return $this->render('Back/link/show.html.twig', ['link' => $link]);
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
+        return $this->render('Back/link/show.html.twig', ['link' => $link,'user' => $user]);
     }
 
     /**
@@ -59,6 +40,8 @@ class LinkController extends AbstractController
      */
     public function edit(Request $request, Link $link): Response
     {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $user = $this->getUser();
         $form = $this->createForm(LinkType::class, $link);
         $form->handleRequest($request);
 
@@ -70,21 +53,8 @@ class LinkController extends AbstractController
 
         return $this->render('Back/link/edit.html.twig', [
             'link' => $link,
+            'user' => $user,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, Link $link): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $link->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($link);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('back_link_index');
     }
 }

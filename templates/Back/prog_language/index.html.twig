@@ -6,7 +6,7 @@
     <h1>ProgLanguage index</h1>
 
     <table class="table">
-        <thead>
+        <thead class="thead-dark">
         <tr>
             <th>Id</th>
             <th>Name</th>
@@ -21,8 +21,8 @@
                 <td>{{ prog_language.name }}</td>
                 <td>{{ prog_language.type }}</td>
                 <td>
-                    <a href="{{ path('back_prog_language_show', {'id': prog_language.id}) }}">show</a>
-                    <a href="{{ path('back_prog_language_edit', {'id': prog_language.id}) }}">edit</a>
+                    <a class="btn btn-primary" href="{{ path('back_prog_language_show', {'id': prog_language.id}) }}">show</a>
+                    <a class="btn btn-primary" href="{{ path('back_prog_language_edit', {'id': prog_language.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -33,5 +33,5 @@
         </tbody>
     </table>
 
-    <a href="{{ path('back_prog_language_new') }}">Create new</a>
+    <a class="btn btn-success" href="{{ path('back_prog_language_new') }}">Create new</a>
 {% endblock %}
