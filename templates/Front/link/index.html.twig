@@ -7,40 +7,45 @@
 {% endblock %}
 
 {% block content %}
-    <div class="container mt-5">
-        <h1>Liste des comptes</h1>
+    <div class="container-fluid ">
+        <div class="row mt-4 mb-4">
+            {{ include('Front/user/_user_info_menu.html.twig') }}
+            <div class="col-9">
+                <h1>Liste des comptes</h1>
 
-        <table class="table display mt-5 mb-5">
-            <thead>
-            <tr>
-                <th>Website</th>
-                <th>Url</th>
-                <th>Name</th>
-                <th>Username</th>
-                <th colspan="2">Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for link in links %}
-                <tr>
-                    <td>{{ link.website }}</td>
-                    <td>{{ link.url }}</td>
-                    <td>{{ link.name }}</td>
-                    <td>{{ link.username }}</td>
-                    <td>
-                        <button class="btn-sm btn-primary"><a class="btn-primary"
-                                                              href="{{ path('front_link_edit', {'id': link.id}) }}">Editer</a>
-                        </button>
-                    </td>
-                    <td>{{ include('Front/link/_delete_form.html.twig') }}</td>
-                </tr>
-            {% else %}
-                <tr>
-                    <td colspan="5">no records found</td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-        <a class="btn btn-success" href="{{ path('front_link_new') }}">Ajouter</a>
+                <table class="table display mt-5 mb-5">
+                    <thead>
+                    <tr>
+                        <th>Website</th>
+                        <th>Url</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th colspan="2">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for link in links %}
+                        <tr>
+                            <td>{{ link.website }}</td>
+                            <td>{{ link.url }}</td>
+                            <td>{{ link.name }}</td>
+                            <td>{{ link.username }}</td>
+                            <td>
+                                <button class="btn-sm btn-primary"><a class="btn-primary"
+                                                                      href="{{ path('front_link_edit', {'id': link.id}) }}">Editer</a>
+                                </button>
+                            </td>
+                            <td>{{ include('Front/link/_delete_form.html.twig') }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">no records found</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+                <a class="btn btn-success" href="{{ path('front_link_new') }}">Ajouter</a>
+            </div>
+        </div>
     </div>
 {% endblock %}
