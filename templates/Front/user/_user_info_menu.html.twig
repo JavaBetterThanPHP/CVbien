@@ -1,13 +1,9 @@
 <div class="col-3">
-        <h6 class="dropdown-header">Menu</h6>
-        <a class="dropdown-item" href="{{ path('front_user_updateInfo') }}">Informations Personnelles</a>
-        <a class="dropdown-item" href="{{ path('front_user_updatePro') }}">Informations Professionnelles</a>
-        <a class="dropdown-item" href="{{ path('front_user_updateExp') }}">Expériences</a>
-        <a class="dropdown-item" href="{{ path('front_user_updateDiploma') }}">Diplômes</a>
-    {#<div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link" id="v-pills-perso-tab" data-toggle="pill" href="{{ path('front_user_updateInfo') }}" role="tab" aria-controls="v-pills-perso" aria-selected="true">Informations Personnelles</a>
-        <a class="nav-link" id="v-pills-pro-tab" data-toggle="pill" href="{{ path('front_user_updatePerso') }}" role="tab" aria-controls="v-pills-pro" aria-selected="false">Informations Professionnelles</a>
-        <a class="nav-link" id="v-pills-exp-tab" data-toggle="pill" href="{{ path('front_user_updateExp') }}" role="tab" aria-controls="v-pills-exp" aria-selected="false">Expériences</a>
-        <a class="nav-link" id="v-pills-scholar-tab" data-toggle="pill" href="{{ path('front_user_updateDiploma') }}" role="tab" aria-controls="v-pills-scholar" aria-selected="false">Diplômes</a>
-    </div>#}
+    <h4 class="dropdown-header">Menu</h4>
+    <a class="dropdown-item" href="{{ path('front_user_reset_password') }}">Changer de mot de passe</a>
+    <a class="dropdown-item" href="{{ path('front_user_updateInfo') }}">Informations personnelles</a>
+    <a class="dropdown-item" href="{{ path('front_user_pro_update') }}">Informations professionnelles</a>
+    <a class="dropdown-item" href="{{ path('front_user_experience_update') }}">Mes expériences</a>
+    <a class="dropdown-item" href="{{ path('front_user_diploma_update') }}">Mes diplômes</a>
+    <a class="dropdown-item" href="{{ path('front_link_index') }}">Mes comptes</a>
 </div>

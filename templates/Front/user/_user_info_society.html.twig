@@ -1,5 +1,6 @@
 <div class="col-9">
-    <h1>Modifier mes expériences <a href="#" class="btn btn-default" type="button" data-toggle="modal" data-target="#userSocietyModal"><i class="fas fa-plus-circle fa-2x"></i></a></h1>
+    <h1>Modifier mes expériences <a href="#" class="btn btn-default" type="button" data-toggle="modal"
+                                    data-target="#userSocietyModal"><i class="fas fa-plus-circle fa-2x"></i></a></h1>
     <div class="container">
         <div class="row">
             {% for userSociety in user.userSocieties %}
@@ -8,13 +9,17 @@
                         <div class="card-header">
                             {{ userSociety.jobType.label }}
                             <div class="float-right">
-                                <form method="post" action="{{ path('front_user_expDelete', {'id': userSociety.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <form method="post"
+                                      action="{{ path('front_user_experience_delele', {'id': userSociety.id}) }}"
+                                      onsubmit="return confirm('Are you sure you want to delete this item?');">
                                     <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ userSociety.id) }}">
+                                    <input type="hidden" name="_token"
+                                           value="{{ csrf_token('delete' ~ userSociety.id) }}">
                                     <button class="btn btn-link float-right"><i class="far fa-trash-alt"></i></button>
                                 </form>
                             </div>
-                            <a href="#" class="btn btn-link float-right"><i class="fas fa-edit" data-toggle="modal" data-target="#editUserExpModal{{ userSociety.id }}"></i></a>
+                            <a href="#" class="btn btn-link float-right"><i class="fas fa-edit" data-toggle="modal"
+                                                                            data-target="#editUserExpModal{{ userSociety.id }}"></i></a>
                             <br>
                             {{ userSociety.society.name }}
                         </div>
@@ -26,11 +31,13 @@
                                 {% endif %}
                             </p>
                             <p class="card-text">
-                                Du {{ userSociety.firstDate | date("m/d/Y", "Europe/Paris") }} au {{ userSociety.lastDate | date("m/d/Y", "Europe/Paris") }}
+                                Du {{ userSociety.firstDate | date("m/d/Y", "Europe/Paris") }}
+                                au {{ userSociety.lastDate | date("m/d/Y", "Europe/Paris") }}
                             </p>
                         </div>
                     </div>
-                    <div id="editUserExpModal{{ userSociety.id }}" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+                    <div id="editUserExpModal{{ userSociety.id }}" class="modal fade bd-example-modal-lg" tabindex="-1"
+                         role="dialog"
                          aria-labelledby="myLargeModalLabel" aria-hidden="true">
                         <div class="modal-dialog modal-lg">
                             <div class="modal-content">
@@ -42,7 +49,7 @@
                                 </div>
                                 <div class="modal-body">
                                     {{ render(controller(
-                                        'App\\Controller\\Front\\UserController::userExpEdit',
+                                        'App\\Controller\\Front\\UserExperienceController::userExpEdit',
                                         { 'id': userSociety.id }
                                     )) }}
                                 </div>

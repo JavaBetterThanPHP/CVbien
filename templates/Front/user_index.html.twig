@@ -11,7 +11,7 @@
 
         {# Values #}
         <input id="updateProfilePictureLink" name="updateProfilePictureLink" type="hidden"
-               value=" ">
+               value="{{ path('front_user_updateProfilePicture') }}">
         <input id="updateBannerLink" name="updateBannerLink" type="hidden"
                value="{{ path('front_user_updateBanner') }}">
         <input id="userId" name="userId" type="hidden" value="{{ user.id }}">

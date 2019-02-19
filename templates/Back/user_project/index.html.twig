@@ -2,7 +2,7 @@
 
 {% block title %}UserProject index{% endblock %}
 
-{% block body %}
+{% block content %}
     <h1>UserProject index</h1>
 
     <table class="table">
@@ -23,10 +23,12 @@
                 <td>{{ user_project.urlProject }}</td>
                 <td>{{ user_project.urlWebsite }}</td>
                 <td>{{ user_project.user.email }}</td>
-                <td>{% if user_project.society.name is defined %}{{ user_project.society.name }} {% endif %}</td>
+                <td>{% if user_project.userSociety.society.name is defined %}{{ user_project.userSociety.society.name }} {% endif %}</td>
                 <td>
-                    <a class="btn btn-primary" href="{{ path('back_user_project_show', {'id': user_project.id}) }}">show</a>
-                    <a class="btn btn-primary" href="{{ path('back_user_project_edit', {'id': user_project.id}) }}">edit</a>
+                    <a class="btn btn-primary"
+                       href="{{ path('back_user_project_show', {'id': user_project.id}) }}">show</a>
+                    <a class="btn btn-primary"
+                       href="{{ path('back_user_project_edit', {'id': user_project.id}) }}">edit</a>
                 </td>
             </tr>
         {% else %}
@@ -36,6 +38,4 @@
         {% endfor %}
         </tbody>
     </table>
-
-    <a class="btn btn-success" href="{{ path('back_user_project_new') }}">Create new</a>
 {% endblock %}

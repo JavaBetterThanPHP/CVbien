@@ -31,14 +31,17 @@
                         Settings
                     </a>
                     <div class="dropdown-menu dropdown-menu-left">
-                        <a class="dropdown-item" href="{{ path('front_user_updateInfo') }}">Modifier mes informations</a>
-                        <a class="dropdown-item" href="{{ path('front_user_reset_password') }}">Modifier mon mot de passe</a>
-                        <a class="dropdown-item" href="#">Autre lien</a>
-                        <a class="dropdown-item" href="{{ path('front_link_index') }}">Relier ses comptes</a>
+                        <a class="dropdown-item" href="{{ path('front_user_reset_password') }}">Changer mot de passe</a>
+                        <a class="dropdown-item" href="{{ path('front_user_updateInfo') }}">Informations
+                            personnelles</a>
+                        <a class="dropdown-item" href="{{ path('front_user_pro_update') }}">Informations
+                            profesionnelles</a>
+                        <a class="dropdown-item" href="{{ path('front_user_experience_update') }}">Mes compétences</a>
+                        <a class="dropdown-item" href="{{ path('front_user_diploma_update') }}">Mes diplômes</a>
+                        <a class="dropdown-item" href="{{ path('front_link_index') }}">Mes comptes</a>
                     </div>
                 </li>
                 {# - #}
-
             </ul>
         </div>
     {% endif %}

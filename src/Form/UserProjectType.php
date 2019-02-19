@@ -2,16 +2,16 @@
 
 namespace App\Form;
 
+use App\Entity\ProgLanguage;
 use App\Entity\ProgTechnology;
 use App\Entity\Society;
-use App\Entity\UserProject;
 use App\Entity\User;
+use App\Entity\UserProject;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\UrlType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use App\Entity\ProgLanguage;
 
 class UserProjectType extends AbstractType
 {
@@ -20,13 +20,6 @@ class UserProjectType extends AbstractType
         $builder
             ->add('urlProject', UrlType::class)
             ->add('urlWebsite', UrlType::class)
-            ->add('user', EntityType::class, [
-                'label' => 'User',
-                'class' => User::class,
-                'choice_label' => 'email',
-                'multiple' => false,
-                'required' => true,
-            ])
             ->add('progLanguages', EntityType::class, [
                 'label' => 'Project Languages',
                 'class' => ProgLanguage::class,
@@ -47,8 +40,7 @@ class UserProjectType extends AbstractType
                 'choice_label' => 'name',
                 'multiple' => false,
                 'required' => false,
-            ])
-        ;
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

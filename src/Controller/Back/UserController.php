@@ -25,31 +25,6 @@ class UserController extends AbstractController
         return $this->render('Back/user/index.html.twig', ['users' => $userRepository->findAll(), 'user' => $user]);
     }
 
-    /**
-     * @Route("/new", name="new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user = $this->getUser();
-        $user_account = new User();
-        $form = $this->createForm(UserType::class, $user_account);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('back_user_index');
-        }
-
-        return $this->render('Back/user/new.html.twig', [
-            'user_account' => $user_account,
-            'user' => $user,
-            'form' => $form->createView()
-        ]);
-    }
 
     /**
      * @Route("/{id}", name="show", methods={"GET"})
@@ -83,19 +58,5 @@ class UserController extends AbstractController
             'user' => $userConnected,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, User $user): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($user);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('back_user_index');
     }
 }

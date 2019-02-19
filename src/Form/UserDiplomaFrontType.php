@@ -17,15 +17,14 @@ class UserDiplomaFrontType extends AbstractType
     {
         $builder
             ->add('dateOfGrant', BirthdayType::class)
-            ->add('mention',  TextType::class)
+            ->add('mention', TextType::class)
             ->add('diploma', EntityType::class, [
-            'label' => 'Diploma',
-            'class' => Diploma::class,
-            'choice_label' => 'title',
-            'multiple' => false,
-            'required' => false,
-            ])
-        ;
+                'label' => 'Diploma',
+                'class' => Diploma::class,
+                'choice_label' => 'title',
+                'multiple' => false,
+                'required' => false,
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver)

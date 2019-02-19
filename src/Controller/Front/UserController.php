@@ -1,7 +1,36 @@
+
+Skip to content
+
+    Pull requests
+    Issues
+    Marketplace
+    Explore
+
+    @powerfulsheron
+
+2
+0
+
+    0
+
+JavaBetterThanPHP/CVbien
+Code
+Issues 36
+Pull requests 1
+ZenHub
+Projects 4
+Wiki
+Insights
+Settings
+CVbien/src/Controller/Front/UserController.php
+574ea95 4 days ago
+@powerfulsheron powerfulsheron Merge remote-tracking branch 'origin/develop' into develop
+@powerfulsheron
+@max-abl
+@froger22
+384 lines (340 sloc) 14.6 KB
 <?php
-
 namespace App\Controller\Front;
-
 use App\Entity\UserDiploma;
 use App\Entity\UserLanguage;
 use App\Entity\UserProgLanguage;
@@ -19,7 +48,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-
 /**
  * @Route("/", name="front_user_")
  */
@@ -38,13 +66,11 @@ class UserController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('front_index');
         }
-
         return $this->render('Front/user/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("/updateProfilePicture", name="updateProfilePicture", methods={"POST"})
      */
@@ -57,7 +83,6 @@ class UserController extends AbstractController
             $user->setImageFile($request->files->get('data'));
             $entityManager->flush();
         } catch (exception $e) {
-
         }
         /*
         $form = $this->createForm(UserFrontType::class, $user);
@@ -74,7 +99,6 @@ class UserController extends AbstractController
         */
         return new Response("ok");
     }
-
     /**
      * @Route("/updateBanner", name="updateBanner", methods={"POST"})
      */
@@ -87,11 +111,9 @@ class UserController extends AbstractController
             $user->setBannerImageFile($request->files->get('data'));
             $entityManager->flush();
         } catch (exception $e) {
-
         }
         return new Response("ok");
     }
-
     /**
      * @Route("/updateInfo", name="updateInfo", methods={"GET","POST"})
      */
@@ -110,8 +132,7 @@ class UserController extends AbstractController
             'formUserFront' => $formUserFront->createView(),
         ]);
     }
-
-    /**
+/**
      * @Route("/updatePro", name="updatePro", methods={"GET","POST"})
      */
     public function updatePro(Request $request): Response
@@ -188,7 +209,6 @@ class UserController extends AbstractController
             'formEditProgLanguage' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("userLanguageDelete/{id}", name="languageDelete", methods={"DELETE"})
      */
@@ -201,7 +221,6 @@ class UserController extends AbstractController
         }
         return $this->redirectToRoute('front_user_updatePro');
     }
-
     /**
      * @Route("userLanguageEdit/{id}", name="languageEdit", methods={"GET","POST"}, options={"expose"=true})
      */
@@ -219,7 +238,6 @@ class UserController extends AbstractController
             'formEditLanguage' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("/updateExp", name="updateExp", methods={"GET","POST"})
      */
@@ -241,7 +259,6 @@ class UserController extends AbstractController
             'formUserSocietyFront' => $formUserSocietyFront->createView(),
         ]);
     }
-
     /**
      * @Route("userExpDelete/{id}", name="expDelete", methods={"DELETE"})
      */
@@ -254,7 +271,6 @@ class UserController extends AbstractController
         }
         return $this->redirectToRoute('front_user_updateExp');
     }
-
     /**
      * @Route("userExpEdit/{id}", name="expEdit", methods={"GET","POST"}, options={"expose"=true})
      */
@@ -272,7 +288,6 @@ class UserController extends AbstractController
             'formEditExp' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("/userUpdateDiploma", name="updateDiploma", methods={"GET","POST"})
      */
@@ -294,7 +309,6 @@ class UserController extends AbstractController
             'formUserDiplomaFront' => $formUserDiplomaFront->createView(),
         ]);
     }
-
     /**
      * @Route("userDiplomaDelete/{id}", name="diplomaDelete", methods={"DELETE"})
      */
@@ -307,7 +321,6 @@ class UserController extends AbstractController
         }
         return $this->redirectToRoute('front_user_updateDiploma');
     }
-
     /**
      * @Route("userDiplomaEdit/{id}", name="diplomaEdit", methods={"GET","POST"}, options={"expose"=true})
      */
@@ -325,68 +338,62 @@ class UserController extends AbstractController
             'formEditUserDiploma' => $form->createView(),
         ]);
     }
-
-
     /**
      * @Route("/reset-password", name="reset_password", methods={"GET", "POST"})
      */
-
     public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-
         $form = $this->createForm(ResetPasswordType::class, $user);
-
         $form->handleRequest($request);
-
-
         if ($form->isSubmitted() && $form->isValid()) {
-
             $oldPassword = $request->request->get('reset_password')['oldPassword'];
             $newPassword = $request->request->get('reset_password')['plainPassword']['first'];
-
             if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
                 $newEncodedPassword = $passwordEncoder->encodePassword($user, $newPassword);
                 $user->setPassword($newEncodedPassword);
-
                 $em->persist($user);
                 $em->flush();
-
                 $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
-
                 return $this->redirectToRoute('front_index');
             } else {
                 $form->addError(new FormError('Ancien mot de passe incorrect'));
             }
         }
-
         return $this->render('Front/user/reset_password.html.twig', array(
             'form' => $form->createView(),
-            'user' => $user
         ));
     }
-
     /**
      * @Route("/sendmail", name="sendmail", methods={"GET", "POST"})
      */
-
     public function sendMail(\Swift_Mailer $mailer)
     {
         $message = (new \Swift_Message('test'))
             ->setFrom('francois0roger@gmail.com')
             ->setTo('francois0roger@gmail.com')
             ->setBody("test");
-
         $logger = new \Swift_Plugins_Loggers_EchoLogger();
         $mailer->registerPlugin(new \Swift_Plugins_LoggerPlugin($logger));
         $resultCustomer = $mailer->send($message, $failures);
-
-
         dump($resultCustomer);
-
         return new JsonResponse("ok", 200);
-
     }
-
 }
+
+    © 2019 GitHub, Inc.
+    Terms
+    Privacy
+    Security
+    Status
+    Help
+
+    Contact GitHub
+    Pricing
+    API
+    Training
+    Blog
+    About
+
+Press h to open a hovercard with more details.
