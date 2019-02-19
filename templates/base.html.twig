@@ -37,8 +37,10 @@
     <script src="https://unpkg.com/hammerjs@2.0.8/hammer.min.js"></script>
     <script src="https://unpkg.com/muuri@0.7.1/dist/muuri.min.js"></script>
     <script src="{{ asset('profile.js') }}"></script>
+    <script src="{{ asset('autocomplete.js') }}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.devbridge-autocomplete/1.4.9/jquery.autocomplete.js" integrity="sha256-AU6mjGKtdyPqKOpEqQm/UCFmQ9UqrP1QH0EZVvpoAnQ=" crossorigin="anonymous"></script>
 {% endblock %}
 {% block javascripts %}{% endblock %}
 </body>

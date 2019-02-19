@@ -19,6 +19,18 @@ class ProgLanguageRepository extends ServiceEntityRepository
         parent::__construct($registry, ProgLanguage::class);
     }
 
+    public function findNameContaining($key) {
+        $query = $this->getEntityManager()
+            ->createQuery("
+	            SELECT p FROM App\Entity\ProgLanguage p
+	            WHERE p.name LIKE :key
+	            ORDER BY LENGTH(p.name) ASC"
+            );
+        $query->setParameter('key', '%'.strtolower($key).'%')
+        ->setMaxResults(10);
+        return $query->getResult();
+    }
+
     // /**
     //  * @return ProgLanguage[] Returns an array of ProgLanguage objects
     //  */

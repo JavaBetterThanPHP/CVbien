@@ -133,7 +133,10 @@ class UserController extends AbstractController
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($userProgLanguage);
                 $entityManager->flush();
+                $this->get('session')->getFlashBag()->clear();
                 return $this->redirectToRoute('front_user_updatePro');
+            }elseif ($formUserProgLanguage->isSubmitted() && !$formUserProgLanguage->isValid()) {
+                $this->addFlash('error', 'Something went wrong. Are you sure this is a valid technology ?');
             }
         }elseif($request->request->has($formUserLanguage->getName())) {
             $formUserLanguage->handleRequest($request);
@@ -175,6 +178,10 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->get('session')->getFlashBag()->clear();
+            return $this->redirectToRoute('front_user_updatePro');
+        }elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error', 'Something went wrong. Are you sure this is a valid technology ?');
             return $this->redirectToRoute('front_user_updatePro');
         }
         return $this->render('Front/user/_modal_user_progLanguage_edit.html.twig', [
@@ -356,6 +363,7 @@ class UserController extends AbstractController
 
         return $this->render('Front/user/reset_password.html.twig', array(
             'form' => $form->createView(),
+            'user' => $user
         ));
     }
 
