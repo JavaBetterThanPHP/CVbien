@@ -1,34 +1,3 @@
-
-Skip to content
-
-    Pull requests
-    Issues
-    Marketplace
-    Explore
-
-    @powerfulsheron
-
-2
-0
-
-    0
-
-JavaBetterThanPHP/CVbien
-Code
-Issues 36
-Pull requests 1
-ZenHub
-Projects 4
-Wiki
-Insights
-Settings
-CVbien/src/Controller/Front/UserController.php
-574ea95 4 days ago
-@powerfulsheron powerfulsheron Merge remote-tracking branch 'origin/develop' into develop
-@powerfulsheron
-@max-abl
-@froger22
-384 lines (340 sloc) 14.6 KB
 <?php
 namespace App\Controller\Front;
 use App\Entity\UserDiploma;
@@ -381,19 +350,3 @@ class UserController extends AbstractController
         return new JsonResponse("ok", 200);
     }
 }
-
-    © 2019 GitHub, Inc.
-    Terms
-    Privacy
-    Security
-    Status
-    Help
-
-    Contact GitHub
-    Pricing
-    API
-    Training
-    Blog
-    About
-
-Press h to open a hovercard with more details.
