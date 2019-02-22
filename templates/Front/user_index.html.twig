@@ -18,49 +18,24 @@
         {# --- #}
 
         {# Display banner/pictures #}
-        <div id="userBanner" class="bg-img"
+        <div id="userBanner" class="bg-img img-fluid"
              style="background-image: url({{ vich_uploader_asset(user, 'bannerImageFile') }})">
+            {# Profil picture #}
+                <img id="profilePicture" class="border-fat rounded-circle profileImg mt-2" src="{{ vich_uploader_asset(user, 'imageFile') }}"/>
+            {# --- #}
         </div>
 
-        {# Under banner #}
-        <div class="height-150 bg-dark">
-            <div class="container d-flex justify-content-between">
+        <div class="height-10 bg-dark">
+        </div>
 
-                {# Profil picture #}
-                <div class="">
-                    <img id="profilePicture" class="border-fat rounded-circle image-120-120 mt-2"
-                         src="{{ vich_uploader_asset(user, 'imageFile') }}"/>
-                </div>
-                {# --- #}
-
-                {# Profil picture #}
-                <div class="text-light flex-fill">
-                    <p>
-                        <b>{{ user.firstname }} {{ user.lastname }}</b>
-                    </p>
-                    <p>
-                        <b>Tél : </b>
-                        {{ user.phoneNumber }}
-                        - <b>Pro : </b>
-                        {{ user.proPhoneNumber }}
-                    </p>
-                    <p>
-                        <b>Ville : </b>
-                        {{ user.city }}
-                        {% if user.country is not null %}
-                            - <b>Country : </b>
-                            {{ user.country.name }}
-                        {% endif %}
-                    </p>
-                </div>
-                {# --- #}
-
+        <div class="container">
+            <div class="row">
                 {# Editer les éléments du profil #}
-                <div class="">
-                    <div class="btn-group mt-4">
-                        <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown"
+
+                    <div class="mt-4">
+                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
                                 aria-haspopup="true" aria-expanded="false">
-                            Edit page
+                            Modifier
                         </button>
                         <div class="dropdown-menu dropdown-menu-right">
                             <button id="btnInitCropProfile" class="dropdown-item" type="button"
@@ -74,8 +49,11 @@
                                 Banner
                             </button>
                         </div>
+                        <button type="button" class="btn btn-secondary" data-toggle="#">
+                            Ajouter
+                        </button>
                     </div>
-                </div>
+
                 {# --- #}
             </div>
         </div>
@@ -98,10 +76,22 @@
                 <div class="item">
                     <div class="item-content">
                         <div class="card">
+                            <div class="card-header">Mes Infos</div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
                                 <h6 class="card-subtitle mb-2 text-muted">{{ user.birthdate | date('d/m/y') }}</h6>
-                                <p class="card-text">{{ user.adress }}, <br/>{{ user.cityCode }} {{ user.city }}
+                                <p class="card-text">{{ user.adress }}, <br/>{{ user.cityCode }} {{ user.city }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="item">
+                    <div class="item-content">
+                        <div class="card">
+                            <div class="card-header"></div>
+                            <div class="card-body">
+                                <p class="card-text">C du text mdr</p>
                             </div>
                         </div>
                     </div>
