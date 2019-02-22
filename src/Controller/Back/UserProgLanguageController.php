@@ -22,33 +22,7 @@ class UserProgLanguageController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
-        return $this->render('Back/user_prog_language/index.html.twig', ['user_prog_languages' => $userProgLanguageRepository->findAll(),'user' => $user]);
-    }
-
-    /**
-     * @Route("/new", name="new", methods={"GET","POST"})
-     */
-    public function new(Request $request): Response
-    {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
-        $user = $this->getUser();
-        $userProgLanguage = new UserProgLanguage();
-        $form = $this->createForm(UserProgLanguageType::class, $userProgLanguage);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($userProgLanguage);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('back_user_prog_language_index');
-        }
-
-        return $this->render('Back/user_prog_language/new.html.twig', [
-            'user_prog_language' => $userProgLanguage,
-            'user' => $user,
-            'form' => $form->createView(),
-        ]);
+        return $this->render('Back/user_prog_language/index.html.twig', ['user_prog_languages' => $userProgLanguageRepository->findAll(), 'user' => $user]);
     }
 
     /**
@@ -58,7 +32,7 @@ class UserProgLanguageController extends AbstractController
     {
         $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
         $user = $this->getUser();
-        return $this->render('Back/user_prog_language/show.html.twig', ['user_prog_language' => $userProgLanguage,'user' => $user]);
+        return $this->render('Back/user_prog_language/show.html.twig', ['user_prog_language' => $userProgLanguage, 'user' => $user]);
     }
 
     /**
@@ -82,19 +56,5 @@ class UserProgLanguageController extends AbstractController
             'user' => $user,
             'form' => $form->createView(),
         ]);
-    }
-
-    /**
-     * @Route("/{id}", name="delete", methods={"DELETE"})
-     */
-    public function delete(Request $request, UserProgLanguage $userProgLanguage): Response
-    {
-        if ($this->isCsrfTokenValid('delete' . $userProgLanguage->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($userProgLanguage);
-            $entityManager->flush();
-        }
-
-        return $this->redirectToRoute('back_user_prog_language_index');
     }
 }

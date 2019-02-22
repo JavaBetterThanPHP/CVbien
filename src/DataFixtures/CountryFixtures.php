@@ -18,7 +18,7 @@ class CountryFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
-        for ($i = 0; $i < 10; $i++){
+        for ($i = 0; $i < 10; $i++) {
             $country = (new Country())
                 ->setName($faker->country);
             $manager->persist($country);

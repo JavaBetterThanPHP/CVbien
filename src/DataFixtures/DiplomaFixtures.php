@@ -14,6 +14,7 @@ use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
+
 class DiplomaFixtures extends Fixture implements DependentFixtureInterface
 {
     public function load(ObjectManager $manager)
@@ -26,10 +27,10 @@ class DiplomaFixtures extends Fixture implements DependentFixtureInterface
         $country = $em->findAll();
 
 
-        for ($i = 0; $i < 10; $i++){
+        for ($i = 0; $i < 10; $i++) {
             $diploma = (new Diploma())
                 ->setTitle($faker->word)
-                ->setLevel($faker->randomElement(['3','2','5']))
+                ->setLevel($faker->randomElement(['3', '2', '5']))
                 ->setIsInternational($faker->boolean)
                 ->setCountry($country[(array_rand($country))]);
             $manager->persist($diploma);

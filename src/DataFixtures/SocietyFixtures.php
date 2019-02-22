@@ -8,11 +8,11 @@
 
 namespace App\DataFixtures;
 
-use App\Entity\Society;
 use App\Entity\Country;
+use App\Entity\Society;
 use Doctrine\Bundle\FixturesBundle\Fixture;
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\Common\DataFixtures\DependentFixtureInterface;
+use Doctrine\Common\Persistence\ObjectManager;
 
 class SocietyFixtures extends Fixture implements DependentFixtureInterface
 {
@@ -23,12 +23,12 @@ class SocietyFixtures extends Fixture implements DependentFixtureInterface
         $em = $manager->getRepository(Country::class);
         $country = $em->findAll();
 
-        for ($i = 0; $i < 10; $i++){
+        for ($i = 0; $i < 10; $i++) {
             $society = (new Society())
                 ->setName($faker->word)
                 ->setAdress($faker->address)
                 ->setCity($faker->city)
-                ->setCityCode($faker->randomNumber(2,true))
+                ->setCityCode($faker->randomNumber(2, true))
                 ->setCountry($country[(array_rand($country))]);
             $manager->persist($society);
         }

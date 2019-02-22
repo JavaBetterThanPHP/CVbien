@@ -18,7 +18,7 @@ class JobTypeFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
-        for ($i = 0; $i < 10; $i++){
+        for ($i = 0; $i < 10; $i++) {
             $jobtype = (new JobType())
                 ->setLabel($faker->word);
             $manager->persist($jobtype);

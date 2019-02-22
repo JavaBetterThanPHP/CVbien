@@ -20,11 +20,11 @@
             <td>{{ prog_language.type }}</td>
         </tr>
         <tr>
-            <th>Related technologies</th>
+            <th>Related Prog Language</th>
             <td>
                 <ul>
-                    {% for technology in prog_language.progTechnologies  %}
-                        <li>{{ technology.label }}</li>
+                    {% for child in prog_language.childProgLanguages %}
+                        <li>{{ child.name }}</li>
                     {% endfor %}
                 </ul>
             </td>

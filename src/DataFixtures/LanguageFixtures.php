@@ -18,7 +18,7 @@ class LanguageFixtures extends Fixture
     {
         $faker = \Faker\Factory::create('fr_FR');
 
-        for ($i = 0; $i < 10; $i++){
+        for ($i = 0; $i < 10; $i++) {
             $language = (new Language())
                 ->setName($faker->word);
             $manager->persist($language);

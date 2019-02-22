@@ -28,7 +28,7 @@ class UserLanguage
     private $user;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true)
+     * @ORM\Column(type="smallint", length=1, nullable=true)
      */
     private $level;
 
