@@ -1,7 +1,15 @@
 <div class="col-9">
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Holy guacamole !</strong> {{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+    {% endfor %}
     <h1>Modifier mes informations professionnelles</h1>
     <h2>Technologies
-        <a href="#" class="btn btn-default" type="button" data-toggle="modal" data-target="#userProgLanguageModal"><i class="fas fa-plus-circle fa-2x"></i></a>    </h2>
+        <a href="#" class="initAuto btn btn-default" type="button" data-toggle="modal" data-target="#userProgLanguageModal"><i class="fas fa-plus-circle fa-2x"></i></a>    </h2>
     <div class="container">
         <div class="row">
             {% for userProgLanguage in user.userProgLanguages %}
@@ -16,7 +24,7 @@
                                     <button class="btn btn-link float-right"><i class="far fa-trash-alt"></i></button>
                                 </form>
                             </div>
-                            <a href="#" class="btn btn-link float-right"><i class="fas fa-edit" data-toggle="modal" data-target="#editUserProgLanguageModal{{ userProgLanguage.id }}"></i></a>
+                            <a href="#" class="initAuto btn btn-link float-right"><i class="fas fa-edit" data-toggle="modal" data-target="#editUserProgLanguageModal{{ userProgLanguage.id }}"></i></a>
                         </div>
                         <div class="card-body">
                             <div class="progress">

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller\Front;
 
 use App\Entity\UserDiploma;
@@ -18,8 +17,9 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use App\Form\ChangePasswordType;
 
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * @Route("/", name="front_user_")
  */
@@ -38,15 +38,13 @@ class UserController extends AbstractController
             $this->getDoctrine()->getManager()->flush();
             return $this->redirectToRoute('front_index');
         }
-
         return $this->render('Front/user/edit.html.twig', [
             'user' => $user,
             'form' => $form->createView(),
         ]);
     }
-
     /**
-     * @Route("/updateProfilePicture", name="updateProfilePicture", methods={"POST"})
+     * @Route("/filePicture", name="updateProfilePicture", methods={"POST"})
      */
     public function updateProfilePicture(Request $request): Response
     {
@@ -57,7 +55,6 @@ class UserController extends AbstractController
             $user->setImageFile($request->files->get('data'));
             $entityManager->flush();
         } catch (exception $e) {
-
         }
         /*
         $form = $this->createForm(UserFrontType::class, $user);
@@ -74,7 +71,6 @@ class UserController extends AbstractController
         */
         return new Response("ok");
     }
-
     /**
      * @Route("/updateBanner", name="updateBanner", methods={"POST"})
      */
@@ -87,11 +83,9 @@ class UserController extends AbstractController
             $user->setBannerImageFile($request->files->get('data'));
             $entityManager->flush();
         } catch (exception $e) {
-
         }
         return new Response("ok");
     }
-
     /**
      * @Route("/updateInfo", name="updateInfo", methods={"GET","POST"})
      */
@@ -110,8 +104,7 @@ class UserController extends AbstractController
             'formUserFront' => $formUserFront->createView(),
         ]);
     }
-
-    /**
+/**
      * @Route("/updatePro", name="updatePro", methods={"GET","POST"})
      */
     public function updatePro(Request $request): Response
@@ -127,13 +120,17 @@ class UserController extends AbstractController
         $userLanguage->setUser($user);
         $formUserLanguage = $this->createForm(UserLanguageFrontType::class, $userLanguage);
 
+
         if($request->request->has($formUserProgLanguage->getName())){
             $formUserProgLanguage->handleRequest($request);
             if ($formUserProgLanguage->isSubmitted() && $formUserProgLanguage->isValid()) {
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->persist($userProgLanguage);
                 $entityManager->flush();
+                $this->get('session')->getFlashBag()->clear();
                 return $this->redirectToRoute('front_user_updatePro');
+            }elseif ($formUserProgLanguage->isSubmitted() && !$formUserProgLanguage->isValid()) {
+                $this->addFlash('error', 'Something went wrong. Are you sure this is a valid technology ?');
             }
         }elseif($request->request->has($formUserLanguage->getName())) {
             $formUserLanguage->handleRequest($request);
@@ -150,10 +147,12 @@ class UserController extends AbstractController
             'formUserLanguageFront' => $formUserLanguage->createView(),
         ]);
     }
+  
 
     /**
      * @Route("userProgLanguageDelete/{id}", name="progLanguageDelete", methods={"DELETE"})
      */
+
     public function userProgLanguageDelete(Request $request, UserProgLanguage $userProgLanguage): Response
     {
         if ($this->isCsrfTokenValid('delete' . $userProgLanguage->getId(), $request->request->get('_token'))) {
@@ -175,6 +174,10 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
+            $this->get('session')->getFlashBag()->clear();
+            return $this->redirectToRoute('front_user_updatePro');
+        }elseif ($form->isSubmitted() && !$form->isValid()) {
+            $this->addFlash('error', 'Something went wrong. Are you sure this is a valid technology ?');
             return $this->redirectToRoute('front_user_updatePro');
         }
         return $this->render('Front/user/_modal_user_progLanguage_edit.html.twig', [
@@ -212,7 +215,6 @@ class UserController extends AbstractController
             'formEditLanguage' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("/updateExp", name="updateExp", methods={"GET","POST"})
      */
@@ -234,7 +236,6 @@ class UserController extends AbstractController
             'formUserSocietyFront' => $formUserSocietyFront->createView(),
         ]);
     }
-
     /**
      * @Route("userExpDelete/{id}", name="expDelete", methods={"DELETE"})
      */
@@ -247,7 +248,6 @@ class UserController extends AbstractController
         }
         return $this->redirectToRoute('front_user_updateExp');
     }
-
     /**
      * @Route("userExpEdit/{id}", name="expEdit", methods={"GET","POST"}, options={"expose"=true})
      */
@@ -265,7 +265,6 @@ class UserController extends AbstractController
             'formEditExp' => $form->createView(),
         ]);
     }
-
     /**
      * @Route("/userUpdateDiploma", name="updateDiploma", methods={"GET","POST"})
      */
@@ -287,7 +286,6 @@ class UserController extends AbstractController
             'formUserDiplomaFront' => $formUserDiplomaFront->createView(),
         ]);
     }
-
     /**
      * @Route("userDiplomaDelete/{id}", name="diplomaDelete", methods={"DELETE"})
      */
@@ -300,7 +298,6 @@ class UserController extends AbstractController
         }
         return $this->redirectToRoute('front_user_updateDiploma');
     }
-
     /**
      * @Route("userDiplomaEdit/{id}", name="diplomaEdit", methods={"GET","POST"}, options={"expose"=true})
      */
@@ -318,42 +315,35 @@ class UserController extends AbstractController
             'formEditUserDiploma' => $form->createView(),
         ]);
     }
-
-
     /**
      * @Route("/reset-password", name="reset_password", methods={"GET", "POST"})
      */
-
+  
     public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
 
-        $form = $this->createForm(ResetPasswordType::class, $user);
+        //dump($user);
+
+        $form = $this->createForm(ChangePasswordType::class, $user);
 
         $form->handleRequest($request);
-
-
         if ($form->isSubmitted() && $form->isValid()) {
-
-            $oldPassword = $request->request->get('reset_password')['oldPassword'];
-            $newPassword = $request->request->get('reset_password')['plainPassword']['first'];
-
+            $oldPassword = $request->request->get('change_password')['oldPassword'];
+            $newPassword = $request->request->get('change_password')['plainPassword']['first'];
+          
             if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
                 $newEncodedPassword = $passwordEncoder->encodePassword($user, $newPassword);
                 $user->setPassword($newEncodedPassword);
-
                 $em->persist($user);
                 $em->flush();
-
                 $this->addFlash('notice', 'Votre mot de passe à bien été changé !');
-
                 return $this->redirectToRoute('front_index');
             } else {
                 $form->addError(new FormError('Ancien mot de passe incorrect'));
             }
         }
-
         return $this->render('Front/user/reset_password.html.twig', array(
             'form' => $form->createView(),
         ));
@@ -362,23 +352,17 @@ class UserController extends AbstractController
     /**
      * @Route("/sendmail", name="sendmail", methods={"GET", "POST"})
      */
-
     public function sendMail(\Swift_Mailer $mailer)
     {
+        exit;
         $message = (new \Swift_Message('test'))
             ->setFrom('francois0roger@gmail.com')
             ->setTo('francois0roger@gmail.com')
             ->setBody("test");
-
         $logger = new \Swift_Plugins_Loggers_EchoLogger();
         $mailer->registerPlugin(new \Swift_Plugins_LoggerPlugin($logger));
         $resultCustomer = $mailer->send($message, $failures);
-
-
         dump($resultCustomer);
-
         return new JsonResponse("ok", 200);
-
     }
-
 }

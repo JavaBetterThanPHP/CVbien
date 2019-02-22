@@ -4,20 +4,18 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ResetPasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('oldPassword', PasswordType::class, array(
-                'mapped' => false,
-            ))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les deux mots de passe doivent être identiques',
@@ -26,8 +24,8 @@ class ResetPasswordType extends AbstractType
                         'class' => 'password-field'
                     )
                 ),
-                'first_options' => array('label' => 'Password'),
-                'second_options' => array('label' => 'Repeat Password'),
+                'first_options'  => array('label' => 'New Password'),
+                'second_options' => array('label' => 'Repeat new Password'),
                 'required' => true,
                 'mapped' => false,
             ))
@@ -35,7 +33,8 @@ class ResetPasswordType extends AbstractType
                 'attr' => array(
                     'class' => 'btn btn-primary btn-block'
                 )
-            ));
+            ))
+        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

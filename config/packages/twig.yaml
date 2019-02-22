@@ -6,4 +6,5 @@ twig:
 
     #exception_controller: src\Controller\ExceptionController\showException
 
-    form_themes: ['bootstrap_4_layout.html.twig']
+    form_themes:
+    - 'bootstrap_4_layout.html.twig'
