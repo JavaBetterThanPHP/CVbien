@@ -8,9 +8,18 @@
     min-height: 100vh;
 }
 
-body{
+.min-100 {
+    height: 70vh;
+}
+
+body {
     background-image: url("https://images7.alphacoders.com/912/912059.jpg");
     background-size: cover;
+}
+
+.transp {
+    background-color: rgba(255, 255, 255, 0.65);
+    border-radius: 10px;
 }
 
 .login-heading {
@@ -29,14 +38,14 @@ body{
     margin-bottom: 1rem;
 }
 
-.form-label-group>input,
-.form-label-group>label {
+.form-label-group > input,
+.form-label-group > label {
     padding: var(--input-padding-y) var(--input-padding-x);
     height: auto;
     border-radius: 2rem;
 }
 
-.form-label-group>label {
+.form-label-group > label {
     position: absolute;
     top: 0;
     left: 0;
@@ -78,7 +87,7 @@ body{
     padding-bottom: calc(var(--input-padding-y) / 3);
 }
 
-.form-label-group input:not(:placeholder-shown)~label {
+.form-label-group input:not(:placeholder-shown) ~ label {
     padding-top: calc(var(--input-padding-y) / 3);
     padding-bottom: calc(var(--input-padding-y) / 3);
     font-size: 12px;
