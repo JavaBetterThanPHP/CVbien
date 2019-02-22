@@ -61,7 +61,6 @@
             $user->setRoles(['ROLE_USER']);
 
 
-
             $em = $this->objectManager;
             $em->persist($user);
             $em->flush();

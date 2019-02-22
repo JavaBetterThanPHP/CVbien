@@ -171,6 +171,21 @@ class User implements UserInterface, \Serializable
      */
     private $userSocieties;
 
+    /**
+     * @ORM\Column(type="string", length=100, nullable=true)
+     */
+    private $tokenToReset;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $date_creation_compte;
+
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     */
+    private $date_derniere_connexion;
+
     public function setImageFile(File $image = null)
     {
         $this->imageFile = $image;
@@ -716,6 +731,42 @@ class User implements UserInterface, \Serializable
                 $userSociety->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTokenToReset(): ?string
+    {
+        return $this->tokenToReset;
+    }
+
+    public function setTokenToReset(?string $tokenToReset): self
+    {
+        $this->tokenToReset = $tokenToReset;
+
+        return $this;
+    }
+
+    public function getDateCreationCompte(): ?\DateTimeInterface
+    {
+        return $this->date_creation_compte;
+    }
+
+    public function setDateCreationCompte(?\DateTimeInterface $date_creation_compte): self
+    {
+        $this->date_creation_compte = $date_creation_compte;
+
+        return $this;
+    }
+
+    public function getDateDerniereConnexion(): ?\DateTimeInterface
+    {
+        return $this->date_derniere_connexion;
+    }
+
+    public function setDateDerniereConnexion(?\DateTimeInterface $date_derniere_connexion): self
+    {
+        $this->date_derniere_connexion = $date_derniere_connexion;
 
         return $this;
     }

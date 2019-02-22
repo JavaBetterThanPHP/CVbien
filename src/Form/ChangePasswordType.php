@@ -11,11 +11,14 @@ use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
-class ResetPasswordType extends AbstractType
+class ChangePasswordType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add('oldPassword', PasswordType::class, array(
+                'mapped' => false,
+            ))
             ->add('plainPassword', RepeatedType::class, array(
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les deux mots de passe doivent être identiques',
@@ -24,8 +27,8 @@ class ResetPasswordType extends AbstractType
                         'class' => 'password-field'
                     )
                 ),
-                'first_options'  => array('label' => 'New Password'),
-                'second_options' => array('label' => 'Repeat new Password'),
+                'first_options'  => array('label' => 'Password'),
+                'second_options' => array('label' => 'Repeat Password'),
                 'required' => true,
                 'mapped' => false,
             ))

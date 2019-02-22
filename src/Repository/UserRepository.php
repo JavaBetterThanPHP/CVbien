@@ -19,32 +19,20 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    // /**
-    //  * @return User[] Returns an array of User objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /** Retourne une liste de Users à purger pour GDPR
+     *  $time : le nombre d'année à retirer
+     */
+    public function getUserToDelete($time)
     {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('u.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $date = new \DateTime();
+        $date->modify('-'.$time.' years');
 
-    /*
-    public function findOneBySomeField($value): ?User
-    {
-        return $this->createQueryBuilder('u')
-            ->andWhere('u.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $qb = $this->createQueryBuilder('u')
+            ->Where('u.date_derniere_connexion < :value')
+            ->setParameter('value', $date)
+            ->andWhere('u.isActive = :isActive')
+            ->setParameter('isActive', true);
+
+        return $qb->getQuery()->getResult();
     }
-    */
 }

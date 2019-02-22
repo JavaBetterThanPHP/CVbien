@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-use App\Form\ResetPasswordType;
+use App\Form\ChangePasswordType;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Serializer\Encoder\EncoderInterface;
@@ -87,25 +87,45 @@ class UserController extends AbstractController
         return new Response("ok");
     }
 
+    /**
+     * @Route("/sendmail", name="sendmail", methods={"GET", "POST"})
+     */
+    public function sendMail(\Swift_Mailer $mailer)
+    {
+        $message = (new \Swift_Message('test'))
+            ->setFrom('francois.roger@axa.fr')
+            ->setTo('francois.roger@axa.fr')
+            ->setBody("test");
+
+        $logger = new \Swift_Plugins_Loggers_EchoLogger();
+        $mailer->registerPlugin(new \Swift_Plugins_LoggerPlugin($logger));
+        $resultCustomer = $mailer->send($message, $failures);
+
+
+        dump($resultCustomer);
+
+        return new JsonResponse("ok", 200);
+
+    }
 
     /**
      * @Route("/reset-password", name="reset_password", methods={"GET", "POST"})
      */
-
     public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
+        //dump($user);
 
-        $form = $this->createForm(ResetPasswordType::class, $user);
+        $form = $this->createForm(ChangePasswordType::class, $user);
 
         $form->handleRequest($request);
 
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $oldPassword = $request->request->get('reset_password')['oldPassword'];
-            $newPassword = $request->request->get('reset_password')['plainPassword']['first'];
+            $oldPassword = $request->request->get('change_password')['oldPassword'];
+            $newPassword = $request->request->get('change_password')['plainPassword']['first'];
 
             if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
                 $newEncodedPassword = $passwordEncoder->encodePassword($user, $newPassword);
@@ -126,27 +146,4 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ));
     }
-
-    /**
-     * @Route("/sendmail", name="sendmail", methods={"GET", "POST"})
-     */
-
-    public function sendMail(\Swift_Mailer $mailer)
-    {
-        $message = (new \Swift_Message('test'))
-            ->setFrom('francois0roger@gmail.com')
-            ->setTo('francois0roger@gmail.com')
-            ->setBody("test");
-
-        $logger = new \Swift_Plugins_Loggers_EchoLogger();
-        $mailer->registerPlugin(new \Swift_Plugins_LoggerPlugin($logger));
-        $resultCustomer = $mailer->send($message, $failures);
-
-
-        dump($resultCustomer);
-
-        return new JsonResponse("ok", 200);
-
-    }
-
 }
