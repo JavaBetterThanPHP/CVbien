@@ -44,8 +44,7 @@ class UserController extends AbstractController
         ]);
     }
     /**
-     * @Route("/
-     filePicture", name="updateProfilePicture", methods={"POST"})
+     * @Route("/filePicture", name="updateProfilePicture", methods={"POST"})
      */
     public function updateProfilePicture(Request $request): Response
     {
