@@ -20,7 +20,7 @@ security:
         check_path: app_security_login
         login_path: app_security_login
         csrf_token_generator: security.csrf.token_manager
-        default_target_path: front_index
+        default_target_path: app_security_login_redirect
         provider: app_user_provider
       logout: {path: /logout, target: /}
 

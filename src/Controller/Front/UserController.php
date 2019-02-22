@@ -1,5 +1,6 @@
 <?php
 namespace App\Controller\Front;
+
 use App\Entity\UserDiploma;
 use App\Entity\UserLanguage;
 use App\Entity\UserProgLanguage;
@@ -16,6 +17,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Form\ChangePasswordType;
+
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 /**
  * @Route("/", name="front_user_")
@@ -41,7 +44,7 @@ class UserController extends AbstractController
         ]);
     }
     /**
-     * @Route("/updateProfilePicture", name="updateProfilePicture", methods={"POST"})
+     * @Route("/filePicture", name="updateProfilePicture", methods={"POST"})
      */
     public function updateProfilePicture(Request $request): Response
     {
@@ -117,6 +120,7 @@ class UserController extends AbstractController
         $userLanguage->setUser($user);
         $formUserLanguage = $this->createForm(UserLanguageFrontType::class, $userLanguage);
 
+
         if($request->request->has($formUserProgLanguage->getName())){
             $formUserProgLanguage->handleRequest($request);
             if ($formUserProgLanguage->isSubmitted() && $formUserProgLanguage->isValid()) {
@@ -143,10 +147,12 @@ class UserController extends AbstractController
             'formUserLanguageFront' => $formUserLanguage->createView(),
         ]);
     }
+  
 
     /**
      * @Route("userProgLanguageDelete/{id}", name="progLanguageDelete", methods={"DELETE"})
      */
+
     public function userProgLanguageDelete(Request $request, UserProgLanguage $userProgLanguage): Response
     {
         if ($this->isCsrfTokenValid('delete' . $userProgLanguage->getId(), $request->request->get('_token'))) {
@@ -178,6 +184,7 @@ class UserController extends AbstractController
             'formEditProgLanguage' => $form->createView(),
         ]);
     }
+
     /**
      * @Route("userLanguageDelete/{id}", name="languageDelete", methods={"DELETE"})
      */
@@ -190,6 +197,7 @@ class UserController extends AbstractController
         }
         return $this->redirectToRoute('front_user_updatePro');
     }
+
     /**
      * @Route("userLanguageEdit/{id}", name="languageEdit", methods={"GET","POST"}, options={"expose"=true})
      */
@@ -310,15 +318,21 @@ class UserController extends AbstractController
     /**
      * @Route("/reset-password", name="reset_password", methods={"GET", "POST"})
      */
+  
     public function resetPassword(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         $em = $this->getDoctrine()->getManager();
         $user = $this->getUser();
-        $form = $this->createForm(ResetPasswordType::class, $user);
+
+        //dump($user);
+
+        $form = $this->createForm(ChangePasswordType::class, $user);
+
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $oldPassword = $request->request->get('reset_password')['oldPassword'];
-            $newPassword = $request->request->get('reset_password')['plainPassword']['first'];
+            $oldPassword = $request->request->get('change_password')['oldPassword'];
+            $newPassword = $request->request->get('change_password')['plainPassword']['first'];
+          
             if ($passwordEncoder->isPasswordValid($user, $oldPassword)) {
                 $newEncodedPassword = $passwordEncoder->encodePassword($user, $newPassword);
                 $user->setPassword($newEncodedPassword);
@@ -334,11 +348,13 @@ class UserController extends AbstractController
             'form' => $form->createView(),
         ));
     }
+
     /**
      * @Route("/sendmail", name="sendmail", methods={"GET", "POST"})
      */
     public function sendMail(\Swift_Mailer $mailer)
     {
+        exit;
         $message = (new \Swift_Message('test'))
             ->setFrom('francois0roger@gmail.com')
             ->setTo('francois0roger@gmail.com')
