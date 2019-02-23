@@ -781,6 +781,11 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    public function equals(User $user)
+    {
+        return ($user->getId() === $this->getId());
+    }
+
     //TODO searialize all user properties just to be sure
 
 }

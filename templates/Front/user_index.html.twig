@@ -67,9 +67,18 @@
 
         {# MODULE AREA - Zone des modules #}
         <div class="container mt-5">
-            {# Import des modules #}
+
+            {% if not edit %}{% if warningNotActive %}
+                <div class="alert alert-primary" role="alert">
+                    <b>Attention : </b> Votre profil n'est pas actif. Pour l'activer rendez vous dans vos parametres
+                    personnelles.
+                </div>
+            {% endif %}{% endif %}
+
+            {# Import des modules dans le GRID #}
             <div class="grid">
 
+                {# Module de bienvenue #}
                 <div class="item">
                     <div class="item-content">
                         <div class="card">
@@ -82,6 +91,7 @@
                     </div>
                 </div>
 
+                {# Module information personnelles #}
                 {% if user.firstname is not null and user.lastname is not null %}
                     <div class="item">
                         <div class="item-content">
@@ -92,12 +102,13 @@
                                     {% if user.birthdate is not null %}
                                         <h6 class="card-subtitle mb-2 text-muted">{{ user.birthdate | date('d/m/y') }}</h6>
                                     {% endif %}
-                                    {% if user.adress is not null
-                                        and user.cityCode is not null
-                                        and user.city is not null %}
+                                    {% if user.adress is not null and user.cityCode is not null and user.city is not null %}
                                         <p class="card-text">
                                             {{ user.adress }},<br/>
-                                            {{ user.cityCode }} {{ user.city }}
+                                            {{ user.cityCode }} {{ user.city }},
+                                            {% if user.country is not null %}
+                                                {{ user.country.name }}
+                                            {% endif %}
                                         </p>
                                     {% endif %}
                                 </div>
@@ -106,6 +117,7 @@
                     </div>
                 {% endif %}
 
+                {# Module liens #}
                 {% if user.links is not null %}
                     <div class="item">
                         <div class="item-content">
@@ -125,7 +137,6 @@
                         </div>
                     </div>
                 {% endif %}
-
 
             </div>
         </div>
