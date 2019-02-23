@@ -36,6 +36,10 @@ class DefaultController extends AbstractController
             throw $this->createNotFoundException('404');
         if (!$user->getIsActive())
             throw $this->createNotFoundException('404');
-        return $this->render('Front/user_view_index.html.twig', ['user' => $user]);
+
+        return $this->render('Front/user_index.html.twig', [
+            'user' => $user,
+            'edit' => false
+        ]);
     }
 }

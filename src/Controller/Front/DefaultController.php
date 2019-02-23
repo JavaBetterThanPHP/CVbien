@@ -21,7 +21,8 @@ class DefaultController extends AbstractController
         $user = $this->getUser();
 
         return $this->render('Front/user_index.html.twig', [
-            'user' => $user
+            'user' => $user,
+            'edit' => true
         ]);
     }
 }
