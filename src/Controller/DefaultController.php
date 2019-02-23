@@ -32,7 +32,10 @@ class DefaultController extends AbstractController
      */
     public function profilView(User $user)
     {
-        // TODO : Si utilisateur non trouvé, afficher une 404
+        if ($user == null)
+            throw $this->createNotFoundException('404');
+        if (!$user->getIsActive())
+            throw $this->createNotFoundException('404');
         return $this->render('Front/user_view_index.html.twig', ['user' => $user]);
     }
 }

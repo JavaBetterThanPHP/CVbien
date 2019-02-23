@@ -13,9 +13,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
                 {# To the personnal page #}
-                <li class="nav-item active">
-                    <a class="nav-link" href="#">Preview<span class="sr-only">(current)</span></a>
-                </li>
+                {% if user.spaceName is defined %}
+                    <li class="nav-item active">
+                        <a class="nav-link"
+                           href="{{ path('app_profilView', {'spaceName': user.spaceName}) }}">Preview<span
+                                    class="sr-only">(current)</span></a>
+                    </li>
+                {% endif %}
                 {# - #}
 
                 {# To the Default #}

@@ -38,48 +38,12 @@ function initCropProfile() {
                 data: fd,
                 processData: false,
                 contentType: false
-            }).done(function (data) {
+            }).done(function () {
                 $('#profilePicture').attr('src', URL.createObjectURL(result));
                 $('#profilePictureModal').modal('hide');
             });
         });
     });
-
-    function b64toBlob(b64Data, contentType, sliceSize) {
-        contentType = contentType || '';
-        sliceSize = sliceSize || 512;
-
-        var byteCharacters = atob(b64Data);
-        var byteArrays = [];
-
-        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-            var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-            var byteNumbers = new Array(slice.length);
-            for (var i = 0; i < slice.length; i++) {
-                byteNumbers[i] = slice.charCodeAt(i);
-            }
-
-            var byteArray = new Uint8Array(byteNumbers);
-
-            byteArrays.push(byteArray);
-        }
-
-        var blob = new Blob(byteArrays, {type: contentType});
-        return blob;
-    }
-
-    function urltoFile(url, filename, mimeType) {
-        return (fetch(url)
-                .then(function (res) {
-                    return res.arrayBuffer();
-                })
-                .then(function (buf) {
-                    return new File([buf], filename, {type: mimeType});
-                })
-        );
-    }
-
 }
 
 function initCropBanner() {
@@ -125,24 +89,12 @@ function initCropBanner() {
                 data: fd,
                 processData: false,
                 contentType: false
-            }).done(function (data) {
+            }).done(function () {
                 $("#userBanner").css('background-image', 'url("' + URL.createObjectURL(result) + '")');
                 $('#bannerModal').modal('hide');
             });
         });
     });
-
-    function urltoFile(url, filename, mimeType) {
-        return (fetch(url)
-                .then(function (res) {
-                    return res.arrayBuffer();
-                })
-                .then(function (buf) {
-                    return new File([buf], filename, {type: mimeType});
-                })
-        );
-    }
-
 }
 
 

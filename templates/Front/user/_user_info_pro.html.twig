@@ -18,7 +18,7 @@
                         <div class="card-header">
                             {{ userProgLanguage.progLanguage.name }}
                             <div class="float-right">
-                                <form method="post" action="{{ path('front_user_progLanguageDelete', {'id': userProgLanguage.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <form method="post" action="{{ path('front_user_pro_prog_language_delete', {'id': userProgLanguage.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ userProgLanguage.id) }}">
                                     <button class="btn btn-link float-right"><i class="far fa-trash-alt"></i></button>
@@ -63,7 +63,7 @@
                         <div class="card-header">
                             {{ userLanguage.language.name }}
                             <div class="float-right">
-                                <form method="post" action="{{ path('front_user_languageDelete', {'id': userLanguage.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <form method="post" action="{{ path('front_user_pro_language_delete', {'id': userLanguage.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
                                     <input type="hidden" name="_method" value="DELETE">
                                     <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ userLanguage.id) }}">
                                     <button class="btn btn-link float-right"><i class="far fa-trash-alt"></i></button>
@@ -88,7 +88,7 @@
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    {{ render(controller('App\\Controller\\Front\\UserController::userLanguageEdit',{ 'id': userLanguage.id })) }}
+                                    {{ render(controller('App\\Controller\\Front\\UserProController::userLanguageEdit',{ 'id': userLanguage.id })) }}
                                 </div>
                             </div>
                         </div>
