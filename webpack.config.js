@@ -6,7 +6,8 @@ Encore
     .setPublicPath('/build')
 
     // EntryPoint
-    .addEntry('app', './assets/js/app.js')
+    .addEntry('app', './assets/js/app.js') // Muuri drag enabled
+    .addEntry('app_offline', './assets/js/app_offline.js') // Muuri drag disabled
     .copyFiles({
         from: './assets/images'
     })
