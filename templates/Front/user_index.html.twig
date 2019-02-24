@@ -76,22 +76,11 @@
                 <div class="item">
                     <div class="item-content">
                         <div class="card">
-                            <div class="card-header">Mes Infos</div>
+                            <div class="card-header">Contact</div>
                             <div class="card-body">
                                 <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ user.birthdate | date('d/m/y') }}</h6>
+                                <p class="card-text">{{ user.proPhoneNumber }}</p>
                                 <p class="card-text">{{ user.adress }}, <br/>{{ user.cityCode }} {{ user.city }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="item">
-                    <div class="item-content">
-                        <div class="card">
-                            <div class="card-header"></div>
-                            <div class="card-body">
-                                <p class="card-text">C du text mdr</p>
                             </div>
                         </div>
                     </div>
