@@ -54,15 +54,10 @@
                             data-target="#bannerModal">
                         Bannière
                     </button>
-                    <button id="btnInitCropBanner" class="dropdown-item" type="button"
-                            data-toggle=""
-                            data-target="">
-                        Ajouter un module
-                    </button>
                 </div>
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#moduleModal">
-                            Ajouter
-                        </button>
+                <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#moduleModal">
+                    Ajouter
+                </button>
             </div>
         {% else %}
             <div class="height-10 bg-dark"></div>
@@ -79,7 +74,6 @@
             {% endif %}{% endif %}
 
             {# Import des modules dans le GRID #}
-            <div class="grid">
             <div id="modGrid" class="grid">
 
                 {# Module de bienvenue #}
