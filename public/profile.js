@@ -123,6 +123,7 @@ function selectModule(moduleName){
 function addTextModule(data){
     var text = data;
     var element = document.createElement('div');
+    element.style.width = "30rem";
     element.innerHTML =
         "<div class=\"card\" style=\"width: 30rem;\">\n"+
         "<div class=\"card-header\"></div>\n"+
@@ -130,7 +131,7 @@ function addTextModule(data){
         "<p class=\"card-text\">"+text+"</p>\n" +
         "</div>\n" +
         "</div>\n";
-    grid.add(element);
+    grid.add(element,{index:0});
     grid.layout();
     $("#wysiwygModal").modal('hide');
     $("#moduleModal").modal('hide');
