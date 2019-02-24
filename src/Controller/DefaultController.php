@@ -32,10 +32,27 @@ class DefaultController extends AbstractController
      */
     public function profilView(User $user)
     {
-        if ($user == null)
+        if (is_null($user)) {
             throw $this->createNotFoundException('404');
-        if (!$user->getIsActive())
-            throw $this->createNotFoundException('404');
-        return $this->render('Front/user_view_index.html.twig', ['user' => $user]);
+        } else {
+            if (!$user->getIsActive()) {
+                $active_user = $this->getUser();
+                if (!is_null($active_user) && $user->equals($active_user)) {
+                    return $this->render('Front/user_index.html.twig', [
+                        'user' => $user,
+                        'edit' => false,
+                        'warningNotActive' => true
+                    ]);
+                } else {
+                    throw $this->createNotFoundException('404');
+                }
+            }
+
+            return $this->render('Front/user_index.html.twig', [
+                'user' => $user,
+                'edit' => false,
+                'warningNotActive' => false
+            ]);
+        }
     }
 }

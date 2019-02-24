@@ -23,6 +23,7 @@ class DefaultController extends AbstractController
 
         return $this->render('Front/user_index.html.twig', [
             'user' => $user,
+            'edit' => true
             'moduleList' => $moduleRepository->findAll()
         ]);
     }

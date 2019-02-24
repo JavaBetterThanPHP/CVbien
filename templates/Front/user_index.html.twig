@@ -1,110 +1,155 @@
 {% extends "front_base.html.twig" %}
 
-{% block title %}Dashboard - CVBien{% endblock %}
+{% block title %}
+    {% if edit %}
+        Dashboard - CVBien
+    {% else %}
+        CVBien - User page
+    {% endif %}
+{% endblock %}
 
 {% block header %}
-    {{ include('_header_dashboard.html.twig') }}
+    {% if edit %}
+        {{ include('_header_dashboard.html.twig') }}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
     {% if user is defined %}
 
-        {# Values #}
-        <input id="updateProfilePictureLink" name="updateProfilePictureLink" type="hidden"
-               value="{{ path('front_user_updateProfilePicture') }}">
-        <input id="updateBannerLink" name="updateBannerLink" type="hidden"
-               value="{{ path('front_user_updateBanner') }}">
-        <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
-        {# --- #}
+        {% if edit %}
+            {# Values #}
+            <input id="updateProfilePictureLink" name="updateProfilePictureLink" type="hidden"
+                   value="{{ path('front_user_updateProfilePicture') }}">
+            <input id="updateBannerLink" name="updateBannerLink" type="hidden"
+                   value="{{ path('front_user_updateBanner') }}">
+            <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
+            {# --- #}
+        {% endif %}
 
         {# Display banner/pictures #}
         <div id="userBanner" class="bg-img img-fluid"
              style="background-image: url({{ vich_uploader_asset(user, 'bannerImageFile') }})">
             {# Profil picture #}
-                <img id="profilePicture" class="border-fat rounded-circle profileImg mt-2" src="{{ vich_uploader_asset(user, 'imageFile') }}"/>
+            <img id="profilePicture" class="border-fat rounded-circle profileImg mt-2"
+                 src="{{ vich_uploader_asset(user, 'imageFile') }}"/>
             {# --- #}
         </div>
 
-        <div class="height-10 bg-dark">
-        </div>
-
-        <div class="container">
-            <div class="row">
-                {# Editer les éléments du profil #}
-
-                    <div class="mt-4">
-                        <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            Modifier
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <button id="btnInitCropProfile" class="dropdown-item" type="button"
-                                    data-toggle="modal"
-                                    data-target="#profilePictureModal">
-                                Avatar
-                            </button>
-                            <button id="btnInitCropBanner" class="dropdown-item" type="button"
-                                    data-toggle="modal"
-                                    data-target="#bannerModal">
-                                Banner
-                            </button>
-                        </div>
+        {% if edit %}
+            <div class="height-70 bg-dark">
+                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle ml-2 mt-2 mb-2"
+                        data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    Editer
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button id="btnInitCropProfile" class="dropdown-item" type="button"
+                            data-toggle="modal"
+                            data-target="#profilePictureModal">
+                        Avatar
+                    </button>
+                    <button id="btnInitCropBanner" class="dropdown-item" type="button"
+                            data-toggle="modal"
+                            data-target="#bannerModal">
+                        Bannière
+                    </button>
+                    <button id="btnInitCropBanner" class="dropdown-item" type="button"
+                            data-toggle=""
+                            data-target="">
+                        Ajouter un module
+                    </button>
+                </div>
                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#moduleModal">
                             Ajouter
                         </button>
-                    </div>
-
-                {# --- #}
             </div>
-        </div>
+        {% else %}
+            <div class="height-10 bg-dark"></div>
+        {% endif %}
 
         {# MODULE AREA - Zone des modules #}
         <div id="modContainer" class="container-fluid mt-5">
 
-            {# {% if user is defined %}
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Informations personnelles</h5>
-                            <p class="card-text">ici on peut rentrer pleins d'information concernant la personne.</p>
-                        </div>
-                    </div>
-               {% endif %}#}
-            {# Import des modules #}
+            {% if not edit %}{% if warningNotActive %}
+                <div class="alert alert-primary" role="alert">
+                    <b>Attention : </b> Votre profil n'est pas actif. Pour l'activer rendez vous dans vos parametres
+                    personnelles.
+                </div>
+            {% endif %}{% endif %}
 
+            {# Import des modules dans le GRID #}
+            <div class="grid">
             <div id="modGrid" class="grid">
 
+                {# Module de bienvenue #}
                 <div class="item">
                     <div class="item-content">
                         <div class="card">
-                            <div class="card-header">Contact</div>
+                            <div class="card-header">Bienvenue sur CVBien</div>
                             <div class="card-body">
-                                <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
-                                <p class="card-text">{{ user.proPhoneNumber }}</p>
-                                <p class="card-text">{{ user.adress }}, <br/>{{ user.cityCode }} {{ user.city }}</p>
+                                <p class="card-text">Remplissez vos information personnelles, pour voir s'afficher vos
+                                    modules</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {# <div class="item">
-                    <div class="item-content">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Liens</h5>
-                                {% for link in user.links %}
-                                    <p class="card-text"><a href="{{ link.url }}">{{ link.website }}
-                                            : {{ link.username }}</p>
-                                {% else %}
-                                    VIDE
-                                {% endfor %}
+                {# Module information personnelles #}
+                {% if user.firstname is not null and user.lastname is not null %}
+                    <div class="item">
+                        <div class="item-content">
+                            <div class="card">
+                                <div class="card-header">Informations personnelles</div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
+                                    {% if user.birthdate is not null %}
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ user.birthdate | date('d/m/y') }}</h6>
+                                    {% endif %}
+                                    {% if user.adress is not null and user.cityCode is not null and user.city is not null %}
+                                        <p class="card-text">
+                                            {{ user.adress }},<br/>
+                                            {{ user.cityCode }} {{ user.city }},
+                                            {% if user.country is not null %}
+                                                {{ user.country.name }}
+                                            {% endif %}
+                                        </p>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>#}
+                {% endif %}
+
+                {# Module liens #}
+                {% if user.links is not null %}
+                    <div class="item">
+                        <div class="item-content">
+                            <div class="card">
+                                <div class="card-header">Liens</div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        {% for link in user.links %}
+                                            <a href="{{ link.url }}">{{ link.website }}</a>
+                                            : {{ link.username }}<br/>
+                                        {% else %}
+                                            Pas de liens
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
 
             </div>
         </div>
         {# --- #}
+
+        {% if edit %}
+            {{ include('Front/_modal_profile_picture.html.twig') }}
+            {{ include('Front/_modal_banner_picture.html.twig') }}
+        {% endif %}
 
         {# ---- MODULE MODAL ---- #}
         {{ include('Front/module/_modal_modules.html.twig') }}
@@ -118,7 +163,11 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('app') }}
+    {% if edit %}
+        {{ encore_entry_script_tags('app') }}
+    {% else %}
+        {{ encore_entry_script_tags('app_offline') }}
+    {% endif %}
 {% endblock %}
 
 {% block footer %}
