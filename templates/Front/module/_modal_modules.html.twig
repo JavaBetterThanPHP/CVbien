@@ -8,7 +8,16 @@
                 </button>
             </div>
             <div class="modal-body">
-
+                {% for module in moduleList %}
+                    <button class="btn btn-link" onclick="selectModule('{{ module.name }}')">
+                        <div class="card" style="width: 10rem; display: inline-block">
+                            <div class="card-body">
+                                <i class="{{ module.faClass }} fa-2x"></i>
+                                <p class="card-text">Module {{ module.name }}</p>
+                            </div>
+                        </div>
+                    </button>
+                {% endfor %}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>

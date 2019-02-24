@@ -106,4 +106,8 @@ $('#btnInitCropBanner').click(function () {
     initCropBanner();
 });
 
+function selectModule(moduleName){
+    alert("you selected :" + moduleName);
+}
+
 
