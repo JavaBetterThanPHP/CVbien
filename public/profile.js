@@ -1,3 +1,6 @@
+const MODULE_TEXTE = "Texte";
+
+
 function initCropProfile() {
     var basic = $('#main-cropper').croppie({
         viewport: {width: 300, height: 300},
@@ -107,7 +110,29 @@ $('#btnInitCropBanner').click(function () {
 });
 
 function selectModule(moduleName){
-    alert("you selected :" + moduleName);
+    switch (moduleName) {
+        case MODULE_TEXTE :
+            $("#wysiwygModal").modal();
+            CKEDITOR.replace( 'editor1');
+            break;
+        default:
+            alert("error");
+    }
 }
 
+function addTextModule(data){
+    var text = data;
+    var element = document.createElement('div');
+    element.innerHTML =
+        "<div class=\"card\" style=\"width: 30rem;\">\n"+
+        "<div class=\"card-header\"></div>\n"+
+        "<div class=\"card-body\">\n"+
+        "<p class=\"card-text\">"+text+"</p>\n" +
+        "</div>\n" +
+        "</div>\n";
+    grid.add(element);
+    grid.layout();
+    $("#wysiwygModal").modal('hide');
+    $("#moduleModal").modal('hide');
 
+}
