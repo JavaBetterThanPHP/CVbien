@@ -196,6 +196,11 @@ class User implements UserInterface, \Serializable
      */
     private $date_derniere_connexion;
 
+    /**
+     * @ORM\Column(type="text", nullable=true)
+     */
+    private $userModulesGridHtmlString;
+
     public function setImageFile(File $image = null)
     {
         $this->imageFile = $image;
@@ -777,6 +782,18 @@ class User implements UserInterface, \Serializable
     public function setDateDerniereConnexion(?\DateTimeInterface $date_derniere_connexion): self
     {
         $this->date_derniere_connexion = $date_derniere_connexion;
+
+        return $this;
+    }
+
+    public function getUserModulesGridHtmlString(): ?string
+    {
+        return $this->userModulesGridHtmlString;
+    }
+
+    public function setUserModulesGridHtmlString(?string $userModulesGridHtmlString): self
+    {
+        $this->userModulesGridHtmlString = $userModulesGridHtmlString;
 
         return $this;
     }
