@@ -137,7 +137,7 @@
                                 <div class="card-body">
                                     <p class="card-text">
                                         {% for link in user.links %}
-                                            <a href="{{ link.url }}">{{ link.website }}</a>
+                                            <a href="{{ link.url }}" target="_blank">{{ link.website }}</a>
                                             : {{ link.username }}<br/>
                                         {% else %}
                                             Pas de liens
