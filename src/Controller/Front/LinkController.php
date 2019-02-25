@@ -67,7 +67,7 @@ class LinkController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
 
-            return $this->redirectToRoute('back_link_index', ['id' => $link->getId()]);
+            return $this->redirectToRoute('front_link_index', ['id' => $link->getId()]);
         }
 
         return $this->render('Front/link/edit.html.twig', [

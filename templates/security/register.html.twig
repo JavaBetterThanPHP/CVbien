@@ -3,7 +3,6 @@
 {% block title %}Sign up - CVBien{% endblock %}
 
 {% block content %}
-
     <link href="{{ asset('login.css') }}" rel="stylesheet">
     <div class="row moutain no-gutters min-100">
         <div class="col-md-8 col-lg-6 align-self-center">
@@ -12,15 +11,21 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-md-9 col-lg-8 mx-auto">
-                                <h1 class="h3 mb-3 font-weight-normal">Heureux de vous rencontrer !</h1>
+                                <h1 class="h3 mb-3 font-weight-normal">Please register :D</h1>
                                 {{ form_start(form) }}
-                                {{ form_row(form.firstname) }}
-                                {{ form_row(form.lastname) }}
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        {{ form_row(form.firstname) }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_row(form.lastname) }}
+                                    </div>
+                                </div>
                                 {{ form_row(form.email) }}
+                                {{ form_row(form.spaceName) }}
                                 {{ form_row(form.password.first) }}
                                 {{ form_row(form.password.second) }}
-
-                                <button class="btn-sm btn-primary" type="submit">S'inscrire</button>
+                                <button class="btn btn-sm btn-primary" type="submit">S'inscrire</button>
                                 {{ form_end(form) }}
                             </div>
                         </div>

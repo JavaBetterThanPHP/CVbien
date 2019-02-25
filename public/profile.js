@@ -1,3 +1,6 @@
+const MODULE_TEXTE = "Texte";
+
+
 function initCropProfile() {
     var basic = $('#main-cropper').croppie({
         viewport: {width: 300, height: 300},
@@ -38,48 +41,12 @@ function initCropProfile() {
                 data: fd,
                 processData: false,
                 contentType: false
-            }).done(function (data) {
+            }).done(function () {
                 $('#profilePicture').attr('src', URL.createObjectURL(result));
                 $('#profilePictureModal').modal('hide');
             });
         });
     });
-
-    function b64toBlob(b64Data, contentType, sliceSize) {
-        contentType = contentType || '';
-        sliceSize = sliceSize || 512;
-
-        var byteCharacters = atob(b64Data);
-        var byteArrays = [];
-
-        for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-            var slice = byteCharacters.slice(offset, offset + sliceSize);
-
-            var byteNumbers = new Array(slice.length);
-            for (var i = 0; i < slice.length; i++) {
-                byteNumbers[i] = slice.charCodeAt(i);
-            }
-
-            var byteArray = new Uint8Array(byteNumbers);
-
-            byteArrays.push(byteArray);
-        }
-
-        var blob = new Blob(byteArrays, {type: contentType});
-        return blob;
-    }
-
-    function urltoFile(url, filename, mimeType) {
-        return (fetch(url)
-                .then(function (res) {
-                    return res.arrayBuffer();
-                })
-                .then(function (buf) {
-                    return new File([buf], filename, {type: mimeType});
-                })
-        );
-    }
-
 }
 
 function initCropBanner() {
@@ -125,24 +92,12 @@ function initCropBanner() {
                 data: fd,
                 processData: false,
                 contentType: false
-            }).done(function (data) {
+            }).done(function () {
                 $("#userBanner").css('background-image', 'url("' + URL.createObjectURL(result) + '")');
                 $('#bannerModal').modal('hide');
             });
         });
     });
-
-    function urltoFile(url, filename, mimeType) {
-        return (fetch(url)
-                .then(function (res) {
-                    return res.arrayBuffer();
-                })
-                .then(function (buf) {
-                    return new File([buf], filename, {type: mimeType});
-                })
-        );
-    }
-
 }
 
 
@@ -154,4 +109,38 @@ $('#btnInitCropBanner').click(function () {
     initCropBanner();
 });
 
+function selectModule(moduleName){
+    switch (moduleName) {
+        case MODULE_TEXTE :
+            $("#wysiwygModal").modal();
+            CKEDITOR.replace( 'editor1');
+            break;
+        default:
+            alert("error");
+    }
+}
 
+function addTextModule(data){
+    var text = data;
+    var element = document.createElement('div');
+    element.style.width = "30rem";
+    element.innerHTML =
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n"+
+        "<div class=\"card\" style=\"width: 30rem;\">\n"+
+        "<div class=\"card-header\">" +
+        "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+        "</div>\n"+
+        "<div class=\"card-body\">\n"+
+        "<p class=\"card-text\">"+text+"</p>\n" +
+        "</div>\n" +
+        "</div>\n" +
+        "</div>\n";
+    grid.add(element,{index:0});
+    grid.layout();
+    $("#wysiwygModal").modal('hide');
+    $("#moduleModal").modal('hide');
+}
+
+function deleteModule(element){
+    grid.remove(element.parentElement.parentElement.parentElement.parentElement, {removeElements:true});
+}

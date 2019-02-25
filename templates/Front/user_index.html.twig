@@ -1,130 +1,165 @@
 {% extends "front_base.html.twig" %}
 
-{% block title %}Dashboard - CVBien{% endblock %}
+{% block title %}
+    {% if edit %}
+        Dashboard - CVBien
+    {% else %}
+        CVBien - {{ user.spaceName | default('User page') }}
+    {% endif %}
+{% endblock %}
 
 {% block header %}
-    {{ include('_header_dashboard.html.twig') }}
+    {% if edit %}
+        {{ include('_header_dashboard.html.twig') }}
+    {% endif %}
 {% endblock %}
 
 {% block content %}
     {% if user is defined %}
 
-        {# Values #}
-        <input id="updateProfilePictureLink" name="updateProfilePictureLink" type="hidden"
-               value="{{ path('front_user_updateProfilePicture') }}">
-        <input id="updateBannerLink" name="updateBannerLink" type="hidden"
-               value="{{ path('front_user_updateBanner') }}">
-        <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
-        {# --- #}
+        {% if edit %}
+            {# Values #}
+            <input id="updateProfilePictureLink" name="updateProfilePictureLink" type="hidden"
+                   value="{{ path('front_user_updateProfilePicture') }}">
+            <input id="updateBannerLink" name="updateBannerLink" type="hidden"
+                   value="{{ path('front_user_updateBanner') }}">
+            <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
+            {# --- #}
+        {% endif %}
 
         {# Display banner/pictures #}
-        <div id="userBanner" class="bg-img"
+        <div id="userBanner" class="bg-img img-fluid"
              style="background-image: url({{ vich_uploader_asset(user, 'bannerImageFile') }})">
+            {# Profil picture #}
+            <img id="profilePicture" class="border-fat rounded-circle profileImg mt-2"
+                 src="{{ vich_uploader_asset(user, 'imageFile') }}"/>
+            {# --- #}
         </div>
 
-        {# Under banner #}
-        <div class="height-150 bg-dark">
-            <div class="container d-flex justify-content-between">
-
-                {# Profil picture #}
-                <div class="">
-                    <img id="profilePicture" class="border-fat rounded-circle image-120-120 mt-2"
-                         src="{{ vich_uploader_asset(user, 'imageFile') }}"/>
+        {% if edit %}
+            <div class="height-70 bg-dark">
+                <button type="button" class="btn btn-sm btn-secondary dropdown-toggle ml-2 mt-2 mb-2"
+                        data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                    Editer
+                </button>
+                <div class="dropdown-menu dropdown-menu-right">
+                    <button id="btnInitCropProfile" class="dropdown-item" type="button"
+                            data-toggle="modal"
+                            data-target="#profilePictureModal">
+                        Avatar
+                    </button>
+                    <button id="btnInitCropBanner" class="dropdown-item" type="button"
+                            data-toggle="modal"
+                            data-target="#bannerModal">
+                        Bannière
+                    </button>
                 </div>
-                {# --- #}
-
-                {# Profil picture #}
-                <div class="text-light flex-fill">
-                    <p>
-                        <b>{{ user.firstname }} {{ user.lastname }}</b>
-                    </p>
-                    <p>
-                        <b>Tél : </b>
-                        {{ user.phoneNumber }}
-                        - <b>Pro : </b>
-                        {{ user.proPhoneNumber }}
-                    </p>
-                    <p>
-                        <b>Ville : </b>
-                        {{ user.city }}
-                        {% if user.country is not null %}
-                            - <b>Country : </b>
-                            {{ user.country.name }}
-                        {% endif %}
-                    </p>
-                </div>
-                {# --- #}
-
-                {# Editer les éléments du profil #}
-                <div class="">
-                    <div class="btn-group mt-4">
-                        <button type="button" class="btn btn-outline-light dropdown-toggle" data-toggle="dropdown"
-                                aria-haspopup="true" aria-expanded="false">
-                            Edit page
-                        </button>
-                        <div class="dropdown-menu dropdown-menu-right">
-                            <button id="btnInitCropProfile" class="dropdown-item" type="button"
-                                    data-toggle="modal"
-                                    data-target="#profilePictureModal">
-                                Avatar
-                            </button>
-                            <button id="btnInitCropBanner" class="dropdown-item" type="button"
-                                    data-toggle="modal"
-                                    data-target="#bannerModal">
-                                Banner
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                {# --- #}
+                <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#moduleModal">
+                    Ajouter
+                </button>
             </div>
-        </div>
+        {% else %}
+            <div class="height-10 bg-dark"></div>
+        {% endif %}
 
         {# MODULE AREA - Zone des modules #}
-        <div class="container mt-5">
+        <div id="modContainer" class="container-fluid mt-5">
 
-            {# {% if user is defined %}
-                    <div class="card" style="width: 18rem;">
-                        <div class="card-body">
-                            <h5 class="card-title">Informations personnelles</h5>
-                            <p class="card-text">ici on peut rentrer pleins d'information concernant la personne.</p>
-                        </div>
-                    </div>
-               {% endif %}#}
-            {# Import des modules #}
+            {% if not edit and warningNotActive %}
+                <div class="alert alert-primary" role="alert">
+                    <b>Attention : </b> Votre profil n'est pas actif. Pour l'activer rendez vous dans vos parametres
+                    personnelles.
+                </div>
+            {% endif %}
 
-            <div class="grid">
+            {# Import des modules dans le GRID #}
+            <div id="modGrid" class="grid">
 
+                {# Module de bienvenue #}
                 <div class="item">
                     <div class="item-content">
                         <div class="card">
+                            <div class="card-header">
+                                Bienvenue sur CVBien
+                                {% if edit %}
+                                    <button class="btn btn-link float-right" onclick="deleteModule(this)"><i class="far fa-trash-alt"></i></button>
+                                {% endif %}
+                            </div>
                             <div class="card-body">
-                                <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted">{{ user.birthdate | date('d/m/y') }}</h6>
-                                <p class="card-text">{{ user.adress }}, <br/>{{ user.cityCode }} {{ user.city }}
+                                <p class="card-text">Remplissez vos information personnelles, pour voir s'afficher vos
+                                    modules</p>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                {# <div class="item">
-                    <div class="item-content">
-                        <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Liens</h5>
-                                {% for link in user.links %}
-                                    <p class="card-text"><a href="{{ link.url }}">{{ link.website }}
-                                            : {{ link.username }}</p>
-                                {% else %}
-                                    VIDE
-                                {% endfor %}
+                {# Module information personnelles #}
+                {% if user.firstname is not null and user.lastname is not null %}
+                    <div class="item">
+                        <div class="item-content">
+                            <div class="card">
+                                <div class="card-header">Informations personnelles
+                                    {% if edit %}
+                                        <button class="btn btn-link float-right" onclick="deleteModule(this)"><i class="far fa-trash-alt"></i></button>
+                                    {% endif %}
+                                </div>
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
+                                    {% if user.birthdate is not null %}
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ user.birthdate | date('d/m/y') }}</h6>
+                                    {% endif %}
+                                    {% if user.adress is not null and user.cityCode is not null and user.city is not null %}
+                                        <p class="card-text">
+                                            {{ user.adress }},<br/>
+                                            {{ user.cityCode }} {{ user.city }},
+                                            {% if user.country is not null %}
+                                                {{ user.country.name }}
+                                            {% endif %}
+                                        </p>
+                                    {% endif %}
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>#}
+                {% endif %}
+
+                {# Module liens #}
+                {% if user.links is not null %}
+                    <div class="item">
+                        <div class="item-content">
+                            <div class="card">
+                                <div class="card-header">Liens
+                                    {% if edit %}
+                                        <button class="btn btn-link float-right" onclick="deleteModule(this)"><i class="far fa-trash-alt"></i></button>
+                                    {% endif %}
+                                </div>
+                                <div class="card-body">
+                                    <p class="card-text">
+                                        {% for link in user.links %}
+                                            <a href="{{ link.url }}" target="_blank">{{ link.website }}</a>
+                                            : {{ link.username }}<br/>
+                                        {% else %}
+                                            Pas de liens
+                                        {% endfor %}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
 
             </div>
         </div>
+        {# --- #}
+
+        {% if edit %}
+            {{ include('Front/_modal_profile_picture.html.twig') }}
+            {{ include('Front/_modal_banner_picture.html.twig') }}
+        {% endif %}
+
+        {# ---- MODULE MODAL ---- #}
+        {{ include('Front/module/_modal_modules.html.twig') }}
         {# --- #}
 
         {# ---- MODAL PICTURES/BANNERS ---- #}
@@ -135,7 +170,11 @@
 {% endblock %}
 
 {% block javascripts %}
-    {{ encore_entry_script_tags('app') }}
+    {% if edit %}
+        {{ encore_entry_script_tags('app') }}
+    {% else %}
+        {{ encore_entry_script_tags('app_offline') }}
+    {% endif %}
 {% endblock %}
 
 {% block footer %}
