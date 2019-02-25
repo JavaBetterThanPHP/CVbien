@@ -8,6 +8,7 @@
                 </button>
             </div>
             <div class="modal-body">
+                {% if moduleList is defined %}
                 {% for module in moduleList %}
                     <button class="btn btn-link" onclick="selectModule('{{ module.name }}')">
                         <div class="card" style="width: 10rem; display: inline-block">
@@ -18,6 +19,7 @@
                         </div>
                     </button>
                 {% endfor %}
+                {% endif %}
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
