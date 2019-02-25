@@ -126,7 +126,9 @@ function addTextModule(data){
     element.style.width = "30rem";
     element.innerHTML =
         "<div class=\"card\" style=\"width: 30rem;\">\n"+
-        "<div class=\"card-header\"></div>\n"+
+        "<div class=\"card-header\">" +
+        "<button class=\"btn btn-link float-right\" onclick=\"deleteModule()\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+        "</div>\n"+
         "<div class=\"card-body\">\n"+
         "<p class=\"card-text\">"+text+"</p>\n" +
         "</div>\n" +
@@ -135,5 +137,8 @@ function addTextModule(data){
     grid.layout();
     $("#wysiwygModal").modal('hide');
     $("#moduleModal").modal('hide');
+}
 
+function deleteModule(element){
+    grid.remove(element.parentElement.parentElement.parentElement.parentElement, {removeElements:true});
 }

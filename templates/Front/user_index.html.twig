@@ -66,12 +66,12 @@
         {# MODULE AREA - Zone des modules #}
         <div id="modContainer" class="container-fluid mt-5">
 
-            {% if not edit %}{% if warningNotActive %}
+            {% if not edit and warningNotActive %}
                 <div class="alert alert-primary" role="alert">
                     <b>Attention : </b> Votre profil n'est pas actif. Pour l'activer rendez vous dans vos parametres
                     personnelles.
                 </div>
-            {% endif %}{% endif %}
+            {% endif %}
 
             {# Import des modules dans le GRID #}
             <div id="modGrid" class="grid">
@@ -80,7 +80,12 @@
                 <div class="item">
                     <div class="item-content">
                         <div class="card">
-                            <div class="card-header">Bienvenue sur CVBien</div>
+                            <div class="card-header">
+                                Bienvenue sur CVBien
+                                {% if edit %}
+                                    <button class="btn btn-link float-right" onclick="deleteModule(this)"><i class="far fa-trash-alt"></i></button>
+                                {% endif %}
+                            </div>
                             <div class="card-body">
                                 <p class="card-text">Remplissez vos information personnelles, pour voir s'afficher vos
                                     modules</p>
@@ -94,7 +99,10 @@
                     <div class="item">
                         <div class="item-content">
                             <div class="card">
-                                <div class="card-header">Informations personnelles</div>
+                                <div class="card-header">Informations personnelles
+                                    {% if edit %}
+                                        <button class="btn btn-link float-right" onclick="deleteModule(this)"><i class="far fa-trash-alt"></i></button>
+                                    {% endif %}                                </div>
                                 <div class="card-body">
                                     <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
                                     {% if user.birthdate is not null %}
@@ -120,7 +128,11 @@
                     <div class="item">
                         <div class="item-content">
                             <div class="card">
-                                <div class="card-header">Liens</div>
+                                <div class="card-header">Liens
+                                    {% if edit %}
+                                        <button class="btn btn-link float-right" onclick="deleteModule(this)"><i class="far fa-trash-alt"></i></button>
+                                    {% endif %}
+                                </div>
                                 <div class="card-body">
                                     <p class="card-text">
                                         {% for link in user.links %}

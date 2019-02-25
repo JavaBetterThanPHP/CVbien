@@ -9,16 +9,16 @@
             </div>
             <div class="modal-body">
                 {% if moduleList is defined %}
-                {% for module in moduleList %}
-                    <button class="btn btn-link" onclick="selectModule('{{ module.name }}')">
-                        <div class="card" style="width: 10rem; display: inline-block">
-                            <div class="card-body">
-                                <i class="{{ module.faClass }} fa-2x"></i>
-                                <p class="card-text">Module {{ module.name }}</p>
+                    {% for module in moduleList %}
+                        <button class="btn btn-link" onclick="selectModule('{{ module.name }}')">
+                            <div class="card" style="width: 10rem; display: inline-block">
+                                <div class="card-body">
+                                    <i class="{{ module.faClass }} fa-2x"></i>
+                                    <p class="card-text">Module {{ module.name }}</p>
+                                </div>
                             </div>
-                        </div>
-                    </button>
-                {% endfor %}
+                        </button>
+                    {% endfor %}
                 {% endif %}
             </div>
             <div class="modal-footer">
