@@ -1,0 +1,58 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}CVBien - Recherche{% endblock %}
+
+{% block header %}
+    {{ include('_header_dashboard.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+        <div class="row mt-4 mb-4">
+            <div class="col-lg-2">
+                <div class="bg-light border p-3">
+                    <div class="header-filter mb-3"><b>Filtres</b></div>
+                    <p>- Ramener les filtres à la maison</p>
+                    <p>- Allez les bleus, allez !</p>
+                    <p>- Casse l'appli comme lolo, lolorenzo</p>
+
+                </div>
+            </div>
+            <div class="col-lg-9">
+                <h1 class="h1">Recherche de profils</h1>
+                <table id="search_page_table" class="table table-striped display mt-5 mb-5">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Country</th>
+                        <th>Age</th>
+                        <th>Statut</th>
+                        <th>Link</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for profile in profileList %}
+                        <tr>
+                            <td>{{ profile.lastname }} {{ profile.firstname }}</td>
+                            <td>{{ profile.country.name | default("-") }}</td>
+                            <td>{{ profile.birthdate | age }}</td>
+                            <td>{{ profile.status | default("-") }}</td>
+                            <td><a class="btn btn-link" target="_blank"
+                                   href="{{ path('app_profilView', {'spaceName': profile.spaceName}) }}">{{ profile.spaceName }}</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Aucun resultat</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('search_pages_datatables.js') }}"></script>
+{% endblock %}
