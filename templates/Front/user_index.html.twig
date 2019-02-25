@@ -4,7 +4,7 @@
     {% if edit %}
         Dashboard - CVBien
     {% else %}
-        CVBien - User page
+        CVBien - {{ user.spaceName | default('User page') }}
     {% endif %}
 {% endblock %}
 
