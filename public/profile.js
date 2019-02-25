@@ -125,12 +125,14 @@ function addTextModule(data){
     var element = document.createElement('div');
     element.style.width = "30rem";
     element.innerHTML =
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n"+
         "<div class=\"card\" style=\"width: 30rem;\">\n"+
         "<div class=\"card-header\">" +
-        "<button class=\"btn btn-link float-right\" onclick=\"deleteModule()\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+        "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
         "</div>\n"+
         "<div class=\"card-body\">\n"+
         "<p class=\"card-text\">"+text+"</p>\n" +
+        "</div>\n" +
         "</div>\n" +
         "</div>\n";
     grid.add(element,{index:0});
