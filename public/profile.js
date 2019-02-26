@@ -142,8 +142,8 @@ function addTextModule(data){
         "</div>\n";
     grid.add(element,{index:0});
     grid.layout();
-    $("#wysiwygModal").modal('hide');
     $("#moduleModal").modal('hide');
+    $("#wysiwygModal").modal('hide');
 }
 
 function deleteModule(element){
@@ -151,5 +151,29 @@ function deleteModule(element){
 }
 
 function addCompetencesModule(style){
-    alert( "lol");
+    var json = JSON.parse(document.querySelector(".user-proglanguage").dataset.userproglanguage);
+    body="";
+    json.forEach(function(obj){
+        body+="<p class=\"card-text\">";
+        body+="<div class=\"progress\">";
+        body+="<div class=\"progress-bar progress-bar-striped progress-bar-animated bg-success\" role=\"progressbar\" aria-valuenow=\""+(obj.level)*10+"\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+(obj.level)*10+"%\"><strong>"+obj.progLanguage.name+"</strong></div>\n";
+        body+="</div></p>";
+    });
+    var element = document.createElement('div');
+    element.style.width = "30rem";
+    element.innerHTML =
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n"+
+        "<div class=\"card\" style=\"width: 30rem;\">\n"+
+        "<div class=\"card-header\">Compétences" +
+        "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+        "</div>\n"+
+        "<div class=\"card-body\">\n"+body+
+        "</div>\n" +
+        "</div>\n" +
+        "</div>\n";
+    alert(element.innerHTML);
+    grid.add(element,{index:0});
+    grid.layout();
+    $("#moduleModal").modal('hide');
+    $("#competencesModal").modal('hide');
 }
