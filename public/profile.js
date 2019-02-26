@@ -1,4 +1,6 @@
 const MODULE_TEXTE = "Texte";
+const MODULE_COMPETENCES = "Competences";
+
 
 
 function initCropProfile() {
@@ -115,6 +117,9 @@ function selectModule(moduleName){
             $("#wysiwygModal").modal();
             CKEDITOR.replace( 'editor1');
             break;
+        case MODULE_COMPETENCES :
+            $("#competencesModal").modal();
+            break;
         default:
             alert("error");
     }
@@ -143,4 +148,8 @@ function addTextModule(data){
 
 function deleteModule(element){
     grid.remove(element.parentElement.parentElement.parentElement.parentElement, {removeElements:true});
+}
+
+function addCompetencesModule(style){
+    alert( "lol");
 }

@@ -166,6 +166,12 @@
         {{ include('Front/_modal_profile_picture.html.twig') }}
         {{ include('Front/_modal_banner_picture.html.twig') }}
         {# ----- #}
+
+        {# ---- USER PROG LANGUAGE DATA ---- #}
+        <div class="user-proglanguage" data-userProgLanguage="{{ user.jsonUserProgLanguages | json_encode}}">
+        </div>
+        {# ----- #}
+
     {% endif %}
 {% endblock %}
 

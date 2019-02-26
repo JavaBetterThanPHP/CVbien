@@ -11,7 +11,7 @@
                 {% if moduleList is defined %}
                     {% for module in moduleList %}
                         <button class="btn btn-link" onclick="selectModule('{{ module.name }}')">
-                            <div class="card" style="width: 10rem; display: inline-block">
+                            <div class="card" style="width: 12rem; display: inline-block">
                                 <div class="card-body">
                                     <i class="{{ module.faClass }} fa-2x"></i>
                                     <p class="card-text">Module {{ module.name }}</p>
@@ -29,4 +29,5 @@
 </div>
 {# ---- MODULES MODALS ---- #}
     {{ include('Front/module/_modal_wysiwyg.html.twig') }}
+    {{ include('Front/module/_modal_competences.html.twig') }}
 {# --- #}

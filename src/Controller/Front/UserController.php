@@ -42,7 +42,7 @@ class UserController extends AbstractController
 
 
     /**
-     * @Route("/filePicture", name="updateProfilePicture", methods={"POST"})
+     * @Route("/updateProfilePicture", name="updateProfilePicture", methods={"POST"})
      *
      * @param Request $request
      * @return Response
