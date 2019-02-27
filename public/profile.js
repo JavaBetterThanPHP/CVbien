@@ -171,7 +171,6 @@ function addCompetencesModule(style){
         "</div>\n" +
         "</div>\n" +
         "</div>\n";
-    alert(element.innerHTML);
     grid.add(element,{index:0});
     grid.layout();
     $("#moduleModal").modal('hide');
