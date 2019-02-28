@@ -1,0 +1,65 @@
+{% extends 'front_base.html.twig' %}
+
+{% block title %}CVBien - Recherche{% endblock %}
+
+{% block header %}
+    {{ include('_header_dashboard.html.twig') }}
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid">
+
+        {# Pour apres les filtres avancé #}
+        {# <div class="row mt-4 mb-4">
+            <div id="accordion" class="col-lg-10 offset-1 border rounded">
+                <div>
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            Filter
+                        </button>
+                </div>
+                <div id="collapseOne" class="collapse show mt-2" aria-labelledby="headingOne"
+                     data-parent="#accordion">
+                    <form></form>
+                </div>
+            </div>
+        </div> #}
+        <div class="row mt-4 mb-4">
+            <div class="col-lg-10 offset-1">
+                <h1 class="h1">Recherche de profils</h1>
+                <table id="search_page_table" class="table table-bordered table-striped display mt-5 mb-5">
+                    <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Country</th>
+                        <th>Age</th>
+                        <th>Statut</th>
+                        <th>Link</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for profile in profileList %}
+                        <tr>
+                            <td>{{ profile.lastname }} {{ profile.firstname }}</td>
+                            <td>{{ profile.country.name | default("-") }}</td>
+                            <td>{{ profile.birthdate | age }}</td>
+                            <td>{{ profile.status | default("-") }}</td>
+                            <td><a class="btn btn-link" target="_blank"
+                                   href="{{ path('app_profilView', {'spaceName': profile.spaceName}) }}">{{ profile.spaceName }}</a>
+                            </td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5">Aucun resultat</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('search_pages_datatables.js') }}"></script>
+{% endblock %}

@@ -8,6 +8,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -591,6 +594,21 @@ class User implements UserInterface, \Serializable
     public function getUserProgLanguages(): Collection
     {
         return $this->userProgLanguages;
+    }
+
+    public function getJsonUserProgLanguages()
+    {
+        //$encoder = new JsonEncoder();
+        //$normalizer = new ObjectNormalizer();
+        //$serializer = new Serializer(array($normalizer), array($encoder));
+        //return $serializer->serialize($this->userProgLanguages->toArray(), 'json');
+        // return json_encode($this.$this->getUserProgLanguages()->toArray());
+        //return json_encode($this->getUserProgLanguages()->toArray());
+        //return ($this->getUserProgLanguages())->toArray();
+        //return $this->toArray();
+        $serializer = new Serializer(array(new ObjectNormalizer()));
+        $data = $serializer->normalize($this->getUserProgLanguages(), null, ['attributes' => ['progLanguage' => ['name'],'level']]);
+        return $data;
     }
 
     public function addUserProgLanguage(UserProgLanguage $userProgLanguage): self

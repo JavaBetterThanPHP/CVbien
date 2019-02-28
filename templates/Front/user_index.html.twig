@@ -107,7 +107,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
                                     {% if user.birthdate is not null %}
-                                        <h6 class="card-subtitle mb-2 text-muted">{{ user.birthdate | date('d/m/y') }}</h6>
+                                        <h6 class="card-subtitle mb-2 text-muted">{{ user.birthdate | age }} ans</h6>
                                     {% endif %}
                                     {% if user.adress is not null and user.cityCode is not null and user.city is not null %}
                                         <p class="card-text">
@@ -166,6 +166,12 @@
         {{ include('Front/_modal_profile_picture.html.twig') }}
         {{ include('Front/_modal_banner_picture.html.twig') }}
         {# ----- #}
+
+        {# ---- USER PROG LANGUAGE DATA ---- #}
+        <div class="user-proglanguage" data-userProgLanguage="{{ user.jsonUserProgLanguages | json_encode}}">
+        </div>
+        {# ----- #}
+
     {% endif %}
 {% endblock %}
 
