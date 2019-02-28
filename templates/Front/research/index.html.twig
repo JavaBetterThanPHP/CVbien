@@ -8,19 +8,26 @@
 
 {% block content %}
     <div class="container-fluid">
-        <div class="row mt-4 mb-4">
-            <div class="col-lg-2">
-                <div class="bg-light border p-3">
-                    <div class="header-filter mb-3"><b>Filtres</b></div>
-                    <p>- Ramener les filtres à la maison</p>
-                    <p>- Allez les bleus, allez !</p>
-                    <p>- Casse l'appli comme lolo, lolorenzo</p>
 
+        {# Pour apres les filtres avancé #}
+        {# <div class="row mt-4 mb-4">
+            <div id="accordion" class="col-lg-10 offset-1 border rounded">
+                <div>
+                        <button class="btn btn-link" data-toggle="collapse" data-target="#collapseOne"
+                                aria-expanded="true" aria-controls="collapseOne">
+                            Filter
+                        </button>
+                </div>
+                <div id="collapseOne" class="collapse show mt-2" aria-labelledby="headingOne"
+                     data-parent="#accordion">
+                    <form></form>
                 </div>
             </div>
-            <div class="col-lg-9">
+        </div> #}
+        <div class="row mt-4 mb-4">
+            <div class="col-lg-10 offset-1">
                 <h1 class="h1">Recherche de profils</h1>
-                <table id="search_page_table" class="table table-striped display mt-5 mb-5">
+                <table id="search_page_table" class="table table-bordered table-striped display mt-5 mb-5">
                     <thead>
                     <tr>
                         <th>Name</th>
