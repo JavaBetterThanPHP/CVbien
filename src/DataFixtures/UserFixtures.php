@@ -36,6 +36,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 ->setRoles(["ROLE_USER"])
                 ->setAdress($faker -> address)
                 ->setCity($faker -> city)
+                ->setSpaceName($faker->unique()->word)
                 ->setCityCode($faker ->numberBetween($min = 1000, $max = 9000))
                 ->setStatus($faker->randomElement($array = array ('Freelance', 'CDI', 'CDD' , 'Libre' , 'Prestation')))
                 ->setType("DEV")
