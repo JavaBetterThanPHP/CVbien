@@ -65,7 +65,11 @@
         </tr>
         <tr>
             <th>Country</th>
-            <td>{{ user_account.country.name }}</td>
+            <td>
+            {% if user_account.country is not null %}
+            {{ user_account.country.name }}
+            {% endif %}
+            </td>
         </tr>
         <tr>
             <th>Status</th>
