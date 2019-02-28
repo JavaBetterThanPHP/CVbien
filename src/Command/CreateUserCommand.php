@@ -35,7 +35,8 @@
             $this   ->setDescription('Creates a new user')
                     ->setHelp('This command allows you to create a user')
                     ->addArgument('email', InputArgument::REQUIRED, 'The email of the user.')
-                    ->addArgument('password',InputArgument::OPTIONAL, 'User password')
+                    ->addArgument('password',InputArgument::REQUIRED, 'User password')
+                    ->addArgument('role',InputArgument::OPTIONAL, 'Role User')
             ;
         }
 
@@ -53,13 +54,19 @@
 
             $email = $input->getArgument('email');
             $passwordToEncode = $input->getArgument('password');
+
             $user = new User();
             $password = $this->passwordEncoder->encodePassword($user, $passwordToEncode);
 
             $user->setEmail($email);
             $user->setPassword($password);
-            $user->setRoles(['ROLE_USER']);
+            $user->setSpaceName(bin2hex(random_bytes(5)));
 
+            if (($input->getArgument('role')) == 'admin'){
+                $user->setRoles(['ROLE_ADMIN']);
+            }else{
+                $user->setRoles(['ROLE_USER']);
+            }
 
             $em = $this->objectManager;
             $em->persist($user);
