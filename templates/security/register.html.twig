@@ -23,8 +23,14 @@
                                 </div>
                                 {{ form_row(form.email) }}
                                 {{ form_row(form.spaceName) }}
-                                {{ form_row(form.password.first) }}
-                                {{ form_row(form.password.second) }}
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        {{ form_row(form.password.first) }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_row(form.password.second) }}
+                                    </div>
+                                </div>
                                 <button class="btn btn-sm btn-primary" type="submit">S'inscrire</button>
                                 {{ form_end(form) }}
                             </div>
