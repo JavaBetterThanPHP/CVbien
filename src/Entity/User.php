@@ -8,7 +8,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -607,7 +606,7 @@ class User implements UserInterface, \Serializable
         //return ($this->getUserProgLanguages())->toArray();
         //return $this->toArray();
         $serializer = new Serializer(array(new ObjectNormalizer()));
-        $data = $serializer->normalize($this->getUserProgLanguages(), null, ['attributes' => ['progLanguage' => ['name'],'level']]);
+        $data = $serializer->normalize($this->getUserProgLanguages(), null, ['attributes' => ['progLanguage' => ['name'], 'level']]);
         return $data;
     }
 
@@ -738,6 +737,23 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
+
+    /**
      * @return Collection|UserSociety[]
      */
     public function getUserSocieties(): Collection
@@ -821,6 +837,22 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    //TODO searialize all user properties just to be sure
+    public function getFullName(): ?string
+    {
+        return $this->getFirstname() . ' ' . $this->getLastname();
+    }
+
+    public function getProfilePicturePath(): ?string
+    {
+        return '/images/profilePictures/' . $this->getProfilePicture();
+    }
+
+    /**
+     * @return null|string
+     */
+    public function __toString()
+    {
+        return $this->getEmail();
+    }
 
 }

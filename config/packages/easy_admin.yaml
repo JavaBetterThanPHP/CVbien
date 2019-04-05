@@ -1,0 +1,191 @@
+easy_admin:
+
+  # Liste des actions
+  list:
+    actions: ['edit', 'search', '-delete']
+
+  # Format des dates
+  formats:
+    date: 'd/m/Y'
+    time: 'H:i'
+    datetime: 'd/m/Y H:i:s'
+
+  # Titre
+  site_name: 'CV Bien <em style="font-size: 80%;">Admininistration.</em>'
+
+  # Informations concernant l'utilisateur courant
+  user:
+    name_property_path: 'fullName'
+    avatar_property_path: 'getProfilePicturePath'
+
+  # Design
+  design:
+    brand_color: '#2331F0'
+    assets:
+      favicon: 'favicon.png'
+
+    # Configuration du menu
+    menu:
+    - label: 'Users'
+      icon: 'users'
+      children:
+      - { entity: 'User', label: 'Account information' }
+      - { entity: 'UserDiploma', label: 'Diploma' }
+      - { entity: 'UserLink', label: 'Link' }
+
+    - label: 'Referential'
+      icon: 'cog'
+      children:
+      - { entity: 'Country', label: 'Countries' }
+      - { entity: 'Diploma', label: 'Diplomas' }
+      - { entity: 'JobType', label: 'Job type' }
+      - { entity: 'Language', label: 'Language' }
+      - { entity: 'ProgLanguage', label: 'Programming Language' }
+      - { entity: 'Society', label: 'Society' }
+
+
+  # Les entités concernés
+  entities:
+
+    # --- Parametrage User ---
+    User:
+      class: App\Entity\User
+      list:
+        fields: ['spaceName', 'email', 'firstname', 'lastname', 'birthdate', 'isActive', 'isSearchable']
+        sort: ['spaceName', 'ASC']
+      edit:
+        fields:
+        - { type: 'tab', label: 'Account' }
+        - 'email'
+        - 'spaceName'
+        - 'isActive'
+        - 'isSearchable'
+        - { type: 'tab', label: 'Personal' }
+        - 'firstname'
+        - 'lastname'
+        - { property: 'birthdate', type: 'birthday', label: 'Birthdate'}
+        - { type: 'tab', label: 'Contact' }
+        - { type: 'group', columns: 6, label: 'Address'}
+        - { property: 'adress', type: 'text', label: 'Address'}
+        - 'city'
+        - 'cityCode'
+        - 'country'
+        - { type: 'group', columns: 6, label: 'Phone'}
+        - 'phoneNumber'
+        - 'proPhoneNumber'
+        - { type: 'tab', label: 'Situation' }
+        - 'status'
+        - 'type'
+
+    # --- Parametrage User Diploma ---
+    UserDiploma:
+      class: App\Entity\UserDiploma
+      #list:
+       # fields: ['diploma']
+        #sort: ['label', 'ASC']
+      #edit:
+       # fields:
+        #- 'label'
+
+    # --- Parametrage JobType ---
+    JobType:
+      class: App\Entity\JobType
+      list:
+        fields: ['label']
+        sort: ['label', 'ASC']
+      edit:
+        fields:
+        - 'label'
+
+    # --- Parametrage Diploma ---
+    Diploma:
+      class: App\Entity\Diploma
+      list:
+        fields: ['title', 'level', 'school',' country', 'isInternational']
+        sort: ['title', 'ASC']
+      edit:
+        fields:
+        - 'title'
+        - 'level'
+        - 'school'
+        - 'country'
+        - 'isInternational'
+
+    # --- Parametrage Pays ---
+    Country:
+      class: App\Entity\Country
+      list:
+        fields: ['name', 'users', 'id']
+        sort: ['name', 'ASC']
+      edit:
+        fields:
+        - 'name'
+
+    # --- Parametrage Société ---
+    Society:
+      class: App\Entity\Society
+      list:
+        fields: ['name', 'adress', 'city', 'cityCode', 'country']
+        sort: ['name', 'ASC']
+      edit:
+        fields:
+        - 'name'
+        - 'adress'
+        - 'city'
+        - 'cityCode'
+        - 'country'
+
+    # --- Parametrage Language ---
+    Language:
+      class: App\Entity\Language
+      list:
+        fields: ['name']
+        sort: ['name', 'ASC']
+      edit:
+        fields:
+        - 'name'
+
+    # --- Parametrage ProgTechno ---
+    ProgTechnology:
+      class: App\Entity\ProgTechnology
+      list:
+        fields: ['label']
+        sort: ['label', 'ASC']
+      edit:
+        fields:
+        - 'label'
+
+    # --- Parametrage ProgLanguage ---
+    ProgLanguage:
+      class: App\Entity\ProgLanguage
+      list:
+        fields: ['name', 'type', 'parentProgLanguage', 'childProgLanguages']
+        sort: ['name', 'ASC']
+      edit:
+        fields:
+        - 'name'
+        - 'type'
+        - 'parentProgLanguage'
+        - 'childProgLanguages'
+
+    # --- Parametrage Link ---
+    UserLink:
+      class: App\Entity\Link
+      list:
+        fields: ['username', 'website', 'url', 'name']
+        sort: ['username', 'ASC']
+      edit:
+        fields:
+        - 'username'
+        - 'website'
+        - 'url'
+        - 'name'
+
+    #UserLanguage:
+    #  class: App\Entity\UserLanguage
+    #UserProject:
+    #  class: App\Entity\UserProject
+    #UserSociety:
+    #  class: App\Entity\UserSociety
+
+
