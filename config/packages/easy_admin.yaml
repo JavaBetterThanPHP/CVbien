@@ -1,8 +1,19 @@
 easy_admin:
 
+  # =========================================
+  # ============ Parametrage ================
+  # =========================================
+
   # Liste des actions
   list:
-    actions: ['edit', 'search', '-delete']
+    actions: ['edit', 'search', '-delete', 'show']
+    title: 'CVB admin - Liste - %%entity_label%%'
+
+  show:
+    title: 'CVB admin - Edition - %%entity_label%% - (#%%entity_id%%)'
+
+  edit:
+    title: 'CVB admin - Show - %%entity_label%% - (#%%entity_id%%)'
 
   # Format des dates
   formats:
@@ -10,15 +21,18 @@ easy_admin:
     time: 'H:i'
     datetime: 'd/m/Y H:i:s'
 
-  # Titre
-  site_name: 'CV Bien <em style="font-size: 80%;">Admininistration.</em>'
+  # Titre haut de page
+  site_name: 'CV Bien <span style="font-size: 70%;">Admin</span>'
 
   # Informations concernant l'utilisateur courant
   user:
     name_property_path: 'fullName'
     avatar_property_path: 'getProfilePicturePath'
 
-  # Design
+
+  # =========================================
+  # =============== Design ==================
+  # =========================================
   design:
     brand_color: '#2331F0'
     assets:
@@ -27,29 +41,29 @@ easy_admin:
     # Configuration du menu
     menu:
     - label: 'Users'
-      icon: 'users'
-      children:
-      - { entity: 'User', label: 'Account information' }
-      - { entity: 'UserDiploma', label: 'Diploma' }
-      - { entity: 'UserLink', label: 'Link' }
+    - { entity: 'User', label: 'Accounts', icon: 'user'}
 
     - label: 'Referential'
-      icon: 'cog'
-      children:
-      - { entity: 'Country', label: 'Countries' }
-      - { entity: 'Diploma', label: 'Diplomas' }
-      - { entity: 'JobType', label: 'Job type' }
-      - { entity: 'Language', label: 'Language' }
-      - { entity: 'ProgLanguage', label: 'Programming Language' }
-      - { entity: 'Society', label: 'Society' }
+    - { entity: 'Country', label: 'Countries', icon: 'globe' }
+    - { entity: 'Diploma', label: 'Diplomas', icon: 'graduation-cap' }
+    - { entity: 'JobType', label: 'Job type', icon: 'briefcase' }
+    - { entity: 'Language', label: 'Language', icon: 'language' }
+    - { entity: 'ProgLanguage', label: 'Programming Language', icon: 'code' }
+    - { entity: 'Society', label: 'Society', icon: 'building' }
+
+    - label: 'Mods'
+    # Ajouter les entités concernant les modules
 
 
-  # Les entités concernés
+  # ==========================================
+  # =============== Entites ==================
+  # ==========================================
   entities:
 
-    # --- Parametrage User ---
+    # --------------------- USERS ---------------------
     User:
       class: App\Entity\User
+      disabled_actions: ['new']
       list:
         fields: ['spaceName', 'email', 'firstname', 'lastname', 'birthdate', 'isActive', 'isSearchable']
         sort: ['spaceName', 'ASC']
@@ -61,10 +75,13 @@ easy_admin:
         - 'isActive'
         - 'isSearchable'
         - { type: 'tab', label: 'Personal' }
+        - { type: 'group', columns: 6, label: 'Identity'}
         - 'firstname'
         - 'lastname'
         - { property: 'birthdate', type: 'birthday', label: 'Birthdate'}
-        - { type: 'tab', label: 'Contact' }
+        - { type: 'group', columns: 6, label: 'Job'}
+        - 'status'
+        - 'type'
         - { type: 'group', columns: 6, label: 'Address'}
         - { property: 'adress', type: 'text', label: 'Address'}
         - 'city'
@@ -73,27 +90,72 @@ easy_admin:
         - { type: 'group', columns: 6, label: 'Phone'}
         - 'phoneNumber'
         - 'proPhoneNumber'
-        - { type: 'tab', label: 'Situation' }
+      show:
+        fields:
+        - 'email'
+        - 'spaceName'
+        - 'isActive'
+        - 'isSearchable'
+        - 'firstname'
+        - 'lastname'
+        - 'birthdate'
         - 'status'
         - 'type'
+        - { property: 'adress', type: 'text' }
+        - 'city'
+        - 'cityCode'
+        - 'country'
+        - 'phoneNumber'
+        - 'proPhoneNumber'
+        - 'userDiplomas'
+        - 'links'
+        - 'userProjects'
+        - 'userLanguages'
+        - 'userProgLanguages'
+        - 'userSocieties'
+        - 'date_creation_compte'
+        - 'updatedAt'
+        - 'date_derniere_connexion'
 
-    # --- Parametrage User Diploma ---
     UserDiploma:
       class: App\Entity\UserDiploma
-      #list:
-       # fields: ['diploma']
-        #sort: ['label', 'ASC']
-      #edit:
-       # fields:
-        #- 'label'
+      disabled_actions: ['new', 'edit', 'delete', 'search', 'list']
+      list: ['id', 'user', 'diploma', 'dateOfGrant', 'mention']
 
+    UserLink:
+      class: App\Entity\Link
+      disabled_actions: ['new', 'edit', 'delete', 'search', 'list']
+      list: ['id', 'user', 'website', 'url', 'name', 'username']
+
+    UserLanguage:
+      class: App\Entity\UserLanguage
+      disabled_actions: ['new', 'edit', 'delete', 'search', 'list']
+      list: ['id', 'user', 'language', 'level']
+
+    UserProgLanguage:
+      class: App\Entity\UserProgLanguage
+      disabled_actions: ['new', 'edit', 'delete', 'search', 'list']
+      list: ['id', 'user', 'progLanguage', 'level']
+
+    UserProject:
+      class: App\Entity\UserProject
+      disabled_actions: ['new', 'edit', 'delete', 'search', 'list']
+
+    UserSociety:
+      class: App\Entity\UserSociety
+      disabled_actions: ['new', 'edit', 'delete', 'search', 'list']
+
+
+
+
+    # --------------------- REFERENTIELS ---------------------
     # --- Parametrage JobType ---
     JobType:
       class: App\Entity\JobType
       list:
         fields: ['label']
         sort: ['label', 'ASC']
-      edit:
+      form:
         fields:
         - 'label'
 
@@ -103,7 +165,7 @@ easy_admin:
       list:
         fields: ['title', 'level', 'school',' country', 'isInternational']
         sort: ['title', 'ASC']
-      edit:
+      form:
         fields:
         - 'title'
         - 'level'
@@ -117,7 +179,7 @@ easy_admin:
       list:
         fields: ['name', 'users', 'id']
         sort: ['name', 'ASC']
-      edit:
+      form:
         fields:
         - 'name'
 
@@ -127,7 +189,7 @@ easy_admin:
       list:
         fields: ['name', 'adress', 'city', 'cityCode', 'country']
         sort: ['name', 'ASC']
-      edit:
+      form:
         fields:
         - 'name'
         - 'adress'
@@ -141,7 +203,7 @@ easy_admin:
       list:
         fields: ['name']
         sort: ['name', 'ASC']
-      edit:
+      form:
         fields:
         - 'name'
 
@@ -151,7 +213,7 @@ easy_admin:
       list:
         fields: ['label']
         sort: ['label', 'ASC']
-      edit:
+      form:
         fields:
         - 'label'
 
@@ -161,31 +223,12 @@ easy_admin:
       list:
         fields: ['name', 'type', 'parentProgLanguage', 'childProgLanguages']
         sort: ['name', 'ASC']
-      edit:
+      form:
         fields:
         - 'name'
         - 'type'
         - 'parentProgLanguage'
         - 'childProgLanguages'
 
-    # --- Parametrage Link ---
-    UserLink:
-      class: App\Entity\Link
-      list:
-        fields: ['username', 'website', 'url', 'name']
-        sort: ['username', 'ASC']
-      edit:
-        fields:
-        - 'username'
-        - 'website'
-        - 'url'
-        - 'name'
-
-    #UserLanguage:
-    #  class: App\Entity\UserLanguage
-    #UserProject:
-    #  class: App\Entity\UserProject
-    #UserSociety:
-    #  class: App\Entity\UserSociety
-
+    # --------------------- MODS ---------------------
 
