@@ -7,13 +7,13 @@ easy_admin:
   # Liste des actions
   list:
     actions: ['edit', 'search', '-delete', 'show']
-    title: 'CVB admin - Liste - %%entity_label%%'
+    title: 'CVB - %%entity_label%%'
 
   show:
-    title: 'CVB admin - Edition - %%entity_label%% - (#%%entity_id%%)'
+    title: 'CVB - %%entity_label%% (#%%entity_id%%)'
 
   edit:
-    title: 'CVB admin - Show - %%entity_label%% - (#%%entity_id%%)'
+    title: 'CVB - %%entity_label%% (#%%entity_id%%)'
 
   # Format des dates
   formats:
@@ -146,8 +146,6 @@ easy_admin:
       disabled_actions: ['new', 'edit', 'delete', 'search', 'list']
 
 
-
-
     # --------------------- REFERENTIELS ---------------------
     # --- Parametrage JobType ---
     JobType:
@@ -157,6 +155,10 @@ easy_admin:
         sort: ['label', 'ASC']
       form:
         fields:
+        - 'label'
+      show:
+        fields:
+        - 'id'
         - 'label'
 
     # --- Parametrage Diploma ---
@@ -172,6 +174,14 @@ easy_admin:
         - 'school'
         - 'country'
         - 'isInternational'
+      show:
+        fields:
+        - 'id'
+        - 'title'
+        - 'level'
+        - 'isInternational'
+        - 'school'
+        - 'country'
 
     # --- Parametrage Pays ---
     Country:
@@ -181,6 +191,10 @@ easy_admin:
         sort: ['name', 'ASC']
       form:
         fields:
+        - 'name'
+      show:
+        fields:
+        - 'id'
         - 'name'
 
     # --- Parametrage Société ---
@@ -196,6 +210,14 @@ easy_admin:
         - 'city'
         - 'cityCode'
         - 'country'
+      show:
+        fields:
+        - 'id'
+        - 'name'
+        - 'adress'
+        - 'city'
+        - 'cityCode'
+        - 'country'
 
     # --- Parametrage Language ---
     Language:
@@ -205,6 +227,10 @@ easy_admin:
         sort: ['name', 'ASC']
       form:
         fields:
+        - 'name'
+      show:
+        fields:
+        - 'id'
         - 'name'
 
     # --- Parametrage ProgTechno ---
@@ -225,6 +251,13 @@ easy_admin:
         sort: ['name', 'ASC']
       form:
         fields:
+        - 'name'
+        - 'type'
+        - 'parentProgLanguage'
+        - 'childProgLanguages'
+      show:
+        fields:
+        - 'id'
         - 'name'
         - 'type'
         - 'parentProgLanguage'
