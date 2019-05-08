@@ -180,4 +180,12 @@ class ProgLanguage
 
         return $this;
     }
+
+    /**
+     * @return null|string
+     */
+    public function __toString()
+    {
+        return $this->getName() . ' - ' . $this->getType();
+    }
 }

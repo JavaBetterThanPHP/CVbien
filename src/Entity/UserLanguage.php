@@ -72,4 +72,13 @@ class UserLanguage
 
         return $this;
     }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->getLanguage()->__toString();
+    }
+
 }

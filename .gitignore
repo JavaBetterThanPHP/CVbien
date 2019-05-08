@@ -74,3 +74,5 @@ npm-debug.log
 yarn-error.log
 ###< symfony/webpack-encore-bundle ###
 other/Mockups
+
+/public/images/

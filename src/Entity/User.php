@@ -5,10 +5,10 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Security\Core\User\UserInterface;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
 use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -24,6 +24,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  */
 class User implements UserInterface, \Serializable
 {
+
+    /* ===================================
+     * =========== Properties ============
+     * ===================================
+     * */
+
     /**
      * @ORM\Id()
      * @ORM\Column(type="uuid", unique=true)
@@ -31,6 +37,8 @@ class User implements UserInterface, \Serializable
      * @ORM\CustomIdGenerator(class="Ramsey\Uuid\Doctrine\UuidGenerator")
      */
     private $id;
+
+    /* =========== ACCOUNT INFO =========== */
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -63,6 +71,13 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="boolean")
      */
     private $isActive;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isSearchable;
+
+    /* =========== USER INFO =========== */
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -110,9 +125,16 @@ class User implements UserInterface, \Serializable
     private $country;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $isSearchable;
+    private $status;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $type;
+
+    /* =========== IMGs =========== */
 
     /**
      * @ORM\Column(type="string", length=255, options={"default":"default.png"})
@@ -127,12 +149,6 @@ class User implements UserInterface, \Serializable
     private $imageFile;
 
     /**
-     * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTime
-     */
-    private $updatedAt;
-
-    /**
      * @ORM\Column(type="string", length=255, options={"default" : "default.png"})
      * @var string
      */
@@ -144,15 +160,7 @@ class User implements UserInterface, \Serializable
      */
     private $bannerImageFile;
 
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $status;
-
-    /**
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    private $type;
+    /* =========== Relations =========== */
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\UserProject", mappedBy="user")
@@ -184,6 +192,8 @@ class User implements UserInterface, \Serializable
      */
     private $userSocieties;
 
+    /* =========== Technical =========== */
+
     /**
      * @ORM\Column(type="string", length=100, nullable=true)
      */
@@ -200,69 +210,33 @@ class User implements UserInterface, \Serializable
     private $date_derniere_connexion;
 
     /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @Gedmo\Blameable(on="update")
+     * @var \DateTime
+     */
+    private $updatedAt;
+
+    /**
      * @ORM\Column(type="text", nullable=true)
      */
     private $userModulesGridHtmlString;
 
-    public function setImageFile(File $image = null)
-    {
-        $this->imageFile = $image;
 
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
-        if ($image) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new \DateTime('now');
-        }
-    }
+    /* ===================================
+     * ============ Methods ==============
+     * ===================================
+     * */
 
-    public function getImageFile()
-    {
-        return $this->imageFile;
-    }
-
-    public function setProfilePicture($profilePicture)
-    {
-        $this->profilePicture = $profilePicture;
-    }
-
-    public function getProfilePicture()
-    {
-        return $this->profilePicture;
-    }
-
-    public function setBannerImageFile(File $image = null)
-    {
-        $this->bannerImageFile = $image;
-        // VERY IMPORTANT:
-        // It is required that at least one field changes if you are using Doctrine,
-        // otherwise the event listeners won't be called and the file is lost
-        if ($image) {
-            // if 'updatedAt' is not defined in your entity, use another property
-            $this->updatedAt = new \DateTime('now');
-        }
-    }
-
-    public function getBannerImageFile()
-    {
-        return $this->bannerImageFile;
-    }
-
-    public function setBannerPicture($bannerPicture)
-    {
-        $this->bannerPicture = $bannerPicture;
-    }
-
-    public function getBannerPicture()
-    {
-        return $this->bannerPicture;
-    }
-
+    /**
+     * User constructor.
+     */
     public function __construct()
     {
         $this->setIsActive(true);
         $this->setIsSearchable(true);
+        $this->updatedAt = new \DateTime('now');
+        $this->date_creation_compte = new \DateTime('now');
+        $this->date_derniere_connexion = new \DateTime('now');
         $this->progLanguages = new ArrayCollection();
         $this->userProjects = new ArrayCollection();
         $this->userDiplomas = new ArrayCollection();
@@ -272,16 +246,96 @@ class User implements UserInterface, \Serializable
         $this->userSocieties = new ArrayCollection();
     }
 
+    /**
+     * @param File|null $image
+     */
+    public function setImageFile(File $image = null)
+    {
+        $this->imageFile = $image;
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param $profilePicture
+     */
+    public function setProfilePicture($profilePicture)
+    {
+        $this->profilePicture = $profilePicture;
+    }
+
+    /**
+     * @return string
+     */
+    public function getProfilePicture()
+    {
+        return $this->profilePicture;
+    }
+
+    /**
+     * @param File|null $image
+     */
+    public function setBannerImageFile(File $image = null)
+    {
+        $this->bannerImageFile = $image;
+        if ($image) {
+            $this->updatedAt = new \DateTime('now');
+        }
+    }
+
+    /**
+     * @return File
+     */
+    public function getBannerImageFile()
+    {
+        return $this->bannerImageFile;
+    }
+
+    /**
+     * @param $bannerPicture
+     */
+    public function setBannerPicture($bannerPicture)
+    {
+        $this->bannerPicture = $bannerPicture;
+    }
+
+    /**
+     * @return string
+     */
+    public function getBannerPicture()
+    {
+        return $this->bannerPicture;
+    }
+
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * @return null|string
+     */
     public function getEmail(): ?string
     {
         return $this->email;
     }
 
+    /**
+     * @param string $email
+     * @return User
+     */
     public function setEmail(string $email): self
     {
         $this->email = $email;
@@ -305,12 +359,15 @@ class User implements UserInterface, \Serializable
     public function getRoles(): array
     {
         $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
         $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
 
+    /**
+     * @param array $roles
+     * @return User
+     */
     public function setRoles(array $roles): self
     {
         $this->roles = $roles;
@@ -326,6 +383,10 @@ class User implements UserInterface, \Serializable
         return (string)$this->password;
     }
 
+    /**
+     * @param string $password
+     * @return User
+     */
     public function setPassword(string $password): self
     {
         $this->password = $password;
@@ -350,11 +411,18 @@ class User implements UserInterface, \Serializable
         // $this->plainPassword = null;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getIsActive(): ?bool
     {
         return $this->isActive;
     }
 
+    /**
+     * @param bool|null $isActive
+     * @return User
+     */
     public function setIsActive(?bool $isActive): self
     {
         $this->isActive = $isActive;
@@ -362,11 +430,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getFirstname(): ?string
     {
         return $this->firstname;
     }
 
+    /**
+     * @param null|string $firstname
+     * @return User
+     */
     public function setFirstname(?string $firstname): self
     {
         $this->firstname = $firstname;
@@ -374,11 +449,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getLastname(): ?string
     {
         return $this->lastname;
     }
 
+    /**
+     * @param null|string $lastname
+     * @return User
+     */
     public function setLastname(?string $lastname): self
     {
         $this->lastname = $lastname;
@@ -386,11 +468,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getBirthdate(): ?\DateTimeInterface
     {
         return $this->birthdate;
     }
 
+    /**
+     * @param \DateTimeInterface|null $birthdate
+     * @return User
+     */
     public function setBirthdate(?\DateTimeInterface $birthdate): self
     {
         $this->birthdate = $birthdate;
@@ -398,11 +487,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getPhoneNumber(): ?string
     {
         return $this->phoneNumber;
     }
 
+    /**
+     * @param null|string $phoneNumber
+     * @return User
+     */
     public function setPhoneNumber(?string $phoneNumber): self
     {
         $this->phoneNumber = $phoneNumber;
@@ -410,11 +506,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getProPhoneNumber(): ?string
     {
         return $this->proPhoneNumber;
     }
 
+    /**
+     * @param null|string $proPhoneNumber
+     * @return User
+     */
     public function setProPhoneNumber(?string $proPhoneNumber): self
     {
         $this->proPhoneNumber = $proPhoneNumber;
@@ -422,11 +525,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getAdress(): ?string
     {
         return $this->adress;
     }
 
+    /**
+     * @param null|string $adress
+     * @return User
+     */
     public function setAdress(?string $adress): self
     {
         $this->adress = $adress;
@@ -434,11 +544,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getCity(): ?string
     {
         return $this->city;
     }
 
+    /**
+     * @param null|string $city
+     * @return User
+     */
     public function setCity(?string $city): self
     {
         $this->city = $city;
@@ -446,11 +563,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getCityCode(): ?string
     {
         return $this->cityCode;
     }
 
+    /**
+     * @param null|string $cityCode
+     * @return User
+     */
     public function setCityCode(?string $cityCode): self
     {
         $this->cityCode = $cityCode;
@@ -458,11 +582,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return Country|null
+     */
     public function getCountry(): ?Country
     {
         return $this->country;
     }
 
+    /**
+     * @param Country|null $country
+     * @return User
+     */
     public function setCountry(?Country $country): self
     {
         $this->country = $country;
@@ -478,6 +609,10 @@ class User implements UserInterface, \Serializable
         return $this->progLanguages;
     }
 
+    /**
+     * @param ProgLanguage $progLanguage
+     * @return User
+     */
     public function addProgLanguage(ProgLanguage $progLanguage): self
     {
         if (!$this->progLanguages->contains($progLanguage)) {
@@ -487,6 +622,10 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param ProgLanguage $progLanguage
+     * @return User
+     */
     public function removeProgLanguage(ProgLanguage $progLanguage): self
     {
         if ($this->progLanguages->contains($progLanguage)) {
@@ -504,6 +643,10 @@ class User implements UserInterface, \Serializable
         return $this->userProjects;
     }
 
+    /**
+     * @param UserProject $userProject
+     * @return User
+     */
     public function addUserProject(UserProject $userProject): self
     {
         if (!$this->userProjects->contains($userProject)) {
@@ -514,6 +657,10 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param UserProject $userProject
+     * @return User
+     */
     public function removeUserProject(UserProject $userProject): self
     {
         if ($this->userProjects->contains($userProject)) {
@@ -535,6 +682,10 @@ class User implements UserInterface, \Serializable
         return $this->userDiplomas;
     }
 
+    /**
+     * @param UserDiploma $userDiploma
+     * @return User
+     */
     public function addUserDiploma(UserDiploma $userDiploma): self
     {
         if (!$this->userDiplomas->contains($userDiploma)) {
@@ -545,6 +696,10 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param UserDiploma $userDiploma
+     * @return User
+     */
     public function removeUserDiploma(UserDiploma $userDiploma): self
     {
         if ($this->userDiplomas->contains($userDiploma)) {
@@ -565,6 +720,10 @@ class User implements UserInterface, \Serializable
         return $this->userLanguages;
     }
 
+    /**
+     * @param UserLanguage $userLanguage
+     * @return User
+     */
     public function addUserLanguage(UserLanguage $userLanguage): self
     {
         if (!$this->userLanguages->contains($userLanguage)) {
@@ -575,6 +734,10 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param UserLanguage $userLanguage
+     * @return User
+     */
     public function removeUserLanguage(UserLanguage $userLanguage): self
     {
         if ($this->userLanguages->contains($userLanguage)) {
@@ -596,21 +759,21 @@ class User implements UserInterface, \Serializable
         return $this->userProgLanguages;
     }
 
+    /**
+     * @return array|bool|float|int|mixed|string
+     * @throws \Symfony\Component\Serializer\Exception\ExceptionInterface
+     */
     public function getJsonUserProgLanguages()
     {
-        //$encoder = new JsonEncoder();
-        //$normalizer = new ObjectNormalizer();
-        //$serializer = new Serializer(array($normalizer), array($encoder));
-        //return $serializer->serialize($this->userProgLanguages->toArray(), 'json');
-        // return json_encode($this.$this->getUserProgLanguages()->toArray());
-        //return json_encode($this->getUserProgLanguages()->toArray());
-        //return ($this->getUserProgLanguages())->toArray();
-        //return $this->toArray();
         $serializer = new Serializer(array(new ObjectNormalizer()));
-        $data = $serializer->normalize($this->getUserProgLanguages(), null, ['attributes' => ['progLanguage' => ['name'],'level']]);
+        $data = $serializer->normalize($this->getUserProgLanguages(), null, ['attributes' => ['progLanguage' => ['name'], 'level']]);
         return $data;
     }
 
+    /**
+     * @param UserProgLanguage $userProgLanguage
+     * @return User
+     */
     public function addUserProgLanguage(UserProgLanguage $userProgLanguage): self
     {
         if (!$this->userProgLanguages->contains($userProgLanguage)) {
@@ -621,6 +784,10 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param UserProgLanguage $userProgLanguage
+     * @return User
+     */
     public function removeUserProgLanguage(UserProgLanguage $userProgLanguage): self
     {
         if ($this->userProgLanguages->contains($userProgLanguage)) {
@@ -666,6 +833,10 @@ class User implements UserInterface, \Serializable
         return $this->links;
     }
 
+    /**
+     * @param Link $link
+     * @return User
+     */
     public function addLink(Link $link): self
     {
         if (!$this->links->contains($link)) {
@@ -676,6 +847,10 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param Link $link
+     * @return User
+     */
     public function removeLink(Link $link): self
     {
         if ($this->links->contains($link)) {
@@ -689,11 +864,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return bool|null
+     */
     public function getIsSearchable(): ?bool
     {
         return $this->isSearchable;
     }
 
+    /**
+     * @param bool $isSearchable
+     * @return User
+     */
     public function setIsSearchable(bool $isSearchable): self
     {
         $this->isSearchable = $isSearchable;
@@ -701,11 +883,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getSpaceName(): ?string
     {
         return $this->spaceName;
     }
 
+    /**
+     * @param string $spaceName
+     * @return User
+     */
     public function setSpaceName(string $spaceName): self
     {
         $this->spaceName = $spaceName;
@@ -713,11 +902,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getStatus(): ?string
     {
         return $this->status;
     }
 
+    /**
+     * @param null|string $status
+     * @return User
+     */
     public function setStatus(?string $status): self
     {
         $this->status = $status;
@@ -725,17 +921,41 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getType(): ?string
     {
         return $this->type;
     }
 
+    /**
+     * @param null|string $type
+     * @return User
+     */
     public function setType(?string $type): self
     {
         $this->type = $type;
 
         return $this;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt(): \DateTime
+    {
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt(\DateTime $updatedAt): void
+    {
+        $this->updatedAt = $updatedAt;
+    }
+
 
     /**
      * @return Collection|UserSociety[]
@@ -745,6 +965,10 @@ class User implements UserInterface, \Serializable
         return $this->userSocieties;
     }
 
+    /**
+     * @param UserSociety $userSociety
+     * @return User
+     */
     public function addUserSociety(UserSociety $userSociety): self
     {
         if (!$this->userSocieties->contains($userSociety)) {
@@ -755,6 +979,10 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param UserSociety $userSociety
+     * @return User
+     */
     public function removeUserSociety(UserSociety $userSociety): self
     {
         if ($this->userSocieties->contains($userSociety)) {
@@ -768,11 +996,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return null|string
+     */
     public function getTokenToReset(): ?string
     {
         return $this->tokenToReset;
     }
 
+    /**
+     * @param null|string $tokenToReset
+     * @return User
+     */
     public function setTokenToReset(?string $tokenToReset): self
     {
         $this->tokenToReset = $tokenToReset;
@@ -780,11 +1015,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getDateCreationCompte(): ?\DateTimeInterface
     {
         return $this->date_creation_compte;
     }
 
+    /**
+     * @param \DateTimeInterface|null $date_creation_compte
+     * @return User
+     */
     public function setDateCreationCompte(?\DateTimeInterface $date_creation_compte): self
     {
         $this->date_creation_compte = $date_creation_compte;
@@ -792,11 +1034,18 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return \DateTimeInterface|null
+     */
     public function getDateDerniereConnexion(): ?\DateTimeInterface
     {
         return $this->date_derniere_connexion;
     }
 
+    /**
+     * @param \DateTimeInterface|null $date_derniere_connexion
+     * @return User
+     */
     public function setDateDerniereConnexion(?\DateTimeInterface $date_derniere_connexion): self
     {
         $this->date_derniere_connexion = $date_derniere_connexion;
@@ -804,16 +1053,27 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @param User $user
+     * @return bool
+     */
     public function equals(User $user)
     {
         return ($user->getId() === $this->getId());
     }
 
+    /**
+     * @return null|string
+     */
     public function getUserModulesGridHtmlString(): ?string
     {
         return $this->userModulesGridHtmlString;
     }
 
+    /**
+     * @param null|string $userModulesGridHtmlString
+     * @return User
+     */
     public function setUserModulesGridHtmlString(?string $userModulesGridHtmlString): self
     {
         $this->userModulesGridHtmlString = $userModulesGridHtmlString;
@@ -821,6 +1081,28 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
-    //TODO searialize all user properties just to be sure
+    /**
+     * @return null|string
+     */
+    public function getFullName(): ?string
+    {
+        return $this->getFirstname() . ' ' . $this->getLastname();
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getProfilePicturePath(): ?string
+    {
+        return '/images/profilePictures/' . $this->getProfilePicture();
+    }
+
+    /**
+     * @return null|string
+     */
+    public function __toString()
+    {
+        return $this->getEmail();
+    }
 
 }
