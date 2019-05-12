@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-fat-bottom">
     <a class="navbar-brand" href="{{ path('app_index') }}">
-        <img src="{{ asset('build/CVBien_logo.png') }}" width="180"/>
+        <img src="{{ asset('build/cvbien_logo.png') }}" width="180"/>
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -12,6 +12,8 @@
         <input id="userId" name="userId" type="hidden" value="{{ user.id }}">
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
+
+
                 {# To the personnal page #}
                 {% if user.spaceName is defined %}
                     <li class="nav-item active">
@@ -21,6 +23,10 @@
                     </li>
                 {% endif %}
                 {# - #}
+
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('front_index') }}">Curivitae</a>
+                </li>
 
                 {# To the Default #}
                 <li class="nav-item">
@@ -65,5 +71,4 @@
         </div>
     {% endif %}
     {# ----------- #}
-
 </nav>
