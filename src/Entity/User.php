@@ -137,19 +137,19 @@ class User implements UserInterface, \Serializable
     /* =========== IMGs =========== */
 
     /**
-     * @ORM\Column(type="string", length=255, options={"default":"default.png"})
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
-    private $profilePicture = "default.png";
+    private $profilePicture="default.png";
 
     /**
      * @Vich\UploadableField(mapping="profilePictures", fileNameProperty="profilePicture")
      * @var File
      */
     private $imageFile;
-
+  
     /**
-     * @ORM\Column(type="string", length=255, options={"default" : "default.png"})
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $bannerPicture = "default.png";
