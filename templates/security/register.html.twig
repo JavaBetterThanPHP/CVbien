@@ -2,44 +2,35 @@
 
 {% block title %}Sign up - CVBien{% endblock %}
 
+{% block head_css %}
+    {{ encore_entry_link_tags('app_login') }}
+{% endblock %}
+
 {% block content %}
-    <link href="{{ asset('login.css') }}" rel="stylesheet">
-    <div class="row moutain no-gutters min-100">
-        <div class="col-md-8 col-lg-6 align-self-center">
-            <div class="transp">
-                <div class="d-flex align-items-center py-5">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-9 col-lg-8 mx-auto">
-                                <h1 class="h3 mb-3 font-weight-normal">Please register :D</h1>
-                                {{ form_start(form) }}
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        {{ form_row(form.firstname) }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form_row(form.lastname) }}
-                                    </div>
-                                </div>
-                                {{ form_row(form.email) }}
-                                {{ form_row(form.spaceName) }}
-                                <div class="form-row">
-                                    <div class="col-md-6">
-                                        {{ form_row(form.password.first) }}
-                                    </div>
-                                    <div class="col-md-6">
-                                        {{ form_row(form.password.second) }}
-                                    </div>
-                                </div>
-                                <button class="btn btn-sm btn-primary" type="submit">S'inscrire</button>
-                                {{ form_end(form) }}
-                            </div>
-                        </div>
-                    </div>
+    <div class="container row mt-5">
+        <div class="text-light border border-secondary rounded p-5 mx-auto">
+            <h1 class="h3 mb-3 font-weight-normal">Please register :D</h1>
+            {{ form_start(form) }}
+            <div class="form-row">
+                <div class="col-md-6">
+                    {{ form_row(form.firstname) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.lastname) }}
                 </div>
             </div>
+            {{ form_row(form.email) }}
+            {{ form_row(form.spaceName) }}
+            <div class="form-row">
+                <div class="col-md-6">
+                    {{ form_row(form.password.first) }}
+                </div>
+                <div class="col-md-6">
+                    {{ form_row(form.password.second) }}
+                </div>
+            </div>
+            <button class="btn btn-sm btn-outline-primary" type="submit">S'inscrire</button>
+            {{ form_end(form) }}
         </div>
-        <div class="col-md-4 col-lg-6"></div>
-    </div>
     </div>
 {% endblock %}

@@ -1,11 +1,37 @@
-<div class="col-9">
-    {#<div class="tab-content" id="v-pills-tabContent">
-        <div class="tab-pane fade show active" id="v-pills-perso" role="tabpanel" aria-labelledby="v-pills-perso-tab">#}
-            <h1>Modifier mes informations personnelles</h1>
-            {{ form_start(formUserFront) }}
-            {{ form_widget(formUserFront) }}
-            <button class="btn btn-primary">{{ button_label|default('Update') }}</button>
-            {{ form_end(formUserFront) }}
-        {#</div>
-    </div>#}
+<div class="col-8">
+
+    {{ form_start(formUserFront) }}
+    <fieldset>
+        <legend>Informations du compte</legend>
+        {{ form_row(formUserFront.spaceName) }}
+        {{ form_row(formUserFront.isActive) }}
+        {{ form_row(formUserFront.isSearchable) }}
+    </fieldset>
+
+    <fieldset class="mt-5">
+        <legend>Informations personnelles</legend>
+        {{ form_row(formUserFront.firstname) }}
+        {{ form_row(formUserFront.lastname) }}
+        {{ form_row(formUserFront.birthdate) }}
+    </fieldset>
+
+    <fieldset class="mt-5">
+        <legend>Contacts</legend>
+        {{ form_row(formUserFront.phoneNumber) }}
+        {{ form_row(formUserFront.proPhoneNumber) }}
+        {{ form_row(formUserFront.adress) }}
+        {{ form_row(formUserFront.cityCode) }}
+        {{ form_row(formUserFront.city) }}
+        {{ form_row(formUserFront.country) }}
+    </fieldset>
+
+    {#<fieldset class="mt-5">
+        <legend>Informations professionnelles</legend>
+        {{ form_row(formUserFront.firstname) }}
+        {{ form_row(formUserFront.lastname) }}
+        {{ form_row(formUserFront.spaceName) }}
+    </fieldset>#}
+
+    <button class="btn btn-primary mt-5">{{ button_label|default('Update') }}</button>
+    {{ form_end(formUserFront) }}
 </div>
