@@ -19,26 +19,34 @@ class Country
      */
     private $id;
 
+
     /**
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Diploma", mappedBy="country")
      */
     private $diplomas;
 
+
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Society", mappedBy="country")
      */
     private $societies;
+
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="country")
      */
     private $users;
 
+
+    /**
+     * Country constructor.
+     */
     public function __construct()
     {
         $this->diplomas = new ArrayCollection();
@@ -46,22 +54,36 @@ class Country
         $this->users = new ArrayCollection();
     }
 
+
+    /**
+     * @return mixed
+     */
     public function getId()
     {
         return $this->id;
     }
 
+
+    /**
+     * @return null|string
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+
+    /**
+     * @param string $name
+     * @return Country
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
 
         return $this;
     }
+
 
     /**
      * @return Collection|Diploma[]
@@ -71,6 +93,11 @@ class Country
         return $this->diplomas;
     }
 
+
+    /**
+     * @param Diploma $diploma
+     * @return Country
+     */
     public function addDiploma(Diploma $diploma): self
     {
         if (!$this->diplomas->contains($diploma)) {
@@ -81,6 +108,11 @@ class Country
         return $this;
     }
 
+
+    /**
+     * @param Diploma $diploma
+     * @return Country
+     */
     public function removeDiploma(Diploma $diploma): self
     {
         if ($this->diplomas->contains($diploma)) {
@@ -94,6 +126,7 @@ class Country
         return $this;
     }
 
+
     /**
      * @return Collection|Society[]
      */
@@ -102,6 +135,11 @@ class Country
         return $this->societies;
     }
 
+
+    /**
+     * @param Society $society
+     * @return Country
+     */
     public function addSociety(Society $society): self
     {
         if (!$this->societies->contains($society)) {
@@ -112,6 +150,11 @@ class Country
         return $this;
     }
 
+
+    /**
+     * @param Society $society
+     * @return Country
+     */
     public function removeSociety(Society $society): self
     {
         if ($this->societies->contains($society)) {
@@ -125,6 +168,7 @@ class Country
         return $this;
     }
 
+
     /**
      * @return Collection|User[]
      */
@@ -133,6 +177,11 @@ class Country
         return $this->users;
     }
 
+
+    /**
+     * @param User $user
+     * @return Country
+     */
     public function addUser(User $user): self
     {
         if (!$this->users->contains($user)) {
@@ -143,6 +192,11 @@ class Country
         return $this;
     }
 
+
+    /**
+     * @param User $user
+     * @return Country
+     */
     public function removeUser(User $user): self
     {
         if ($this->users->contains($user)) {
@@ -154,5 +208,17 @@ class Country
         }
 
         return $this;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        if ($this->getName() != null) {
+            return $this->getName();
+        }
+        return "";
     }
 }
