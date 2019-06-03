@@ -115,10 +115,10 @@ class User implements UserInterface, \Serializable
     private $isSearchable;
 
     /**
-     * @ORM\Column(type="string", length=255, options={"default":"default.png"})
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
-    private $profilePicture = "default.png";
+    private $profilePicture="default.png";
 
     /**
      * @Vich\UploadableField(mapping="profilePictures", fileNameProperty="profilePicture")
@@ -133,7 +133,7 @@ class User implements UserInterface, \Serializable
     private $updatedAt;
 
     /**
-     * @ORM\Column(type="string", length=255, options={"default" : "default.png"})
+     * @ORM\Column(type="string", length=255)
      * @var string
      */
     private $bannerPicture = "default.png";

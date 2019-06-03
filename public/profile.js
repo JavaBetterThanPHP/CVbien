@@ -1,7 +1,6 @@
 const MODULE_TEXTE = "Texte";
 const MODULE_COMPETENCES = "Competences";
-
-
+const MODULE_LIEN = "Lien";
 
 function initCropProfile() {
     var basic = $('#main-cropper').croppie({
@@ -120,6 +119,9 @@ function selectModule(moduleName){
         case MODULE_COMPETENCES :
             $("#competencesModal").modal();
             break;
+        case MODULE_LIEN :
+            $("#lienModal").modal();
+            break;
         default:
             alert("error");
     }
@@ -175,4 +177,24 @@ function addCompetencesModule(style){
     grid.layout();
     $("#moduleModal").modal('hide');
     $("#competencesModal").modal('hide');
+}
+
+function addLienModule(titre,lien,image){
+    var element = document.createElement('div');
+    element.style.width = "30rem";
+    bgimage = "background-image:url(\""+image+"\")";
+    element.innerHTML =
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n"+
+        "<div class=\"card\" style=\"width:8rem;height:8em;background-size:8rem 8rem;background-image: url('"+image+"');\">\n"+
+        "<div class=\"card-header bg-transparent border-bottom-0\">" +
+        "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+        "</div>\n" +
+        "<a href=\""+lien+"\">"+
+        "</a>"+
+        "</div>\n" +
+        "</div>\n";
+    grid.add(element,{index:0});
+    grid.layout();
+    $("#moduleModal").modal('hide');
+    $("#lienModal").modal('hide');
 }
