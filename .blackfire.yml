@@ -1,7 +1,0 @@
-tests:
-  "Toutes les pages sont rapides et avec peu de requêtes":
-    path: "/.*"
-    assertions:
-    - main.wall_time < 60ms
-    - main.memory < 2Mb
-    - metrics.sql.queries.count <= 10

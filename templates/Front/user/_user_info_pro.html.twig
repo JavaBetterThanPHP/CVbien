@@ -1,4 +1,4 @@
-<div class="col-9">
+<div class="col-8">
 
     {% for message in app.flashes('error') %}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
@@ -14,7 +14,7 @@
 
     <h4>Technologies
         <a href="" class="btn btn-success ml-5" data-toggle="modal"
-           data-target="#userDiplomaModal">Ajouter</a></h4>
+           data-target="#userProgLanguageModal">Ajouter</a></h4>
 
     <div class="row mt-3 mb-5">
         {% for userProgLanguage in user.userProgLanguages %}
@@ -63,7 +63,7 @@
                 </div>
             </div>
         {% else %}
-            <div class="col-sm-6 col-lg-4 py-2">
+            <div class="col-sm-6 col-lg-8 py-2">
                 <span class="ml-5 font-italic">Renseignez vos compétences technologiques :)</span>
             </div>
         {% endfor %}
@@ -72,12 +72,12 @@
 
     <h4>Langues
         <a href="" class="btn btn-success ml-5" data-toggle="modal"
-           data-target="#userDiplomaModal">Ajouter</a></h4>
+           data-target="#userLanguageModal">Ajouter</a></h4>
     </h2>
     <div class="row mt-3 mb-5">
         {% for userLanguage in user.userLanguages %}
             <div class="col-sm-6 col-lg-4 py-2">
-                <div class="card bg-light card h-100" style="max-width: 25rem;">
+                <div class="card" style="max-width: 25rem;">
                     <div class="card-header">
                         {{ userLanguage.language.name }}
                         <div class="float-right">
@@ -96,7 +96,8 @@
                         <div class="progress">
                             <div class="progress-bar bg-warning" role="progressbar"
                                  aria-valuenow="{{ userLanguage.level * 10 }}" aria-valuemin="0" aria-valuemax="100"
-                                 style="width: {{ userLanguage.level * 10 }}%"></div>
+                                 style="width: {{ userLanguage.level * 10 }}%">{{ userLanguage.level }} / 1O
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -119,7 +120,7 @@
                 </div>
             </div>
         {% else %}
-            <div class="col-sm-6 col-lg-4 py-2">
+            <div class="col-sm-6 col-lg-8 py-2">
                 <span class="ml-5 font-italic">Renseignez vos langues parlées :)</span>
             </div>
         {% endfor %}
