@@ -15,14 +15,14 @@ class ProgLanguageType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('type', TextType::class)
-            ->add('parentProgLanguage', EntityType::class, array(
+            ->add('type', TextType::class);
+
+    }/*            ->add('parentProgLanguage', EntityType::class, array(
                 'class' => ProgLanguage::class,
                 'choice_label' => 'name',
                 'multiple' => true,
                 'expanded' => true,
-            ));
-    }
+            ));*/
 
     public function configureOptions(OptionsResolver $resolver)
     {

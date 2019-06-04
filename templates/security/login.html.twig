@@ -2,57 +2,84 @@
 
 {% block title %}Sign in - CVBien{% endblock %}
 
+{% block head_css %}
+    {{ encore_entry_link_tags('app_login') }}
+{% endblock %}
+
 {% block content %}
-    <link href="{{ asset('login.css') }}" rel="stylesheet">
-    <div class="row moutain no-gutters min-100">
-        <div class="col-md-4 col-lg-6"></div>
-        <div class="col-md-8 col-lg-6 align-self-center">
-            <div class="transp">
-                <div class="d-flex align-items-center py-5">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-9 col-lg-8 mx-auto">
-                                <form method="post">
-                                    {% if error %}
-                                        <div class="alert alert-danger">
-                                            {{ error.messageKey|trans(error.messageData, 'security') }}
-                                        </div>
-                                    {% endif %}
+<link href="{{ asset('login.css') }}" rel="stylesheet">
+<div class="row moutain no-gutters min-100">
+    <div class="col-md-4 col-lg-6"></div>
+    <div class="col-md-8 col-lg-6 align-self-center">
+        <div class="transp">
+            <div class="d-flex align-items-center py-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-9 col-lg-8 mx-auto">
+                            <form method="post">
+                                {% if error %}
+                                    <div class="alert alert-danger">
+                                        {{ error.messageKey|trans(error.messageData, 'security') }}
+                                    </div>
+                                {% endif %}
 
-                                    <h1 class="h3 mb-3 font-weight-normal">Please log in :)</h1>
+                                <h1 class="h3 mb-3 font-weight-normal">Please log in :)</h1>
 
-                                    <label for="inputEmail" class="">Email</label>
-                                    <input type="email" value="{{ last_username }}" name="_username"
-                                           id="inputEmail" class="form-control"
-                                           required autofocus>
+                                <label for="inputEmail" class="">Email</label>
+                                <input type="email" value="{{ last_username }}" name="_username"
+                                       id="inputEmail" class="form-control"
+                                       required autofocus>
 
-                                    <label for="inputPassword" class="mt-3">Password</label>
-                                    <input type="password" name="_password" id="inputPassword"
-                                           class="form-control" required>
+                                <label for="inputPassword" class="mt-3">Password</label>
+                                <input type="password" name="_password" id="inputPassword"
+                                       class="form-control" required>
 
-                                    <input type="hidden" name="_csrf_token"
-                                           value="{{ csrf_token('authenticate') }}">
+                                <input type="hidden" name="_csrf_token"
+                                       value="{{ csrf_token('authenticate') }}">
 
-                                    <button class="btn btn-sm btn-primary mt-3" type="submit">
-                                        Sign in
+                                <button class="btn btn-sm btn-primary mt-3" type="submit">
+                                    Sign in
+                                </button>
+                                <a href="{{ path('app_security_forgot_password') }}">
+                                    <button class="btn btn-sm btn-primary mt-3" type="button">
+                                        Mot de passe oublié
                                     </button>
-                                    <a href="{{ path('app_security_forgot_password') }}">
-                                        <button class="btn btn-sm btn-primary mt-3" type="button">
-                                            Mot de passe oublié
-                                        </button>
-                                    </a>
+                                </a>
 
-                                    <a href="{{ path('app_security_register_professional') }}">
-                                        <button class="btn btn-sm btn-primary mt-3" type="button">
-                                            Obtenir un compte PRO !
-                                        </button>
-                                    </a>
-                                </form>
-                            </div>
+                                <a href="{{ path('app_security_register_professional') }}">
+                                    <button class="btn btn-sm btn-primary mt-3" type="button">
+                                        Obtenir un compte PRO !
+                                    </button>
+                                </a>
+                            </form>
                         </div>
                     </div>
                 </div>
             </div>
+            {% endif %}
+
+            <h1 class="h3 mb-3 font-weight-normal">Please log in :)</h1>
+
+            <label for="inputEmail" class="">Email</label>
+            <input type="email" value="{{ last_username }}" name="_username"
+                   id="inputEmail" class="form-control"
+                   required autofocus>
+
+            <label for="inputPassword" class="mt-3">Password</label>
+            <input type="password" name="_password" id="inputPassword"
+                   class="form-control" required>
+
+            <input type="hidden" name="_csrf_token"
+                   value="{{ csrf_token('authenticate') }}">
+
+            <button class="btn btn-sm btn-outline-primary mt-3" type="submit">
+                Sign in
+            </button>
+            <a href="{{ path('app_security_forgot_password') }}">
+                <button class="btn btn-sm btn-outline-primary mt-3" type="button">
+                    Mot de passe oublié
+                </button>
+            </a>
+            </form>
         </div>
-    </div>
-{% endblock %}
+        {% endblock %}

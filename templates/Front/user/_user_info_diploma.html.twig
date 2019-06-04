@@ -1,64 +1,76 @@
-<div class="col-9">
-    <h1>Modifier mes Diplômes
-        <a href="#" class="btn btn-default" type="button" data-toggle="modal" data-target="#userDiplomaModal"><i
-                    class="fas fa-plus-circle fa-2x"></i></a>
-    </h1>
-    <div class="container">
-        <div class="row">
-            {% for userDiploma in user.userDiplomas %}
-                <div class="col-sm-6 col-lg-4 py-2">
-                    <div class="card bg-light card h-100" style="max-width: 25rem;">
-                        <div class="card-header">
-                            {{ userDiploma.diploma.title }}
-                            <div class="float-right">
-                                <form method="post"
-                                      action="{{ path('front_user_diploma_delete', {'id': userDiploma.id}) }}"
-                                      onsubmit="return confirm('Are you sure you want to delete this item?');">
-                                    <input type="hidden" name="_method" value="DELETE">
-                                    <input type="hidden" name="_token"
-                                           value="{{ csrf_token('delete' ~ userDiploma.id) }}">
-                                    <button class="btn btn-link float-right"><i class="far fa-trash-alt"></i></button>
-                                </form>
-                            </div>
-                            <a href="#" class="btn btn-link float-right"><i class="fas fa-edit" data-toggle="modal"
-                                                                            data-target="#editUserDiplomaModal{{ userDiploma.id }}"></i></a>
-                            <br>
-                            {{ userDiploma.diploma.school }}
+<div class="col-8">
+    <h1>Mon parcours et mes diplômes <a href="" class="btn btn-success ml-5" data-toggle="modal" data-target="#userDiplomaModal">Ajouter</a></h1>
+    <div class="row mt-5">
+
+        {# CARD DIPLOMA #}
+        {% for userDiploma in user.userDiplomas %}
+            <div class="col-sm-6 col-lg-4 py-2">
+                <div class="card" style="max-width: 25rem;">
+                    {# --- Header --- #}
+                    <div class="card-header">
+                        {{ userDiploma.diploma.title }}
+                        <div class="float-right">
+                            <form method="post"
+                                  action="{{ path('front_user_diploma_delete', {'id': userDiploma.id}) }}"
+                                  onsubmit="return confirm('Are you sure you want to delete this item?');">
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="hidden" name="_token"
+                                       value="{{ csrf_token('delete' ~ userDiploma.id) }}">
+                                <button class="btn btn-link float-right"><i class="far fa-trash-alt"></i></button>
+                            </form>
                         </div>
-                        <div class="card-body">
-                            <p class="card-text">
-                                {{ userDiploma.diploma.country.name }}
-                                {% if userDiploma.mention %}
-                                    <span class="badge badge-success float-right">mention {{ userDiploma.mention }}</span>
-                                {% endif %}
-                                <br>
-                                {{ userDiploma.dateOfGrant | date("m/d/Y", "Europe/Paris") }}
-                            </p>
-                        </div>
+                        <a href="#" class="btn btn-link float-right"><i class="fas fa-edit" data-toggle="modal"
+                                                                        data-target="#editUserDiplomaModal{{ userDiploma.id }}"></i></a>
+                        <br>
                     </div>
-                    <div id="editUserDiplomaModal{{ userDiploma.id }}" class="modal fade bd-example-modal-lg"
-                         tabindex="-1" role="dialog"
-                         aria-labelledby="myLargeModalLabel" aria-hidden="true">
-                        <div class="modal-dialog modal-lg">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Modifier le Diplôme</h5>
-                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                        <span aria-hidden="true">&times;</span>
-                                    </button>
-                                </div>
-                                <div class="modal-body">
-                                    {{ render(controller(
-                                        'App\\Controller\\Front\\UserDiplomaController::userDiplomaEdit',
-                                        { 'id': userDiploma.id }
-                                    )) }}
-                                </div>
+                    {# --- #}
+
+                    <div class="card-body">
+                        <p class="card-text">
+                            {% if userDiploma.mention %}
+                                <span class="badge badge-success float-right">Mention : {{ userDiploma.mention }}</span>
+                            {% endif %}
+                            {% if userDiploma.diploma.school %}
+                                <span class="font-weight-bold">Etablissement : </span>{{ userDiploma.diploma.school }}
+                                <br/>
+                            {% endif %}
+                            {% if userDiploma.diploma.country %}
+                                <span class="font-weight-bold">Pays : </span>{{ userDiploma.diploma.country.name }}
+                            {% endif %}
+                            <br/> <br/>
+                            <span class="font-weight-bold">Date of Grant : </span>{{ userDiploma.dateOfGrant | date("d/m/Y", "Europe/Paris") }}
+                        </p>
+                    </div>
+                </div>
+                {# - #}
+
+                {# Modification #}
+                <div id="editUserDiplomaModal{{ userDiploma.id }}" class="modal fade bd-example-modal-lg"
+                     tabindex="-1" role="dialog"
+                     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modifier le Diplôme</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                {{ render(controller(
+                                    'App\\Controller\\Front\\UserDiplomaController::userDiplomaEdit',
+                                    { 'id': userDiploma.id }
+                                )) }}
                             </div>
                         </div>
                     </div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% else %}
+            <div class="col-sm-6 col-lg-8 py-2">
+                <span class="ml-5 font-italic">Renseignez vos diplômes :)</span>
+            </div>
+        {% endfor %}
     </div>
 </div>
 </div>

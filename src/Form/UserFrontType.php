@@ -21,11 +21,11 @@ class UserFrontType extends AbstractType
             ->add('lastname', TextType::class)
             ->add("spaceName", TextType::class)
             ->add("isActive", CheckboxType::class, [
-                'label' => 'Show this my user page publicly ?',
+                'label' => 'Rendre mon compte actif ?',
                 'required' => false,
             ])
             ->add("isSearchable", CheckboxType::class, [
-                'label' => 'Make my profile searchable ?',
+                'label' => 'Rendre mon profil recherchable ?',
                 'required' => false,
             ])
             ->add('birthdate', DateType::class, [

@@ -3,11 +3,6 @@ controllers:
   type: annotation
   prefix: /
 
-controllers_back:
-  resource: ../../src/Controller/Back
-  type: annotation
-  prefix: /back
-
 controllers_front:
   resource: ../../src/Controller/Front
   type: annotation
