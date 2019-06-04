@@ -2,6 +2,9 @@
     "behat/transliterator": {
         "version": "v1.2.0"
     },
+    "braintree/braintreehttp": {
+        "version": "0.3.0"
+    },
     "doctrine/annotations": {
         "version": "1.0",
         "recipe": {
@@ -139,6 +142,9 @@
     },
     "pagerfanta/pagerfanta": {
         "version": "v2.0.1"
+    },
+    "paypal/paypal-checkout-sdk": {
+        "version": "1.0.0"
     },
     "phpdocumentor/reflection-common": {
         "version": "1.0.1"

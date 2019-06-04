@@ -1,0 +1,53 @@
+{% extends 'security/security_base.html.twig' %}
+
+{% block title %}Sign up Professional- CVBien{% endblock %}
+
+{% block content %}
+    <link href="{{ asset('login.css') }}" rel="stylesheet">
+    <div class="row moutain no-gutters min-100">
+        <div class="col-md-8 col-lg-6 align-self-center">
+            <div class="transp">
+                <div class="d-flex align-items-center py-5">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-9 col-lg-8 mx-auto">
+                                <h1 class="h3 mb-3 font-weight-normal">Inscription CVBien Premium</h1>
+                                {{ form_start(form) }}
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        {{ form_row(form.firstname) }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_row(form.lastname) }}
+                                    </div>
+                                </div>
+                                {{ form_row(form.email) }}
+                                {{ form_row(form.spaceName) }}
+                                <div class="form-row">
+                                    <div class="col-md-6">
+                                        {{ form_row(form.password.first) }}
+                                    </div>
+                                    <div class="col-md-6">
+                                        {{ form_row(form.password.second) }}
+                                    </div>
+                                </div>
+                                <button class="btn btn-sm btn-primary" type="submit">S'inscrire</button>
+
+
+                                <div id="paypal-button-container"></div>
+                                {{ form_end(form) }}
+
+                                <script src="https://www.paypal.com/sdk/js?client-id=AVTpbY5bZ9aU1QYVTUCgEr1kbL3PIlOs65LiiYCY6kRh20RZIPwUd6x8FvQUVpi4J8-mx5S4A2W29jZp"></script>
+                                <script>paypal.Buttons().render('#paypal-button-container');</script>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 col-lg-6"></div>
+    </div>
+
+    </div>
+{% endblock %}

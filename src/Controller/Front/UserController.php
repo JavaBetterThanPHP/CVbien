@@ -150,7 +150,7 @@ class UserController extends AbstractController
      */
     public function sendMail(\Swift_Mailer $mailer)
     {
-        exit;
+        exit();
         $message = (new \Swift_Message('test'))
             ->setFrom('francois0roger@gmail.com')
             ->setTo('francois0roger@gmail.com')
