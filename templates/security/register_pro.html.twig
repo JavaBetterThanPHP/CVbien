@@ -30,13 +30,11 @@
                 </div>
             </div>
             <button class="btn btn-sm btn-outline-primary" type="submit">S'inscrire</button>
+            <div id="paypal-button-container"></div>
 
             {{ form_end(form) }}
-            <a href="{{ path('app_security_register_professional') }}">
-                <button class="btn btn-sm btn-outline-primary mt-3" type="button">
-                    S'inscrire en tant que PRO !
-                </button>
-            </a>
+            <script src="https://www.paypal.com/sdk/js?client-id=AVTpbY5bZ9aU1QYVTUCgEr1kbL3PIlOs65LiiYCY6kRh20RZIPwUd6x8FvQUVpi4J8-mx5S4A2W29jZp"></script>
+            <script>paypal.Buttons().render('#paypal-button-container');</script>
         </div>
     </div>
 {% endblock %}

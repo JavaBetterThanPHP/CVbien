@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Country;
 use App\Entity\User;
+use function Sodium\add;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
@@ -29,6 +30,7 @@ class UserType extends AbstractType
             ->add('adress', TextType::class)
             ->add('city', TextType::class)
             ->add('cityCode', TextType::class)
+            ->add('isProfessional', CheckboxType::class)
             ->add('country', EntityType::class, [
                 'label' => 'Pays',
                 'class' => Country::class,
