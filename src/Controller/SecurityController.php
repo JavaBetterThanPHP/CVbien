@@ -55,17 +55,15 @@ class SecurityController extends AbstractController
         $em->persist($user);
         $em->flush();
 
-        //dump($user->getRoles());die;
-        //echo $user->getRoles();die;
 
         if (in_array("ROLE_PREMIUM", $user->getRoles()))
         {
-            echo 'PREMIUM';die;
+            return $this->redirectToRoute('front_research_index');
         }
         else {
-            echo 'USER';die;
+            return $this->redirectToRoute('front_index');
         }
-        return $this->redirectToRoute('front_index');
+
     }
 
     /**

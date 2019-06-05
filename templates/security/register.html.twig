@@ -30,7 +30,13 @@
                 </div>
             </div>
             <button class="btn btn-sm btn-outline-primary" type="submit">S'inscrire</button>
+
             {{ form_end(form) }}
+            <a href="{{ path('app_security_register_professional') }}">
+                <button class="btn btn-sm btn-outline-primary mt-3" type="button">
+                    S'inscrire en tant que PRO !
+                </button>
+            </a>
         </div>
     </div>
 {% endblock %}

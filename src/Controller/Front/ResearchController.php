@@ -18,7 +18,7 @@ class ResearchController extends AbstractController
      */
     public function index(Request $request, UserRepository $userRepository)
     {
-        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        $this->denyAccessUnlessGranted('ROLE_PREMIUM', null, '403 - Vous devez posséder un compte PRO pour accéder a cette page.');
         $user = $this->getUser();
 
 
