@@ -11,6 +11,7 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Form\UserPasswordType;
+use App\Form\UserPasswordPremiumType;
 use App\Entity\User;
 use Symfony\Component\Form\FormError;
 use Symfony\Component\Security\Core\Security;
@@ -218,7 +219,7 @@ class SecurityController extends AbstractController
     public function registerPro(Request $request, UserPasswordEncoderInterface $passwordEncoder, \Swift_Mailer $mailer)
     {
         $user = new User();
-        $form = $this->createForm(UserPasswordType::class, $user);
+        $form = $this->createForm(UserPasswordPremiumType::class, $user);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -233,6 +234,8 @@ class SecurityController extends AbstractController
 
             $user->setRoles(['ROLE_PREMIUM']);
             $user->setIsProfessional(true);
+            dump(bin2hex(random_bytes(5)));
+            $user->setSpaceName(bin2hex(random_bytes(5)));
 
             /** fin difference */
 
@@ -241,13 +244,15 @@ class SecurityController extends AbstractController
             $em->flush();
 
             /** @doc swift mailer: https://symfony.com/doc/current/email.html  */
+            /** décommenter ici en PROD pour envoi de mail apres inscription */
+            /**
             $message = (new \Swift_Message('Inscription CVBien Premium'))
                 ->setFrom('register@cvbien.io')
                 ->setTo($user->getEmail())
                 ->setBody("Bonjour, merci de votre inscription Premium. Votre identifiant est votre mail et le mot de passe celui que vous venez de définir. Vous pouvez visionner les CV de tous les développeurs.");
 
             $mailer->send($message);
-
+            */
 
             return $this->redirectToRoute('app_security_login');
         }
