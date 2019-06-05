@@ -15,7 +15,7 @@
 
 
                 {# To the personnal page #}
-                {% if user.spaceName is defined %}
+                {% if user.spaceName is defined and not is_granted('ROLE_PREMIUM') %}
                     <li class="nav-item active">
                         <a class="nav-link"
                            href="{{ path('app_profilView', {'spaceName': user.spaceName}) }}">Preview<span
@@ -25,9 +25,13 @@
                 {# - #}
 
                 {# To the Default #}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('front_index') }}">Dashboard</a>
-                </li>
+
+                {% if not is_granted('ROLE_PREMIUM') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('front_index') }}">Dashboard</a>
+                    </li>
+                {% endif %}
+
                 {# - #}
 
                 {# Vers les recherches #}
@@ -46,10 +50,12 @@
                         <a class="dropdown-item" href="{{ path('front_user_reset_password') }}">Changer mot de passe</a>
                         <a class="dropdown-item" href="{{ path('front_user_updateInfo') }}">Informations
                             personnelles</a>
-                        <a class="dropdown-item" href="{{ path('front_user_pro_update') }}">Mes expériences</a>
-                        <a class="dropdown-item" href="{{ path('front_user_experience_update') }}">Mes compétences</a>
-                        <a class="dropdown-item" href="{{ path('front_user_diploma_update') }}">Mes diplômes</a>
-                        <a class="dropdown-item" href="{{ path('front_link_index') }}">Mes comptes annexes</a>
+                        {% if not is_granted('ROLE_PREMIUM') %}
+                            <a class="dropdown-item" href="{{ path('front_user_pro_update') }}">Mes expériences</a>
+                            <a class="dropdown-item" href="{{ path('front_user_experience_update') }}">Mes compétences</a>
+                            <a class="dropdown-item" href="{{ path('front_user_diploma_update') }}">Mes diplômes</a>
+                            <a class="dropdown-item" href="{{ path('front_link_index') }}">Mes comptes annexes</a>
+                        {% endif %}
                     </div>
                 </li>
                 {# - #}
