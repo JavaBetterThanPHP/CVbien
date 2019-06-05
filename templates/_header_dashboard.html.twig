@@ -35,9 +35,11 @@
                 {# - #}
 
                 {# Vers les recherches #}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('front_research_index') }}">Search</a>
-                </li>
+                {% if is_granted('ROLE_PREMIUM') %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('front_research_index') }}">Search</a>
+                    </li>
+                {% endif %}
                 {# - #}
 
                 {# To parameters pages #}
@@ -52,7 +54,8 @@
                             personnelles</a>
                         {% if not is_granted('ROLE_PREMIUM') %}
                             <a class="dropdown-item" href="{{ path('front_user_pro_update') }}">Mes expériences</a>
-                            <a class="dropdown-item" href="{{ path('front_user_experience_update') }}">Mes compétences</a>
+                            <a class="dropdown-item" href="{{ path('front_user_experience_update') }}">Mes
+                                compétences</a>
                             <a class="dropdown-item" href="{{ path('front_user_diploma_update') }}">Mes diplômes</a>
                             <a class="dropdown-item" href="{{ path('front_link_index') }}">Mes comptes annexes</a>
                         {% endif %}
