@@ -110,11 +110,11 @@ $('#btnInitCropBanner').click(function () {
     initCropBanner();
 });
 
-function selectModule(moduleName){
+function selectModule(moduleName) {
     switch (moduleName) {
         case MODULE_TEXTE :
             $("#wysiwygModal").modal();
-            CKEDITOR.replace( 'editor1');
+            CKEDITOR.replace('editor1');
             break;
         case MODULE_COMPETENCES :
             $("#competencesModal").modal();
@@ -127,73 +127,73 @@ function selectModule(moduleName){
     }
 }
 
-function addTextModule(data){
+function addTextModule(data) {
     var text = data;
     var element = document.createElement('div');
-    element.style.width = "30rem";
+    element.className = "item";
     element.innerHTML =
-        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n"+
-        "<div class=\"card\" style=\"width: 30rem;\">\n"+
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n" +
+        "<div class=\"card\">\n" +
         "<div class=\"card-header\">" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
-        "</div>\n"+
-        "<div class=\"card-body\">\n"+
-        "<p class=\"card-text\">"+text+"</p>\n" +
+        "</div>\n" +
+        "<div class=\"card-body\">\n" +
+        "<p class=\"card-text\">" + text + "</p>\n" +
         "</div>\n" +
         "</div>\n" +
         "</div>\n";
-    grid.add(element,{index:0});
+    grid.add(element, {index: 0});
     grid.layout();
     $("#moduleModal").modal('hide');
     $("#wysiwygModal").modal('hide');
 }
 
-function deleteModule(element){
-    grid.remove(element.parentElement.parentElement.parentElement.parentElement, {removeElements:true});
+function deleteModule(element) {
+    grid.remove(element.parentElement.parentElement.parentElement.parentElement, {removeElements: true});
 }
 
-function addCompetencesModule(style){
+function addCompetencesModule(style) {
     var json = JSON.parse(document.querySelector(".user-proglanguage").dataset.userproglanguage);
-    body="";
-    json.forEach(function(obj){
-        body+="<p class=\"card-text\">";
-        body+="<div class=\"progress\">";
-        body+="<div class=\"progress-bar progress-bar-striped progress-bar-animated bg-success\" role=\"progressbar\" aria-valuenow=\""+(obj.level)*10+"\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: "+(obj.level)*10+"%\"><strong>"+obj.progLanguage.name+"</strong></div>\n";
-        body+="</div></p>";
+    body = "";
+    json.forEach(function (obj) {
+        body += "<p class=\"card-text\">";
+        body += "<div class=\"progress\">";
+        body += "<div class=\"progress-bar progress-bar-striped progress-bar-animated bg-success\" role=\"progressbar\" aria-valuenow=\"" + (obj.level) * 10 + "\" aria-valuemin=\"0\" aria-valuemax=\"100\" style=\"width: " + (obj.level) * 10 + "%\"><strong>" + obj.progLanguage.name + "</strong></div>\n";
+        body += "</div></p>";
     });
     var element = document.createElement('div');
-    element.style.width = "30rem";
+    element.className = "item";
     element.innerHTML =
-        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n"+
-        "<div class=\"card\" style=\"width: 30rem;\">\n"+
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n" +
+        "<div class=\"card\">\n" +
         "<div class=\"card-header\">Compétences" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
-        "</div>\n"+
-        "<div class=\"card-body\">\n"+body+
+        "</div>\n" +
+        "<div class=\"card-body\">\n" + body +
         "</div>\n" +
         "</div>\n" +
         "</div>\n";
-    grid.add(element,{index:0});
+    grid.add(element, {index: 0});
     grid.layout();
     $("#moduleModal").modal('hide');
     $("#competencesModal").modal('hide');
 }
 
-function addLienModule(titre,lien,image){
+function addLienModule(titre, lien, image) {
     var element = document.createElement('div');
-    element.style.width = "30rem";
-    bgimage = "background-image:url(\""+image+"\")";
+    element.className = "item";
+    bgimage = "background-image:url(\"" + image + "\")";
     element.innerHTML =
-        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n"+
-        "<div class=\"card\" style=\"width:8rem;height:8em;background-size:8rem 8rem;background-image: url('"+image+"');\">\n"+
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n" +
+        "<div class=\"card\" style=\"width:8rem;height:8em;background-size:8rem 8rem;background-image: url('" + image + "');\">\n" +
         "<div class=\"card-header bg-transparent border-bottom-0\">" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
         "</div>\n" +
-        "<a href=\""+lien+"\">"+
-        "</a>"+
+        "<a href=\"" + lien + "\">" +
+        "</a>" +
         "</div>\n" +
         "</div>\n";
-    grid.add(element,{index:0});
+    grid.add(element, {index: 0});
     grid.layout();
     $("#moduleModal").modal('hide');
     $("#lienModal").modal('hide');
