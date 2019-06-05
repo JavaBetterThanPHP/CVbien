@@ -21,10 +21,9 @@ class ResearchController extends AbstractController
         $this->denyAccessUnlessGranted('ROLE_PREMIUM', null, '403 - Vous devez posséder un compte PRO pour accéder a cette page.');
         $user = $this->getUser();
 
-
         return $this->render('Front/research/index.html.twig', [
             'user' => $user,
-            'profileList' => $userRepository->findAll()
+            'profileList' => $userRepository->findBy(['isProfessional' => false])
         ]);
     }
 }
