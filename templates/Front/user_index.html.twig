@@ -58,6 +58,9 @@
                 <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#moduleModal">
                     Ajouter
                 </button>
+                <button type="button" class="btn btn-sm btn-secondary" data-toggle="modal" data-target="#updateModal">
+                    Update
+                </button>
             </div>
         {% else %}
             <div class="height-10 bg-dark"></div>
@@ -65,93 +68,8 @@
 
         {# MODULE AREA - Zone des modules #}
         <div id="modContainer" class="container-fluid mt-5">
-
-            {% if not edit and warningNotActive %}
-                <div class="alert alert-primary" role="alert">
-                    <b>Attention : </b> Votre profil n'est pas actif. Pour l'activer rendez vous dans vos parametres
-                    personnelles.
-                </div>
-            {% endif %}
-
-            {# Import des modules dans le GRID #}
-            <div id="modGrid" class="grid">
-
-                {# Module de bienvenue #}
-                <div class="item">
-                    <div class="item-content">
-                        <div class="card">
-                            <div class="card-header">
-                                Bienvenue sur Curvitae
-                                {% if edit %}
-                                    <button class="btn btn-link float-right" onclick="deleteModule(this)"><i
-                                                class="far fa-trash-alt"></i></button>
-                                {% endif %}
-                            </div>
-                            <div class="card-body">
-                                <p class="card-text">Remplissez vos information personnelles, pour voir s'afficher vos
-                                    modules</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {# Module information personnelles #}
-                {% if user.firstname is not null and user.lastname is not null %}
-                    <div class="item">
-                        <div class="item-content">
-                            <div class="card">
-                                <div class="card-header">Informations personnelles
-                                    {% if edit %}
-                                        <button class="btn btn-link float-right" onclick="deleteModule(this)"><i
-                                                    class="far fa-trash-alt"></i></button>
-                                    {% endif %}
-                                </div>
-                                <div class="card-body">
-                                    <h5 class="card-title">{{ user.firstname }} {{ user.lastname }}</h5>
-                                    {% if user.birthdate is not null %}
-                                        <h6 class="card-subtitle mb-2 text-muted">{{ user.birthdate | age }} ans</h6>
-                                    {% endif %}
-                                    {% if user.adress is not null and user.cityCode is not null and user.city is not null %}
-                                        <p class="card-text">
-                                            {{ user.adress }},<br/>
-                                            {{ user.cityCode }} {{ user.city }},
-                                            {% if user.country is not null %}
-                                                {{ user.country.name }}
-                                            {% endif %}
-                                        </p>
-                                    {% endif %}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-
-                {# Module liens #}
-                {% if user.links is not null %}
-                    <div class="item">
-                        <div class="item-content">
-                            <div class="card">
-                                <div class="card-header">Liens
-                                    {% if edit %}
-                                        <button class="btn btn-link float-right" onclick="deleteModule(this)"><i
-                                                    class="far fa-trash-alt"></i></button>
-                                    {% endif %}
-                                </div>
-                                <div class="card-body">
-                                    <p class="card-text">
-                                        {% for link in user.links %}
-                                            <a href="{{ link.url }}" target="_blank">{{ link.website }}</a>
-                                            : {{ link.username }}<br/>
-                                        {% else %}
-                                            Pas de liens
-                                        {% endfor %}
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                {% endif %}
-
+            <div id="modGrid" class="grid muuri">
+                {{ user.userModulesGridHtmlString | raw }}
             </div>
         </div>
         {# --- #}
@@ -159,6 +77,7 @@
         {% if edit %}
             {{ include('Front/_modal_profile_picture.html.twig') }}
             {{ include('Front/_modal_banner_picture.html.twig') }}
+            {{ include('Front/_modal_update.html.twig') }}
         {% endif %}
 
         {# ---- MODULE MODAL ---- #}
