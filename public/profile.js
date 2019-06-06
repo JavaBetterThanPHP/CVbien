@@ -164,7 +164,7 @@ function addCompetencesModule(style){
     var element = document.createElement('div');
     element.style.width = "30rem";
     element.innerHTML =
-        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n"+
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:30rem;\">\n"+
         "<div class=\"card\" style=\"width: 30rem;\">\n"+
         "<div class=\"card-header\">Compétences" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
@@ -181,10 +181,10 @@ function addCompetencesModule(style){
 
 function addLienModule(titre,lien,image){
     var element = document.createElement('div');
-    element.style.width = "30rem";
+    element.style.width = "8rem";
     bgimage = "background-image:url(\""+image+"\")";
     element.innerHTML =
-        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n"+
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width: 8rem%;height:8rem;\">\n"+
         "<div class=\"card\" style=\"width:8rem;height:8em;background-size:8rem 8rem;background-image: url('"+image+"');\">\n"+
         "<div class=\"card-header bg-transparent border-bottom-0\">" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
@@ -198,3 +198,14 @@ function addLienModule(titre,lien,image){
     $("#moduleModal").modal('hide');
     $("#lienModal").modal('hide');
 }
+
+$("#updateDashboard").click(function () {
+    alert($("#modGrid").html());
+    $.ajax({
+        type: 'POST',
+        url: "/dashboard/updateDashboard",
+        data: {html :$("#modGrid").html()}
+}).done(function (data) {
+        alert(data);
+    });
+});

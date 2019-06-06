@@ -161,4 +161,25 @@ class UserController extends AbstractController
         dump($resultCustomer);
         return new JsonResponse("ok", 200);
     }
+
+    /**
+     * @Route("/updateDashboard", name="updateDashboard", methods={"POST"})
+     *
+     * @param Request $request
+     * @return Response
+     */
+    public function updateDashboard(Request $request): Response
+    {
+        $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+        try {
+            $user = $this->getUser();
+            $entityManager = $this->getDoctrine()->getManager();
+            $user->setUserModulesGridHtmlString(($request->get('html')));
+            $entityManager->flush();
+        } catch (\Exception $e) {
+            throw $this->createNotFoundException('404');
+        }
+        return new Response(($user->getUserModulesGridHtmlString()));
+    }
 }
+

@@ -25,6 +25,8 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 class User implements UserInterface, \Serializable
 {
 
+    private $htmlDumpDefault;
+
     /* ===================================
      * =========== Properties ============
      * ===================================
@@ -219,8 +221,21 @@ class User implements UserInterface, \Serializable
     /**
      * @ORM\Column(type="text", nullable=true)
      */
-    private $userModulesGridHtmlString;
-
+    private $userModulesGridHtmlString = '
+          <div class="item muuri-item muuri-item-shown" style="left: 0px; top: 0px; transform: translateX(0px) translateY(0px); display: block; touch-action: none; -moz-user-select: none;">
+             <div class="item-content" style="opacity: 1; transform: scale(1);">
+                <div class="card">
+                   <div class="card-header">
+                      Bienvenue sur CVBien
+                      <button class="btn btn-link float-right" onclick="deleteModule(this)"><i class="far fa-trash-alt"></i></button>
+                   </div>
+                   <div class="card-body">
+                      <p class="card-text">Remplissez vos information personnelles, et choisissez vos Modules 😉</p>
+                   </div>
+                </div>
+             </div>
+          </div>
+        ';
 
     /* ===================================
      * ============ Methods ==============
@@ -1067,7 +1082,7 @@ class User implements UserInterface, \Serializable
      */
     public function getUserModulesGridHtmlString(): ?string
     {
-        return $this->userModulesGridHtmlString;
+        return htmlspecialchars_decode($this->userModulesGridHtmlString);
     }
 
     /**
