@@ -237,6 +237,11 @@ class User implements UserInterface, \Serializable
           </div>
         ';
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isProfessional;
+
     /* ===================================
      * ============ Methods ==============
      * ===================================
@@ -259,6 +264,7 @@ class User implements UserInterface, \Serializable
         $this->userProgLanguages = new ArrayCollection();
         $this->links = new ArrayCollection();
         $this->userSocieties = new ArrayCollection();
+        $this->setIsProfessional(false);
     }
 
     /**
@@ -1120,4 +1126,15 @@ class User implements UserInterface, \Serializable
         return $this->getEmail();
     }
 
+    public function getIsProfessional(): ?bool
+    {
+        return $this->isProfessional;
+    }
+
+    public function setIsProfessional(bool $isProfessional): self
+    {
+        $this->isProfessional = $isProfessional;
+
+        return $this;
+    }
 }

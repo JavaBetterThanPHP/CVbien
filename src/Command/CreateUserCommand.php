@@ -14,7 +14,11 @@
     use Doctrine\Common\Persistence\ObjectManager;
 
 
-
+    /**
+     * UTILISATION
+     * php bin/console app:create-user [email:string] [password:string] [role:string]
+     * role = {'admin', 'dev', 'premium'}
+     */
     class CreateUserCommand extends Command
     {
         // the name of the command (the part after "bin/console")
@@ -36,7 +40,7 @@
                     ->setHelp('This command allows you to create a user')
                     ->addArgument('email', InputArgument::REQUIRED, 'The email of the user.')
                     ->addArgument('password',InputArgument::REQUIRED, 'User password')
-                    ->addArgument('role',InputArgument::OPTIONAL, 'Role User')
+                    ->addArgument('role',InputArgument::REQUIRED, 'Role User')
             ;
         }
 
@@ -62,10 +66,17 @@
             $user->setPassword($password);
             $user->setSpaceName(bin2hex(random_bytes(5)));
 
-            if (($input->getArgument('role')) == 'admin'){
-                $user->setRoles(['ROLE_ADMIN']);
-            }else{
-                $user->setRoles(['ROLE_USER']);
+            switch ($input->getArgument('role'))
+            {
+                case 'admin':
+                    $user->setRoles(['ROLE_ADMIN']);
+                    break;
+                case 'dev':
+                    $user->setRoles(['ROLE_USER']);
+                    break;
+                case 'premium':
+                    $user->setRoles(['ROLE_PREMIUM']);
+                    break;
             }
 
             $em = $this->objectManager;

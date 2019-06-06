@@ -1,0 +1,8 @@
+# .blackfire.yml
+
+tests:
+  "Toutes les pages sont rapides":
+    path: "/.*"
+    assertions:
+      - main.wall_time < 70ms
+      - main.memory < 10Mb
