@@ -2,9 +2,9 @@
 
 {% block title %}
     {% if edit %}
-        Dashboard - CVBien
+        Dashboard - {{ parent() }}
     {% else %}
-        CVBien - {{ user.spaceName | default('User page') }}
+        {{ user.spaceName | default('User page') }} - {{ parent() }}
     {% endif %}
 {% endblock %}
 
@@ -81,7 +81,7 @@
                     <div class="item-content">
                         <div class="card">
                             <div class="card-header">
-                                Bienvenue sur CVBien
+                                Bienvenue sur Curvitae
                                 {% if edit %}
                                     <button class="btn btn-link float-right" onclick="deleteModule(this)"><i
                                                 class="far fa-trash-alt"></i></button>
