@@ -9470,5 +9470,39 @@ a.text-dark:hover, a.text-dark:focus {
     visibility: hidden !important;
 }
 
+.badge{
+    padding: 4px 8px;
+    border: 1px solid transparent;
+    width:48px;
+    margin: 2px;
+}
+
+.goldBadge {
+    background-color: #fffae6;
+    border-color: #ece5c6;
+}
+
+.goldDot {
+   color: #ffcc01;
+}
+
+.silverBadge {
+    background-color: #eaebec;
+    border-color: #dddee0;
+}
+
+.silverDot {
+    color: #b4b8bc;
+}
+
+.bronzeBadge {
+    background-color: #f8e9dd;
+    border-color: #f0decb;
+}
+
+.bronzeDot {
+    color: #d1a684;
+}
+
 /*----Custom CSS----*/
 
