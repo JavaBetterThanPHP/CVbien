@@ -153,6 +153,7 @@ function addTextModule(data) {
         "</div>\n";
     grid.add(element, {index: 0});
     grid.layout();
+    grid.synchronize();
     $("#wysiwygModal").modal('hide');
 }
 
@@ -183,6 +184,7 @@ function addCompetencesModule(style) {
         "</div>\n";
     grid.add(element, {index: 0});
     grid.layout();
+    grid.synchronize();
     $("#competencesModal").modal('hide');
 }
 
@@ -203,10 +205,12 @@ function addLienModule(titre, lien, image) {
         "</div>\n";
     grid.add(element, {index: 0});
     grid.layout();
+
     $("#lienModal").modal('hide');
 }
 
 $("#updateDashboard").click(function () {
+    grid.synchronize();
     $.ajax({
         type: 'POST',
         url: "/dashboard/updateDashboard",
@@ -222,6 +226,7 @@ function addStackOverflowModule(userId) {
         url: "https://api.stackexchange.com/2.2/users/"+userId+"?site=stackoverflow",
     }).done(function (data) {
         var element = document.createElement('div');
+        element.className = "item";
         element.style.width = "15rem";
         element.innerHTML =
             "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:15rem;\">\n"+
@@ -229,7 +234,7 @@ function addStackOverflowModule(userId) {
             "<div class=\"card-header\">StackOverflow" +
             "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
             "</div>\n" +
-            "<div class=\"card-header bg-white text-center\">" +
+            "<div class=\"card-footer bg-white text-center\">" +
             "<a href=\""+data.items[0].link+"\">"+
             "<img src=\""+data.items[0].profile_image+"\" class=\" mt-2\">"+
             "</a>"+
@@ -246,7 +251,6 @@ function addStackOverflowModule(userId) {
             "</div>\n" +
             "</div>\n";
         grid.add(element, {index: 0});
-        grid.layout();
         $("#lienModal").modal('hide');
     });
 }

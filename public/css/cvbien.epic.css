@@ -9504,5 +9504,9 @@ a.text-dark:hover, a.text-dark:focus {
     color: #d1a684;
 }
 
+.grid.muuri{
+    height: 3000px !important;
+}
+
 /*----Custom CSS----*/
 
