@@ -1,6 +1,8 @@
 const MODULE_TEXTE = "Texte";
 const MODULE_COMPETENCES = "Competences";
 const MODULE_LIEN = "Lien";
+const MODULE_STACKOVERFLOW = "StackOverflow";
+
 
 function initCropProfile() {
     var basic = $('#main-cropper').croppie({
@@ -113,14 +115,21 @@ $('#btnInitCropBanner').click(function () {
 function selectModule(moduleName) {
     switch (moduleName) {
         case MODULE_TEXTE :
+            $("#moduleModal").modal('hide');
             $("#wysiwygModal").modal();
             CKEDITOR.replace('editor1');
             break;
         case MODULE_COMPETENCES :
+            $("#moduleModal").modal('hide');
             $("#competencesModal").modal();
             break;
         case MODULE_LIEN :
+            $("#moduleModal").modal('hide');
             $("#lienModal").modal();
+            break;
+        case MODULE_STACKOVERFLOW :
+            $("#moduleModal").modal('hide');
+            $("#stackOverflowModal").modal();
             break;
         default:
             alert("error");
@@ -144,7 +153,6 @@ function addTextModule(data) {
         "</div>\n";
     grid.add(element, {index: 0});
     grid.layout();
-    $("#moduleModal").modal('hide');
     $("#wysiwygModal").modal('hide');
 }
 
@@ -175,7 +183,6 @@ function addCompetencesModule(style) {
         "</div>\n";
     grid.add(element, {index: 0});
     grid.layout();
-    $("#moduleModal").modal('hide');
     $("#competencesModal").modal('hide');
 }
 
@@ -196,17 +203,50 @@ function addLienModule(titre, lien, image) {
         "</div>\n";
     grid.add(element, {index: 0});
     grid.layout();
-    $("#moduleModal").modal('hide');
     $("#lienModal").modal('hide');
 }
 
 $("#updateDashboard").click(function () {
-    alert($("#modGrid").html());
     $.ajax({
         type: 'POST',
         url: "/dashboard/updateDashboard",
         data: {html :$("#modGrid").html()}
 }).done(function (data) {
-        alert(data);
+        $("#updateModal").modal('hide');
     });
 });
+
+function addStackOverflowModule(userId) {
+    $.ajax({
+        type: 'GET',
+        url: "https://api.stackexchange.com/2.2/users/"+userId+"?site=stackoverflow",
+    }).done(function (data) {
+        var element = document.createElement('div');
+        element.style.width = "15rem";
+        element.innerHTML =
+            "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:15rem;\">\n"+
+            "<div class=\"card\" style=\"width: 15rem;\">\n"+
+            "<div class=\"card-header\">StackOverflow" +
+            "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+            "</div>\n" +
+            "<div class=\"card-header bg-white text-center\">" +
+            "<a href=\""+data.items[0].link+"\">"+
+            "<img src=\""+data.items[0].profile_image+"\" class=\" mt-2\">"+
+            "</a>"+
+            "</div>\n" +
+            "<div class=\"card-body text-center\">\n"+
+            "<h2 class=\"card-title\">"+data.items[0].reputation+"</h2>"+
+            "<p class=\"card-text text-light\">Reputation</p>"+
+            "<div class=\"card-footer bg-white text-center\">\n" +
+            "<span class=\"goldBadge badge\"><span class=\"goldDot\"> • </span>"+data.items[0].badge_counts.gold+"</span>"+
+            "<span class=\"silverBadge badge\"><span class=\"silverDot\"> • </span>"+data.items[0].badge_counts.silver+"</span>"+
+            "<span class=\"bronzeBadge badge\"><span class=\"bronzeDot\"> • </span>"+data.items[0].badge_counts.bronze+"</span>"+
+            "</div>"+
+            "</div>\n" +
+            "</div>\n" +
+            "</div>\n";
+        grid.add(element, {index: 0});
+        grid.layout();
+        $("#lienModal").modal('hide');
+    });
+}
