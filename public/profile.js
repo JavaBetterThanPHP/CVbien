@@ -2,6 +2,7 @@ const MODULE_TEXTE = "Texte";
 const MODULE_COMPETENCES = "Competences";
 const MODULE_LIEN = "Lien";
 const MODULE_STACKOVERFLOW = "StackOverflow";
+const MODULE_GITHUB = "Github";
 
 
 function initCropProfile() {
@@ -131,6 +132,10 @@ function selectModule(moduleName) {
             $("#moduleModal").modal('hide');
             $("#stackOverflowModal").modal();
             break;
+        case MODULE_GITHUB:
+            $("#moduleModal").modal('hide');
+            $("#githubModal").modal();
+            break;
         default:
             alert("error");
     }
@@ -141,16 +146,16 @@ function addTextModule(data) {
     var element = document.createElement('div');
     element.className = "item";
     element.innerHTML =
-        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n" +
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">" +
         "<div class=\"card\">\n" +
         "<div class=\"card-header\">" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
-        "</div>\n" +
-        "<div class=\"card-body\">\n" +
-        "<p class=\"card-text\">" + text + "</p>\n" +
-        "</div>\n" +
-        "</div>\n" +
-        "</div>\n";
+        "</div>" +
+        "<div class=\"card-body\">" +
+        text +
+        "</div>" +
+        "</div>" +
+        "</div>";
     grid.add(element, {index: 0});
     grid.layout();
     $("#wysiwygModal").modal('hide');
@@ -172,8 +177,8 @@ function addCompetencesModule(style) {
     var element = document.createElement('div');
     element.className = "item";
     element.innerHTML =
-        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:30rem;\">\n"+
-        "<div class=\"card\" style=\"width: 30rem;\">\n"+
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:30rem;\">\n" +
+        "<div class=\"card\" style=\"width: 30rem;\">\n" +
         "<div class=\"card-header\">Compétences" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
         "</div>\n" +
@@ -188,11 +193,12 @@ function addCompetencesModule(style) {
 
 function addLienModule(titre, lien, image) {
     var element = document.createElement('div');
+    element.className = "item";
     element.style.width = "8rem";
-    bgimage = "background-image:url(\""+image+"\")";
+    bgimage = "background-image:url(\"" + image + "\")";
     element.innerHTML =
-        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width: 8rem%;height:8rem;\">\n"+
-        "<div class=\"card\" style=\"width:8rem;height:8em;background-size:8rem 8rem;background-image: url('"+image+"');\">\n"+
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width: 8rem%;height:8rem;\">\n" +
+        "<div class=\"card\" style=\"width:8rem;height:8em;background-size:8rem 8rem;background-image: url('" + image + "');\">\n" +
 
         "<div class=\"card-header bg-transparent border-bottom-0\">" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
@@ -210,8 +216,8 @@ $("#updateDashboard").click(function () {
     $.ajax({
         type: 'POST',
         url: "/dashboard/updateDashboard",
-        data: {html :$("#modGrid").html()}
-}).done(function (data) {
+        data: {html: $("#modGrid").html()}
+    }).done(function (data) {
         $("#updateModal").modal('hide');
     });
 });
@@ -219,34 +225,70 @@ $("#updateDashboard").click(function () {
 function addStackOverflowModule(userId) {
     $.ajax({
         type: 'GET',
-        url: "https://api.stackexchange.com/2.2/users/"+userId+"?site=stackoverflow",
+        url: "https://api.stackexchange.com/2.2/users/" + userId + "?site=stackoverflow",
     }).done(function (data) {
         var element = document.createElement('div');
+        element.className = "item";
         element.style.width = "15rem";
         element.innerHTML =
-            "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:15rem;\">\n"+
-            "<div class=\"card\" style=\"width: 15rem;\">\n"+
+            "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:15rem;\">\n" +
+            "<div class=\"card\" style=\"width: 15rem;\">\n" +
             "<div class=\"card-header\">StackOverflow" +
             "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
             "</div>\n" +
             "<div class=\"card-header bg-white text-center\">" +
-            "<a href=\""+data.items[0].link+"\">"+
-            "<img src=\""+data.items[0].profile_image+"\" class=\" mt-2\">"+
-            "</a>"+
+            "<a href=\"" + data.items[0].link + "\" target='_blank'>" +
+            "<img src=\"" + data.items[0].profile_image + "\" class=\" mt-2\">" +
+            "</a>" +
             "</div>\n" +
-            "<div class=\"card-body text-center\">\n"+
-            "<h2 class=\"card-title\">"+data.items[0].reputation+"</h2>"+
-            "<p class=\"card-text text-light\">Reputation</p>"+
+            "<div class=\"card-body text-center\">\n" +
+            "<h2 class=\"card-title\">" + data.items[0].reputation + "</h2>" +
+            "<p class=\"card-text text-secondary\">Reputation</p>" +
             "<div class=\"card-footer bg-white text-center\">\n" +
-            "<span class=\"goldBadge badge\"><span class=\"goldDot\"> • </span>"+data.items[0].badge_counts.gold+"</span>"+
-            "<span class=\"silverBadge badge\"><span class=\"silverDot\"> • </span>"+data.items[0].badge_counts.silver+"</span>"+
-            "<span class=\"bronzeBadge badge\"><span class=\"bronzeDot\"> • </span>"+data.items[0].badge_counts.bronze+"</span>"+
-            "</div>"+
+            "<span class=\"goldBadge badge\"><span class=\"goldDot\"> • </span>" + data.items[0].badge_counts.gold + "</span>" +
+            "<span class=\"silverBadge badge\"><span class=\"silverDot\"> • </span>" + data.items[0].badge_counts.silver + "</span>" +
+            "<span class=\"bronzeBadge badge\"><span class=\"bronzeDot\"> • </span>" + data.items[0].badge_counts.bronze + "</span>" +
+            "</div>" +
             "</div>\n" +
             "</div>\n" +
             "</div>\n";
         grid.add(element, {index: 0});
         grid.layout();
         $("#lienModal").modal('hide');
+    });
+}
+
+function addGithubModule(e, userId) {
+    e.preventDefault();
+    $.ajax({
+        type: 'GET',
+        url: "https://api.github.com/users/" + userId,
+    }).done(function (data) {
+        var element = document.createElement('div');
+        element.className = "item";
+        element.style.width = "15rem";
+        element.innerHTML =
+            "<div class='item-content'>" +
+            "<div class='card'>" +
+            "<div class='card-header text-white bg-dark'>Github" +
+            "<button class='btn btn-link float-right' onclick='deleteModule(this)'><i class='far fa-trash-alt'></i></button>" +
+            "</div>" +
+            "<div class='card-header text-white bg-dark'>" +
+            "<a href='" + data.html_url + "' target='_blank'>" +
+            "<img width='100%' src='" + data.avatar_url + "' class='mt-2'>" +
+            "</a>" +
+            "</div>" +
+            "<div class='card-body text-white bg-dark text-center'>" +
+            "<h2 class='card-title'>" + data.name + "</h2>" +
+            "<p class='card-text'>" + data.login + "</p>" +
+            "<p class='card-text'>" + data.bio + "</p>" +
+            "</div>" +
+            "</div>" +
+            "</div>";
+        grid.add(element, {index: 0});
+        grid.layout();
+        $("#lienModal").modal('hide');
+    }).fail(function (err) {
+        console.error("user " + err.responseJSON.message);
     });
 }

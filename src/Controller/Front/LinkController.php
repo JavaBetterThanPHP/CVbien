@@ -93,14 +93,4 @@ class LinkController extends AbstractController
         return $this->redirectToRoute('front_link_index');
     }
 
-
-    /**
-     * @Route("/new/github", name="new_github", methods={"GET", "POST"})
-     */
-    public function newGithubAccount(Request $request): Response
-    {
-        // WRITE LINK GITHUB FORMTYPE
-    }
-
-
 }
