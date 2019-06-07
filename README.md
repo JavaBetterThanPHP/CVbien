@@ -6,12 +6,22 @@ Créateurs de CV / Portfolio pour les developpeurs
 
 Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 
-## Must read
-
-### Git Flow
-
-https://danielkummer.github.io/git-flow-cheatsheet/
-
+## Installation
+### Run
+```
+docker-compose up
+yarn watch
+php bin/console server:start
+```
+### Initialize
+```
+docker-compose up
+php bin/console d:d:d
+php bin/console d:d:c
+php bin/console d:s:u
+php bin/console d:f:l
+```
+=> create your user through interface
 ## Rendus
 
 ### Management de projet Web
