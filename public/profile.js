@@ -2,6 +2,7 @@ const MODULE_TEXTE = "Texte";
 const MODULE_COMPETENCES = "Competences";
 const MODULE_LIEN = "Lien";
 const MODULE_STACKOVERFLOW = "StackOverflow";
+const MODULE_IMAGE = "Image";
 
 
 function initCropProfile() {
@@ -131,6 +132,10 @@ function selectModule(moduleName) {
             $("#moduleModal").modal('hide');
             $("#stackOverflowModal").modal();
             break;
+        case MODULE_IMAGE :
+            $("#moduleModal").modal('hide');
+            $("#imageModuleModal").modal();
+            break;
         default:
             alert("error");
     }
@@ -153,7 +158,6 @@ function addTextModule(data) {
         "</div>\n";
     grid.add(element, {index: 0});
     grid.layout();
-    grid.synchronize();
     $("#wysiwygModal").modal('hide');
 }
 
@@ -184,18 +188,17 @@ function addCompetencesModule(style) {
         "</div>\n";
     grid.add(element, {index: 0});
     grid.layout();
-    grid.synchronize();
     $("#competencesModal").modal('hide');
 }
 
 function addLienModule(titre, lien, image) {
     var element = document.createElement('div');
+    element.className = "item";
     element.style.width = "8rem";
-    bgimage = "background-image:url(\""+image+"\")";
+    element.style.height = "8rem";
     element.innerHTML =
         "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width: 8rem%;height:8rem;\">\n"+
         "<div class=\"card\" style=\"width:8rem;height:8em;background-size:8rem 8rem;background-image: url('"+image+"');\">\n"+
-
         "<div class=\"card-header bg-transparent border-bottom-0\">" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
         "</div>\n" +
@@ -205,7 +208,6 @@ function addLienModule(titre, lien, image) {
         "</div>\n";
     grid.add(element, {index: 0});
     grid.layout();
-
     $("#lienModal").modal('hide');
 }
 
@@ -259,4 +261,23 @@ function addStackOverflowModule(userId) {
             $("#lienModal").modal('hide');
         });
     });
+}
+
+function addImageModule(imageUrl,width,height) {
+    var element = document.createElement('div');
+
+    element.innerHTML =
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:"+width+"px;height:"+height+"px;\">\n"+
+        "<div class=\"card\" style=\"width:"+width+"px;height:"+height+"px;background-size:"+width+"px "+height+"px;background-image: url('"+imageUrl+"');\">\n"+
+        "<div class=\"card-header bg-transparent border-bottom-0\">"+
+        "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+        "</div>\n" +
+        "</div>\n" +
+        "</div>\n";
+    element.className = "item";
+    element.style.width = width;
+    element.style.height = height;
+    grid.add(element, {index: 0});
+    grid.layout();
+    $("#addImageModule").modal('hide');
 }
