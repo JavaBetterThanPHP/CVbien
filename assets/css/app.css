@@ -35,7 +35,6 @@
 }
 
 .item {
-    width: 20rem;
     display: block;
     position: absolute;
     z-index: 1;

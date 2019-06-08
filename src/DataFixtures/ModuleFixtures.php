@@ -38,6 +38,11 @@ class ModuleFixtures extends Fixture
             ->setFaClass("fab fa-stack-overflow");
         $manager->persist($module);
 
+        $module = (new Module())
+            ->setName("Image")
+            ->setFaClass("far fa-image");
+        $manager->persist($module);
+
         $manager->flush();
     }
 }
