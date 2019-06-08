@@ -9470,7 +9470,7 @@ a.text-dark:hover, a.text-dark:focus {
     visibility: hidden !important;
 }
 
-.badge{
+.sobadge{
     padding: 4px 8px;
     border: 1px solid transparent;
     width:48px;
@@ -9503,10 +9503,11 @@ a.text-dark:hover, a.text-dark:focus {
 .bronzeDot {
     color: #d1a684;
 }
-
+/*---
 .grid.muuri{
     height: 3000px !important;
 }
+---*/
 
 /*----Custom CSS----*/
 

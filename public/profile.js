@@ -143,7 +143,7 @@ function addTextModule(data) {
     element.innerHTML =
         "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n" +
         "<div class=\"card\">\n" +
-        "<div class=\"card-header\">" +
+        "<div class=\"card-header\">&nbsp;"+
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
         "</div>\n" +
         "<div class=\"card-body\">\n" +
@@ -225,32 +225,38 @@ function addStackOverflowModule(userId) {
         type: 'GET',
         url: "https://api.stackexchange.com/2.2/users/"+userId+"?site=stackoverflow",
     }).done(function (data) {
-        var element = document.createElement('div');
-        element.className = "item";
-        element.style.width = "15rem";
-        element.innerHTML =
-            "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:15rem;\">\n"+
-            "<div class=\"card\" style=\"width: 15rem;\">\n"+
-            "<div class=\"card-header\">StackOverflow" +
-            "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
-            "</div>\n" +
-            "<div class=\"card-footer bg-white text-center\">" +
-            "<a href=\""+data.items[0].link+"\">"+
-            "<img src=\""+data.items[0].profile_image+"\" class=\" mt-2\">"+
-            "</a>"+
-            "</div>\n" +
-            "<div class=\"card-body text-center\">\n"+
-            "<h2 class=\"card-title\">"+data.items[0].reputation+"</h2>"+
-            "<p class=\"card-text text-light\">Reputation</p>"+
-            "<div class=\"card-footer bg-white text-center\">\n" +
-            "<span class=\"goldBadge badge\"><span class=\"goldDot\"> • </span>"+data.items[0].badge_counts.gold+"</span>"+
-            "<span class=\"silverBadge badge\"><span class=\"silverDot\"> • </span>"+data.items[0].badge_counts.silver+"</span>"+
-            "<span class=\"bronzeBadge badge\"><span class=\"bronzeDot\"> • </span>"+data.items[0].badge_counts.bronze+"</span>"+
-            "</div>"+
-            "</div>\n" +
-            "</div>\n" +
-            "</div>\n";
-        grid.add(element, {index: 0});
-        $("#lienModal").modal('hide');
+        $.ajax({
+            type: 'GET',
+            url: "https://api.stackexchange.com/2.2/users/"+userId+"/tags?pagesize=3&order=desc&sort=popular&site=stackoverflow",
+        }).done(function (topTags) {
+            var element = document.createElement('div');
+            element.className = "item";
+            element.style.width = "15rem";
+            element.innerHTML =
+                "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:15rem;\">\n"+
+                "<div class=\"card\" style=\"width: 15rem;\">\n"+
+                "<div class=\"card-header\">StackOverflow" +
+                "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+                "</div>\n" +
+                "<div class=\"card-body text-center\">\n"+
+                "<p class=\"card-text bg-white text-center\">" +
+                "<a href=\""+data.items[0].link+"\">"+
+                "<img src=\""+data.items[0].profile_image+"\">"+
+                "</a>"+
+                "</p>\n" +
+                "<h2 class=\"card-title\">"+data.items[0].reputation+"</h2>"+
+                "<p class=\"card-text text-light\">Reputation</p>"+
+                "<p class=\"card-text\"></p><span class=\"badge badge-light mx-1\">"+topTags.items[0].name+"</span><span class=\"badge badge-light mx-1\">"+topTags.items[1].name+"</span><span class=\"badge badge-light mx-1\">"+topTags.items[2].name+"</span></p>"+
+                "<p class=\"card-text bg-white text-center\">\n" +
+                "<span class=\"goldBadge badge sobadge\"><span class=\"goldDot\"> • </span>"+data.items[0].badge_counts.gold+"</span>"+
+                "<span class=\"silverBadge badge sobadge\"><span class=\"silverDot\"> • </span>"+data.items[0].badge_counts.silver+"</span>"+
+                "<span class=\"bronzeBadge badge sobadge\"><span class=\"bronzeDot\"> • </span>"+data.items[0].badge_counts.bronze+"</span>"+
+                "</p>"+
+                "</div>\n" +
+                "</div>\n" +
+                "</div>\n";
+            grid.add(element, {index: 0});
+            $("#lienModal").modal('hide');
+        });
     });
 }
