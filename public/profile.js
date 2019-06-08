@@ -198,12 +198,10 @@ function addLienModule(titre, lien, image) {
     element.style.height = "8rem";
     element.innerHTML =
         "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width: 8rem%;height:8rem;\">\n"+
-        "<div class=\"card\" style=\"width:8rem;height:8em;background-size:8rem 8rem;background-image: url('"+image+"');\">\n"+
+        "<div class=\"card card-disabled\" style=\"width:8rem;height:8em;background-size:8rem 8rem;background-image: url('"+image+"');\" data-value=\"" + lien + "\">\n"+
         "<div class=\"card-header bg-transparent border-bottom-0\">" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
         "</div>\n" +
-        "<a href=\"" + lien + "\">" +
-        "</a>" +
         "</div>\n" +
         "</div>\n";
     grid.add(element, {index: 0});
