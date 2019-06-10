@@ -16,8 +16,6 @@ class ModuleFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $faker = \Faker\Factory::create('fr_FR');
-
         $module = (new Module())
             ->setName("Texte")
             ->setFaClass("fas fa-align-left");
@@ -41,6 +39,11 @@ class ModuleFixtures extends Fixture
         $module = (new Module())
             ->setName("Image")
             ->setFaClass("far fa-image");
+        $manager->persist($module);
+
+        $module = (new Module())
+            ->setName("Github")
+            ->setFaClass("fab fa-github");
         $manager->persist($module);
 
         $manager->flush();

@@ -1,6 +1,6 @@
 {% extends 'front_base.html.twig' %}
 
-{% block title %}Comptes annexes - {{ parent() }}n{% endblock %}
+{% block title %}Comptes annexes - {{ parent() }}{% endblock %}
 
 {% block header %}
     {{ include('_header_dashboard.html.twig') }}
@@ -12,7 +12,20 @@
             {{ include('Front/user/_user_info_menu.html.twig') }}
             <div class="col-8">
                 <h1>Liste des comptes</h1>
-
+                {#
+                <div class="mt-5">
+                    <button type="button" class="btn btn-secondary text-white mr-3" data-toggle="modal"
+                            data-target="#exampleModalCenter">
+                        <i class="fab fa-github mr-2"></i>Compte Github
+                    </button>
+                    <a class="btn text-white mr-3" style="background-color: #1da1f2"><i class="fab fa-twitter mr-2"></i>Compte
+                        Twitter</a>
+                    <a class="btn text-white mr-3" style="background-color: #F48024"><i
+                                class="fab fa-stack-overflow mr-2"></i>Compte Stack overflow</a>
+                    <a class="btn btn-success" href="{{ path('front_link_new') }}"><i class="fas fa-link mr-2"></i>Autres
+                        comptes</a>
+                </div>
+                #}
                 <table class="table display mt-5 mb-5">
                     <thead>
                     <tr>
@@ -44,7 +57,6 @@
                     {% endfor %}
                     </tbody>
                 </table>
-                <a class="btn btn-success" href="{{ path('front_link_new') }}">Ajouter</a>
             </div>
         </div>
     </div>
