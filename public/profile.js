@@ -4,6 +4,7 @@ const MODULE_LIEN = "Lien";
 const MODULE_STACKOVERFLOW = "StackOverflow";
 const MODULE_IMAGE = "Image";
 const MODULE_CODEPEN = "Codepen";
+const MODULE_GITHUB = "Github";
 
 
 function initCropProfile() {
@@ -141,6 +142,10 @@ function selectModule(moduleName) {
             $("#moduleModal").modal('hide');
             $("#codepenModal").modal();
             break;
+        case MODULE_GITHUB:
+            $("#moduleModal").modal('hide');
+            $("#githubModal").modal();
+            break;
         default:
             alert("error");
     }
@@ -151,18 +156,17 @@ function addTextModule(data) {
     var element = document.createElement('div');
     element.className = "item";
     element.innerHTML =
-        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">\n" +
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);\">" +
         "<div class=\"card\">\n" +
-        "<div class=\"card-header\">&nbsp;"+
+        "<div class=\"card-header\">&nbsp;" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
-        "</div>\n" +
-        "<div class=\"card-body\">\n" +
-        "<p class=\"card-text\">" + text + "</p>\n" +
-        "</div>\n" +
-        "</div>\n" +
-        "</div>\n";
+        "</div>" +
+        "<div class=\"card-body\">" +
+        text +
+        "</div>" +
+        "</div>" +
+        "</div>";
     grid.add(element, {index: -1});
-    grid.layout();
     $("#wysiwygModal").modal('hide');
 }
 
@@ -182,8 +186,8 @@ function addCompetencesModule(style) {
     var element = document.createElement('div');
     element.className = "item";
     element.innerHTML =
-        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:30rem;\">\n"+
-        "<div class=\"card\" style=\"width: 30rem;\">\n"+
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:30rem;\">\n" +
+        "<div class=\"card\" style=\"width: 30rem;\">\n" +
         "<div class=\"card-header\">Compétences" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
         "</div>\n" +
@@ -192,7 +196,6 @@ function addCompetencesModule(style) {
         "</div>\n" +
         "</div>\n";
     grid.add(element, {index: -1});
-    grid.layout();
     $("#competencesModal").modal('hide');
 }
 
@@ -202,15 +205,14 @@ function addLienModule(titre, lien, image) {
     element.style.width = "8rem";
     element.style.height = "8rem";
     element.innerHTML =
-        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width: 8rem%;height:8rem;\">\n"+
-        "<div class=\"card card-disabled\" style=\"width:8rem;height:8em;background-size:8rem 8rem;background-image: url('"+image+"');\" data-value=\"" + lien + "\">\n"+
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width: 8rem%;height:8rem;\">\n" +
+        "<div class=\"card card-disabled\" style=\"width:8rem;height:8em;background-size:8rem 8rem;background-image: url('" + image + "');\" data-value=\"" + lien + "\">\n" +
         "<div class=\"card-header bg-transparent border-bottom-0\">" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
         "</div>\n" +
         "</div>\n" +
         "</div>\n";
     grid.add(element, {index: -1});
-    grid.layout();
     $("#lienModal").modal('hide');
 }
 
@@ -219,8 +221,8 @@ $("#updateDashboard").click(function () {
     $.ajax({
         type: 'POST',
         url: "/dashboard/updateDashboard",
-        data: {html :$("#modGrid").html()}
-}).done(function (data) {
+        data: {html: $("#modGrid").html()}
+    }).done(function (data) {
         $("#updateModal").modal('hide');
     });
 });
@@ -228,35 +230,34 @@ $("#updateDashboard").click(function () {
 function addStackOverflowModule(userId) {
     $.ajax({
         type: 'GET',
-        url: "https://api.stackexchange.com/2.2/users/"+userId+"?site=stackoverflow",
+        url: "https://api.stackexchange.com/2.2/users/" + userId + "?site=stackoverflow",
     }).done(function (data) {
         $.ajax({
             type: 'GET',
-            url: "https://api.stackexchange.com/2.2/users/"+userId+"/tags?pagesize=3&order=desc&sort=popular&site=stackoverflow",
+            url: "https://api.stackexchange.com/2.2/users/" + userId + "/tags?pagesize=3&order=desc&sort=popular&site=stackoverflow",
         }).done(function (topTags) {
             var element = document.createElement('div');
             element.className = "item";
             element.style.width = "15rem";
             element.innerHTML =
-                "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:15rem;\">\n"+
-                "<div class=\"card\" style=\"width: 15rem;\">\n"+
+                "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:15rem;\">\n" +
+                "<div class=\"card\" style=\"width: 15rem;\">\n" +
                 "<div class=\"card-header\">StackOverflow" +
                 "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
                 "</div>\n" +
-                "<div class=\"card-body text-center\">\n"+
-                "<p class=\"card-text bg-white text-center\">" +
-                "<a href=\""+data.items[0].link+"\">"+
-                "<img src=\""+data.items[0].profile_image+"\">"+
-                "</a>"+
-                "</p>\n" +
-                "<h2 class=\"card-title\">"+data.items[0].reputation+"</h2>"+
-                "<p class=\"card-text text-light\">Reputation</p>"+
-                "<p class=\"card-text\"></p><span class=\"badge badge-light mx-1\">"+topTags.items[0].name+"</span><span class=\"badge badge-light mx-1\">"+topTags.items[1].name+"</span><span class=\"badge badge-light mx-1\">"+topTags.items[2].name+"</span></p>"+
-                "<p class=\"card-text bg-white text-center\">\n" +
-                "<span class=\"goldBadge badge sobadge\"><span class=\"goldDot\"> • </span>"+data.items[0].badge_counts.gold+"</span>"+
-                "<span class=\"silverBadge badge sobadge\"><span class=\"silverDot\"> • </span>"+data.items[0].badge_counts.silver+"</span>"+
-                "<span class=\"bronzeBadge badge sobadge\"><span class=\"bronzeDot\"> • </span>"+data.items[0].badge_counts.bronze+"</span>"+
-                "</p>"+
+                "<div class=\"card-body text-center\">\n" +
+                "<a href=\"" + data.items[0].link + "\" target='_blank'>" +
+                "<img width='100%' src=\"" + data.items[0].profile_image + "\" class=\"rounded\">" +
+                "</a>" +
+                "<h2 class=\"card-title mt-3\">" + data.items[0].display_name + "</h2>" +
+                "<h2 class=\"card-title\">" + data.items[0].reputation + "</h2>" +
+                "<p class=\"card-text text-secondary\">Reputation</p>" +
+                "<p class=\"card-text\"></p><span class=\"badge badge-light mx-1\">" + ((topTags.items[0]) ? topTags.items[0].name : "") + "</span><span class=\"badge badge-light mx-1\">" + ((topTags.items[1]) ? topTags.items[1].name : "") + "</span><span class=\"badge badge-light mx-1\">" + ((topTags.items[2]) ? topTags.items[2].name : "") + "</span></p>" +
+                "<div class=\"card-footer bg-white text-center\">\n" +
+                "<span class=\"goldBadge badge\"><span class=\"goldDot\"> • </span>" + data.items[0].badge_counts.gold + "</span>" +
+                "<span class=\"silverBadge badge\"><span class=\"silverDot\"> • </span>" + data.items[0].badge_counts.silver + "</span>" +
+                "<span class=\"bronzeBadge badge\"><span class=\"bronzeDot\"> • </span>" + data.items[0].badge_counts.bronze + "</span>" +
+                "</div>" +
                 "</div>\n" +
                 "</div>\n" +
                 "</div>\n";
@@ -266,12 +267,46 @@ function addStackOverflowModule(userId) {
     });
 }
 
-function addImageModule(imageUrl,width,height) {
+function addGithubModule(e, userId) {
+    e.preventDefault();
+    $.ajax({
+        type: 'GET',
+        url: "https://api.github.com/users/" + userId,
+    }).done(function (data) {
+        var element = document.createElement('div');
+        element.className = "item";
+        element.style.width = "15rem";
+        element.innerHTML =
+            "<div class='item-content'>" +
+            "<div class='card'>" +
+            "<div class='card-header'>Github" +
+            "<button class='btn btn-link float-right' onclick='deleteModule(this)'><i class='far fa-trash-alt'></i></button>" +
+            "</div>" +
+            "<div class='card-body'>" +
+            "<a href='" + data.html_url + "' target='_blank'>" +
+            "<img class='rounded' width='100%' src='" + data.avatar_url + "' class='mt-2'>" +
+            "</a>" +
+            "<h2 class='card-title mt-3'>" + data.name + "</h2>" +
+            "<p class='card-text'>" + data.login + "</p>" +
+            "<span class='card-text'>" + data.bio + "</span><br/>" +
+            "<span class='card-text'>" + "Followers : " + data.followers + "</span><br/>" +
+            "<span class='card-text'>" + "Repositories : " + data.public_repos + "</span>" +
+            "</div>" +
+            "</div>" +
+            "</div>";
+        grid.add(element, {index: -1});
+        $("#lienModal").modal('hide');
+    }).fail(function (err) {
+        console.error("user " + err.responseJSON.message);
+    });
+}
+
+function addImageModule(imageUrl, width, height) {
     var element = document.createElement('div');
     element.innerHTML =
-        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:"+width+"px;height:"+height+"px;\">\n"+
-        "<div class=\"card\" style=\"width:"+width+"px;height:"+height+"px;background-size:"+width+"px "+height+"px;background-image: url('"+imageUrl+"');\">\n"+
-        "<div class=\"card-header bg-transparent border-bottom-0\">"+
+        "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:" + width + "px;height:" + height + "px;\">\n" +
+        "<div class=\"card\" style=\"width:" + width + "px;height:" + height + "px;background-size:" + width + "px " + height + "px;background-image: url('" + imageUrl + "');\">\n" +
+        "<div class=\"card-header bg-transparent border-bottom-0\">" +
         "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
         "</div>\n" +
         "</div>\n" +
@@ -280,7 +315,6 @@ function addImageModule(imageUrl,width,height) {
     element.style.width = width;
     element.style.height = height;
     grid.add(element, {index: -1});
-    grid.layout();
     $("#addImageModule").modal('hide');
 }
 
@@ -306,7 +340,6 @@ function addCodepenModule(penUrl) {
             "</div>\n";
         element.className = "item";
         grid.add(element, {index: -1});
-        grid.layout();
         $("#codepenModal").modal('hide');
     });
 }

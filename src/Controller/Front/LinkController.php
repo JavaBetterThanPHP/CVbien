@@ -92,4 +92,5 @@ class LinkController extends AbstractController
 
         return $this->redirectToRoute('front_link_index');
     }
+
 }
