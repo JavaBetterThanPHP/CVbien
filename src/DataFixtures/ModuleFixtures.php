@@ -42,6 +42,11 @@ class ModuleFixtures extends Fixture
         $manager->persist($module);
 
         $module = (new Module())
+            ->setName("Codepen")
+            ->setFaClass("fab fa-codepen");
+        $manager->persist($module);
+      
+        $module = (new Module())
             ->setName("Github")
             ->setFaClass("fab fa-github");
         $manager->persist($module);
