@@ -5,7 +5,7 @@ const MODULE_STACKOVERFLOW = "StackOverflow";
 const MODULE_IMAGE = "Image";
 const MODULE_CODEPEN = "Codepen";
 const MODULE_GITHUB = "Github";
-
+const MODULE_TWITTER = "Twitter";
 
 function initCropProfile() {
     var basic = $('#main-cropper').croppie({
@@ -145,6 +145,10 @@ function selectModule(moduleName) {
         case MODULE_GITHUB:
             $("#moduleModal").modal('hide');
             $("#githubModal").modal();
+            break;
+        case MODULE_TWITTER:
+            $("#moduleModal").modal('hide');
+            $("#twitterModuleModal").modal();
             break;
         default:
             alert("error");
@@ -342,4 +346,27 @@ function addCodepenModule(penUrl) {
         grid.add(element, {index: -1});
         $("#codepenModal").modal('hide');
     });
+}
+
+function addTwitterModule(twitterUsername, width, height) {
+    var element = document.createElement('div');
+    element.innerHTML =
+        "<div class=\"item-content\">\n"+
+        "<div class=\"card\">\n"+
+        "<div class=\"card-header bg-transparent border-bottom-0\">"+
+        "Twitter"+
+        "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+        "</div>\n" +
+        "<div class=\"card-body text-center\">\n"+
+        "<a class=\"twitter-timeline\" data-width=\""+width+"\" data-height=\""+height+"\" data-theme=\"dark\" href=\"https://twitter.com/"+twitterUsername+"\">" +
+        "</a>"+
+        "</div>\n" +
+        "</div>\n" +
+        "</div>\n";
+    element.className = "item";
+    grid.add(element, {index: -1});
+    twttr.widgets.load(
+        document.getElementsByClassName("twitter-timeline")
+    );
+    $("#twitterModuleModal").modal('hide');
 }

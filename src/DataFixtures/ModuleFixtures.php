@@ -51,6 +51,11 @@ class ModuleFixtures extends Fixture
             ->setFaClass("fab fa-github");
         $manager->persist($module);
 
+        $module = (new Module())
+            ->setName("Twitter")
+            ->setFaClass("fab fa-twitter");
+        $manager->persist($module);
+
         $manager->flush();
     }
 }

@@ -1,0 +1,30 @@
+<div class="modal fade bd-modal-lg" tabindex="-1" role="dialog" aria-labelledby="twitterModuleModal" aria-hidden="true" id="twitterModuleModal">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Module Twitter</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Twitter Username</label>
+                    <input type="text" class="form-control" id="twitterUsername" placeholder="kaiv_">
+                </div>
+                <div class="form-group">
+                    <label>Width</label>
+                    <input type="text" class="form-control" id="twitterModuleWidth" placeholder="400">
+                </div>
+                <div class="form-group">
+                    <label>Height</label>
+                    <input type="text" class="form-control" id="twitterModuleHeight" placeholder="400">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="addTwitterModule($('#twitterUsername').val(),$('#twitterModuleWidth').val(),$('#twitterModuleHeight').val())">Save</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
