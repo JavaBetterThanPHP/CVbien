@@ -3,6 +3,7 @@ const MODULE_COMPETENCES = "Competences";
 const MODULE_LIEN = "Lien";
 const MODULE_STACKOVERFLOW = "StackOverflow";
 const MODULE_IMAGE = "Image";
+const MODULE_CODEPEN = "Codepen";
 
 
 function initCropProfile() {
@@ -136,6 +137,10 @@ function selectModule(moduleName) {
             $("#moduleModal").modal('hide');
             $("#imageModuleModal").modal();
             break;
+        case MODULE_CODEPEN :
+            $("#moduleModal").modal('hide');
+            $("#codepenModal").modal();
+            break;
         default:
             alert("error");
     }
@@ -156,7 +161,7 @@ function addTextModule(data) {
         "</div>\n" +
         "</div>\n" +
         "</div>\n";
-    grid.add(element, {index: 0});
+    grid.add(element, {index: -1});
     grid.layout();
     $("#wysiwygModal").modal('hide');
 }
@@ -186,7 +191,7 @@ function addCompetencesModule(style) {
         "</div>\n" +
         "</div>\n" +
         "</div>\n";
-    grid.add(element, {index: 0});
+    grid.add(element, {index: -1});
     grid.layout();
     $("#competencesModal").modal('hide');
 }
@@ -204,7 +209,7 @@ function addLienModule(titre, lien, image) {
         "</div>\n" +
         "</div>\n" +
         "</div>\n";
-    grid.add(element, {index: 0});
+    grid.add(element, {index: -1});
     grid.layout();
     $("#lienModal").modal('hide');
 }
@@ -255,7 +260,7 @@ function addStackOverflowModule(userId) {
                 "</div>\n" +
                 "</div>\n" +
                 "</div>\n";
-            grid.add(element, {index: 0});
+            grid.add(element, {index: -1});
             $("#lienModal").modal('hide');
         });
     });
@@ -263,7 +268,6 @@ function addStackOverflowModule(userId) {
 
 function addImageModule(imageUrl,width,height) {
     var element = document.createElement('div');
-
     element.innerHTML =
         "<div class=\"item-content\" style=\"opacity: 1; transform: scale(1);width:"+width+"px;height:"+height+"px;\">\n"+
         "<div class=\"card\" style=\"width:"+width+"px;height:"+height+"px;background-size:"+width+"px "+height+"px;background-image: url('"+imageUrl+"');\">\n"+
@@ -275,7 +279,34 @@ function addImageModule(imageUrl,width,height) {
     element.className = "item";
     element.style.width = width;
     element.style.height = height;
-    grid.add(element, {index: 0});
+    grid.add(element, {index: -1});
     grid.layout();
     $("#addImageModule").modal('hide');
+}
+
+function addCodepenModule(penUrl) {
+    $.ajaxSetup({'cache':true});
+    $.ajax({
+        type: 'GET',
+        dataType: "jsonp",
+        url: "http://codepen.io/api/oembed/?url="+penUrl+"&format=js&callback=dataCallBack",
+    }).done(function (data) {
+        var element = document.createElement('div');
+        element.innerHTML =
+            "<div class=\"item-content\">\n"+
+            "<div class=\"card\">\n"+
+            "<div class=\"card-header bg-transparent border-bottom-0\">"+
+            "Codepen : "+ data.title+
+            "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+            "</div>\n" +
+            "<div class=\"card-body text-center\">\n"+
+            data.html+
+            "</div>\n" +
+            "</div>\n" +
+            "</div>\n";
+        element.className = "item";
+        grid.add(element, {index: -1});
+        grid.layout();
+        $("#codepenModal").modal('hide');
+    });
 }

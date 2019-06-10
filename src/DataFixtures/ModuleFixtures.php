@@ -43,6 +43,11 @@ class ModuleFixtures extends Fixture
             ->setFaClass("far fa-image");
         $manager->persist($module);
 
+        $module = (new Module())
+            ->setName("Codepen")
+            ->setFaClass("fab fa-codepen");
+        $manager->persist($module);
+
         $manager->flush();
     }
 }
