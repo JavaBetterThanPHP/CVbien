@@ -236,12 +236,11 @@ function addStackOverflowModule(userId) {
             "<div class=\"card-header\">StackOverflow" +
             "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
             "</div>\n" +
-            "<div class=\"card-header bg-white text-center\">" +
-            "<a href=\"" + data.items[0].link + "\" target='_blank'>" +
-            "<img src=\"" + data.items[0].profile_image + "\" class=\" mt-2\">" +
-            "</a>" +
-            "</div>\n" +
             "<div class=\"card-body text-center\">\n" +
+            "<a href=\"" + data.items[0].link + "\" target='_blank'>" +
+            "<img width='100%' src=\"" + data.items[0].profile_image + "\" class=\"rounded\">" +
+            "</a>" +
+            "<h2 class=\"card-title mt-3\">" + data.items[0].display_name + "</h2>" +
             "<h2 class=\"card-title\">" + data.items[0].reputation + "</h2>" +
             "<p class=\"card-text text-secondary\">Reputation</p>" +
             "<div class=\"card-footer bg-white text-center\">\n" +
@@ -270,18 +269,18 @@ function addGithubModule(e, userId) {
         element.innerHTML =
             "<div class='item-content'>" +
             "<div class='card'>" +
-            "<div class='card-header text-white bg-dark'>Github" +
+            "<div class='card-header'>Github" +
             "<button class='btn btn-link float-right' onclick='deleteModule(this)'><i class='far fa-trash-alt'></i></button>" +
             "</div>" +
-            "<div class='card-header text-white bg-dark'>" +
+            "<div class='card-body'>" +
             "<a href='" + data.html_url + "' target='_blank'>" +
-            "<img width='100%' src='" + data.avatar_url + "' class='mt-2'>" +
+            "<img class='rounded' width='100%' src='" + data.avatar_url + "' class='mt-2'>" +
             "</a>" +
-            "</div>" +
-            "<div class='card-body text-white bg-dark text-center'>" +
-            "<h2 class='card-title'>" + data.name + "</h2>" +
+            "<h2 class='card-title mt-3'>" + data.name + "</h2>" +
             "<p class='card-text'>" + data.login + "</p>" +
-            "<p class='card-text'>" + data.bio + "</p>" +
+            "<span class='card-text'>" + data.bio + "</span><br/>" +
+            "<span class='card-text'>" + "Followers : " + data.followers + "</span><br/>" +
+            "<span class='card-text'>" + "Repositories : " + data.public_repos + "</span>" +
             "</div>" +
             "</div>" +
             "</div>";
