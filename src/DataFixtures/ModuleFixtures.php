@@ -56,6 +56,11 @@ class ModuleFixtures extends Fixture
             ->setFaClass("fab fa-twitter");
         $manager->persist($module);
 
+        $module = (new Module())
+            ->setName("Instagram")
+            ->setFaClass("fab fa-instagram");
+        $manager->persist($module);
+
         $manager->flush();
     }
 }

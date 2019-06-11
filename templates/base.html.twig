@@ -33,6 +33,9 @@
 
     <!-- Bootstrap template -->
     <link type="text/css" rel="stylesheet" href="{{ asset('css/cvbien.epic.css') }}"/>
+
+    <link type="text/css" rel="stylesheet" href="{{ asset('css/jquery.oembed.css') }}"/>
+
     {% block head_css %}{% endblock %}
 </head>
 <body>
@@ -81,9 +84,11 @@
     <!-- Custom JS-->
     <script src="{{ asset('profile.js') }}"></script>
     <script src="{{ asset('autocomplete.js') }}"></script>
+    <script src="{{ asset('jquery.oembed.js') }}"></script>
     <script src="{{ asset('bundles/fosjsrouting/js/router.min.js') }}"></script>
     <script src="{{ path('fos_js_routing_js', { callback: 'fos.Router.setData' }) }}"></script>
     <script src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script src="https://platform.instagram.com/en_US/embeds.js"></script>
 {% endblock %}
 {% block javascripts %}{% endblock %}
 </body>
