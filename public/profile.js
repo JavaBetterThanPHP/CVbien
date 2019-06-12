@@ -8,6 +8,8 @@ const MODULE_GITHUB = "Github";
 const MODULE_TWITTER = "Twitter";
 const MODULE_INSTAGRAM = "Instagram";
 const MODULE_REPLIT = "Repl.it";
+const MODULE_SOUNDCLOUD = "SoundCloud";
+
 
 
 function initCropProfile() {
@@ -160,6 +162,9 @@ function selectModule(moduleName) {
         case MODULE_REPLIT:
             $("#moduleModal").modal('hide');
             $("#replitModal").modal();
+        case MODULE_SOUNDCLOUD:
+            $("#moduleModal").modal('hide');
+            $("#soundcloudModal").modal();
             break;
         default:
             alert("error");
@@ -426,3 +431,25 @@ function addReplitModule(title,replitUrl,width,height,hideCode) {
     $("#replitModal").modal('hide');
 }
 
+function addSoundcloudModule(soundCloudUrl) {
+    $.ajax({
+        type: 'GET',
+        url: "https://soundcloud.com/oembed?format=json&url="+soundCloudUrl,
+    }).done(function (data) {
+        var element = document.createElement('div');
+        element.innerHTML =
+            "<div class=\"item-content\">\n"+
+            "<div class=\"card\">\n"+
+            "<div class=\"card-header bg-transparent border-bottom-0\">"+
+            "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+            "</div>\n" +
+            "<div class=\"card-body text-center\">\n"+
+            data.html+
+            "</div>\n" +
+            "</div>\n" +
+            "</div>\n";
+        element.className = "item";
+        grid.add(element, {index: -1});
+        $("#soundcloudModal").modal('hide');
+    });
+}
