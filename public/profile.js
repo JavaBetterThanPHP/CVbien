@@ -7,6 +7,7 @@ const MODULE_CODEPEN = "Codepen";
 const MODULE_GITHUB = "Github";
 const MODULE_TWITTER = "Twitter";
 const MODULE_INSTAGRAM = "Instagram";
+const MODULE_REPLIT = "Repl.it";
 
 
 function initCropProfile() {
@@ -155,6 +156,10 @@ function selectModule(moduleName) {
         case MODULE_INSTAGRAM:
             $("#moduleModal").modal('hide');
             $("#instagramModal").modal();
+            break;
+        case MODULE_REPLIT:
+            $("#moduleModal").modal('hide');
+            $("#replitModal").modal();
             break;
         default:
             alert("error");
@@ -339,7 +344,7 @@ function addCodepenModule(penUrl) {
         element.innerHTML =
             "<div class=\"item-content\">\n"+
             "<div class=\"card\">\n"+
-            "<div class=\"card-header bg-transparent border-bottom-0\">"+
+            "<div class=\"card-header\">"+
             "Codepen : "+ data.title+
             "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
             "</div>\n" +
@@ -400,5 +405,24 @@ function addInstagramModule(instagramPostUrl) {
         instgrm.Embeds.process();
         $("#instagramModal").modal('hide');
     });
+}
+
+function addReplitModule(title,replitUrl,width,height,hideCode) {
+    var element = document.createElement('div');
+    var outputonly = hideCode ? "&outputonly=true" : "";
+    element.innerHTML =
+        "<div class=\"item-content\">\n"+
+        "<div class=\"card\">\n"+
+        "<div class=\"card-header\">" + title +
+        "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+        "</div>\n" +
+        "<div class=\"card-body text-center\">\n"+
+        "<iframe frameborder=\"0\" width=\""+width+"\" height=\""+height+"\" src=\""+replitUrl+"?lite=true"+outputonly+"\"></iframe>"+
+        "</div>\n" +
+        "</div>\n" +
+        "</div>\n";
+    element.className = "item";
+    grid.add(element, {index: -1});
+    $("#replitModal").modal('hide');
 }
 
