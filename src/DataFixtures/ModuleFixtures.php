@@ -66,6 +66,11 @@ class ModuleFixtures extends Fixture
             ->setFaClass("fas fa-terminal");
         $manager->persist($module);
 
+        $module = (new Module())
+            ->setName("SoundCloud")
+            ->setFaClass("fab fa-soundcloud");
+        $manager->persist($module);
+
         $manager->flush();
     }
 }
