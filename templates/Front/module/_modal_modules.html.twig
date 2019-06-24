@@ -8,10 +8,10 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
+            <div class="modal-body justify-content-around text-center">
                 {% if moduleList is defined %}
                     {% for module in moduleList %}
-                        <button class="btn btn-link" onclick="selectModule('{{ module.name }}')">
+                        <button class="btn btn-link d-inline-flex p-2 " onclick="selectModule('{{ module.name }}')">
                             <div class="card" style="width: 12rem; display: inline-block">
                                 <div class="card-body">
                                     <i class="{{ module.faClass }} fa-2x"></i>
@@ -32,4 +32,12 @@
     {{ include('Front/module/_modal_wysiwyg.html.twig') }}
     {{ include('Front/module/_modal_competences.html.twig') }}
     {{ include('Front/module/_modal_lien.html.twig') }}
+    {{ include('Front/module/_modal_stackoverflow.html.twig') }}
+    {{ include('Front/module/_modal_github.html.twig') }}
+    {{ include('Front/module/_modal_image.html.twig') }}
+    {{ include('Front/module/_modal_codepen.html.twig') }}
+    {{ include('Front/module/_modal_twitter.html.twig') }}
+    {{ include('Front/module/_modal_instagram.html.twig') }}
+    {{ include('Front/module/_modal_replit.html.twig') }}
+    {{ include('Front/module/_modal_soundcloud.html.twig') }}
 {# --- #}

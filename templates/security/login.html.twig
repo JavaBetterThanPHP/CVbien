@@ -1,6 +1,6 @@
 {% extends 'security/security_base.html.twig' %}
 
-{% block title %}Sign in - CVBien{% endblock %}
+{% block title %}Log in - {{ parent() }}{% endblock %}
 
 {% block head_css %}
     {{ encore_entry_link_tags('app_login') }}
@@ -15,7 +15,7 @@
                 </div>
             {% endif %}
 
-            <h1 class="h3 mb-3 font-weight-normal">Please log in :)</h1>
+            <h1 class="h3 mb-3 font-weight-normal">Log in</h1>
 
             <label for="inputEmail" class="">Email</label>
             <input type="email" value="{{ last_username }}" name="_username"
@@ -29,18 +29,17 @@
             <input type="hidden" name="_csrf_token"
                    value="{{ csrf_token('authenticate') }}">
 
-            <button class="btn btn-sm btn-outline-primary mt-3" type="submit">
+            <button class="btn btn-sm btn-primary mt-3 mb-3" type="submit">
                 Sign in
             </button>
             <a href="{{ path('app_security_forgot_password') }}">
-                <button class="btn btn-sm btn-outline-primary mt-3" type="button">
-                    Mot de passe oublié
+                <button class="btn btn-sm btn-outline-primary mt-3 mb-3" type="button">
+                    Forgot password
                 </button>
             </a>
-            <a href="{{ path('app_security_register_professional') }}">
-                <button class="btn btn-sm btn-outline-primary mt-3" type="button">
+            <br />
+            <a class="link text-primary" href="{{ path('app_security_register_professional') }}">
                     Obtenir un compte PRO !
-                </button>
             </a>
         </form>
     </div>

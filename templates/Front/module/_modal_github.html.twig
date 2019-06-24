@@ -1,0 +1,25 @@
+<div class="modal fade bd-modal-sm" tabindex="-1" role="dialog" aria-labelledby="githubModal" aria-hidden="true"
+     id="githubModal">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Module Github</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label>Entrez votre identifiant Github</label>
+                    <input type="text" class="form-control" id="GithubId">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        onclick="addGithubModule(event, $('#GithubId').val())">Save
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
