@@ -1,0 +1,42 @@
+# Read the documentation: https://github.com/FriendsOfSymfony/FOSElasticaBundle/blob/master/Resources/doc/setup.md
+fos_elastica:
+    clients:
+        default: { host: localhost, port: 9200 }
+    indexes:
+        user_research:
+            settings:
+                index:
+                    analysis:
+                        analyzer:
+                            autocomplete_analyzer:
+                                type: custom
+                                tokenizer: autocomplete_tokenizer
+                                filter: [lowercase, asciifolding]
+                        tokenizer:
+                            autocomplete_tokenizer:
+                                type: nGram
+                                min_gram: 3
+                                max_gram: 20
+            types:
+                user_account:
+                    dynamic: false
+                    properties:
+                        firstname: { type: text, analyzer: french }
+                        lastname: { type: text, analyzer: french }
+                        spaceName: { type: text, analyzer: autocomplete_analyzer }
+                        status: { type: text, analyzer: autocomplete_analyzer }
+                        city: { type: text, analyzer: autocomplete_analyzer }
+                        cityCode: { type: text, analyzer: autocomplete_analyzer }
+                        country: { type: text, analyzer: autocomplete_analyzer }
+                        userProgLanguages: { type: text, analyzer: autocomplete_analyzer}
+                        userDiplomas: { type: text, analyzer: autocomplete_analyzer }
+                        userLanguages: { type: text, analyzer: autocomplete_analyzer }
+                        userModulesGridHtmlString: { type: text, analyzer: english }
+                    persistence:
+                        driver: orm
+                        model: App\Entity\User
+                        finder: ~
+                        listener:
+                            logger: false
+                        provider:
+                            debug_logging: false

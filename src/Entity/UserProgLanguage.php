@@ -71,4 +71,9 @@ class UserProgLanguage
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->getProgLanguage()->__toString();
+    }
 }
