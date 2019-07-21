@@ -4,10 +4,9 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
-use FOS\ElasticaBundle\Repository;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 
 
 /**
@@ -29,7 +28,7 @@ class UserRepository extends ServiceEntityRepository
     public function getUserToDelete($time)
     {
         $date = new \DateTime();
-        $date->modify('-'.$time.' years');
+        $date->modify('-' . $time . ' years');
 
         $qb = $this->createQueryBuilder('u')
             ->Where('u.date_derniere_connexion < :value')
@@ -47,7 +46,10 @@ class UserRepository extends ServiceEntityRepository
 
         return $qb
             ->where($qb->expr()->eq('u.isSearchable', ':isSearchable'))
-            ->setParameter(':isSearchable', true);
+            ->andWhere($qb->expr()->eq('u.isActive', ':isActive'))
+            ->setParameter(':isSearchable', true)
+            ->setParameter(':isActive', true);
+
     }
 
     public function search($search = null, $limit = 10)
