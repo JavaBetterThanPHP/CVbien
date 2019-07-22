@@ -9,8 +9,7 @@ const MODULE_TWITTER = "Twitter";
 const MODULE_INSTAGRAM = "Instagram";
 const MODULE_REPLIT = "Repl.it";
 const MODULE_SOUNDCLOUD = "SoundCloud";
-
-
+const MODULE_MEDIUM = "Medium";
 
 function initCropProfile() {
     var basic = $('#main-cropper').croppie({
@@ -165,6 +164,10 @@ function selectModule(moduleName) {
         case MODULE_SOUNDCLOUD:
             $("#moduleModal").modal('hide');
             $("#soundcloudModal").modal();
+            break;
+        case MODULE_MEDIUM:
+            $("#moduleModal").modal('hide');
+            $("#mediumModal").modal();
             break;
         default:
             alert("error");
@@ -453,3 +456,32 @@ function addSoundcloudModule(soundCloudUrl) {
         $("#soundcloudModal").modal('hide');
     });
 }
+
+function addMediumModule(mediumUrl) {
+    var element = document.createElement('div');
+    element.innerHTML =
+        "<div class=\"item-content\">\n"+
+        "<div class=\"card\">\n"+
+        "<div class=\"card-header\">Medium"+
+        "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+        "</div>\n" +
+        "<div class=\"card-body text-center\">\n"+
+        "<div id=\"retainable-rss-embed\"\n" +
+        "data-rss=\""+mediumUrl+"\"\n" +
+        "data-maxcols=\"3\"\n" +
+        "data-layout=\"slider\"\n" +
+        "data-poststyle=\"modal\"\n" +
+        "data-readmore=\"Read\"\n" +
+        "data-buttonclass=\"btn btn-primary\"\n" +
+        "data-offset=\"-100\"></div>"+
+        "</div>\n" +
+        "</div>\n" +
+        "</div>\n";
+    element.className = "item";
+    grid.add(element, {index: -1});
+    $("#soundcloudModal").modal('hide');
+}
+
+
+
+
