@@ -242,6 +242,11 @@ class User implements UserInterface, \Serializable
      */
     private $isProfessional;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $sexe;
+
     /* ===================================
      * ============ Methods ==============
      * ===================================
@@ -1134,6 +1139,25 @@ class User implements UserInterface, \Serializable
     public function setIsProfessional(bool $isProfessional): self
     {
         $this->isProfessional = $isProfessional;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    /**
+     * @param null|string $sexe
+     * @return User
+     */
+    public function setSexe(?string $sexe): self
+    {
+        $this->sexe = $sexe;
 
         return $this;
     }

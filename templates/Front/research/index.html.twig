@@ -20,8 +20,9 @@
                     <tr>
                         <th>Photo</th>
                         <th>Name</th>
-                        <th>Country</th>
-                        <th>Age</th>
+                        <th>Localisation</th>
+                        <th>Prog Languages</th>
+                        <th>Sexe</th>
                         <th>Statut</th>
                         <th>Link</th>
                     </tr>
@@ -29,10 +30,15 @@
                     <tbody>
                     {% for profile in profileList %}
                         <tr>
-                            <td><img src="{{ vich_uploader_asset(user, 'imageFile') }}" class="img-rounded mt-2" width="70" height="70" alt="Profile Picture"></td>
+                            <td><img src="{{ asset('/images/profilePictures/'~profile.profilePicture) }}" class="img-rounded mt-2" width="70" height="70" alt="Profile Picture"></td>
                             <td>{{ profile.lastname }} {{ profile.firstname }}</td>
-                            <td>{{ profile.country.name | default("-") }}</td>
-                            <td>{{ profile.birthdate | age }}</td>
+                            <td>{{ profile.city | default("-") }} ({{ profile.cityCode }})</td>
+                            <td>
+                                {% for element in profile.userProgLanguages %}
+                                    {{ element }}
+                                {% endfor %}
+                            </td>
+                            <td>{{ profile.sexe | default("-") }}</td>
                             <td>{{ profile.status | default("-") }}</td>
                             <td><a class="btn btn-link" target="_blank"
                                    href="{{ path('app_profilView', {'spaceName': profile.spaceName}) }}">{{ profile.spaceName }}</a>

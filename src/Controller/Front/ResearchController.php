@@ -36,6 +36,8 @@ class ResearchController extends AbstractController
                 'profileList' => $results
             ]);
         }
+        //dump($userRepository->findBy(['isProfessional' => false]));die;
+        //echo '<pre>';print_r();echo '</pre>';die;
 
         return $this->render('Front/research/index.html.twig', [
             'form' => $form->createView(),
