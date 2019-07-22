@@ -34,7 +34,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $birthdate = ''.$month.'/'.$day.'/'.$year.'';
             $lastName = $faker->lastName;
             $firstName = $faker->firstName;
-            $spaceName = substr($this->skip_accents(strtolower($firstName)), 0, 1).$this->skip_accents($lastName);
+            $spaceName = substr(strtolower($this->skip_accents($firstName)), 0, 1).$this->skip_accents($lastName);
 
             $city = $faker->randomElement($array = array ('Paris', 'Lille', 'Bordeaux' , 'Lyon' , 'Nice', 'Toulouse', 'Nantes', 'Strasbourg', 'Montpellier'));
             switch ($city){
@@ -94,7 +94,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             }
 
             $user = (new User())
-                ->setEmail($this->skip_accents(strtolower($lastName)).'.'.$this->skip_accents(strtolower($firstName)).'@gmail.com')
+                ->setEmail(strtolower($this->skip_accents($lastName)).'.'.strtolower($this->skip_accents($firstName)).'@gmail.com')
                 ->setLastname($lastName)
                 ->setFirstname($firstName)
                 ->setBirthdate(new \DateTime($birthdate))
