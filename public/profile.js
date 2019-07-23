@@ -384,7 +384,7 @@ function addTwitterModule(twitterUsername, width, height) {
             "</div>\n" +
         "</div>\n";
     element.className = "item";
-    element.style.width = width+30;
+    element.style.width = "430px";
     grid.add(element, {index: -1});
     twttr.widgets.load(
         document.getElementsByClassName("twitter-timeline")
