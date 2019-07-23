@@ -2,6 +2,7 @@ $(document).ready(function () {
     $('#search_page_table').DataTable(
         {
             "lengthChange": false,
+            "searching": false,
             "order": [[0, "asc"]],
             "lengthMenu": [[50], [50]],
             "language": {

@@ -4,7 +4,10 @@ namespace App\Repository;
 
 use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Elastica\Query;
+use Elastica\Query\BoolQuery;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+
 
 /**
  * @method User|null find($id, $lockMode = null, $lockVersion = null)
@@ -25,7 +28,7 @@ class UserRepository extends ServiceEntityRepository
     public function getUserToDelete($time)
     {
         $date = new \DateTime();
-        $date->modify('-'.$time.' years');
+        $date->modify('-' . $time . ' years');
 
         $qb = $this->createQueryBuilder('u')
             ->Where('u.date_derniere_connexion < :value')
@@ -34,5 +37,37 @@ class UserRepository extends ServiceEntityRepository
             ->setParameter('isActive', true);
 
         return $qb->getQuery()->getResult();
+    }
+
+
+    public function getUserSearchable()
+    {
+        $qb = $this->createQueryBuilder('u');
+
+        return $qb
+            ->where($qb->expr()->eq('u.isSearchable', ':isSearchable'))
+            ->andWhere($qb->expr()->eq('u.isActive', ':isActive'))
+            ->setParameter(':isSearchable', true)
+            ->setParameter(':isActive', true);
+
+    }
+
+    public function search($search = null, $limit = 10)
+    {
+        $query = new Query();
+
+        $boolQuery = new BoolQuery();
+
+        if (!\is_null($search)) {
+            $fieldQuery = new Query\MatchPhrasePrefix();
+            $fieldQuery->setField('userProgLanguages', $search);
+
+            $boolQuery->addMust($fieldQuery);
+        }
+
+        $query->setQuery($boolQuery);
+        $query->setSize($limit);
+
+        return $this->find($query);
     }
 }

@@ -34,19 +34,14 @@ class ProgLanguageRepository extends ServiceEntityRepository
     // /**
     //  * @return ProgLanguage[] Returns an array of ProgLanguage objects
     //  */
-    /*
-    public function findByExampleField($value)
+
+    public function findByArray()
     {
-        return $this->createQueryBuilder('p')
-            ->andWhere('p.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('p.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('pl')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getScalarResult();
     }
-    */
+
 
     /*
     public function findOneBySomeField($value): ?ProgLanguage
