@@ -83,12 +83,11 @@
         {# ---- MODULE MODAL ---- #}
         {{ include('Front/module/_modal_modules.html.twig') }}
         {# --- #}
-
         {# ---- MODAL PICTURES/BANNERS ---- #}
         {{ include('Front/_modal_profile_picture.html.twig') }}
         {{ include('Front/_modal_banner_picture.html.twig') }}
         {# ----- #}
-
+        <script src="https://www.retainable.io/assets/retainable/rss-embed/retainable-rss-embed.js"></script>
         {# ---- USER PROG LANGUAGE DATA ---- #}
         <div class="user-proglanguage" data-userProgLanguage="{{ user.jsonUserProgLanguages | json_encode }}">
         </div>

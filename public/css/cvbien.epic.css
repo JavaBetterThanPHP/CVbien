@@ -9480,6 +9480,10 @@ a.text-dark:hover, a.text-dark:focus {
 .goldBadge {
     background-color: #fffae6;
     border-color: #ece5c6;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: 5px;
+    margin-left: 5px:;
 }
 
 .goldDot {
@@ -9489,6 +9493,10 @@ a.text-dark:hover, a.text-dark:focus {
 .silverBadge {
     background-color: #eaebec;
     border-color: #dddee0;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: 5px;
+    margin-left: 5px:;
 }
 
 .silverDot {
@@ -9498,10 +9506,25 @@ a.text-dark:hover, a.text-dark:focus {
 .bronzeBadge {
     background-color: #f8e9dd;
     border-color: #f0decb;
+    padding-right: 10px;
+    padding-left: 10px;
+    margin-right: 5px;
+    margin-left: 5px:;
 }
 
 .bronzeDot {
     color: #d1a684;
+}
+
+.gitcounter {
+    background-color: rgba(27,31,35,.08);
+    border-radius: 20px;
+    color: #586069;
+    display: inline-block;
+    font-size: 12px;
+    font-weight: 600;
+    line-height: 1;
+    padding: 2px 5px;
 }
 
 /*---

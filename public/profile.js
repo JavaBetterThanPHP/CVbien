@@ -9,8 +9,7 @@ const MODULE_TWITTER = "Twitter";
 const MODULE_INSTAGRAM = "Instagram";
 const MODULE_REPLIT = "Repl.it";
 const MODULE_SOUNDCLOUD = "SoundCloud";
-
-
+const MODULE_MEDIUM = "Medium";
 
 function initCropProfile() {
     var basic = $('#main-cropper').croppie({
@@ -162,9 +161,14 @@ function selectModule(moduleName) {
         case MODULE_REPLIT:
             $("#moduleModal").modal('hide');
             $("#replitModal").modal();
+            break;
         case MODULE_SOUNDCLOUD:
             $("#moduleModal").modal('hide');
             $("#soundcloudModal").modal();
+            break;
+        case MODULE_MEDIUM:
+            $("#moduleModal").modal('hide');
+            $("#mediumModal").modal();
             break;
         default:
             alert("error");
@@ -309,8 +313,8 @@ function addGithubModule(e, userId) {
             "<h2 class='card-title mt-3'>" + data.name + "</h2>" +
             "<p class='card-text'>" + data.login + "</p>" +
             "<span class='card-text'>" + data.bio + "</span><br/>" +
-            "<span class='card-text'>" + "Followers : " + data.followers + "</span><br/>" +
-            "<span class='card-text'>" + "Repositories : " + data.public_repos + "</span>" +
+            "<span class='card-text'>" + "Followers : "+"</span><span class='gitcounter'>"+ data.followers + "</span><br/>" +
+            "<span class='card-text'>" + "Repositories : "+ "</span><span class='gitcounter'>" + data.public_repos + "</span>" +
             "</div>" +
             "</div>" +
             "</div>";
@@ -368,23 +372,26 @@ function addTwitterModule(twitterUsername, width, height) {
     var element = document.createElement('div');
     element.innerHTML =
         "<div class=\"item-content\">\n"+
-        "<div class=\"card\">\n"+
-        "<div class=\"card-header bg-transparent border-bottom-0\">"+
-        "Twitter"+
-        "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
-        "</div>\n" +
-        "<div class=\"card-body text-center\">\n"+
-        "<a class=\"twitter-timeline\" data-width=\""+width+"\" data-height=\""+height+"\" data-theme=\"dark\" href=\"https://twitter.com/"+twitterUsername+"\">" +
-        "</a>"+
-        "</div>\n" +
-        "</div>\n" +
+            "<div class=\"card\">\n"+
+                "<div class=\"card-header bg-transparent border-bottom-0\">"+
+                    "Twitter"+
+                    "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+                "</div>\n" +
+                "<div class=\"card-body text-center\">\n"+
+                    "<a class=\"twitter-timeline\" data-width=\""+width+"\" data-height=\""+height+"\" data-theme=\"dark\" href=\"https://twitter.com/"+twitterUsername+"\">" +
+                    "</a>"+
+                "</div>\n" +
+            "</div>\n" +
         "</div>\n";
     element.className = "item";
+    element.style.width = width+30;
     grid.add(element, {index: -1});
     twttr.widgets.load(
         document.getElementsByClassName("twitter-timeline")
     );
     $("#twitterModuleModal").modal('hide');
+    grid.refreshItems();
+    grid.layout();
 }
 
 function addInstagramModule(instagramPostUrl) {
@@ -414,7 +421,8 @@ function addInstagramModule(instagramPostUrl) {
 
 function addReplitModule(title,replitUrl,width,height,hideCode) {
     var element = document.createElement('div');
-    var outputonly = hideCode ? "&outputonly=true" : "";
+    var outputonly = (hideCode) ? "&outputonly=1" : "";
+    alert(outputonly);
     element.innerHTML =
         "<div class=\"item-content\">\n"+
         "<div class=\"card\">\n"+
@@ -453,3 +461,53 @@ function addSoundcloudModule(soundCloudUrl) {
         $("#soundcloudModal").modal('hide');
     });
 }
+
+function addMediumModule(mediumUrl) {
+
+
+
+    $.ajax({
+        url: 'https://api.rss2json.com/v1/api.json',
+        method: 'GET',
+        dataType: 'json',
+        data: {
+            rss_url: mediumUrl,
+            api_key: 'oxfhhfsqyvsmi1dhmlrt0mgmwmznzdnvokbmjerh'
+         }
+    }).done(function (response) {
+        $cards = "";
+        for(var i in response.items){
+            if(i!=0) {
+                var item = response.items[i];
+                $cards = $cards +
+                    "<div class=\"card\" style=\"margin-top:8px;background-color: white;\">\n" +
+                    "  <div class=\"card-header\" style=\"background-color: white;width:250px;text-align:center;\"style=\"background-color: white;\">\n" +
+                    "  <img style=\"width:100%;border-radius:8px;margin-top: 8px;\"; src=\"" + item.thumbnail + "\">" +
+                    "  <a href=\"" + item.guid + "\"><h1>" + item.title + "</h1></a>\n" +
+                    "  </div>\n" +
+                    "</div>";
+            }
+        }
+
+        var element = document.createElement('div');
+        element.innerHTML =
+            "<div class=\"item-content\">\n"+
+                "<div class=\"card\" style=\"background-color: white;\">\n"+
+                    "<div class=\"card-header\">Medium"+
+                        "<button class=\"btn btn-link float-right\" onclick=\"deleteModule(this)\"><i class=\"far fa-trash-alt\"></i></button>\n" +
+                    "</div>\n"+
+                    "<div class=\"card-body text-center\">\n"+ $cards +
+                    "</div>"+
+                "</div>\n" +
+            "</div>\n";
+        element.className = "item";
+        grid.add(element, {index: -1});
+        $("#mediumModal").modal('hide');
+        $('.card-carousel').carousel()
+
+    });
+}
+
+
+
+
