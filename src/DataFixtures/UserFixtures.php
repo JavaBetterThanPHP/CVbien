@@ -39,7 +39,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             $city = $faker->randomElement($array = array ('Paris', 'Lille', 'Bordeaux' , 'Lyon' , 'Nice', 'Toulouse', 'Nantes', 'Strasbourg', 'Montpellier'));
             switch ($city){
                 case 'Paris':
-                    $rand = rand(0, 20);
+                    $rand = rand(1, 20);
                     $rand<10 ? $rand = '0'.$rand : $rand;
                     $cityCode='750'.$rand;
                     break;
