@@ -8,7 +8,7 @@ Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 
 ## testable data for modules
 
-- Medium : https://medium.com/feed/the-mission
+- SoundCloud : https://soundcloud.com/lorenzo-kbsone
 - Twitter : kaiv1_
 - Github : powerfulsheron
 - Instagram : https://www.instagram.com/p/B0QSJ6gFzR0/
@@ -17,6 +17,7 @@ Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 - Image : https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2013/07/developers-730x288.jpg
     - w 730
     - h 288
+- Medium : https://medium.com/feed/the-mission
 
 ## Installation
 ### Run
