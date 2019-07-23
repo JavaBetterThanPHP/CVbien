@@ -152,7 +152,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
             ->setFirstname('Guy')
             ->setBirthdate(new \DateTime('11/28/1981'))
             ->setPassword('$argon2i$v=19$m=1024,t=2,p=2$a3ZKZ01lSmxIN1V5ME9nYQ$leDGM0pR2bmvWh8u/nIdOqSFEYBTNnTbXeWXg06BZc4')
-            ->setRoles(["ROLE_USER"])
+            ->setRoles(["ROLE_PREMIUM"])
             ->setAdress('')
             ->setCity('Paris')
             ->setSpaceName('Gteub')
