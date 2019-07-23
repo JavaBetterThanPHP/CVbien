@@ -6,19 +6,17 @@ Créateurs de CV / Portfolio pour les developpeurs
 
 Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 
-## Must read  
+## testable data for modules
 
-testable data for modules :
 - Medium : https://medium.com/feed/the-mission
 - Twitter : kaiv1_
 - Github : powerfulsheron
-- Insta : https://www.instagram.com/p/B0QSJ6gFzR0/
+- Instagram : https://www.instagram.com/p/B0QSJ6gFzR0/
 - Repl.it : https://repl.it/@nicklalli44/Video-Game
 - Codepen : https://codepen.io/scottkellum/pen/MMLvpe
-- image : https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2013/07/developers-730x288.jpg
+- Image : https://cdn0.tnwcdn.com/wp-content/blogs.dir/1/files/2013/07/developers-730x288.jpg
     - w 730
     - h 288
-- 
 
 ### Git Flow
 
