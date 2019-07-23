@@ -44,49 +44,49 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     $cityCode='750'.$rand;
                     break;
                 case 'Lille':
-                    $rand = rand(0, 999);
+                    $rand = rand(1, 999);
                     $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
                     $cityCode='59'.$rand;
                     break;
                 case 'Bordeaux':
-                    $rand = rand(0, 999);
+                    $rand = rand(1, 999);
                     $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
                     $cityCode='33'.$rand;
                     break;
                 case 'Lyon':
-                    $rand = rand(0, 999);
+                    $rand = rand(1, 999);
                     $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
                     $cityCode='69'.$rand;
                     break;
                 case 'Nice':
-                    $rand = rand(0, 999);
+                    $rand = rand(1, 999);
                     $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
                     $cityCode='06'.$rand;
                     break;
                 case 'Toulouse':
-                    $rand = rand(0, 999);
+                    $rand = rand(1, 999);
                     $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
                     $cityCode='31'.$rand;
                     break;
                 case 'Nantes':
-                    $rand = rand(0, 999);
+                    $rand = rand(1, 999);
                     $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
                     $cityCode='44'.$rand;
                     break;
                 case 'Strasbourg':
-                    $rand = rand(0, 999);
+                    $rand = rand(1, 999);
                     $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
                     $cityCode='67'.$rand;
                     break;
                 case 'Montpellier':
-                    $rand = rand(0, 999);
+                    $rand = rand(1, 999);
                     $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
                     $cityCode='34'.$rand;
