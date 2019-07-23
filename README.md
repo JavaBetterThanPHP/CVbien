@@ -9,6 +9,7 @@ Equipe AUBLET / CANAVAGGIO / LONGUET / ROGER
 ## testable data for modules
 
 - SoundCloud : https://soundcloud.com/lorenzo-kbsone
+- Stackoverflow : 7770033
 - Twitter : kaiv1_
 - Github : powerfulsheron
 - Instagram : https://www.instagram.com/p/B0QSJ6gFzR0/
