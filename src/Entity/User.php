@@ -297,6 +297,9 @@ class User implements UserInterface, \Serializable
     public function setProfilePicture($profilePicture)
     {
         $this->profilePicture = $profilePicture;
+
+        return $this;
+
     }
 
     /**
@@ -332,6 +335,9 @@ class User implements UserInterface, \Serializable
     public function setBannerPicture($bannerPicture)
     {
         $this->bannerPicture = $bannerPicture;
+
+        return $this;
+
     }
 
     /**

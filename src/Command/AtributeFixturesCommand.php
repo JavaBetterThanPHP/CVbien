@@ -43,16 +43,26 @@ class AtributeFixturesCommand extends Command
         ]);
 
         $em = $this->objectManager;
-        $users = $this->objectManager->getRepository(User::class)->findAll();
-        $progLanguages = $this->objectManager->getRepository(ProgLanguage::class)->findAll();
+
+        $users = $em->getRepository(User::class)->findAll();
+
+        $em_userProgLanguage = $em->getRepository(UserProgLanguage::class);
+
+        $em_progLanguages = $em->getRepository(ProgLanguage::class);
+        $progLanguages = $em_progLanguages->findAll();
 
 
         foreach ($users as $user)
         {
+            $randomPL = $progLanguages[rand(0, 20)];
+            while($em_userProgLanguage->findOneBy(['user' => $user, 'progLanguage' => $randomPL]))
+            {
+                $randomPL = $progLanguages[rand(0, 20)];
+            }
 
             $userProgLanguage = new UserProgLanguage();
             $userProgLanguage->setLevel(rand(1, 10));
-            $userProgLanguage->setProgLanguage($progLanguages[rand(1, 15)]);
+            $userProgLanguage->setProgLanguage($randomPL);
             $userProgLanguage->setUser($user);
 
             $em->persist($userProgLanguage);

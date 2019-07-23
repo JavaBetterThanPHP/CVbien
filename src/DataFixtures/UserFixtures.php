@@ -25,7 +25,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         $em = $manager->getRepository(Country::class);
         $country = $em->findAll();
 
-        for ($i = 0; $i < 100; $i++) {
+        for ($i = 1; $i < 101; $i++) {
 
             $day = rand(1, 28);
             $month = rand(1, 12);
@@ -45,53 +45,57 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                     break;
                 case 'Lille':
                     $rand = rand(1, 999);
-                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
+                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $cityCode='59'.$rand;
                     break;
                 case 'Bordeaux':
                     $rand = rand(1, 999);
-                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
+                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $cityCode='33'.$rand;
                     break;
                 case 'Lyon':
                     $rand = rand(1, 999);
-                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
+                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $cityCode='69'.$rand;
                     break;
                 case 'Nice':
                     $rand = rand(1, 999);
-                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
+                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $cityCode='06'.$rand;
                     break;
                 case 'Toulouse':
                     $rand = rand(1, 999);
-                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
+                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $cityCode='31'.$rand;
                     break;
                 case 'Nantes':
                     $rand = rand(1, 999);
-                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
+                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $cityCode='44'.$rand;
                     break;
                 case 'Strasbourg':
                     $rand = rand(1, 999);
-                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
+                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $cityCode='67'.$rand;
                     break;
                 case 'Montpellier':
                     $rand = rand(1, 999);
-                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $rand<100 ? $rand = '00'.$rand : $rand;
+                    $rand<10 ? $rand = '0'.$rand : $rand;
                     $cityCode='34'.$rand;
                     break;
             }
+
+            $sexe = $faker->randomElement($array = array ('H', 'F'));
+            $profilePicture = 'fixtures_pic/'.$sexe.$i.'.png';
+
 
             $user = (new User())
                 ->setEmail(strtolower($this->skip_accents($lastName)).'.'.strtolower($this->skip_accents($firstName)).'@gmail.com')
@@ -102,6 +106,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 ->setRoles(["ROLE_USER"])
                 ->setAdress($faker -> address)
                 ->setCity($city)
+                ->setProfilePicture($profilePicture)
                 ->setSpaceName($spaceName.$faker->numberBetween($min = 0, $max = 9))
                 ->setCityCode($cityCode)
                 ->setStatus($faker->randomElement($array = array ('Freelance', 'CDI', 'CDD' , 'Libre' , 'Prestation')))
@@ -111,7 +116,7 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
                 ->setIsActive($faker->boolean($chanceOfGettingTrue = 90))
                 ->setIsSearchable($faker->boolean($chanceOfGettingTrue = 90))
                 ->setCountry($country[(array_rand($country))])
-                ->setSexe($faker->randomElement($array = array ('H', 'F')))
+                ->setSexe($sexe)
             ;
             $manager->persist($user);
         }
@@ -120,15 +125,15 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         // CRÉATION DU USER DEV (user@user & demo)
         $user = (new User())
             ->setEmail('user@user')
-            ->setLastname('son_lastname')
-            ->setFirstname('son_firstname')
-            ->setBirthdate(new \DateTime('11/22/1996'))
+            ->setLastname('Anduchite')
+            ->setFirstname('Yves')
+            ->setBirthdate(new \DateTime('09/16/1994'))
             ->setPassword('$argon2i$v=19$m=1024,t=2,p=2$a3ZKZ01lSmxIN1V5ME9nYQ$leDGM0pR2bmvWh8u/nIdOqSFEYBTNnTbXeWXg06BZc4')
             ->setRoles(["ROLE_USER"])
-            ->setAdress('16 rue Cépré')
+            ->setAdress('11 rue de la cité')
             ->setCity('Paris')
-            ->setSpaceName('son_spacename_dev')
-            ->setCityCode('75015')
+            ->setSpaceName('Yanduchite')
+            ->setCityCode('75020')
             ->setStatus('Libre')
             ->setType("DEV")
             ->setPhoneNumber($faker->phoneNumber)
@@ -143,15 +148,15 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
 
         $user = (new User())
             ->setEmail('premium@premium')
-            ->setLastname('son_lastname')
-            ->setFirstname('son_firstname')
-            ->setBirthdate(new \DateTime('11/22/1996'))
+            ->setLastname('Teub')
+            ->setFirstname('Guy')
+            ->setBirthdate(new \DateTime('11/28/1981'))
             ->setPassword('$argon2i$v=19$m=1024,t=2,p=2$a3ZKZ01lSmxIN1V5ME9nYQ$leDGM0pR2bmvWh8u/nIdOqSFEYBTNnTbXeWXg06BZc4')
             ->setRoles(["ROLE_USER"])
-            ->setAdress('16 rue Cépré')
+            ->setAdress('')
             ->setCity('Paris')
-            ->setSpaceName('son_spacename_premium')
-            ->setCityCode('75015')
+            ->setSpaceName('Gteub')
+            ->setCityCode('75001')
             ->setStatus('RRH')
             ->setType("RH")
             ->setPhoneNumber($faker->phoneNumber)
@@ -166,14 +171,14 @@ class UserFixtures extends Fixture implements DependentFixtureInterface
         // CRÉATION DU USER ADMIN (admin@admin & demo)
         $user = (new User())
             ->setEmail('admin@admin')
-            ->setLastname('admin')
-            ->setFirstname('admin')
+            ->setLastname('Efoutouna')
+            ->setFirstname('Walid')
             ->setBirthdate(new \DateTime())
             ->setPassword('$argon2i$v=19$m=1024,t=2,p=2$a3ZKZ01lSmxIN1V5ME9nYQ$leDGM0pR2bmvWh8u/nIdOqSFEYBTNnTbXeWXg06BZc4')
             ->setRoles(["ROLE_ADMIN"])
             ->setAdress('N/A')
             ->setCity('N/A')
-            ->setSpaceName('N/A_spacename')
+            ->setSpaceName('N/A_admin_')
             ->setCityCode('N/A')
             ->setStatus('N/A')
             ->setType("N/A")

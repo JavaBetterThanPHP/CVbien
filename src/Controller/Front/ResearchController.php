@@ -28,7 +28,9 @@ class ResearchController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $results = $finder->getRepository(User::class)->find($request->request->get('user_research')['user_research']);
+            $results = $finder->getRepository(User::class)->find($request->request->get('user_research')['user_research'], '101');
+            dump(count($results));
+            //dump($results);die;
 
             return $this->render('Front/research/index.html.twig', [
                 'form' => $form->createView(),
@@ -39,10 +41,11 @@ class ResearchController extends AbstractController
         //dump($userRepository->findBy(['isProfessional' => false]));die;
         //echo '<pre>';print_r();echo '</pre>';die;
 
+        dump(count($userRepository->findBy(['isProfessional' => false, 'isSearchable' => true, 'isActive' => true])));
         return $this->render('Front/research/index.html.twig', [
             'form' => $form->createView(),
             'user' => $this->getUser(),
-            'profileList' => $userRepository->findBy(['isProfessional' => false])
+            'profileList' => $userRepository->findBy(['isProfessional' => false, 'isSearchable' => true, 'isActive' => true])
         ]);
     }
 

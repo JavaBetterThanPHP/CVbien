@@ -16,8 +16,9 @@ class ProgLanguageFixtures extends Fixture
 {
     public function load(ObjectManager $manager)
     {
-        $faker = \Faker\Factory::create('fr_FR');
 
+        $faker = \Faker\Factory::create('fr_FR');
+/*
         for ($i = 0; $i < 10; $i++) {
             $proglanguage = (new ProgLanguage())
                 ->setName($faker->word)
@@ -26,5 +27,6 @@ class ProgLanguageFixtures extends Fixture
         }
 
         $manager->flush();
+*/
     }
 }
